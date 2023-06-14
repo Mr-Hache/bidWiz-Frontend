@@ -7,18 +7,24 @@
 
 @mixin h-2 {
   font-family: $ralewayFont;
-  font-size: 80px;
+  font-size: 60px;
   font-weight: 700;
 }
 
 @mixin h-3 {
   font-family: $ralewayFont;
-  font-size: 80px;
-  font-weight: 700;
+  font-size: 40px;
+  font-weight: 600;
 }
 
 @mixin h-4 {
   font-family: $ralewayFont;
-  font-size: 80px;
-  font-weight: 700;
+  font-size: 35px;
+  font-weight: 400;
+}
+
+@mixin p-p {
+  font-family: $ralewayFont;
+  font-size: 20px;
+  font-weight: 400;
 }
