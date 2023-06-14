@@ -1,4 +1,4 @@
-import Navbar from "./Componets/navbar/navbar";
+import Navbar from "./Componets/notreusable/navbar/navbar";
 
 export const metadata = {
   title: "Bidwiz",
