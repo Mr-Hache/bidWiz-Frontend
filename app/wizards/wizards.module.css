@@ -1,0 +1,28 @@
+.content {    
+    margin-top: 40px;
+}
+
+.contentSec {
+    display: flex;
+    background-color: rgb(179, 184, 230);
+    height: 50px;
+    align-items: center;
+}
+
+.personas {
+    margin-top: 60px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+
+.persona {
+    background-color: rgb(136, 177, 203);
+    text-align: center;
+}
+
+.persona img {
+    border-radius: 80px;
+    width: 300px;
+
+}
