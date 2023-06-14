@@ -1,0 +1,10 @@
+@import "../../../utils/mixin";
+.why {
+  background-color: #f2f2f2;
+  padding: 20px;
+  text-align: center;
+
+  h1 {
+    @include p-p;
+  }
+}

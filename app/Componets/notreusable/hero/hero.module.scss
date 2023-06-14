@@ -1,0 +1,14 @@
+@import "../../../utils/variabls";
+
+.hero {
+  background-color: $darkMediumGray;
+  margin: 10px 0px;
+  padding: 20px;
+  text-align: center;
+
+  h1 {
+    font-family: $ralewayFont;
+    font-size: 80px;
+    font-weight: 900;
+  }
+}
