@@ -8,8 +8,8 @@ export default function hero() {
         <h3>
           Ditch the Old Ways. Harness the Best Minds. Right Now. Right Here.
         </h3>
-        <button>Find Wizard</button>
-        <button>Become Wizard</button>
+        <button className={styles.button1}>Find Wizard</button>
+        <button className={styles.button2}>Become Wizard</button>
       </div>
       <div className={styles.conteinerImg}></div>
     </section>

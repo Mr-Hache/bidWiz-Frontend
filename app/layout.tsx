@@ -1,4 +1,5 @@
 import Navbar from "./Componets/notreusable/navbar/navbar";
+import styles from "./layout.module.scss";
 
 export const metadata = {
   title: "Bidwiz",
@@ -12,7 +13,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>
+      <body className={styles.body}>
         <Navbar />
         {children}
       </body>
