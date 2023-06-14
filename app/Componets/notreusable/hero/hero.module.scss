@@ -12,10 +12,10 @@
   }
 
   .button1 {
-    @include button-styles1(18px);
+    @include button-styles1(20px);
   }
 
   .button2 {
-    @include button-styles2(18px);
+    @include button-styles2(20px);
   }
 }
