@@ -1,14 +1,21 @@
 @import "../../../utils/variabls";
+@import "../../../utils/mixin";
 
 .hero {
-  background-color: $darkMediumGray;
+  border: solid black 2px;
   margin: 10px 0px;
   padding: 20px;
   text-align: center;
 
   h1 {
-    font-family: $ralewayFont;
-    font-size: 80px;
-    font-weight: 900;
+    @include h-1;
+  }
+
+  .button1 {
+    @include button-styles1(18px);
+  }
+
+  .button2 {
+    @include button-styles2(18px);
   }
 }

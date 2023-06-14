@@ -1,30 +1,75 @@
 @import "./variabls";
 @mixin h-1 {
   font-family: $ralewayFont;
-  font-size: 80px;
+  font-size: 40px;
   font-weight: 700;
 }
 
 @mixin h-2 {
   font-family: $ralewayFont;
-  font-size: 60px;
+  font-size: 30px;
   font-weight: 700;
 }
 
 @mixin h-3 {
   font-family: $ralewayFont;
-  font-size: 40px;
+  font-size: 20px;
   font-weight: 600;
 }
 
 @mixin h-4 {
   font-family: $ralewayFont;
-  font-size: 35px;
+  font-size: 18px;
   font-weight: 400;
 }
 
 @mixin p-p {
   font-family: $ralewayFont;
-  font-size: 20px;
+  font-size: 15px;
   font-weight: 400;
+}
+
+@mixin button-styles1($font-size) {
+  font-size: 18px;
+  font-family: $ralewayFont;
+  font-weight: 500;
+  background-color: #d1c4e97e;
+  color: white;
+  border-radius: 7px;
+  width: auto;
+  height: auto;
+  border: none;
+  margin: 15px;
+  padding: 5px 15px 5px 15px;
+  box-shadow: (0px 4px 4px rgba(0, 0, 0, 0.25));
+  transition: 0.2s;
+
+  &:hover {
+    background-color: $lightPurple;
+    transition: 0.2s;
+    cursor: pointer;
+  }
+}
+
+@mixin button-styles2($font-size) {
+  font-size: $font-size;
+  font-family: $ralewayFont;
+  font-weight: 500;
+  color: $lightMediumGray;
+  background-color: $darkMediumPurple;
+  border-radius: 7px;
+  width: auto;
+  height: auto;
+  border: none;
+  margin: 15px;
+  padding: 5px 15px 5px 15px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  transition: 0.2s;
+
+  &:hover {
+    background-color: $lightPurple;
+    color: $darkMediumGray;
+    transition: 0.2s;
+    cursor: pointer;
+  }
 }
