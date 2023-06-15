@@ -2,20 +2,63 @@
 @import "../../../utils/mixin";
 
 .hero {
-  border: solid black 2px;
   margin: 10px 0px;
   padding: 20px;
   text-align: center;
+  display: flex;
+  justify-content: space-around;
+
+  .containerText {
+    padding: 4vw;
+  }
+
+  .text {
+    margin-bottom: 3vw;
+    width: 35vw;
+  }
 
   h1 {
     @include h-1;
+    width: 40vw;
+    text-align: start;
+    margin-bottom: 0.5vw;
+    color: $darkMediumGreen;
   }
 
+  h4 {
+    @include h-4;
+    width: 30vw;
+    text-align: start;
+    margin-bottom: -1.5vw;
+    color: $darkPurple;
+  }
+
+  .buttons {
+    display: flex;
+    padding-left: 0px;
+  }
   .button1 {
-    @include button-styles1(20px);
+    @include button-styles1(1.3vw);
+    margin-left: 0px;
+  }
+
+  .button1 a {
+    text-decoration: none;
+    color: inherit;
   }
 
   .button2 {
-    @include button-styles2(20px);
+    @include button-styles2(1.3vw);
+  }
+
+  .button2 a {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .containerImg {
+    align-items: center;
+    justify-content: center;
+    padding-top: 2.5vw;
   }
 }
