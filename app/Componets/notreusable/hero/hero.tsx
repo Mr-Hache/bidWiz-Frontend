@@ -1,5 +1,6 @@
 import styles from "./hero.module.scss";
 import Image from "next/image";
+import Link from "next/link";
 
 import landing1 from "../../../src/images/landing1.jpeg";
 
@@ -14,8 +15,16 @@ export default function hero() {
           <h4>Right Now. Right Here.</h4>
         </div>
         <div className={styles.buttons}>
-          <button className={styles.button1}>Find Wizard</button>
-          <button className={styles.button2}>Become Wizard</button>
+          <button className={styles.button1}>
+            <Link href="/wizards" passHref>
+              Find Wizard
+            </Link>
+          </button>
+          <button className={styles.button2}>
+            <Link href="/register" passHref>
+              Become Wizard
+            </Link>
+          </button>
         </div>
       </div>
       <div className={styles.containerImg}>

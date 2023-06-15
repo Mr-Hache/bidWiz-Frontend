@@ -42,8 +42,16 @@
     margin-left: 0px;
   }
 
+  .button1 a {
+    text-decoration: none;
+  }
+
   .button2 {
     @include button-styles2(1.3vw);
+  }
+
+  .button2 a {
+    text-decoration: none;
   }
 
   .containerImg {
