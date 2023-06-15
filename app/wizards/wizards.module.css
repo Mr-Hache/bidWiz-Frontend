@@ -1,28 +1,35 @@
-.content {    
+.content {        
     margin-top: 40px;
 }
 
 .contentSec {
     display: flex;
-    background-color: rgb(179, 184, 230);
+    background-color: #b39ddb;
     height: 50px;
     align-items: center;
 }
 
 .personas {
-    margin-top: 60px;
+    padding: 15rem;
+    margin-top: -350px;
     display: flex;
     flex-wrap: wrap;
-    gap: 30px;
+    gap: 30px;  
+    justify-content: center;        
 }
 
 .persona {
-    background-color: rgb(136, 177, 203);
+    background-color: #d1c4e9;
     text-align: center;
 }
 
 .persona img {
     border-radius: 80px;
-    width: 300px;
+    width: 200px;
+}
 
+.formMultiple {    
+    margin-top: 100px;    
+    display: flex;    
+    height: 150px;           
 }
