@@ -1,8 +1,8 @@
-import styles from "./why.module.scss";
+import "./why.module.scss";
 
 export default function why() {
   return (
-    <section className={styles.why}>
+    <section className="why">
       <h1>Why bidWiz</h1>
     </section>
   );
