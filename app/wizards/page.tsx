@@ -8,8 +8,9 @@ const cargarDatos = async () => {
 
 export default async function wizards() {
   const datos = await cargarDatos()
-    return (
-      
+
+
+    return (      
     <div className={style.content}>
       <div className={style.contentSec}>
         <span>Filter by:</span>
