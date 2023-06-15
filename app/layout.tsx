@@ -1,6 +1,6 @@
 "use client";
 
-import Navbar from "./Componets/notreusable/navbar/navbar";
+import Navbar from "./Componets/navbar/navbar";
 import styles from "./layout.module.scss";
 import { Providers } from "./redux/providers";
 

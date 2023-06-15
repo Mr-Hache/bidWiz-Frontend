@@ -1,7 +1,6 @@
-import Hero from "./Componets/notreusable/hero/hero";
-import Why from "./Componets/notreusable/why/why";
-import LandingWizards from "./Componets/notreusable/landingWizards/landingWizards";
-
+import Hero from "./Componets/hero/hero";
+import Why from "./Componets/why/why";
+import LandingWizards from "./Componets/landingWizards/landingWizards";
 
 export default function Landing() {
   return (
