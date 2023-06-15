@@ -2,6 +2,7 @@ import Link from "next/link";
 import style from "./navbar.module.css"
 
 export default function Navbar() {
+
     return (
         <div className={style.navCont}>
             <nav>
@@ -14,4 +15,5 @@ export default function Navbar() {
             </nav>
         </div>
     )
+
 }
