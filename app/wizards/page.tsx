@@ -1,3 +1,4 @@
+
 import style from "./wizards.module.css"
 
 const cargarDatos = async () => {
@@ -71,5 +72,4 @@ export default async function wizards() {
     </div>       
     )
 }
-
 

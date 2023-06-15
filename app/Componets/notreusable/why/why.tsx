@@ -1,5 +1,9 @@
+"use client";
+
 import styles from "./why.module.scss";
 import Image from "next/image";
+import { useAppDispatch, useAppSelector } from "@/app/redux/hooks";
+
 import w1 from "../../../src/images/landing/w1.jpg";
 import w2 from "../../../src/images/landing/w2.jpg";
 import w3 from "../../../src/images/landing/w3.jpg";

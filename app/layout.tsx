@@ -1,5 +1,8 @@
+"use client";
+
 import Navbar from "./Componets/notreusable/navbar/navbar";
 import styles from "./layout.module.scss";
+import { Providers } from "./redux/providers";
 
 export const metadata = {
   title: "Bidwiz",
@@ -13,10 +16,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={styles.body}>
-        <Navbar />
-        {children}
-      </body>
+      <Providers>
+        <body className={styles.body}>
+          <Navbar />
+          {children}
+        </body>
+      </Providers>
     </html>
   );
 }
