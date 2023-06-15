@@ -21,13 +21,13 @@
     @include h-1;
     width: 40vw;
     text-align: start;
-    margin-bottom: 0.5vw;
+    margin-bottom: -0.5vw;
     color: $darkMediumGreen;
   }
 
   h4 {
-    @include h-4;
-    width: 30vw;
+    @include h-3;
+    width: 34vw;
     text-align: start;
     margin-bottom: -1.5vw;
     color: $darkPurple;

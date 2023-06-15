@@ -2,7 +2,7 @@ import styles from "./hero.module.scss";
 import Image from "next/image";
 import Link from "next/link";
 
-import landing1 from "../../../src/images/landing1.jpeg";
+import landing1 from "../../../src/images/landing/landing1.jpeg";
 
 export default function hero() {
   return (
