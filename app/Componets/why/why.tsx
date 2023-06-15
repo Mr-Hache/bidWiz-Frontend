@@ -3,16 +3,13 @@
 import styles from "./why.module.scss";
 import Image from "next/image";
 
-
-import w1 from "../../../src/images/landing/w1.jpg";
-import w2 from "../../../src/images/landing/w2.jpg";
-import w3 from "../../../src/images/landing/w3.jpg";
-import w4 from "../../../src/images/landing/w4.jpg";
-import w5 from "../../../src/images/landing/w5.jpg";
+import w1 from "../../src/images/landing/w1.jpg";
+import w2 from "../../src/images/landing/w2.jpg";
+import w3 from "../../src/images/landing/w3.jpg";
+import w4 from "../../src/images/landing/w4.jpg";
+import w5 from "../../src/images/landing/w5.jpg";
 
 export default function why() {
-
-  
   return (
     <section className={styles.why}>
       <div className={styles.containerWhy}>
@@ -73,7 +70,6 @@ export default function why() {
           </h4>
         </div>
       </div>
-      
     </section>
   );
 }
