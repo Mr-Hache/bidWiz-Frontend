@@ -1,7 +1,3 @@
 export default function wizards() {
-    return (
-    <div >
-        PROFESORES
-    </div>
-    )
+  return <div>WIZARDS</div>;
 }
