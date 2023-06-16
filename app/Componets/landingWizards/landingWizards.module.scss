@@ -2,11 +2,13 @@
 @import "../../utils/variabls";
 
 .wizards {
+  margin-top: 5vw;
   text-align: center;
 
   h1 {
     @include h-1;
     color: $darkMediumGreen;
+    margin-bottom: 8vw;
   }
 
   h3 {
@@ -15,12 +17,19 @@
     color: $darkGray;
     margin-top: 22px;
     text-align: center;
+    margin-bottom: 1vw;
   }
 
   h4 {
     @include h-4;
     color: $darkGray;
     text-align: center;
+    margin-bottom: -1vw;
+    margin-top: 1.5vw;
+  }
+  .online {
+    font-weight: 700;
+    margin-top: 2vw;
   }
 
   .title {

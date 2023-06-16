@@ -21,9 +21,11 @@ export default function landingWizards() {
               </div>
               <div className={styles.text}>
                 <h3>{`${user.name} ${user.lastName}`}</h3>
-                <h4>Gives {user.languages} classes</h4>
-                <h4>in {user.languages}</h4>
-                <h4>OnLine</h4>
+                <h4>
+                  Gives {user.subjects.toString().split(/\W+/)[0]} classes
+                </h4>
+                <h4>in {user.languages.toString().split(/\W+/)[0]}</h4>
+                <h4 className={styles.online}>Online</h4>
               </div>
             </div>
           ))}
