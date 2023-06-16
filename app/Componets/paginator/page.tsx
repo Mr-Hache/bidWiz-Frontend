@@ -17,7 +17,7 @@ const dispatch = useAppDispatch();
 
 
 
-    console.log(page)
+    
   return (
      <div>
         <button  onClick={handlePage}>Prev</button>
