@@ -1,0 +1,28 @@
+@import "../../utils/mixin";
+@import "../../utils/variabls";
+
+.button {
+  @include button-styles1(1vw);
+  margin: 0;
+}
+
+.input {
+  @include h-4;
+  width: 15vw;
+  font-size: 16px;
+  margin-right: 0.5vw;
+  border-radius: 7px;
+  border: solid 1px $darkPurple;
+  letter-spacing: 1px;
+  text-transform: capitalize;
+  padding: 4px 0 4px 8px;
+}
+
+.input::placeholder {
+  font-size: 15px;
+  padding: 4px;
+}
+
+.input::first-letter {
+  padding-left: 4px;
+}
