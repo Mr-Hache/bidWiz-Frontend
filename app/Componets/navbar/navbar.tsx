@@ -8,7 +8,7 @@ export default function Navbar() {
             <nav>
                 <ul className={style.navUl}>
                     <li><Link href="/" >LANDING</Link></li>
-                    <li><Link href="/wizards" >WIZARDS</Link></li>
+                    <li><Link href="/offerBoard" >WIZARDS</Link></li>
                     <li><Link href="/login" >LOGIN</Link></li>
                     <li><Link href="/register" >REGISTER</Link></li>
                 </ul>            

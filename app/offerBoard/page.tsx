@@ -7,7 +7,7 @@ const cargarDatos = async () => {
   return datos.results
 }
 
-export default async function wizards() {
+export default async function offerBoard() {
   const datos = await cargarDatos()
 
 
