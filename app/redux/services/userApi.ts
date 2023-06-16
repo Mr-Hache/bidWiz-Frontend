@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-type User = {
+export type User = {
   _id: string;
   username: string;
   name: string;
@@ -9,31 +9,8 @@ type User = {
   email: string;
   phoneNumber: string;
   isWizard: boolean;
-  languages: [
-    "English",
-    "Spanish",
-    "Portuguese",
-    "German",
-    "French",
-    "Chinese",
-    "Japanese",
-    "Russian",
-    "Italian"
-  ];
-  subjects: [
-    "Mathematics",
-    "Physics",
-    "Chemistry",
-    "Biology",
-    "Economics",
-    "Business Administration",
-    "Accounting",
-    "Computer Science",
-    "Music Theory",
-    "Political Science",
-    "Law",
-    "Programming"
-  ];
+  languages: string [];
+  subjects:  string [];
   experience: {
     title: string;
     origin: string;
