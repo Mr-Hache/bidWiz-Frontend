@@ -73,7 +73,7 @@ export const userApi = createApi({
       }
     >({
       query: ({ subjects, languages, page = 1, limit = 3 }) => {
-        let url = `users/wizards?page=${page}&limit=${limit}`;
+        let url = `users/wizards?page=${page}&size=${limit}`;
 
         if (subjects) {
           url += `&subjects=${subjects}`;
