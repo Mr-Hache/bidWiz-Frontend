@@ -1,0 +1,27 @@
+
+
+
+.form{
+    background-color:#c5e2e6;
+    margin: 10rem auto;
+    padding: 3rem;
+    border-radius: .5rem;
+    width: 350px; 
+    .inputcontainer{
+        width: 100%;
+        min-height: 20px;
+        position: relative;
+        // background-color: blue;
+        .input{
+            width: 100%;
+            height: 30px;
+            border: 2px solid #999;
+            border-radius: 5px;
+            color: #999;
+        }
+        label{
+            position: relative;
+        }
+    }
+   
+}

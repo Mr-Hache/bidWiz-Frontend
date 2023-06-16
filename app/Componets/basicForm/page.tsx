@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useCreateUserMutation } from '@/app/redux/services/userApi';
 import {User} from '../../redux/services/userApi'
+import style from './basicForm.module.scss';
 
 export interface UserFormValues {
     username: string;
@@ -103,48 +104,64 @@ function basicForm() {
     }
 
     return (
-        <form onSubmit={handleSubmit} >
+        <form className={style.form} onSubmit={handleSubmit} >
+                      
             <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
+            <div className={style.inputcontainer}>     
             <label>
                 Username:
-                <input type="text" name="username" value={values.username} onChange={handleChange} />
+                <input className={style.input} type="text" name="username" value={values.username} onChange={handleChange} />
             </label>
+            </div> 
+
             <br />
+            <div className={style.inputcontainer}>
             <label>
                 Name:
-                <input type="text" name="name" value={values.name} onChange={handleChange} />
+                <input className={style.input} type="text" name="name" value={values.name} onChange={handleChange} />
             </label>
+            </div>
+
             <br />
+            <div className={style.inputcontainer}>
             <label>
                 Last Name:
-                <input type="text" name="lastName" value={values.lastName} onChange={handleChange} />
+                <input className={style.input} type="text" name="lastName" value={values.lastName} onChange={handleChange} />
             </label>
+            </div>
+
             <br />
+            <div className={style.inputcontainer}>
             <label>
                 Password:
-                <input type="password" name="password" value={values.password} onChange={handleChange} />
+                <input className={style.input} type="password" name="password" value={values.password} onChange={handleChange} />
             </label>
+            </div>
+
             <br />
+            <div className={style.inputcontainer}>
             <label>
                 Email:
-                <input type="email" name="email" value={values.email} onChange={handleChange} />
+                <input className={style.input} type="email" name="email" value={values.email} onChange={handleChange} />
             </label>
+            </div>
+
             <br />
+            <div className={style.inputcontainer}>
             <label>
                 Phone Number:
-                <input type="text" name="phoneNumber" value={values.phoneNumber} onChange={handleChange} />
+                <input className={style.input} type="text" name="phoneNumber" value={values.phoneNumber} onChange={handleChange} />
             </label>
+            </div>
+
             <br />
+            <div className={style.inputcontainer}>
             <label>
                 Image:
-                <input type="text" name="image" value={values.image} onChange={handleChange} />
-            </label>
+                <input className={style.input} type="text" name="image" value={values.image} onChange={handleChange} />
+            </label>            
+            </div>
+
             <br />
             <label>
                 Is a Wizard?
@@ -162,6 +179,8 @@ function basicForm() {
                             ))}
                         </select>
                     </label>
+                    <br />
+                    <div>
                     <label>
                         Subjects:
                         <select multiple value={values.subjects} onChange={handleSubjectChange}>
@@ -170,19 +189,30 @@ function basicForm() {
                             ))}
                         </select>
                     </label>
+                    </div>
+
+                    <br />
+                    <div className={style.inputcontainer}>
                     <label>
                         Title:
-                        <input type="text" name="title" value={values.experience.title} onChange={handleExperienceChange} />
+                        <input className={style.input} type="text" name="title" value={values.experience.title} onChange={handleExperienceChange} />
                     </label>
+                    </div>
+                    <br />
+
+                    <div className={style.inputcontainer}>
                     <label>
                         Origin:
-                        <input type="text" name="origin" value={values.experience.origin} onChange={handleExperienceChange} />
+                        <input className={style.input} type="text" name="origin" value={values.experience.origin} onChange={handleExperienceChange} />
                     </label>
+                    </div>
 
 
                 </div> : null
 
             }
+            <br />
+            
             <input type="submit" value="Submit" />
 
         </form>

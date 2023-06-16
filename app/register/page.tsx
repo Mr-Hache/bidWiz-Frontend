@@ -4,8 +4,9 @@ import BasicForm from "../Componets/basicForm/page"
 
 export default function register() {
     return (
-    <div >
-        <BasicForm/>    
+    <div>
+        REGISTER
     </div>
+    
     )
 }
