@@ -72,7 +72,7 @@ export const userApi = createApi({
         limit?: number;
       }
     >({
-      query: ({ subjects, languages, page = 1, limit = 3 }) => {
+      query: ({ subjects, languages, page = 1, limit =  9 }) => {
         let url = `users/wizards?page=${page}&size=${limit}`;
 
         if (subjects) {
