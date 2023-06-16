@@ -1,4 +1,5 @@
 import { User } from "../../redux/services/userApi";
+import style from "./wizard.module.scss"
 
 interface WizardProps {
     wizardUser: User;
@@ -6,7 +7,7 @@ interface WizardProps {
 
 const Wizard: React.FC<WizardProps> = ({ wizardUser }) => {
     return (
-        <div>
+        <div className={style.contCards}>
             <img src={wizardUser.image} alt="" width={200} height={200} />
             <h3>{wizardUser.name}</h3>
             <h3>{wizardUser.lastName}</h3>
