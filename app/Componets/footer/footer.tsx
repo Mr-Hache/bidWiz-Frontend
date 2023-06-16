@@ -1,10 +1,17 @@
 import styles from "./footer.module.scss";
+import { BsFacebook } from "react-icons/bs";
+import { BsInstagram } from "react-icons/bs";
+import { BsTwitter } from "react-icons/bs";
+import { BsLinkedin } from "react-icons/bs";
+import { BsYoutube } from "react-icons/bs";
 
 export default function Footer() {
   return (
     <section className={styles.footer}>
       <div className={styles.containerMedium}>
-        <h3>Study</h3>
+        <div className={styles.title}>
+          <h2>You can study</h2>
+        </div>
         <div className={styles.subject}>
           <h4>Mathematics</h4>
           <h4>Physics</h4>
@@ -26,7 +33,16 @@ export default function Footer() {
         </div>
       </div>
       <div className={styles.containerSmall}>
-        <h1>contenedor2</h1>
+        <div className={styles.icons}>
+          <BsFacebook className={styles.face} />
+          <BsInstagram className={styles.inst} />
+          <BsTwitter className={styles.twit} />
+          <BsYoutube className={styles.yout} />
+          <BsLinkedin className={styles.link} />
+        </div>
+        <div className={styles.copy}>
+          <small>Copyright &copy; BidWiz Company</small>
+        </div>
       </div>
     </section>
   );

@@ -3,15 +3,16 @@
 
 .footer {
   width: 100%;
-  height: 32vw;
+  height: 28vw;
   background-color: $darkMediumGreen;
   display: flex;
   flex-direction: column;
+  padding-top: 5vw;
 
   .containerSmall {
     background-color: $darkGreen;
     width: 100%;
-    height: 20vw;
+    height: 12vw;
     margin-top: auto;
   }
 
@@ -20,16 +21,76 @@
     justify-content: space-evenly;
   }
 
-  h3 {
-    @include h-3;
+  h2 {
+    @include h-2;
     font-weight: 600;
+    color: white;
   }
 
   h4 {
     @include h-4;
+    color: $darkGray;
   }
   h4:hover {
     text-decoration: underline;
     cursor: default;
+  }
+
+  .title {
+    margin-top: 0.9vw;
+    width: 5vw;
+  }
+  .icons {
+    height: 3vw;
+    padding: 2vw 35vw 0 35vw;
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-end;
+  }
+
+  .face {
+    @include icon($lightPurple);
+    transition: 1.5s;
+  }
+  .face:hover {
+    @include icon(#1877f2);
+    transition: 0.1s;
+  }
+  .inst {
+    @include icon($lightPurple);
+    transition: 1.5s;
+  }
+  .inst:hover {
+    @include icon(#d42689);
+    transition: 0.1s;
+  }
+  .twit {
+    @include icon($lightPurple);
+    transition: 1.5s;
+  }
+  .twit:hover {
+    @include icon(#1690db);
+    transition: 0.1s;
+  }
+  .link {
+    @include icon($lightPurple);
+    transition: 1.5s;
+  }
+  .link:hover {
+    @include icon(#0a66c2);
+    transition: 0.1s;
+  }
+  .yout {
+    @include icon($lightPurple);
+    transition: 1.5s;
+  }
+  .yout:hover {
+    @include icon(#ff0000);
+    transition: 0.1s;
+  }
+
+  .copy {
+    margin-top: 3vw;
+    text-align: center;
   }
 }
