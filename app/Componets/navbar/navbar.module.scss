@@ -4,7 +4,7 @@
 .navCont {
   position: fixed;
   display: flex;
-
+  justify-content: space-between;
   z-index: 10;
   width: 100%;
   height: 70px;
@@ -12,11 +12,11 @@
   background-color: rgb(255, 255, 255);
 
   .icons {
-    margin-left: 40px;
     display: flex;
     justify-content: space-around;
     align-items: center;
     list-style: none;
+    margin-left: 3vw;
   }
 
   .logo {
@@ -26,14 +26,21 @@
     transition: 0.2s;
   }
 
+  .links {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
   .navUl {
     display: flex;
-    margin-left: 5vw;
+    padding: 0;
+    gap: 4vw;
   }
 
   .navUl li {
     list-style: none;
-    transition: 0.5s;
+    transition: 0.2s;
   }
 
   .navUl li a {
@@ -43,49 +50,32 @@
     display: block;
     position: relative;
     text-decoration: none;
-    padding: 8px;
-    margin-left: 5vw;
-    transition: 0.5s;
-  }
-
-  .navUl:hover li a {
-    transform: scale(1);
-    opacity: 0.2;
+    transition: 0.2s;
   }
 
   .navUl li a:hover {
-    opacity: 1;
-    filter: blur(0);
-    text-decoration: underline;
-  }
-
-  .navUl li a::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    transition: 0.8s;
-    transform-origin: right;
-    transform: scaleX(0);
-    z-index: -1;
-  }
-
-  .navUl li a:hover::before {
-    transition: transform 0.5s;
-    transform-origin: left;
-    transform: scaleX(1);
+    transform: scale(1.1);
   }
 
   .buttons {
     display: flex;
-    margin-left: 42vw;
+    align-items: center;
+    margin-right: 3vw;
   }
-  .button1 {
-    @include button-styles1(1vw);
-    font-weight: 700;
-    height: 2vw;
+  .log a {
+    @include h-3;
+    text-decoration: none;
+    margin-right: 2vw;
+    color: $darkMediumGray;
+  }
+
+  h3 {
+    transition: 0.2s;
+  }
+
+  h3:hover {
+    transform: scale(1.1);
+    transition: 0.2s;
   }
 
   .button1 a {

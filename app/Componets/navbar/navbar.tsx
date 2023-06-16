@@ -12,23 +12,25 @@ export default function Navbar() {
           </Link>
         </li>
       </div>
-      <ul className={styles.navUl}>
-        <li>
-          <Link href="/offerBoard">Subjects</Link>
-        </li>
-        <li>
-          <Link href="/offerBoard">offerBoard</Link>
-        </li>
-      </ul>
+      <div className={styles.links}>
+        <ul className={styles.navUl}>
+          <li>
+            <Link href="/offerBoard">Subjects</Link>
+          </li>
+          <li>
+            <Link href="/offerBoard">offerBoard</Link>
+          </li>
+        </ul>
+      </div>
       <div className={styles.buttons}>
-        <button className={styles.button1}>
-          <Link href="/offerBoard" passHref>
-            Find Wizard
+        <h3 className={styles.log}>
+          <Link href="/login" passHref>
+            Login
           </Link>
-        </button>
+        </h3>
         <button className={styles.button2}>
           <Link href="/register" passHref>
-            Become Wizard
+            Sign Up
           </Link>
         </button>
       </div>
