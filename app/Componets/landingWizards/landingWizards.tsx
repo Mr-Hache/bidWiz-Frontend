@@ -2,10 +2,25 @@
 
 import styles from "./landingWizards.module.scss";
 import Link from "next/link";
+
+import { setWizards } from "@/app/redux/services/wizardsSlice"
 import { useGetWizardsQuery } from "@/app/redux/services/userApi";
+import { useAppDispatch } from "@/app/redux/hooks";
+
+
 
 export default function landingWizards() {
+  const dispatch = useAppDispatch();
+
   const { data } = useGetWizardsQuery({});
+
+
+  dispatch(setWizards(data))
+
+
+
+
+
 
   return (
     <section className={styles.wizards}>
