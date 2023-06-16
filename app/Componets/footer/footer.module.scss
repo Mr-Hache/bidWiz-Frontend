@@ -3,22 +3,30 @@
 
 .footer {
   width: 100%;
-  height: 28vw;
+  height: 16.5vw;
   background-color: $darkMediumGreen;
   display: flex;
   flex-direction: column;
-  padding-top: 5vw;
+  padding-top: 0vw;
 
   .containerSmall {
     background-color: $darkGreen;
     width: 100%;
-    height: 12vw;
-    margin-top: auto;
+    height: 6vw;
   }
 
   .containerMedium {
     display: flex;
     justify-content: space-evenly;
+  }
+
+  .containerCopy {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: $lightGreen;
+    height: 2vw;
   }
 
   h2 {
@@ -32,7 +40,7 @@
     color: $darkGray;
   }
   h4:hover {
-    text-decoration: underline;
+    text-decoration: underline white;
     cursor: default;
   }
 
@@ -41,11 +49,11 @@
     width: 5vw;
   }
   .icons {
-    height: 3vw;
-    padding: 2vw 35vw 0 35vw;
+    height: 6vw;
+    padding: 0vw 35vw 0 35vw;
     display: flex;
     justify-content: space-around;
-    align-items: flex-end;
+    align-items: center;
   }
 
   .face {
@@ -87,10 +95,5 @@
   .yout:hover {
     @include icon(#ff0000);
     transition: 0.1s;
-  }
-
-  .copy {
-    margin-top: 3vw;
-    text-align: center;
   }
 }

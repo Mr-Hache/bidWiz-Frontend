@@ -1,7 +1,7 @@
 "use client";
 
 import styles from "./landingWizards.module.scss";
-
+import Link from "next/link";
 import { useGetWizardsQuery } from "@/app/redux/services/userApi";
 
 export default function landingWizards() {
@@ -14,7 +14,7 @@ export default function landingWizards() {
       </div>
       <div>
         <div className={styles.containerW}>
-          {data?.slice(0, 4).map((user) => (
+          {data?.slice(0, 5).map((user) => (
             <div className={styles.cardw} key={user._id}>
               <div className={styles.containerImg}>
                 <img src={user.image} alt="" width={200} height={200} />
@@ -30,6 +30,18 @@ export default function landingWizards() {
             </div>
           ))}
         </div>
+      </div>
+      <div className={styles.buttons}>
+        <button className={styles.button1}>
+          <Link href="/offerBoard" passHref>
+            Find Wizard
+          </Link>
+        </button>
+        <button className={styles.button2}>
+          <Link href="/register" passHref>
+            Become Wizard
+          </Link>
+        </button>
       </div>
     </section>
   );

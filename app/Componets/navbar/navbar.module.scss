@@ -1,0 +1,106 @@
+@import "../../utils/mixin";
+@import "../../utils/variabls";
+
+.navCont {
+  position: fixed;
+  display: flex;
+
+  z-index: 10;
+  width: 100%;
+  height: 70px;
+  box-shadow: 0px 0px 6px 4px rgba(22, 21, 21, 0.491);
+  background-color: rgb(255, 255, 255);
+
+  .icons {
+    margin-left: 40px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    list-style: none;
+  }
+
+  .logo {
+    @include icon($darkMediumPurple);
+    width: 3vw;
+    height: 3vw;
+    transition: 0.2s;
+  }
+
+  .navUl {
+    display: flex;
+    margin-left: 5vw;
+  }
+
+  .navUl li {
+    list-style: none;
+    transition: 0.5s;
+  }
+
+  .navUl li a {
+    @include h-4;
+    color: $darkGray;
+    font-weight: 500;
+    display: block;
+    position: relative;
+    text-decoration: none;
+    padding: 8px;
+    margin-left: 5vw;
+    transition: 0.5s;
+  }
+
+  .navUl:hover li a {
+    transform: scale(1);
+    opacity: 0.2;
+  }
+
+  .navUl li a:hover {
+    opacity: 1;
+    filter: blur(0);
+    text-decoration: underline;
+  }
+
+  .navUl li a::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transition: 0.8s;
+    transform-origin: right;
+    transform: scaleX(0);
+    z-index: -1;
+  }
+
+  .navUl li a:hover::before {
+    transition: transform 0.5s;
+    transform-origin: left;
+    transform: scaleX(1);
+  }
+
+  .buttons {
+    display: flex;
+    margin-left: 42vw;
+  }
+  .button1 {
+    @include button-styles1(1vw);
+    font-weight: 700;
+    height: 2vw;
+  }
+
+  .button1 a {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .button2 {
+    @include button-styles2(1vw);
+    font-weight: 700;
+    height: 2vw;
+  }
+
+  .button2 a {
+    text-decoration: none;
+    color: inherit;
+  }
+}

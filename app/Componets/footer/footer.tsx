@@ -40,7 +40,7 @@ export default function Footer() {
           <BsYoutube className={styles.yout} />
           <BsLinkedin className={styles.link} />
         </div>
-        <div className={styles.copy}>
+        <div className={styles.containerCopy}>
           <small>Copyright &copy; BidWiz Company</small>
         </div>
       </div>
