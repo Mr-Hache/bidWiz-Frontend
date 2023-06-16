@@ -213,7 +213,7 @@ function basicForm() {
             }
             <br />
             
-            <input type="submit" value="Submit" />
+            <input className={style.boton} type="submit" value="Submit" />
 
         </form>
     )
