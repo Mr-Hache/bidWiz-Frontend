@@ -1,6 +1,8 @@
 import Link from "next/link";
 import styles from "./navbar.module.scss";
 import { FaHatWizard } from "react-icons/fa";
+import SearchBar from "../searchBar/searchBar";
+import SelectorNavbar from "../selectorsNavbar/slectorNavbar";
 
 export default function Navbar() {
   return (
@@ -13,14 +15,8 @@ export default function Navbar() {
         </li>
       </div>
       <div className={styles.links}>
-        <ul className={styles.navUl}>
-          <li>
-            <Link href="/offerBoard">Subjects</Link>
-          </li>
-          <li>
-            <Link href="/offerBoard">offerBoard</Link>
-          </li>
-        </ul>
+        <SelectorNavbar />
+        <SearchBar />
       </div>
       <div className={styles.buttons}>
         <h3 className={styles.log}>

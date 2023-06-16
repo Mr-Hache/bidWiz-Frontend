@@ -39,7 +39,7 @@ export default function landingWizards() {
         </button>
         <button className={styles.button2}>
           <Link href="/register" passHref>
-            Become Wizard
+            Sign Up
           </Link>
         </button>
       </div>
