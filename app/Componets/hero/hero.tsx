@@ -16,7 +16,7 @@ export default function hero() {
         </div>
         <div className={styles.buttons}>
           <button className={styles.button1}>
-            <Link href="/wizards" passHref>
+            <Link href="/offerBoard" passHref>
               Find Wizard
             </Link>
           </button>
