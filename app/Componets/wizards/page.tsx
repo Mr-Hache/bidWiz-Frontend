@@ -1,11 +1,13 @@
 "use client";
-import { useGetWizardsQuery, User } from "../../redux/services/userApi";
+import {  User } from "../../redux/services/userApi";
 import Wizard from '../wizard/page'
 import Paginator from '../paginator/page'
 import { useAppSelector, useAppDispatch } from "@/app/redux/hooks";
 
 import { setWizards } from "@/app/redux/services/wizardsSlice";
+import { setPage } from "@/app/redux/services/filtersSlice";
 import { useEffect, useState } from "react";
+import FilterBar from "../filterBar/page";
 
 
 export default function wizards() {
@@ -13,23 +15,20 @@ export default function wizards() {
   const dispatch = useAppDispatch();
   const page = useAppSelector((state) => state.filters.page);
   const wizards = useAppSelector((state) => state.wizards.wizards);
-  const { data } = useGetWizardsQuery({});
+  const languages: string[] = useAppSelector((state) => state.filters.languages);
+  const subjects: string[] = useAppSelector((state) => state.filters.subjects);
   const [statePage, setStatePage] = useState(true);
-  const [totalPage, setTotalPage] = useState(0);
+  const [totalWizards, setTotalWizards] = useState(0);
 
-  useEffect(() => {
-    const allowPage = Math.ceil(totalPage / size);
-    if(page == allowPage) {
-      setStatePage(false);
-    }
-    else {
-      setStatePage(true);
-    }
-  }, [page, totalPage])
-
-
-  useEffect(() => {
-    fetch(`https://bidwiz-backend-production-db77.up.railway.app/users/wizards/count`)
+  const concatLanguagesAndSubjects = (languages: string[] = [], subjects: string[] = []) => {
+    const stringLanguages = languages.length > 0 ? `languages=${languages.join('&languages=')}` : null;
+    const stringSubjects = subjects.length > 0 ? `subjects=${subjects.join('&subjects=')}` : null;
+    const filter = stringLanguages && stringSubjects ? `${stringLanguages}&${stringSubjects}` : stringLanguages ? stringLanguages : stringSubjects ? stringSubjects : null;
+    return filter;
+  }
+  const takeCounter = (languages: string[] = [], subjects: string[] = []) => {
+    const filter = concatLanguagesAndSubjects(languages, subjects);
+    fetch(`https://bidwiz-backend-production-db77.up.railway.app/users/wizards/count?${filter}`)
       .then(response => {
         if (!response.ok) {
           throw new Error('ERROR Request');
@@ -37,23 +36,17 @@ export default function wizards() {
         return response.json();
       })
       .then(data => {
-        setTotalPage(data);
+        setTotalWizards(data);
 
       })
       .catch(error => {
         console.log(error);
       });
-  })
+  }
 
-  useEffect(() => {
-    if (!wizards || wizards.length === 0) {
-      dispatch(setWizards(data));
-    }
-  }, [wizards, dispatch, data]);
-
-
-  useEffect(() => {
-    fetch(`https://bidwiz-backend-production-db77.up.railway.app/users/wizards?page=${page}&size=${size}`)
+  const takeWizards = (languages: string[] = [], subjects: string[] = [], page: number) => {
+    const filter = concatLanguagesAndSubjects(languages, subjects);
+    fetch(`https://bidwiz-backend-production-db77.up.railway.app/users/wizards?page=${page}&size=${size}&${filter}`)
       .then(response => {
         if (!response.ok) {
           throw new Error('ERROR Request');
@@ -66,14 +59,43 @@ export default function wizards() {
       .catch(error => {
         console.log(error);
       });
-  }, [page]);
+  }
+
+  useEffect(() => {
+    takeCounter(languages, subjects);
+    wizards.length == 0 ? takeWizards(languages, subjects, 1) : null;
+  }, [])
+
+  useEffect(() => {
+    dispatch(setPage(1));
+    takeCounter(languages, subjects);
+    takeWizards(languages, subjects, 1);
+    // takeWizards(languages, subjects,1);
+  }, [languages, subjects])
+
+  useEffect(() => {
+    takeWizards(languages, subjects, page);
+  }, [page])
+
+
+  useEffect(() => {
+    const allowPage = Math.ceil(totalWizards / size);
+    if (page == allowPage) {
+      setStatePage(false);
+    }
+    else {
+      setStatePage(true);
+    }
+  }, [page, totalWizards])
+
 
   return (
     <div>
+      <FilterBar />
       {wizards && wizards.map((wizardUser: User) => {
         return <Wizard key={wizardUser._id} wizardUser={wizardUser} />
       })}
-      <Paginator statePage={statePage}/>
+      <Paginator statePage={statePage} />
     </div>
   )
 }
