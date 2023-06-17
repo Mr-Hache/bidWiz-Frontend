@@ -1,22 +1,22 @@
-import style from "./login.module.css"
+"use client"
 
+import style from "./login.module.css"
+import Auth from "../Componets/auth/page"
 
 export default function login() {
 
     return (
-        <form className={style.formSubmit}>
-            <div className={style.userName}>
-                <label htmlFor="username">Username</label>
-                <input type="text" name="username" />
-            </div>
-
-            <div className={style.userName}>
-                <label htmlFor="password">Password</label>
-                <input type="password" name="password" />
-            </div>
-            <button className={style.login} type="submit">Login</button>
-        </form>
- 
+        <div>
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <Auth/>
+        </div>
     )
 }
 
