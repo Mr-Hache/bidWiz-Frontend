@@ -12,7 +12,7 @@ export default function searchBar() {
   }
   
     const { data: user, isLoading, isError } = useGetUserByUsernameQuery({username: search});
-    console.log(user);
+    //console.log(user);
     
   
 
