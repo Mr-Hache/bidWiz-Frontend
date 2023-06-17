@@ -10,7 +10,7 @@ const Wizard: React.FC<WizardProps> = ({ wizardUser }) => {
     return (
 
     <div>
-        <Link href={`/user/${wizardUser.username}`}>
+        <Link href={`/detail/${wizardUser.username}`}>
             <img src={wizardUser.image} alt="" width={200} height={200} />
             <h3>{`${wizardUser.name} ${wizardUser.lastName}`}</h3>
         </Link>
