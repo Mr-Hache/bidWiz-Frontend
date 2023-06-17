@@ -7,6 +7,8 @@ import { useAppSelector, useAppDispatch } from "@/app/redux/hooks";
 import { setWizards } from "@/app/redux/services/wizardsSlice";
 import { useEffect, useState } from "react";
 
+import style from "./wizards.module.scss"
+
 
 export default function wizards() {
   const size = 9;
@@ -69,7 +71,7 @@ export default function wizards() {
   }, [page]);
 
   return (
-    <div>
+    <div className={style.contCard}>
       {wizards && wizards.map((wizardUser: User) => {
         return <Wizard key={wizardUser._id} wizardUser={wizardUser} />
       })}
