@@ -24,11 +24,12 @@
   .containerColumn {
     background-color: #43a04838;
     width: 28vw;
+    height: 12vw;
     border-radius: 10px;
     display: flex;
     justify-content: space-between;
     padding-right: 3vw;
-    margin-top: 13vw;
+    margin-top: 18vw;
     position: absolute;
   }
 
@@ -54,5 +55,23 @@
   }
   .list li {
     margin-top: 10px;
+  }
+
+  .list {
+    @include h-4;
+    width: 400px;
+    padding-left: 10px;
+    display: grid;
+    grid-template-columns: repeat(
+      auto-fit,
+      minmax(80px, 1fr)
+    ); /* Columnas automáticas */
+    grid-gap: 50px; /* Espacio entre elementos */
+    row-gap: 8px;
+    align-items: center;
+  }
+
+  .list:hover {
+    cursor: pointer;
   }
 }
