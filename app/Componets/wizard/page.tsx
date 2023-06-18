@@ -1,6 +1,7 @@
 import { User } from "../../redux/services/userApi";
 import Link from 'next/link';
 import Image from 'next/image';
+import style from "./wizard.module.scss"
 
 interface WizardProps {
   wizardUser: User;
@@ -11,25 +12,32 @@ const Wizard: React.FC<WizardProps> = ({ wizardUser }) => {
         return src; // Devuelve la ruta original de la imagen sin modificaciones
       };
   return (
-    <div>
+    <div className={style.contCards}>
       <Link href={`/detail/${wizardUser.username}`}>
         
           <div>
-            <Image
+          <h2>{`${wizardUser.name} ${wizardUser.lastName}`}</h2>
+            <Image className={style.imagen}
               loader={imageLoader}
               src={wizardUser.image}
               alt=""
-              width={200}
-              height={200}
-            />
+              width={120}
+              height={120}
+            />            
           </div>
-          <h3>{`${wizardUser.name} ${wizardUser.lastName}`}</h3>
-        
-      </Link>
 
-      <h4>{wizardUser.experience.title}</h4>
-      <h4>{wizardUser.languages.join(', ')}</h4>
-      <h4>{wizardUser.subjects.join(', ')}</h4>
+          </Link>
+          <div className={style.secondCont}>                                    
+            <p className={style.tittle}>{wizardUser.experience.title}</p>
+            <hr />
+            <h3>Languages</h3>
+            <p>{wizardUser.languages.join(' - ')}</p>
+            <hr />
+            <h3>Subjects</h3>
+            <p>{wizardUser.subjects.join(' - ')}</p>    
+            <hr /> 
+            <p>⭐⭐⭐⭐⭐</p>       
+          </div>      
     </div>
   );
 }

@@ -9,9 +9,11 @@ import { setPage } from "@/app/redux/services/filtersSlice";
 import { useEffect, useState } from "react";
 import FilterBar from "../filterBar/page";
 
+import style from "./wizards.module.scss"
+
 
 export default function wizards() {
-  const size = 9;
+  const size = 3;
   const dispatch = useAppDispatch();
   const page = useAppSelector((state) => state.filters.page);
   const wizards = useAppSelector((state) => state.wizards.wizards);
@@ -90,7 +92,7 @@ export default function wizards() {
 
 
   return (
-    <div>
+    <div className={style.contCard}>
       <FilterBar />
       {wizards && wizards.map((wizardUser: User) => {
         return <Wizard key={wizardUser._id} wizardUser={wizardUser} />

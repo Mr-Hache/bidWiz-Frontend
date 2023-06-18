@@ -1,0 +1,8 @@
+@import "../../utils/mixin";
+@import "../../utils/variabls";
+
+.contCard {    
+    display: flex;
+    flex-wrap: wrap;    
+    background-color: $lightGreen;
+}

@@ -2,6 +2,8 @@ import React, { useState, ChangeEvent } from 'react';
 import {useAppDispatch } from '@/app/redux/hooks';
 import { setLanguages, setSubjects } from '@/app/redux/services/filtersSlice';
 
+import style from "./filterBar.module.scss"
+
 
 const languagesList = ['English', 'Spanish', 'Portuguese', 'German', 'French', 'Chinese', 'Japanese', 'Russian', 'Italian'];
 const subjectsList = ["Mathematics", "Physics", "Chemistry", "Biology", "Economics", "Business Administration", "Accounting", "Computer Science", "Music Theory", "Political Science", "Law", "Programming"];
@@ -49,7 +51,7 @@ function FilterBar() {
   };
 
   return (
-    <aside>
+    <aside className={style.contAside}>
       <h2>Languages</h2>
       {stateLanguagesCheckbox.map((language, index) => (
         <div key={index}>
@@ -65,6 +67,7 @@ function FilterBar() {
           </label>
         </div>
       ))}
+      <hr />
 
       <h2>Subjects</h2>
       {stateSubjectsCheckbox.map((subject, index) => (

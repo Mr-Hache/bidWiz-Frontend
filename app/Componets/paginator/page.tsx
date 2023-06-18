@@ -1,5 +1,6 @@
 "use client"
 import React from 'react'
+import style from "./paginator.module.scss"
 import { useAppSelector, useAppDispatch } from "@/app/redux/hooks";
 import { setPage } from "@/app/redux/services/filtersSlice";
 
@@ -22,7 +23,7 @@ const dispatch = useAppDispatch();
 
     
   return (
-     <div>
+     <div className={style.contPaginator}>
         <button  onClick={handlePage}>Prev</button>
         <span>{page}</span>
         <button value="Next" onClick={handlePage}>Next</button>
