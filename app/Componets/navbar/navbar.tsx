@@ -2,8 +2,8 @@ import Link from "next/link";
 import styles from "./navbar.module.scss";
 import { FaHatWizard } from "react-icons/fa";
 import SearchBar from "../searchBar/searchBar";
-import SelectorNavbar1 from "../selectorsNavbar/slectorNavbar1";
-import SelectorNavbar2 from "../selectorsNavbar/slectorNavbar2";
+
+import SelectorNavbar from "../selectorsNavbar/selectorNavbar";
 
 export default function Navbar() {
   return (
@@ -16,8 +16,9 @@ export default function Navbar() {
         </li>
       </div>
       <div className={styles.links}>
-        <SelectorNavbar1 />
-        <SelectorNavbar2 />
+        {/* <SelectorNavbar1 /> */}
+        <SelectorNavbar filter="languages" />
+        <SelectorNavbar filter="subjects" />
         <SearchBar />
       </div>
       <div className={styles.buttons}>
