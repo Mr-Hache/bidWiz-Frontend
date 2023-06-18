@@ -40,10 +40,11 @@
     padding-right: 3vw;
     margin-top: 14vw;
     position: absolute;
+    box-shadow: 0px 6px 4px 2px rgba(0, 0, 0, 0.25);
   }
   .containerColumn2 {
     background-color: white;
-    width: 28vw;
+    width: 29vw;
     height: 12vw;
     border-radius: 0px 0px 10px 10px;
     display: flex;
@@ -75,7 +76,7 @@
   }
 
   .line span {
-    @include p-p;
+    @include h-4;
     color: $darkGray;
     font-weight: 500;
     text-decoration: none;
