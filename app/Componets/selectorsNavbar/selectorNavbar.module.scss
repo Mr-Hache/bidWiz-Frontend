@@ -1,84 +1,58 @@
 @import "../../utils/mixin";
 @import "../../utils/variabls";
 
-.links {
+.dropdown {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  width: 15vw;
-}
+  justify-content: center;
+  .dropdownToggle {
+  }
+  .dropdownToggle a {
+    @include h-3;
+    color: $darkGray;
+    font-weight: 500;
+    text-decoration: none;
+    cursor: pointer;
+    transition: 0.2s;
+  }
 
-.navUl {
-  display: flex;
-  padding: 0;
-  gap: 4vw;
-}
+  .dropdownToggle:hover {
+    transition: 0.2s;
+    transform: scale(1.05);
+  }
 
-.navUl li {
-  list-style: none;
-  transition: 0.2s;
-}
+  .containerColumn {
+    background-color: #43a04838;
+    width: 28vw;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    padding-right: 3vw;
+    margin-top: 13vw;
+    position: absolute;
+  }
 
-.navUl li a {
-  @include h-4;
-  color: $darkGray;
-  font-weight: 500;
-  display: block;
-  position: relative;
-  text-decoration: none;
-  transition: 0.2s;
-}
+  .containerColumn a {
+  }
 
-.dropdown {
-  cursor: pointer;
-}
+  .list {
+    list-style: none;
+    transition: 0.2s;
+  }
 
-.dropdownContent {
-  display: none;
+  .list a {
+    @include p-p;
+    color: $darkGray;
+    font-weight: 500;
+    text-decoration: none;
+    transition: 0.2s;
+    cursor: pointer;
+  }
 
-  position: absolute;
-  margin: 0;
-  padding: 0%;
-  margin-left: -13vw;
-}
-.dropdownContent a {
-  @include p-p;
-  color: $darkGray;
-  text-decoration: none;
-}
-
-.dropdownContent li {
-  list-style: none;
-  margin-bottom: 10px;
-}
-
-.dropdownContent a:hover {
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-}
-
-.navUl li a:hover {
-  transform: scale(1.1);
-}
-
-//-------------------------------------------------------------------------//
-.dropdownContent {
-  display: none;
-}
-
-.dropdownToggle:focus + .dropdownContent,
-.dropdownContent:hover {
-  display: block;
-}
-
-.dropdownContent {
-}
-
-.containerColumn {
-  background-color: #43a04838;
-  width: 28vw;
-  border-radius: 10px;
-  display: flex;
-  justify-content: space-between;
-  padding-right: 3vw;
-  margin-top: 1.1vw;
+  .list a:hover {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  }
+  .list li {
+    margin-top: 10px;
+  }
 }

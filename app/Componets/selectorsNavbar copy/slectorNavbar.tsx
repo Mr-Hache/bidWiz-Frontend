@@ -1,7 +1,15 @@
+import { useEffect, useRef, useState } from "react";
 import styles from "./selectorNavbar.module.scss";
-import Link from "next/link";
 
 export default function slectorNavbar() {
+  function toggleDropdown0() {
+    const dropdownContent0 = document.getElementById(
+      "dropdownContent0"
+    ) as HTMLUListElement;
+    dropdownContent0.style.display =
+      dropdownContent0.style.display === "block" ? "none" : "block";
+  }
+
   function toggleDropdown() {
     const dropdownContent = document.getElementById(
       "dropdownContent"
@@ -12,11 +20,62 @@ export default function slectorNavbar() {
 
   return (
     <div className={styles.links}>
-      <ul className={styles.navUl}>
-        <li>
-          <Link href="/offerBoard">offerBoard</Link>
-        </li>
-      </ul>
+      {/* LANGUAGES DROPDOWN */}
+
+      <div className={styles.dropdown}>
+        <ul className={styles.navUl}>
+          <li>
+            <div className={styles.dropdownToggle} onClick={toggleDropdown0}>
+              <a>Languages</a>
+            </div>
+          </li>
+        </ul>
+        <div className={styles.dropdownContent} id="dropdownContent0">
+          <div className={styles.containerColumn}>
+            <div className={styles.column}>
+              <ul>
+                <li>
+                  <a href="/">English</a>
+                </li>
+                <li>
+                  <a href="/">Spanish</a>
+                </li>
+                <li>
+                  <a href="/">Portuguese</a>
+                </li>
+              </ul>
+            </div>
+            <div className={styles.column}>
+              <ul>
+                <li>
+                  <a href="/">German</a>
+                </li>
+                <li>
+                  <a href="/">French</a>
+                </li>
+                <li>
+                  <a href="/">Chinese</a>
+                </li>
+              </ul>
+            </div>
+            <div className={styles.column}>
+              <ul>
+                <li>
+                  <a href="/">Japanese</a>
+                </li>
+                <li>
+                  <a href="/">Russian</a>
+                </li>
+                <li>
+                  <a href="/">Italian</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* SUBJECT DROPDOWN */}
 
       <div className={styles.dropdown}>
         <ul className={styles.navUl}>
