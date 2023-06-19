@@ -32,7 +32,7 @@ export const userApi = createApi({
       query: () => "users",
     }),
     getUserByUsername: builder.query<User, { username: string }>({
-      query: ({ username }) => `users/${username}`,
+      query: ({ username }) => `users/wizard/${username}`,
     }),
     createUser: builder.mutation<User, Partial<User>>({
       query: (newUser) => ({
