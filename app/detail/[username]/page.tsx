@@ -3,6 +3,7 @@
 import { usePathname } from "next/navigation";
 import { useGetUserByUsernameQuery } from "@/app/redux/services/userApi";
 import Navbar from "@/app/Componets/navbar/navbar";
+import styles from "./detail.module.scss";
 
 
 function detail() {
@@ -18,18 +19,44 @@ function detail() {
   if (isError || !user) return <div>User not found</div>;
 
   return (
+    
     <div>
-
-      <Navbar />
-      <h1>{user.username}</h1>
-      <img src={user.image} alt="" width={300} height={300} />
-      <h2>{`${user.name} ${user.lastName}`}</h2>
-      <h2>{user.experience.title}</h2>
-      <h2>{user.experience.origin}</h2>
-      <h2>{user.experience.expJobs}</h2>
-      <h3>{user.languages.join(", ")}</h3>
-      <h3>{user.subjects.join(", ")}</h3>
-
+      <Navbar/>
+      <div className={styles.block}></div>
+    <div className={styles.detail}>
+      <div className={styles.sidebar}>
+        <img src={user.image} alt="" width={200} height={200} />
+        <h2>{`${user.name} ${user.lastName}`}</h2>
+        <h2>{user.experience.title}</h2>
+        <p>⭐⭐⭐⭐⭐</p>
+        <h4>{user.experience.expJobs} Reviews</h4>
+        <h3>{user.languages.join(' - ')}</h3>
+        <h3>{user.subjects.join(' - ')}</h3>
+        {/* <h3>{user.experience.origin}</h3> */}
+        </div>
+        <div className={styles.righbar}>
+          <h1>About Me</h1>
+          <h3>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam corporis, cupiditate ex dolores omnis aliquid voluptate facere error sequi sapiente nam praesentium nemo, itaque veniam consequatur recusandae mollitia natus rerum?</h3>
+          <table>
+    <tbody>
+      <tr>
+        <td>1 Class</td>
+        <td>5000 each</td>
+      </tr>
+      <tr>
+        <td>3 Classes</td>
+        <td>4000 each</td>
+      </tr>
+      <tr>
+        <td>5 Classes</td>
+        <td>3500 each</td>
+      </tr>
+    </tbody>
+  </table>
+  <button>CONFIRM</button>
+  {/* BOTON NO FUNCIONAL */}
+        </div>
+    </div>
     </div>
   );
 }
