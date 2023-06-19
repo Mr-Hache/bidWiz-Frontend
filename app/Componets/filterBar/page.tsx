@@ -5,6 +5,8 @@ import { useAppDispatch } from "@/app/redux/hooks";
 import { setLanguages, setSubjects } from "@/app/redux/services/filtersSlice";
 import { useAppSelector } from "@/app/redux/hooks";
 import { useEffect } from "react";
+import style from "./filterBar.module.scss"
+
 
 const languagesList = [
   "English",
@@ -115,7 +117,7 @@ function FilterBar() {
   }, [languages, subjects]);
 
   return (
-    <aside>
+    <aside className={style.contAside}>
       <h2>Languages</h2>
       {stateLanguagesCheckbox.map((language, index) => (
         <div key={index}>
@@ -131,6 +133,7 @@ function FilterBar() {
           </label>
         </div>
       ))}
+      <hr />
 
       <h2>Subjects</h2>
       {stateSubjectsCheckbox.map((subject, index) => (

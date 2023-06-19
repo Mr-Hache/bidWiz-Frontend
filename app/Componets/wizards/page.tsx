@@ -13,6 +13,10 @@ import {
 import { useEffect, useState } from "react";
 import FilterBar from "../filterBar/page";
 
+
+import style from "./wizards.module.scss"
+
+
 export default function wizards() {
   const size = 9;
   const dispatch = useAppDispatch();
@@ -119,14 +123,24 @@ export default function wizards() {
     };
   }, []);
 
-  return (
-    <div>
-      <FilterBar />
-      {wizards &&
-        wizards.map((wizardUser: User) => {
-          return <Wizard key={wizardUser._id} wizardUser={wizardUser} />;
-        })}
+
+  return (    
+    <div className={style.contCard}>
+      <div className={style.containerWizard}>
+
+        <div className={style.filterBar}>
+          <FilterBar />
+        </div>
+          <div className={style.containerCard}>
+          {wizards && wizards.map((wizardUser: User) => {
+            return <Wizard key={wizardUser._id} wizardUser={wizardUser} />
+      })}
+      </div>
+      </div>
+      <div className={style.paginator}>
+
       <Paginator statePage={statePage} />
+      </div>
     </div>
   );
 }

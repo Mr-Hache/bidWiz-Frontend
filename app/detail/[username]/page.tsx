@@ -4,6 +4,7 @@ import { usePathname } from "next/navigation";
 import { useGetUserByUsernameQuery } from "@/app/redux/services/userApi";
 import Navbar from "@/app/Componets/navbar/navbar";
 
+
 function detail() {
   const pathname = usePathname(); // imprime la ruta actual
   const username = pathname.split("/")[2];
@@ -18,12 +19,8 @@ function detail() {
 
   return (
     <div>
-      <Navbar />
 
-      <br />
-      <br />
-      <br />
-      <br />
+      <Navbar />
       <h1>{user.username}</h1>
       <img src={user.image} alt="" width={300} height={300} />
       <h2>{`${user.name} ${user.lastName}`}</h2>
@@ -32,6 +29,7 @@ function detail() {
       <h2>{user.experience.expJobs}</h2>
       <h3>{user.languages.join(", ")}</h3>
       <h3>{user.subjects.join(", ")}</h3>
+
     </div>
   );
 }
