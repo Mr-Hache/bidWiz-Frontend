@@ -1,34 +1,39 @@
 import styles from "./searchBar.module.scss";
 import { useGetUserByUsernameQuery } from '@/app/redux/services/userApi';
-import {useState} from 'react'
+import { useState } from 'react';
+import Link from 'next/link';
 
 export default function searchBar() {
   
-  const [search, setSearch] = useState<string>('')
-  
+  const [search, setSearch] = useState<string>('');
+  const [shouldFetch, setShouldFetch] = useState<boolean>(false);
+  const { data: user, isLoading, isError } = useGetUserByUsernameQuery({ username: search }, { skip: !shouldFetch || search === '' }); 
 
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSearch(event.target.value)
+    setSearch(event.target.value);
+  }
+
+  const handleSearchClick = () => {
+    if (search !== '') {
+      setShouldFetch(true);
+    }
   }
   
-    const { data: user, isLoading, isError } = useGetUserByUsernameQuery({username: search});
-    //console.log(user);
-    
-  
-
-
   return (
     <div className={styles.searchBar}>
       <input
         className={styles.input}
         type="text"
-        placeholder="Find your Wizards"
+        placeholder="Find your Wizard"
         value={search}
         onChange={handleSearch}
       />
-      <button  className={styles.button} type="submit">
-        <div className={styles.lupa}>🔍︎</div>
-      </button>
+      <Link href={`/detail/${search}`} passHref>
+        <button className={styles.button} onClick={handleSearchClick}>
+          <div className={styles.lupa}>🔍︎</div>
+        </button>
+      </Link>
     </div>
   );
 }
+
