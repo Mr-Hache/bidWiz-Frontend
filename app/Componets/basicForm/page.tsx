@@ -2,7 +2,8 @@
 import React, { useState, useEffect } from 'react'
 import { useCreateUserMutation } from '@/app/redux/services/userApi';
 import {validatePassword, validatePhoneNumber, validateEmail, validateLanguages, validateSubjects, validateNotEmpty} from "../../utils/functionsValidation"
-
+import style from './basicForm.module.scss'
+import { ImMagicWand  } from "react-icons/im";
 export interface UserFormValues {
     username: string;
     name: string;
@@ -166,99 +167,143 @@ function basicForm() {
             }
         }
     }, [error]);
-    
-      
 
     return (
-        <form onSubmit={handleSubmit} >
-            <br />
-            <br />
-            <br />
-            <br />
+        
+        
+        <form className={style.form} onSubmit={handleSubmit} >
+            <div className={style.block}></div>
+            <div className={style.inputcontainer}>
             <label>
-                Username:
-                <input type="text" name="username" value={values.username} onChange={handleChange} />
-                {errors.username && <p className="error">{errors.username}</p>}
+                <input className={style.input} type="text" name="username" value={values.username} placeholder='Username:' onChange={handleChange} />
             </label>
+                {errors.username && <span className="error">{errors.username}</span>}
+
+            </div>
+
             <br />
+            <div className={style.inputcontainer}>
             <label>
-                Name:
-                <input type="text" name="name" value={values.name} onChange={handleChange} />
-                {errors.name && <p className="error">{errors.name}</p>}
+                
+                <input className={style.input} type="text" name="name" value={values.name} placeholder='Name:' onChange={handleChange} />
             </label>
+                {errors.name && <span className="error">{errors.name}</span>}
+            </div>
+
             <br />
+            <div className={style.inputcontainer}>
             <label>
-                Last Name:
-                <input type="text" name="lastName" value={values.lastName} onChange={handleChange} />
-                {errors.lastName && <p className="error">{errors.lastName}</p>}
+                
+                <input className={style.input} type="text" name="lastName" value={values.lastName} placeholder='Last Name:' onChange={handleChange} />
             </label>
+                {errors.lastName && <span className="error">{errors.lastName}</span>}
+            </div>
+
             <br />
+            <div className={style.inputcontainer}>
             <label>
-                Password:
-                <input type="password" name="password" value={values.password} onChange={handleChange} />
-                {errors.password && <p className="error">{errors.password}</p>}
+                
+                <input className={style.input} type="password" name="password" value={values.password} placeholder='Password:' onChange={handleChange} />
             </label>
+                {errors.password && <span className="error">{errors.password}</span>}
+            </div>
+
             <br />
+            <div className={style.inputcontainer}>
             <label>
-                Email:
-                <input type="email" name="email" value={values.email} onChange={handleChange} />
-                {errors.email && <p className="error">{errors.email}</p>}
+                
+                <input className={style.input} type="email" name="email" value={values.email} placeholder='Email:' onChange={handleChange} />
             </label>
+                {errors.email && <span className="error">{errors.email}</span>}
+            </div>
+
             <br />
+            <div className={style.inputcontainer}>
             <label>
-                Phone Number:
-                <input type="text" name="phoneNumber" value={values.phoneNumber} onChange={handleChange} />
-                {errors.phoneNumber && <p className="error">{errors.phoneNumber}</p>}
+                
+                <input className={style.input} type="text" name="phoneNumber" value={values.phoneNumber} placeholder='Phone Number:' onChange={handleChange} />
             </label>
+                {errors.phoneNumber && <span className="error">{errors.phoneNumber}</span>}
+            </div>
+
             <br />
+            <div className={style.inputcontainer}>
             <label>
-                Image:
-                <input type="text" name="image" value={values.image} onChange={handleChange} />
-                {errors.image && <p className="error">{errors.image}</p>}
+                
+                <input className={style.input} type="text" name="image" value={values.image} placeholder='Image:' onChange={handleChange} />
             </label>
+                {errors.image && <span className="error">{errors.image}</span>}
+            </div>
+
             <br />
             <label>
-                Is a Wizard?
+            <div >Unleash your magic 
+            <div className={style.magic}>
                 <input type="checkbox" name="isWizard" checked={values.isWizard} onChange={handleCheckboxChange} />
+                <ImMagicWand className={style.logo} />
+                </div>
+                </div>
             </label>
 
 
             {
                 values.isWizard ? <div>
-                    <label>
-                        Languages:
-                        <select multiple value={values.languages} onChange={handleLanguageChange}>
+                    <br />                                   
+                    <div className={style.select}>
+                       <div className={style.selectTitle}>Languages</div> 
+                        <div className={style.selectSelect}>
+                        <select  multiple value={values.languages} onChange={handleLanguageChange}>
                             {languages.map((language, index) => (
                                 <option key={index} value={language}>{language}</option>
                             ))}
                         </select>
-                        {errors.languages && <p className="error">{errors.languages}</p>}
-                    </label>
-                    <label>
-                        Subjects:
+                        {errors.languages && <span className="error">{errors.languages}</span>}
+                        </div>
+                    </div>                    
+                      <br />                 
+                    <div className={style.inputcontainer}>
+                    <div className={style.select}>
+                    <div className={style.selectTitle}>Subjects</div>
+                    <div className={style.selectSelect}>                        
                         <select multiple value={values.subjects} onChange={handleSubjectChange}>
                             {subjects.map((subject, index) => (
                                 <option key={index} value={subject}>{subject}</option>
                             ))}
                         </select>
-                        {errors.subjects && <p className="error">{errors.subjects}</p>}
-                    </label>
+                        {errors.subjects && <span className="error">{errors.subjects}</span>}
+                        </div>    
+                    </div>
+                    </div>
+
+                    <br />
+                    <div className={style.inputcontainer}>
                     <label>
-                        Title:
-                        <input type="text" name="title" value={values.experience.title} onChange={handleExperienceChange} />
-                        {errors.title && <p className="error">{errors.title}</p>}
+                        
+                        <input className={style.input} type="text" name="title" value={values.experience.title} placeholder='Title:' onChange={handleExperienceChange} />
                     </label>
+                        {errors.title && <span className="error">{errors.title}</span>}
+                    </div>
+
+                    <br />
+                    <div className={style.inputcontainer}>
                     <label>
-                        Origin:
-                        <input type="text" name="origin" value={values.experience.origin} onChange={handleExperienceChange} />
-                        {errors.origin && <p className="error">{errors.origin}</p>}
+                        
+                        <input className={style.input} type="text" name="origin" value={values.experience.origin} placeholder='Origin:' onChange={handleExperienceChange} />
                     </label>
+                        {errors.origin && <span className="error">{errors.origin}</span>}
+                    </div>
 
 
                 </div> : null
 
             }
-            <input type="submit" value="Submit" />
+            <br />
+            <br />
+                      
+
+            
+
+            <input className={style.boton} type="submit" value="Submit" />
 
         </form>
     )
