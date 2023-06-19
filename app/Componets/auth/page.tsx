@@ -1,19 +1,19 @@
 import React from 'react'
+import style from "./auth.module.scss"
 
 function auth() {
     return (
     
-        <form >
-            <div >
-                <label htmlFor="username">Username</label>
-                <input type="text" name="username" />
+        <form className={style.form}>
+            <div  className={style.container}>
+                <label htmlFor="username" className={style.label}>Username</label><br/>
+                <input type="text" name="username"  className={style.input}/>
             </div>
-
-            <div>
-                <label htmlFor="password">Password</label>
-                <input type="password" name="password" />
+            <div className={style.container}>
+                <label htmlFor="password">Password</label><br/>
+                <input type="password" name="password" className={style.input}/>
             </div>
-                <button type="submit">Login</button>
+            <button type="submit" className={style.button}>Login</button>
         </form>
         
   )
