@@ -1,0 +1,20 @@
+@import "../../utils/mixin";
+@import "../../utils/variabls";
+
+.contAside {      
+    position: fixed;      
+    background-color: $lightBlue;
+    margin-top: 6vw;
+    margin-left: 1vw;
+    width: 14vw;
+    height: 38vw;
+    border: 2px solid rgb(197, 188, 188);
+    border-radius: 10px;
+    align-content: center;    
+}
+
+.contAside h2 {
+    background-color: rgba(53, 56, 56, 0.13);
+    color: rgb(3, 3, 116);        
+    text-align: center;    
+}

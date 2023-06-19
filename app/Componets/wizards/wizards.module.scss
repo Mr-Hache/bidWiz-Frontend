@@ -1,0 +1,29 @@
+@import "../../utils/mixin";
+@import "../../utils/variabls";
+
+.contCard {       
+    min-height: 100vw;
+    display: flex;
+    flex-direction: column;     
+    justify-content: center;    
+}
+
+.containerWizard {
+    background-color: white;
+    display: flex;
+    width: 100%;                  
+}
+
+.containerCard {
+    margin-top: 1vw;
+    display: flex;
+    flex-wrap: wrap;         
+    justify-content: center;
+}
+
+.paginator {
+    background-color: white;
+    margin-top: 2vw;
+}
+
+
