@@ -1,11 +1,11 @@
-import Link from "next/link";
+"use client";
 
-export default function NotFound() {
+import PageNotFound from "./Componets/pageNotFound/pageNotFound";
+
+export default function notfound() {
   return (
-    <div>
-      <h1>404 - Page Not Found</h1>
-      <p>The page you are looking for doesn't exist</p>
-      <Link href="/">Home</Link>
-    </div>
+    <main>
+      <PageNotFound />
+    </main>
   );
 }
