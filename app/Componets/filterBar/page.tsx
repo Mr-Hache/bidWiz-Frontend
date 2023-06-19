@@ -1,34 +1,64 @@
-import React, { useState, ChangeEvent } from 'react';
-import {useAppDispatch } from '@/app/redux/hooks';
-import { setLanguages, setSubjects } from '@/app/redux/services/filtersSlice';
+"use client";
 
+import React, { useState, ChangeEvent } from "react";
+import { useAppDispatch } from "@/app/redux/hooks";
+import { setLanguages, setSubjects } from "@/app/redux/services/filtersSlice";
+import { useAppSelector } from "@/app/redux/hooks";
+import { useEffect } from "react";
 import style from "./filterBar.module.scss"
 
 
-const languagesList = ['English', 'Spanish', 'Portuguese', 'German', 'French', 'Chinese', 'Japanese', 'Russian', 'Italian'];
-const subjectsList = ["Mathematics", "Physics", "Chemistry", "Biology", "Economics", "Business Administration", "Accounting", "Computer Science", "Music Theory", "Political Science", "Law", "Programming"];
+const languagesList = [
+  "English",
+  "Spanish",
+  "Portuguese",
+  "German",
+  "French",
+  "Chinese",
+  "Japanese",
+  "Russian",
+  "Italian",
+];
+const subjectsList = [
+  "Mathematics",
+  "Physics",
+  "Chemistry",
+  "Biology",
+  "Economics",
+  "Business Administration",
+  "Accounting",
+  "Computer Science",
+  "Music Theory",
+  "Political Science",
+  "Law",
+  "Programming",
+];
 
 function FilterBar() {
-
   const dispatch = useAppDispatch();
+  const languages: string[] = useAppSelector(
+    (state) => state.filters.languages
+  );
+  const subjects: string[] = useAppSelector((state) => state.filters.subjects);
 
   const [stateLanguagesCheckbox, setStateLanguagesCheckbox] = useState(
     languagesList.map((language) => ({
       name: language,
-      checked: false
+      checked: languages.includes(language) ? true : false,
     }))
   );
 
   const [stateSubjectsCheckbox, setStateSubjectsCheckbox] = useState(
     subjectsList.map((subject) => ({
       name: subject,
-      checked: false
+      checked: subjects.includes(subject) ? true : false,
     }))
   );
 
-
-
-  const handleLanguageCheckboxChange = (event: ChangeEvent<HTMLInputElement>, index: number) => {
+  const handleLanguageCheckboxChange = (
+    event: ChangeEvent<HTMLInputElement>,
+    index: number
+  ) => {
     const updatedLanguagesCheckbox = [...stateLanguagesCheckbox];
     updatedLanguagesCheckbox[index].checked = event.target.checked;
     setStateLanguagesCheckbox(updatedLanguagesCheckbox);
@@ -39,7 +69,10 @@ function FilterBar() {
     dispatch(setLanguages(selectedLanguages));
   };
 
-  const handleSubjectCheckboxChange = (event: ChangeEvent<HTMLInputElement>, index: number) => {
+  const handleSubjectCheckboxChange = (
+    event: ChangeEvent<HTMLInputElement>,
+    index: number
+  ) => {
     const updatedSubjectsCheckbox = [...stateSubjectsCheckbox];
     updatedSubjectsCheckbox[index].checked = event.target.checked;
     setStateSubjectsCheckbox(updatedSubjectsCheckbox);
@@ -49,6 +82,39 @@ function FilterBar() {
       .map((checkbox) => checkbox.name);
     dispatch(setSubjects(selectedSubjects));
   };
+
+  useEffect(() => {
+    if (languages.length == 1) {
+      for (let j = 0; j < stateLanguagesCheckbox.length; j++) {
+        if (languages[0] == stateLanguagesCheckbox[j].name) {
+          stateLanguagesCheckbox[j].checked = true;
+        } else {
+          stateLanguagesCheckbox[j].checked = false;
+        }
+      }
+    } else if (languages.length == 0) {
+      for (let j = 0; j < stateLanguagesCheckbox.length; j++) {
+        {
+          stateLanguagesCheckbox[j].checked = false;
+        }
+      }
+    }
+    if (subjects.length == 1) {
+      for (let j = 0; j < stateSubjectsCheckbox.length; j++) {
+        if (subjects[0] == stateSubjectsCheckbox[j].name) {
+          stateSubjectsCheckbox[j].checked = true;
+        } else {
+          stateSubjectsCheckbox[j].checked = false;
+        }
+      }
+    } else if (subjects.length == 0) {
+      for (let j = 0; j < stateSubjectsCheckbox.length; j++) {
+        {
+          stateSubjectsCheckbox[j].checked = false;
+        }
+      }
+    }
+  }, [languages, subjects]);
 
   return (
     <aside className={style.contAside}>

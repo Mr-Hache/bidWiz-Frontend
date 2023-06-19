@@ -1,7 +1,9 @@
+"use client"
 import React, { useState, useEffect } from 'react'
 import { useCreateUserMutation } from '@/app/redux/services/userApi';
-import {User} from '../../redux/services/userApi'
-
+import {validatePassword, validatePhoneNumber, validateEmail, validateLanguages, validateSubjects, validateNotEmpty} from "../../utils/functionsValidation"
+import style from './basicForm.module.scss'
+import { ImMagicWand  } from "react-icons/im";
 export interface UserFormValues {
     username: string;
     name: string;
@@ -19,11 +21,6 @@ export interface UserFormValues {
         expJobs: number;
     };
 }
-
-
-
-
-
 
 function basicForm() {
 
@@ -48,15 +45,72 @@ function basicForm() {
         },
     });
 
-    // const [valuesWizard, setValuesWizard] = useState<WizardFormValues>({
-    //     languages: ['Spanish'],
-    //     subjects: ["Physics"],
-    //     experience: {
-    //         title: '',
-    //         origin: '',
-    //     },
-    // });
+    interface Errors {
+        username?: string;
+        name?: string;
+        lastName?: string;
+        password?: string;
+        email?: string;
+        phoneNumber?: string;
+        image?: string;
+        languages?: string;
+        subjects?: string;
+        title?: string;
+        origin?: string;
+    }
 
+    const [errors, setErrors] = useState<Errors>({}); 
+
+    const validateForm = () => {
+    let formErrors = {};
+
+    if (!validateNotEmpty(values.username)) {
+      formErrors = { ...formErrors, username: "Username cannot be empty." };
+    }
+    if (!validateNotEmpty(values.name)) {
+      formErrors = { ...formErrors, name: "Name cannot be empty." };
+    }
+    if (!validateNotEmpty(values.lastName)) {
+      formErrors = { ...formErrors, lastName: "Last Name cannot be empty." };
+    }
+    if (!validatePassword(values.password)) {
+      formErrors = { ...formErrors, password: "Password must contain a capital letter, a number and a symbol." };
+    }
+    if (!validateEmail(values.email)) {
+      formErrors = { ...formErrors, email: "Invalid email format." };
+    }
+    if (!validatePhoneNumber(values.phoneNumber)) {
+      formErrors = { ...formErrors, phoneNumber: "Phone number must start with '+' and contain only digits." };
+    }
+    if (!validateNotEmpty(values.image)) {
+      formErrors = { ...formErrors, image: "Image cannot be empty." };
+    }
+    if (values.isWizard) {
+      if (!validateLanguages(values.languages)) {
+        formErrors = { ...formErrors, languages: "At least one language must be selected." };
+      }
+      if (!validateSubjects(values.subjects)) {
+        formErrors = { ...formErrors, subjects: "At least one subject must be selected." };
+      }
+      if (!validateNotEmpty(values.experience.title)) {
+        formErrors = { ...formErrors, title: "Title cannot be empty." };
+      }
+      if (!validateNotEmpty(values.experience.origin)) {
+        formErrors = { ...formErrors, origin: "Origin cannot be empty." };
+      }
+
+      if (!validateNotEmpty(values.image)) {
+        formErrors = { ...formErrors, image: "Image cannot be empty." };
+    }
+    }
+
+    setErrors(formErrors);
+        return Object.keys(formErrors).length === 0; 
+    };
+
+  useEffect(() => {
+    validateForm();
+  }, [values]);
 
 
 
@@ -99,91 +153,157 @@ function basicForm() {
         event.preventDefault();
 
             
-        createUser(values)
+        if (validateForm()) {
+            createUser(values);
+        }
     }
 
+    useEffect(() => {
+        if (error) {
+            if ('message' in error) {
+                alert(`Error: ${error.message}`);
+            } else if ('status' in error) {
+                alert(`Error: ${error.status}`);
+            }
+        }
+    }, [error]);
+
     return (
-        <form onSubmit={handleSubmit} >
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
+        
+        
+        <form className={style.form} onSubmit={handleSubmit} >
+            <div className={style.block}></div>
+            <div className={style.inputcontainer}>
             <label>
-                Username:
-                <input type="text" name="username" value={values.username} onChange={handleChange} />
+                <input className={style.input} type="text" name="username" value={values.username} placeholder='Username:' onChange={handleChange} />
             </label>
+                {errors.username && <span className="error">{errors.username}</span>}
+
+            </div>
+
             <br />
+            <div className={style.inputcontainer}>
             <label>
-                Name:
-                <input type="text" name="name" value={values.name} onChange={handleChange} />
+                
+                <input className={style.input} type="text" name="name" value={values.name} placeholder='Name:' onChange={handleChange} />
             </label>
+                {errors.name && <span className="error">{errors.name}</span>}
+            </div>
+
             <br />
+            <div className={style.inputcontainer}>
             <label>
-                Last Name:
-                <input type="text" name="lastName" value={values.lastName} onChange={handleChange} />
+                
+                <input className={style.input} type="text" name="lastName" value={values.lastName} placeholder='Last Name:' onChange={handleChange} />
             </label>
+                {errors.lastName && <span className="error">{errors.lastName}</span>}
+            </div>
+
             <br />
+            <div className={style.inputcontainer}>
             <label>
-                Password:
-                <input type="password" name="password" value={values.password} onChange={handleChange} />
+                
+                <input className={style.input} type="password" name="password" value={values.password} placeholder='Password:' onChange={handleChange} />
             </label>
+                {errors.password && <span className="error">{errors.password}</span>}
+            </div>
+
             <br />
+            <div className={style.inputcontainer}>
             <label>
-                Email:
-                <input type="email" name="email" value={values.email} onChange={handleChange} />
+                
+                <input className={style.input} type="email" name="email" value={values.email} placeholder='Email:' onChange={handleChange} />
             </label>
+                {errors.email && <span className="error">{errors.email}</span>}
+            </div>
+
             <br />
+            <div className={style.inputcontainer}>
             <label>
-                Phone Number:
-                <input type="text" name="phoneNumber" value={values.phoneNumber} onChange={handleChange} />
+                
+                <input className={style.input} type="text" name="phoneNumber" value={values.phoneNumber} placeholder='Phone Number:' onChange={handleChange} />
             </label>
+                {errors.phoneNumber && <span className="error">{errors.phoneNumber}</span>}
+            </div>
+
             <br />
+            <div className={style.inputcontainer}>
             <label>
-                Image:
-                <input type="text" name="image" value={values.image} onChange={handleChange} />
+                
+                <input className={style.input} type="text" name="image" value={values.image} placeholder='Image:' onChange={handleChange} />
             </label>
+                {errors.image && <span className="error">{errors.image}</span>}
+            </div>
+
             <br />
             <label>
-                Is a Wizard?
+            <div >Unleash your magic 
+            <div className={style.magic}>
                 <input type="checkbox" name="isWizard" checked={values.isWizard} onChange={handleCheckboxChange} />
+                <ImMagicWand className={style.logo} />
+                </div>
+                </div>
             </label>
 
 
             {
                 values.isWizard ? <div>
-                    <label>
-                        Languages:
-                        <select multiple value={values.languages} onChange={handleLanguageChange}>
+                    <br />                                   
+                    <div className={style.select}>
+                       <div className={style.selectTitle}>Languages</div> 
+                        <div className={style.selectSelect}>
+                        <select  multiple value={values.languages} onChange={handleLanguageChange}>
                             {languages.map((language, index) => (
                                 <option key={index} value={language}>{language}</option>
                             ))}
                         </select>
-                    </label>
-                    <label>
-                        Subjects:
+                        {errors.languages && <span className="error">{errors.languages}</span>}
+                        </div>
+                    </div>                    
+                      <br />                 
+                    <div className={style.inputcontainer}>
+                    <div className={style.select}>
+                    <div className={style.selectTitle}>Subjects</div>
+                    <div className={style.selectSelect}>                        
                         <select multiple value={values.subjects} onChange={handleSubjectChange}>
                             {subjects.map((subject, index) => (
                                 <option key={index} value={subject}>{subject}</option>
                             ))}
                         </select>
-                    </label>
+                        {errors.subjects && <span className="error">{errors.subjects}</span>}
+                        </div>    
+                    </div>
+                    </div>
+
+                    <br />
+                    <div className={style.inputcontainer}>
                     <label>
-                        Title:
-                        <input type="text" name="title" value={values.experience.title} onChange={handleExperienceChange} />
+                        
+                        <input className={style.input} type="text" name="title" value={values.experience.title} placeholder='Title:' onChange={handleExperienceChange} />
                     </label>
+                        {errors.title && <span className="error">{errors.title}</span>}
+                    </div>
+
+                    <br />
+                    <div className={style.inputcontainer}>
                     <label>
-                        Origin:
-                        <input type="text" name="origin" value={values.experience.origin} onChange={handleExperienceChange} />
+                        
+                        <input className={style.input} type="text" name="origin" value={values.experience.origin} placeholder='Origin:' onChange={handleExperienceChange} />
                     </label>
+                        {errors.origin && <span className="error">{errors.origin}</span>}
+                    </div>
 
 
                 </div> : null
 
             }
-            <input type="submit" value="Submit" />
+            <br />
+            <br />
+                      
+
+            
+
+            <input className={style.boton} type="submit" value="Submit" />
 
         </form>
     )
