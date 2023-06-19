@@ -29,6 +29,10 @@
     color: $lightPurple;
   }
 
+  .link {
+    text-decoration: none;
+  }
+
   h2 {
     @include h-2;
     font-weight: 600;
@@ -42,7 +46,7 @@
   }
   h4:hover {
     text-decoration: underline white;
-    cursor: default;
+    cursor: pointer;
   }
 
   .title {
@@ -81,11 +85,11 @@
     @include icon(#1690db);
     transition: 0.1s;
   }
-  .link {
+  .lin {
     @include icon($lightMediumPurple);
     transition: 1.5s;
   }
-  .link:hover {
+  .lin:hover {
     @include icon(#0a66c2);
     transition: 0.1s;
   }
