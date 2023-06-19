@@ -2,19 +2,32 @@
 @import "../../utils/variabls";
 
 .contAside {      
-    position: fixed;      
-    background-color: $lightBlue;
+    @include h-4;
+    font-size: 18px;
+    position: relative;      
+    background-color: white;
     margin-top: 6vw;
     margin-left: 1vw;
     width: 14vw;
     height: 38vw;
     border: 2px solid rgb(197, 188, 188);
     border-radius: 10px;
-    align-content: center;    
+    align-content: center; 
+    box-shadow: 0px 6px 4px 2px rgba(0, 0, 0, 0.25);  
 }
 
 .contAside h2 {
     background-color: rgba(53, 56, 56, 0.13);
-    color: rgb(3, 3, 116);        
+    color: $darkPurple;        
     text-align: center;    
 }
+
+.filter{
+    padding-left: 10px;
+}
+
+.checkbox{
+    margin-right: 10px;
+
+}
+
