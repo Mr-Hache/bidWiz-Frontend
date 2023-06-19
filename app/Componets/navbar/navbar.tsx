@@ -2,7 +2,6 @@ import Link from "next/link";
 import styles from "./navbar.module.scss";
 import { FaHatWizard } from "react-icons/fa";
 import SearchBar from "../searchBar/searchBar";
-
 import SelectorNavbar from "../selectorsNavbar/selectorNavbar";
 
 export default function Navbar() {
