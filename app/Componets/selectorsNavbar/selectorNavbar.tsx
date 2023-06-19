@@ -48,50 +48,6 @@ export default function slectorNavbar({ filter }: { filter: string }) {
     filterList = subjectsList;
   }
 
-  // const [listLanguages, setListLanguages] = useState(
-  //   languagesList.map((language) => ({
-  //     name: language,
-
-  //   }))
-  // );
-
-  // const [stateSubjectsCheckbox, setStateSubjectsCheckbox] = useState(
-  //   subjectsList.map((subject) => ({
-  //     name: subject,
-  //     checked: false,
-  //   }))
-  // );
-
-  // const handleLanguageCheckboxChange = (
-  //   event: ChangeEvent<HTMLInputElement>,
-  //   index: number
-  // ) => {
-  //   const updatedLanguagesCheckbox = [...stateLanguagesCheckbox];
-  //   updatedLanguagesCheckbox[index].checked = event.target.checked;
-  //   setStateLanguagesCheckbox(updatedLanguagesCheckbox);
-
-  //   const selectedLanguages = updatedLanguagesCheckbox
-  //     .filter((checkbox) => checkbox.checked)
-  //     .map((checkbox) => checkbox.name);
-  //   dispatch(setLanguages(selectedLanguages));
-  // };
-
-  // const handleSubjectCheckboxChange = (
-  //   event: ChangeEvent<HTMLInputElement>,
-  //   index: number
-  // ) => {
-  //   const updatedSubjectsCheckbox = [...stateSubjectsCheckbox];
-  //   updatedSubjectsCheckbox[index].checked = event.target.checked;
-  //   setStateSubjectsCheckbox(updatedSubjectsCheckbox);
-
-  //   const selectedSubjects = updatedSubjectsCheckbox
-  //     .filter((checkbox) => checkbox.checked)
-  //     .map((checkbox) => checkbox.name);
-  //   dispatch(setSubjects(selectedSubjects));
-  // };
-
-  // ----------dropDown-------------
-
   const pathname = usePathname();
 
   const [open, setOpen] = useState<boolean>(false);
@@ -125,10 +81,27 @@ export default function slectorNavbar({ filter }: { filter: string }) {
   return (
     <div className={styles.dropdown} ref={dropdownRef}>
       <div className={styles.dropdownToggle}>
-        <a onClick={(event) => handleDropdown(open)}>{filter} ⮟</a>
+        <a
+          onClick={(event) => handleDropdown(open)}
+          style={{ display: "inline-block" }}
+        >
+          {filter}
+          <div
+            className={styles.arrow}
+            style={{ marginLeft: "10px", display: "inline-block" }}
+          >
+            ⮟
+          </div>
+        </a>
       </div>
       {open && (
-        <div className={styles.containerColumn}>
+        <div
+          className={
+            filter === "languages"
+              ? styles.containerColumn
+              : styles.containerColumn2
+          }
+        >
           <div className={styles.column}>
             <ul className={styles.list}>
               {filterList.map((filter, index) => (

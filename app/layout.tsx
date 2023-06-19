@@ -1,6 +1,5 @@
 "use client";
 
-import Navbar from "./Componets/navbar/navbar";
 import styles from "./layout.module.scss";
 import { Providers } from "./redux/providers";
 
@@ -17,10 +16,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <Providers>
-        <body className={styles.body}>
-          <Navbar />
-          {children}
-        </body>
+        <body className={styles.body}>{children}</body>
       </Providers>
     </html>
   );
