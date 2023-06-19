@@ -2,16 +2,17 @@
 @import "../../utils/variabls";
 
 .contCard {       
-    min-height: 100vw;
+    margin-bottom: 10px;
     display: flex;
     flex-direction: column;     
-    justify-content: center;    
+    justify-content: center; 
+
 }
 
 .containerWizard {
     background-color: white;
     display: flex;
-    width: 100%;                  
+    width: 100%;    
 }
 
 .containerCard {
@@ -21,9 +22,6 @@
     justify-content: center;
 }
 
-.paginator {
-    background-color: white;
-    margin-top: 2vw;
-}
+
 
 
