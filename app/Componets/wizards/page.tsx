@@ -134,12 +134,13 @@ export default function wizards() {
           {wizards && wizards.map((wizardUser: User) => {
             return <Wizard key={wizardUser._id} wizardUser={wizardUser} />
       })}
+       {wizards && wizards.length > 0 && <Paginator statePage={statePage} />}
       </div>
       </div>
-      <div className={style.paginator}>
+    
 
-      <Paginator statePage={statePage} />
-      </div>
+     
+      
     </div>
   );
 }
