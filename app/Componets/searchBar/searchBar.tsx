@@ -7,14 +7,16 @@ export default function searchBar() {
   
   const [search, setSearch] = useState<string>('');
   const [shouldFetch, setShouldFetch] = useState<boolean>(false);
-  const { data: user, isLoading, isError } = useGetUserByUsernameQuery({ username: search }, { skip: !shouldFetch }); 
+  const { data: user, isLoading, isError } = useGetUserByUsernameQuery({ username: search }, { skip: !shouldFetch || search === '' }); 
 
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(event.target.value);
   }
 
   const handleSearchClick = () => {
-    setShouldFetch(true);
+    if (search !== '') {
+      setShouldFetch(true);
+    }
   }
   
   return (
@@ -31,7 +33,7 @@ export default function searchBar() {
           <div className={styles.lupa}>🔍︎</div>
         </button>
       </Link>
-      {isError && <div>Wizard with username "{search}" not found</div>}
     </div>
   );
 }
+
