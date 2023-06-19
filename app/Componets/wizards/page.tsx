@@ -13,7 +13,7 @@ import style from "./wizards.module.scss"
 
 
 export default function wizards() {
-  const size = 3;
+  const size = 9;
   const dispatch = useAppDispatch();
   const page = useAppSelector((state) => state.filters.page);
   const wizards = useAppSelector((state) => state.wizards.wizards);
@@ -91,13 +91,22 @@ export default function wizards() {
   }, [page, totalWizards])
 
 
-  return (
+  return (    
     <div className={style.contCard}>
-      <FilterBar />
-      {wizards && wizards.map((wizardUser: User) => {
-        return <Wizard key={wizardUser._id} wizardUser={wizardUser} />
+      <div className={style.containerWizard}>
+
+        <div className={style.filterBar}>
+          <FilterBar />
+        </div>
+          <div className={style.containerCard}>
+          {wizards && wizards.map((wizardUser: User) => {
+            return <Wizard key={wizardUser._id} wizardUser={wizardUser} />
       })}
+      </div>
+      </div>
+      <div className={style.paginator}>
       <Paginator statePage={statePage} />
+      </div>
     </div>
   )
 }

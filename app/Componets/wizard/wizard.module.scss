@@ -1,16 +1,16 @@
 @import "../../utils/mixin";
 @import "../../utils/variabls";
 
-.contCards {            
-    padding: 1rem;
+.contCards {     
+    // display: flex;       
+    padding: 1vw;
     border: 2px solid;
     border-radius: 10px;
     box-shadow: 5px 5px 5px 0px rgba(1, 0, 8, 0.808);    
     text-align: center;
-    margin-left: 9vw;   
-    margin-bottom: 1vw;   
+    margin-left: 7vw;          
     margin-top: 6vw; 
-    width: 15rem;    
+    width: 16vw;    
     border-color: rgb(230, 228, 240);
     background-image: linear-gradient(to right, rgb(182, 218, 215), rgb(151, 223, 148), rgb(163, 193, 228), rgb(174, 233, 112));
     background-size: 300% 100%;
@@ -24,7 +24,8 @@
 .contCards h2 {    
     font-family: $ralewayFont;
     font-size: 30px;
-    font-weight: 700
+    font-weight: 700;
+    color: rgb(3, 3, 116);    
 }
 
 .contCards p {

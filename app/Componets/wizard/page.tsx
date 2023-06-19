@@ -13,7 +13,7 @@ const Wizard: React.FC<WizardProps> = ({ wizardUser }) => {
       };
   return (
     <div className={style.contCards}>
-      <Link href={`/detail/${wizardUser.username}`}>
+      <Link style={{textDecoration:'none'}} href={`/detail/${wizardUser.username}` }>
         
           <div>
           <h2>{`${wizardUser.name} ${wizardUser.lastName}`}</h2>

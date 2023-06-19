@@ -15,12 +15,8 @@ const dispatch = useAppDispatch();
     const page = useAppSelector((state) => state.filters.page);
 
     const handlePage = (event: React.MouseEvent<HTMLButtonElement>) => {
-        event.currentTarget.value === "Next" ? statePage?dispatch(setPage(page + 1)): null : page==1?null:dispatch(setPage(page - 1)); 
-        
+        event.currentTarget.value === "Next" ? statePage?dispatch(setPage(page + 1)): null : page==1?null:dispatch(setPage(page - 1));         
     }
-
-
-
     
   return (
      <div className={style.contPaginator}>
