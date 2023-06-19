@@ -22,7 +22,7 @@ export default function searchBar() {
       <input
         className={styles.input}
         type="text"
-        placeholder="Find your Wizards"
+        placeholder="Find your Wizard"
         value={search}
         onChange={handleSearch}
       />
@@ -31,10 +31,7 @@ export default function searchBar() {
           <div className={styles.lupa}>🔍︎</div>
         </button>
       </Link>
+      {isError && <div>Wizard with username "{search}" not found</div>}
     </div>
   );
 }
-
-
-
-
