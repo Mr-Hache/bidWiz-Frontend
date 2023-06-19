@@ -90,6 +90,10 @@ export default function wizards() {
   useEffect(() => {
     takeCounter(languages, subjects);
     takeWizards(languages, subjects, 1);
+    return () => {
+      dispatch(setLanguages([]));
+      dispatch(setSubjects([]));
+    };
   }, []);
 
   useEffect(() => {
@@ -112,12 +116,7 @@ export default function wizards() {
     }
   }, [page, totalWizards]);
 
-  useEffect(() => {
-    return () => {
-      dispatch(setLanguages([]));
-      dispatch(setSubjects([]));
-    };
-  }, []);
+
 
   return (
     <div>
