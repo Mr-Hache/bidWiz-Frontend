@@ -120,13 +120,14 @@ function FilterBar() {
     <aside className={style.contAside}>
       <h2>Languages</h2>
       {stateLanguagesCheckbox.map((language, index) => (
-        <div key={index}>
+        <div key={index} className={style.filter}>
           <label>
             <input
               type="checkbox"
               name="language"
               value={language.name}
               checked={language.checked}
+              className={style.checkbox}
               onChange={(event) => handleLanguageCheckboxChange(event, index)}
             />
             {language.name}
@@ -137,13 +138,14 @@ function FilterBar() {
 
       <h2>Subjects</h2>
       {stateSubjectsCheckbox.map((subject, index) => (
-        <div key={index}>
+        <div key={index} className={style.filter}>
           <label>
             <input
               type="checkbox"
               name="subject"
               value={subject.name}
               checked={subject.checked}
+              className={style.checkbox}
               onChange={(event) => handleSubjectCheckboxChange(event, index)}
             />
             {subject.name}
