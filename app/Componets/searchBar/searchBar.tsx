@@ -1,23 +1,49 @@
+"use client"
 import styles from "./searchBar.module.scss";
-import { useGetUserByUsernameQuery } from '@/app/redux/services/userApi';
 import { useState } from 'react';
 import Link from 'next/link';
+import {useRouter} from "next/navigation"
+
+
+
 
 export default function searchBar() {
+  const router = useRouter();
+
+  const [search, setSearch] = useState<string>("");
+  const [userNotFound, setUserNotFound] = useState<boolean>(false)
+
+   
   
-  const [search, setSearch] = useState<string>('');
-  const [shouldFetch, setShouldFetch] = useState<boolean>(false);
-  const { data: user, isLoading, isError } = useGetUserByUsernameQuery({ username: search }, { skip: !shouldFetch || search === '' }); 
 
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSearch(event.target.value);
+    setSearch(
+      
+      event.target.value
+      
+    );
   }
 
-  const handleSearchClick = () => {
+  const handleSearchClick = async () => {
     if (search !== '') {
-      setShouldFetch(true);
+      try {
+        const response = await fetch(`https://bidwiz-backend-production-db77.up.railway.app/users/wizard/${search}`);
+        if (response.ok) {
+         
+          setUserNotFound(false);
+          router.push(`/detail/${search}`)
+        } else {
+          setUserNotFound(true);
+        }
+      } catch (error) {
+        console.error(error);
+        setUserNotFound(true);
+      }   
     }
-  }
+  };
+
+
+  
   
   return (
     <div className={styles.searchBar}>
@@ -28,11 +54,11 @@ export default function searchBar() {
         value={search}
         onChange={handleSearch}
       />
-      <Link href={`/detail/${search}`} passHref>
+      {userNotFound? <span>User not found</span>: null}
         <button className={styles.button} onClick={handleSearchClick}>
           <div className={styles.lupa}>🔍︎</div>
         </button>
-      </Link>
+      
     </div>
   );
 }
