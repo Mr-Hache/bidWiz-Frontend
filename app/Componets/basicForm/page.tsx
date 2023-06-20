@@ -24,8 +24,8 @@ export interface UserFormValues {
 
 function basicForm() {
 
-    const languages = ['English', 'Spanish', 'Portuguese', 'German', 'French', 'Chinese', 'Japanese', 'Russian', 'Italian'] ;
-    const subjects=["Mathematics", "Physics", "Chemistry", "Biology", "Economics", "Business Administration", "Accounting", "Computer Science", "Music Theory", "Political Science", "Law", "Programming"] 
+    const languages = ['Chinese', 'English', 'French', 'German', 'Italian', 'Japanese', 'Portuguese', 'Russian', 'Spanish'] ;
+    const subjects=["Accounting", "Biology", "Business Administration", "Chemistry", "Computer Science", "Economics", "Law", "Mathematics", "Music Theory", "Phisycs", "Political Sciennce", "Programming"] 
 
     const [values, setValues] = useState<UserFormValues>({
         username: '',
