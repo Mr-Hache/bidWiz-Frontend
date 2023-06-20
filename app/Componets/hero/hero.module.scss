@@ -2,12 +2,21 @@
 @import "../../utils/mixin";
 
 .hero {
-  padding-top: 10vw;
+  padding-top: 5vw;
   padding-bottom: 9.5vw;
   text-align: center;
   display: flex;
   justify-content: space-around;
   height: auto;
+
+  .container {
+    display: flex;
+    justify-content: space-around;
+    height: auto;
+    width: 100%;
+    background-color: #d3d3d365;
+    padding: 0 7vw;
+  }
 
   .containerText {
     padding: 4vw;
@@ -58,8 +67,8 @@
   }
 
   .containerImg {
+    height: 35vw;
     align-items: center;
     justify-content: center;
-    padding-top: 2.5vw;
   }
 }
