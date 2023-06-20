@@ -1,4 +1,4 @@
-"use client";
+
 
 import styles from "./layout.module.scss";
 import { Providers } from "./redux/providers";
