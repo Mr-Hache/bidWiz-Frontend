@@ -1,6 +1,6 @@
 import styles from "./pageNotFound.module.scss";
 import Image from "next/image";
-import pnf from "../../src/pnf.png";
+import pnf from "../../src/sombrero.png";
 import Link from "next/link";
 
 export default function pageNotFound() {
