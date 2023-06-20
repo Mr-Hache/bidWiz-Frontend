@@ -8,23 +8,11 @@ import { BsLinkedin } from "react-icons/bs";
 import { BsYoutube } from "react-icons/bs";
 import Link from "next/link";
 
-import { useRef, useState, ChangeEvent, useEffect } from "react";
-import { useAppDispatch, useAppSelector } from "@/app/redux/hooks";
-import { setLanguages, setSubjects } from "@/app/redux/services/filtersSlice";
+import { useAppDispatch } from "@/app/redux/hooks";
+import { setSubjects } from "@/app/redux/services/filtersSlice";
 import { usePathname } from "next/navigation";
 import { useRouter } from "next/navigation";
 
-const languagesList = [
-  "English",
-  "Spanish",
-  "Portuguese",
-  "German",
-  "French",
-  "Chinese",
-  "Japanese",
-  "Russian",
-  "Italian",
-];
 const subjectsList = [
   "Physics",
   "Chemistry",
@@ -33,16 +21,15 @@ const subjectsList = [
   "Economics",
   "Law",
   "Accounting",
+  "Business Administration",
   "Programming",
-  "Music Theory",
   "Computer Science",
   "Political Science",
-  "Business Administration",
+  "Music Theory",
 ];
 
 export default function Footer() {
   //--------Filter----------------
-
   const router = useRouter();
   const dispatch = useAppDispatch();
 
@@ -73,7 +60,7 @@ export default function Footer() {
                 <div className={styles.line} key={index}>
                   <label>
                     <span id={filter} onClick={onClickFilter}>
-                      {filter}
+                      <h3>{filter}</h3>
                     </span>
                   </label>
                 </div>
