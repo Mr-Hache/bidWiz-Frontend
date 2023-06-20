@@ -2,7 +2,12 @@
 @import "../../utils/variabls";
 
 .contCards {     
-    // display: flex;     
+    //display: flex;  
+    justify-content: center;   
+    align-content: center;
+    align-items: center;
+
+
     font-family: $ralewayFont;  
     padding: 1vw;
     border: 2px solid;
