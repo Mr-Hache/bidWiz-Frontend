@@ -1,0 +1,35 @@
+@import "../../utils/mixin";
+@import "../../utils/variabls";
+
+.form{
+    font-family: $ralewayFont;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    padding-top: 150px;
+
+    .label{
+        margin-top: 10px;
+    }
+    .input {
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 16px;
+        outline: none;
+      }
+
+      .input:focus {
+        border-color: #007bff;
+        box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+      }
+    .button{
+        @include button-styles2(1vw);
+  }
+  .link {
+    text-decoration: none;
+  }
+}

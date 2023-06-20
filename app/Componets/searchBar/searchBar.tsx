@@ -1,7 +1,6 @@
 "use client"
 import styles from "./searchBar.module.scss";
 import { useState } from 'react';
-import Link from 'next/link';
 import {useRouter} from "next/navigation"
 
 
@@ -11,7 +10,6 @@ export default function searchBar() {
   const router = useRouter();
 
   const [search, setSearch] = useState<string>("");
-  const [userNotFound, setUserNotFound] = useState<boolean>(false)
 
    
   
@@ -30,14 +28,14 @@ export default function searchBar() {
         const response = await fetch(`https://bidwiz-backend-production-db77.up.railway.app/users/wizard/${search}`);
         if (response.ok) {
          
-          setUserNotFound(false);
           router.push(`/detail/${search}`)
         } else {
-          setUserNotFound(true);
+          alert('Wizard not found')
+          setSearch("")
         }
       } catch (error) {
         console.error(error);
-        setUserNotFound(true);
+       
       }   
     }
   };
@@ -54,7 +52,7 @@ export default function searchBar() {
         value={search}
         onChange={handleSearch}
       />
-      {userNotFound? <span>User not found</span>: null}
+    
         <button className={styles.button} onClick={handleSearchClick}>
           <div className={styles.lupa}>🔍︎</div>
         </button>
