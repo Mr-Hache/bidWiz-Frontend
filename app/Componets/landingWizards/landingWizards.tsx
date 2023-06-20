@@ -25,7 +25,7 @@ export default function landingWizards() {
   return (
     <section className={styles.wizards}>
       <div className={styles.title}>
-        <h1>Want to learn from the best in bidWiz?</h1>
+        <h1>Want to learn from the best in BidWiz?</h1>
       </div>
       <div>
         <div className={styles.containerW}>
