@@ -23,7 +23,7 @@ export default function hero() {
             </button>
             <button className={styles.button2}>
               <Link href="/register" passHref>
-                Become Wizard
+                Become BidWiz
               </Link>
             </button>
           </div>
