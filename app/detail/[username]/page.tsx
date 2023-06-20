@@ -42,15 +42,15 @@ function detail() {
     <tbody>
       <tr>
         <td>1 Class</td>
-        <td>5000 each</td>
+        <td>30 USD</td>
       </tr>
       <tr>
         <td>3 Classes</td>
-        <td>4000 each</td>
+        <td>28 USD</td>
       </tr>
       <tr>
         <td>5 Classes</td>
-        <td>3500 each</td>
+        <td>25 USD</td>
       </tr>
     </tbody>
   </table>

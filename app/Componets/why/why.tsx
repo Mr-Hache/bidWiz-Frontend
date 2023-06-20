@@ -51,7 +51,7 @@ export default function why() {
           <div className={styles.containerImg}>
             <Image src={w4} alt="" width={200} height={200} />
           </div>
-          <h3>Secure and transparent</h3>
+          <h3>Secure and Transparent</h3>
           <h4>
             You can rest easy knowing that financial arrangements with Wizards
             are made in a trustworthy manner, and the payment process is
@@ -62,7 +62,7 @@ export default function why() {
           <div className={styles.containerImg}>
             <Image src={w5} alt="" width={200} height={200} />
           </div>
-          <h3>Wide variety of topics</h3>
+          <h3>Wide Variety of Topics</h3>
           <h4>
             BidWiz covers everything from academic subjects to specialized
             skills. Find help in any area of study or project, regardless of its
