@@ -98,11 +98,11 @@ export default function slectorNavbar({ filter }: { filter: string }) {
           className={
             filter === "languages"
               ? styles.containerColumn
-              : styles.containerColumn2
+              : styles.containerColumn2              
           }
         >
           <div className={styles.column}>
-            <h3>Choose your language</h3>
+            <h3>Classes available in</h3>
             <ul className={styles.list}>
               {filterList.map((filter, index) => (
                 <div className={styles.line} key={index}>
