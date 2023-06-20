@@ -1,3 +1,5 @@
+"use client";
+
 import styles from "./footer.module.scss";
 import { BsFacebook } from "react-icons/bs";
 import { BsInstagram } from "react-icons/bs";
@@ -6,7 +8,58 @@ import { BsLinkedin } from "react-icons/bs";
 import { BsYoutube } from "react-icons/bs";
 import Link from "next/link";
 
+import { useRef, useState, ChangeEvent, useEffect } from "react";
+import { useAppDispatch, useAppSelector } from "@/app/redux/hooks";
+import { setLanguages, setSubjects } from "@/app/redux/services/filtersSlice";
+import { usePathname } from "next/navigation";
+import { useRouter } from "next/navigation";
+
+const languagesList = [
+  "English",
+  "Spanish",
+  "Portuguese",
+  "German",
+  "French",
+  "Chinese",
+  "Japanese",
+  "Russian",
+  "Italian",
+];
+const subjectsList = [
+  "Physics",
+  "Chemistry",
+  "Biology",
+  "Mathematics",
+  "Economics",
+  "Law",
+  "Accounting",
+  "Programming",
+  "Music Theory",
+  "Computer Science",
+  "Political Science",
+  "Business Administration",
+];
+
 export default function Footer() {
+  //--------Filter----------------
+
+  const router = useRouter();
+  const dispatch = useAppDispatch();
+
+  let filterList: string[] = subjectsList;
+
+  const pathname = usePathname();
+
+  const onClickFilter = (event: React.MouseEvent<HTMLSpanElement>) => {
+    event.preventDefault();
+    const nameFilter: string = event.currentTarget.id;
+    console.log(nameFilter);
+    dispatch(setSubjects([nameFilter]));
+    if (pathname !== "/offerBoard") {
+      router.push("/offerBoard");
+    }
+  };
+
   return (
     <section className={styles.footer}>
       <div className={styles.containerMedium}>
@@ -14,47 +67,19 @@ export default function Footer() {
           <h2>You can study</h2>
         </div>
         <div className={styles.subject}>
-          <Link href="/not-found" className={styles.link}>
-            <h4>Mathematics</h4>
-          </Link>
-
-          <Link href="/not-found" className={styles.link}>
-            <h4>Physics</h4>
-          </Link>
-          <Link href="/not-found" className={styles.link}>
-            <h4>Law</h4>
-          </Link>
-          <Link href="/not-found" className={styles.link}>
-            <h4>Chemistry</h4>
-          </Link>
-        </div>
-        <div className={styles.subject}>
-          <Link href="/not-found" className={styles.link}>
-            <h4>Biology</h4>
-          </Link>
-          <Link href="/not-found" className={styles.link}>
-            <h4>Programming</h4>
-          </Link>
-          <Link href="/not-found" className={styles.link}>
-            <h4>Economics</h4>
-          </Link>
-          <Link href="/not-found" className={styles.link}>
-            <h4>Business Administration</h4>
-          </Link>
-        </div>
-        <div className={styles.subject}>
-          <Link href="/not-found" className={styles.link}>
-            <h4>Accounting</h4>
-          </Link>
-          <Link href="/not-found" className={styles.link}>
-            <h4>Computer Science</h4>
-          </Link>
-          <Link href="/not-found" className={styles.link}>
-            <h4>Political Science</h4>
-          </Link>
-          <Link href="/not-found" className={styles.link}>
-            <h4>Music Theory</h4>
-          </Link>
+          <div className={styles.column}>
+            <ul className={styles.list}>
+              {filterList.map((filter, index) => (
+                <div className={styles.line} key={index}>
+                  <label>
+                    <span id={filter} onClick={onClickFilter}>
+                      {filter}
+                    </span>
+                  </label>
+                </div>
+              ))}
+            </ul>
+          </div>
         </div>
       </div>
       <div className={styles.containerSmall}>
