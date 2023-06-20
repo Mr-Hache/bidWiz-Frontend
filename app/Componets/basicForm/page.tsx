@@ -155,6 +155,23 @@ function basicForm() {
             
         if (validateForm()) {
             createUser(values);
+            alert("New user created")
+            setValues(  
+            {username: '',
+            name: '',
+            lastName: '',
+            password: '',
+            email: '',
+            phoneNumber: '',
+            image: '',
+            isWizard: false,
+            languages: [],
+            subjects: [],
+            experience: {
+                title: '',
+                origin: '',
+                expJobs: 0,
+            }},)
         }
     }
 
@@ -237,10 +254,11 @@ function basicForm() {
 
             <br />
             <label>
-            <div >Unleash your magic 
+            <div ><h3 className={style.selectTitle}>Unleash your magic </h3>
             <div className={style.magic}>
                 <input type="checkbox" name="isWizard" checked={values.isWizard} onChange={handleCheckboxChange} />
-                <ImMagicWand className={style.logo} />
+                <div className={style.wand}><ImMagicWand className={style.logo} /></div>
+                
                 </div>
                 </div>
             </label>
@@ -297,13 +315,9 @@ function basicForm() {
                 </div> : null
 
             }
-            <br />
-            <br />
-                      
 
+            <div className={style.button}><button className={style.boton}  >Submit</button></div>
             
-
-            <input className={style.boton} type="submit" value="Submit" />
 
         </form>
     )
