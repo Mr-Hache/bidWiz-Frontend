@@ -3,11 +3,9 @@
 
 .footer {
   width: 100%;
-  height: 16.5vw;
   display: flex;
   flex-direction: column;
   background-color: $lightGreen;
-  padding-top: 0vw;
 
   .containerSmall {
     background-color: $darkMediumGreen;
@@ -18,6 +16,7 @@
   .containerMedium {
     display: flex;
     justify-content: space-evenly;
+    align-items: center;
   }
 
   .containerCopy {
@@ -39,20 +38,50 @@
     color: $darkMediumPurple;
   }
 
-  h4 {
-    @include h-4;
-    color: $darkMediumPurple;
-    font-size: 16px;
+  .title {
+    width: 5vw;
+    height: 10vw;
   }
-  h4:hover {
-    text-decoration: underline white;
+
+  // ---------------FILTER---------------------
+
+  .list {
+    width: 60vw;
+    display: grid;
+    grid-template-columns: repeat(
+      auto-fit,
+      minmax(12vw, 1vw)
+    ); /* Columnas automáticas */
+    grid-gap: 4vw; /* Espacio entre elementos */
+    row-gap: 0.6vw;
+    align-items: center;
+  }
+
+  .list h3 {
+    @include h-3;
+    font-size: 16px;
+    color: $darkGray;
+  }
+
+  .line span::before {
+    margin-right: 5px;
+  }
+
+  .line span {
+    @include h-4;
+    color: $darkGray;
+    font-weight: 500;
+    text-decoration: none;
+    transition: 0.2s;
     cursor: pointer;
   }
 
-  .title {
-    margin-top: 0.9vw;
-    width: 5vw;
+  .line span:hover {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
   }
+
+  // -------------------ICONS--------------------
+
   .icons {
     height: 6vw;
     padding: 0vw 40vw 0 40vw;

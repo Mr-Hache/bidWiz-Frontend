@@ -8,11 +8,12 @@ export default function Navbar() {
   return (
     <div className={styles.navCont}>
       <div className={styles.icons}>
-        <li>
-          <Link href="/">
+        <Link href="/" style={{ textDecoration: "none" }}>
+          <div className={styles.iconsLink}>
             <FaHatWizard className={styles.logo} />
-          </Link>
-        </li>
+            <h1>BidWiz</h1>
+          </div>
+        </Link>
       </div>
       <div className={styles.links}>
         {/* <SelectorNavbar1 /> */}

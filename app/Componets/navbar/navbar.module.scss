@@ -12,24 +12,43 @@
   background-color: rgb(255, 255, 255);
 
   .icons {
+    width: auto;
     display: flex;
     justify-content: space-around;
     align-items: center;
     list-style: none;
     margin-left: 3vw;
     margin-top: -0.5vw;
+    text-decoration: none;
+  }
+
+  .iconsLink {
+    width: 15vw;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+  }
+
+  .iconsLink h1 {
+    @include h-1;
+    margin-top: 3vw;
+    font-size: 2.5vw;
+    color: $darkMediumPurple;
   }
 
   .logo {
     @include icon($darkMediumPurple);
-    width: 3.5vw;
-    height: 3.5vw;
+    width: 3vw;
+    height: 3vw;
     transition: 0.2s;
     transform: rotate(15deg);
   }
 
-  .logo:hover {
-    transform: rotate(0deg);
+  .iconsLink:hover {
+    .logo {
+      transform: rotate(0deg);
+    }
   }
 
   .links {
