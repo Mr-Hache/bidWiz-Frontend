@@ -8,29 +8,28 @@ import { usePathname } from "next/navigation";
 import { useRouter } from "next/navigation";
 
 const languagesList = [
-  "English",
-  "Spanish",
-  "Portuguese",
-  "German",
-  "French",
   "Chinese",
-  "Japanese",
-  "Russian",
+  "French",
+  "German",
   "Italian",
+  "Japanese",
+  "Portuguese",
+  "Russian",
+  "Spanish",
 ];
 const subjectsList = [
-  "Physics",
-  "Chemistry",
+  "Accounting",
   "Biology",
-  "Mathematics",
+  "Business Administration",
+  "Chemistry",
+  "Computer Science",
   "Economics",
   "Law",
-  "Accounting",
-  "Programming",
+  "Mathematics",
   "Music Theory",
-  "Computer Science",
+  "Physics",
   "Political Science",
-  "Business Administration",
+  "Programming",
 ];
 
 export default function slectorNavbar({ filter }: { filter: string }) {
@@ -103,6 +102,7 @@ export default function slectorNavbar({ filter }: { filter: string }) {
           }
         >
           <div className={styles.column}>
+            <h3>Choose your language</h3>
             <ul className={styles.list}>
               {filterList.map((filter, index) => (
                 <div className={styles.line} key={index}>
