@@ -4,6 +4,7 @@ import { usePathname } from "next/navigation";
 import { useGetUserByUsernameQuery } from "@/app/redux/services/userApi";
 import Navbar from "@/app/Componets/navbar/navbar";
 import styles from "./detail.module.scss";
+import Link from "next/link";
 
 
 function detail() {
@@ -53,8 +54,7 @@ function detail() {
       </tr>
     </tbody>
   </table>
-  <button>CONFIRM</button>
-  {/* BOTON NO FUNCIONAL */}
+  <Link href="/not-found" className={styles.link}>  <button>CONFIRM</button> </Link>
         </div>
     </div>
     </div>
