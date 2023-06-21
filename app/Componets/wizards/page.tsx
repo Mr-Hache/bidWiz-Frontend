@@ -121,8 +121,6 @@ export default function wizards() {
   }, [page, totalWizards]);
 
 
-
-
   return (    
     <div className={style.contCard}>
       <div className={style.containerWizard}>
@@ -136,11 +134,7 @@ export default function wizards() {
       })}
        {wizards && wizards.length > 0 && <Paginator statePage={statePage} />}
       </div>
-      </div>
-    
-
-     
-      
+    </div>              
     </div>
   );
 }
