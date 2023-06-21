@@ -102,7 +102,7 @@ export default function slectorNavbar({ filter }: { filter: string }) {
           }
         >
           <div className={styles.column}>
-            {filter === 'languages'?<h3>Wizards speak </h3>:<h3>Wizards knowledge</h3>}
+            {filter === 'languages'? <h3>Wizards speak</h3>:<h3>Wizards knowledge</h3>}
             <ul className={styles.list}>
               {filterList.map((filter, index) => (
                 <div className={styles.line} key={index}>
