@@ -43,7 +43,7 @@ export const flags = [
   export const subjectsIcons = [
     {
       name: "Accounting",
-      icon: "FaBook",
+      icon: "FaBook",      
     },
     {
       name: "Biology",
