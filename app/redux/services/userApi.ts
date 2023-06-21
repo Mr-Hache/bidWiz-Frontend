@@ -4,7 +4,7 @@ export type User = {
   _id: string;
   username: string;
   name: string;
-  password: string;
+  uidFireBase: string;
   email: string;
   phoneNumber: string;
   isWizard: boolean;

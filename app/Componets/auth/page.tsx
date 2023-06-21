@@ -26,7 +26,7 @@ useEffect(() =>{
       router.push('/'); // redirige al usuario a la página de inicio después del inicio de sesión exitoso
     } catch (error) {
       console.error(error);
-      // manejo de errores
+      // manejo de errores avaAnder$10
     }
   }
 
