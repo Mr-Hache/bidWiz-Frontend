@@ -2,9 +2,9 @@
 @import "../../utils/variabls";
 
 .contAside {      
-    @include h-4;
+    @include h-4;    
     font-size: 18px;
-    position: relative;      
+    position: relative;     
     background-color: white;
     margin-top: 6vw;
     margin-left: 1vw;
@@ -28,6 +28,7 @@
 
 .checkbox{
     margin-right: 10px;
-
 }
+
+
 
