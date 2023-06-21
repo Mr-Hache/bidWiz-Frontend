@@ -4,10 +4,11 @@ import { useCreateUserMutation } from '@/app/redux/services/userApi';
 import {validatePassword, validatePhoneNumber, validateEmail, validateLanguages, validateSubjects, validateNotEmpty} from "../../utils/functionsValidation"
 import style from './basicForm.module.scss'
 import { ImMagicWand  } from "react-icons/im";
+import {  GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
+import {auth} from '../../utils/firebase'
 export interface UserFormValues {
     username: string;
     name: string;
-    lastName: string;
     password: string;
     email: string;
     phoneNumber: string;
@@ -26,11 +27,11 @@ function basicForm() {
 
     const languages = ['English', 'Spanish', 'Portuguese', 'German', 'French', 'Chinese', 'Japanese', 'Russian', 'Italian'] ;
     const subjects=["Mathematics", "Physics", "Chemistry", "Biology", "Economics", "Business Administration", "Accounting", "Computer Science", "Music Theory", "Political Science", "Law", "Programming"] 
-
+    
+    
     const [values, setValues] = useState<UserFormValues>({
         username: '',
         name: '',
-        lastName: '',
         password: '',
         email: '',
         phoneNumber: '',
@@ -48,7 +49,6 @@ function basicForm() {
     interface Errors {
         username?: string;
         name?: string;
-        lastName?: string;
         password?: string;
         email?: string;
         phoneNumber?: string;
@@ -70,9 +70,7 @@ function basicForm() {
     if (!validateNotEmpty(values.name)) {
       formErrors = { ...formErrors, name: "Name cannot be empty." };
     }
-    if (!validateNotEmpty(values.lastName)) {
-      formErrors = { ...formErrors, lastName: "Last Name cannot be empty." };
-    }
+    
     if (!validatePassword(values.password)) {
       formErrors = { ...formErrors, password: "Password must contain a capital letter, a number and a symbol." };
     }
@@ -159,7 +157,6 @@ function basicForm() {
             setValues(  
             {username: '',
             name: '',
-            lastName: '',
             password: '',
             email: '',
             phoneNumber: '',
@@ -185,6 +182,20 @@ function basicForm() {
         }
     }, [error]);
 
+    const googleProvider = new GoogleAuthProvider();
+
+    const handleGoogleSignIn = async () => {
+        try {
+          const userCredential = await signInWithPopup(auth, googleProvider);
+             auth.currentUser
+             const user = userCredential.user
+            console.log(user);
+        } catch (error) {
+            console.error(error);
+          
+        }
+    };
+
     return (
         
         
@@ -208,15 +219,7 @@ function basicForm() {
             </div>
 
             <br />
-            <div className={style.inputcontainer}>
-            <label>
-                
-                <input className={style.input} type="text" name="lastName" value={values.lastName} placeholder='Last Name:' onChange={handleChange} />
-            </label>
-                {errors.lastName && <span className="error">{errors.lastName}</span>}
-            </div>
-
-            <br />
+           
             <div className={style.inputcontainer}>
             <label>
                 
@@ -316,7 +319,7 @@ function basicForm() {
 
             }
 
-            <div className={style.button}><button className={style.boton}  >Submit</button></div>
+            <div className={style.button}><button className={style.boton}  >Submit</button><button onClick={handleGoogleSignIn}>Register with Google</button></div>
             
 
         </form>
