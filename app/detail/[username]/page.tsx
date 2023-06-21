@@ -1,7 +1,7 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import { useGetUserByUsernameQuery } from "@/app/redux/services/userApi";
+import { useGetUserByIdQuery } from "@/app/redux/services/userApi";
 import Navbar from "@/app/Componets/navbar/navbar";
 import styles from "./detail.module.scss";
 import Link from "next/link";
@@ -9,13 +9,13 @@ import Link from "next/link";
 
 function detail() {
   const pathname = usePathname(); // imprime la ruta actual
-  const username = pathname.split("/")[2];
+  const _id = pathname.split("/")[2];
 
   const {
     data: user,
     isLoading,
     isError,
-  } = useGetUserByUsernameQuery({ username });
+  } = useGetUserByIdQuery({ _id});
   if (isLoading) return <div>Loading...</div>;
   if (isError || !user) return <div>User not found</div>;
 
@@ -27,13 +27,12 @@ function detail() {
     <div className={styles.detail}>
       <div className={styles.sidebar}>
         <img src={user.image} alt="" width={200} height={200} />
-        <h2>{`${user.name} ${user.lastName}`}</h2>
+        <h2>{`${user.name} `}</h2>
         <h2>{user.experience.title}</h2>
         <p>⭐⭐⭐⭐⭐</p>
         <h4>{user.experience.expJobs} Reviews</h4>
         <h3>{user.languages.join(' - ')}</h3>
         <h3>{user.subjects.join(' - ')}</h3>
-        {/* <h3>{user.experience.origin}</h3> */}
         </div>
         <div className={styles.righbar}>
           <h1>About Me</h1>
@@ -42,15 +41,15 @@ function detail() {
     <tbody>
       <tr>
         <td>1 Class</td>
-        <td>5000 each</td>
+        <td>30 USD</td>
       </tr>
       <tr>
         <td>3 Classes</td>
-        <td>4000 each</td>
+        <td>28 USD</td>
       </tr>
       <tr>
         <td>5 Classes</td>
-        <td>3500 each</td>
+        <td>25 USD</td>
       </tr>
     </tbody>
   </table>

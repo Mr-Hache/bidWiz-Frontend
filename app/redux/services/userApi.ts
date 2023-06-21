@@ -2,12 +2,9 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export type User = {
   _id: string;
-  username: string;
   name: string;
-  lastName: string;
-  password: string;
+  uidFireBase: string;
   email: string;
-  phoneNumber: string;
   isWizard: boolean;
   languages: string [];
   subjects:  string [];
@@ -31,8 +28,8 @@ export const userApi = createApi({
     getUsers: builder.query<User[], null>({
       query: () => "users",
     }),
-    getUserByUsername: builder.query<User, { username: string }>({
-      query: ({ username }) => `users/wizard/${username}`,
+    getUserById: builder.query<User, { _id: string }>({
+      query: ({ _id }) => `users/wizard/${_id}`,
     }),
     createUser: builder.mutation<User, Partial<User>>({
       query: (newUser) => ({
@@ -41,25 +38,16 @@ export const userApi = createApi({
         body: newUser,
       }),
     }),
-    disableUser: builder.mutation<void, { username: string }>({
-      query: ({ username }) => ({
-        url: `users/${username}`,
+    disableUser: builder.mutation<void, { _id: string }>({
+      query: ({ _id }) => ({
+        url: `users/${_id}`,
         method: "DELETE",
       }),
     }),
-    updateUserPassword: builder.mutation<
-      User,
-      { username: string; password: string }
-    >({
-      query: ({ username, password }) => ({
-        url: `users/${username}/password`,
-        method: "PATCH",
-        body: { password },
-      }),
-    }),
-    updateWizardStatus: builder.mutation<User, { username: string }>({
-      query: ({ username }) => ({
-        url: `users/${username}/wizard`,
+    
+    updateWizardStatus: builder.mutation<User, { _id: string }>({
+      query: ({ _id }) => ({
+        url: `users/${_id}/wizard`,
         method: "PATCH",
       }),
     }),
@@ -91,10 +79,9 @@ export const userApi = createApi({
 
 export const {
   useGetUsersQuery,
-  useGetUserByUsernameQuery,
+  useGetUserByIdQuery,
   useCreateUserMutation,
   useDisableUserMutation,
-  useUpdateUserPasswordMutation,
   useUpdateWizardStatusMutation,
   useGetWizardsQuery,
 } = userApi;

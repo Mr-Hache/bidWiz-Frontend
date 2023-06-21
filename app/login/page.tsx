@@ -1,6 +1,6 @@
 "use client";
 
-import Auth from "../Componets/auth/page";
+import Authent from "../Componets/auth/page";
 import Navbar from "@/app/Componets/navbar/navbar";
 
 export default function login() {
@@ -9,7 +9,7 @@ export default function login() {
       <Navbar />
 
       
-      <Auth />
+      <Authent />
     </div>
   );
 }
