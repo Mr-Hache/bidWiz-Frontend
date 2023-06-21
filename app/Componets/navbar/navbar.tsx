@@ -16,7 +16,6 @@ export default function Navbar() {
         </Link>
       </div>
       <div className={styles.links}>
-        {/* <SelectorNavbar1 /> */}
         <SelectorNavbar filter="languages" />
         <SelectorNavbar filter="subjects" />
         <SearchBar />

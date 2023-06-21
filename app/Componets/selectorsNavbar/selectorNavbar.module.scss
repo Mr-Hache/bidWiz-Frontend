@@ -5,11 +5,13 @@
   display: flex;
   align-items: center;
   justify-content: center;
+
   .dropdownToggle {
     display: inline-flex;
   }
   .dropdownToggle a {
     @include h-3;
+    font-size: 1.2vw;
     color: $darkGray;
     font-weight: 500;
     text-decoration: none;
@@ -56,7 +58,6 @@
   }
 
   .list {
-    @include h-4;
     width: 29vw;
     padding-left: 0.5vw;
     display: grid;
@@ -77,6 +78,7 @@
 
   .line span {
     @include h-4;
+    font-size: 1vw;
     color: $darkGray;
     font-weight: 500;
     text-decoration: none;
