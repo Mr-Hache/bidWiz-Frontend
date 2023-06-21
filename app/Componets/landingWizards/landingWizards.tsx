@@ -30,7 +30,7 @@ export default function landingWizards() {
                   <img src={user.image} alt="" width={200} height={200} />
                 </div>
                 <div className={styles.text}>
-                  <h3>{`${user.name} ${user.lastName}`}</h3>
+                  <h3>{`${user.name} `}</h3>
                   <h4>
                     Gives {user.subjects.toString().split(/\W+/)[0]} classes
                   </h4>
