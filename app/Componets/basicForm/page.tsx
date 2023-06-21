@@ -269,8 +269,8 @@ function basicForm() {
                     <br />                                   
                     <div className={style.select}>
                        <div className={style.selectTitle}>Languages</div> 
-                        <div className={style.selectSelect}>
-                        <select  multiple value={values.languages} onChange={handleLanguageChange}>
+                        <div >
+                        <select className={style.selectSelect1} multiple value={values.languages} onChange={handleLanguageChange}>
                             {languages.map((language, index) => (
                                 <option key={index} value={language}>{language}</option>
                             ))}
