@@ -2,12 +2,12 @@
 @import "../../utils/variabls";
 
 .contPaginator {
-    margin-top: 2vw;
+    margin-top: 4vw;
     margin-bottom: 2vw;
-    display: flex;        
+    // display: flex;       
     justify-content: center;   
-    width: 100%;
-
+    width: 100%;      
+    margin-left: 30vw;
 }
 
 .contPaginator button {
