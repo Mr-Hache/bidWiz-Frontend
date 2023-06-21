@@ -1,25 +1,26 @@
 @import "../../utils/mixin";
 @import "../../utils/variabls";
 
-.contCard {       
+.contCard {          
+    flex-wrap: wrap;      
     margin-bottom: 10px;
     display: flex;
     flex-direction: column;     
-    justify-content: center; 
-
+    justify-content: center;  
+       
 }
 
-.containerWizard {
+.containerWizard {    
     background-color: white;
-    display: flex;
-    width: 100%;    
+    display: flex;   
+    width: 100%;       
+    //justify-content: center;     
 }
 
 .containerCard {
     margin-top: 1vw;
     display: flex;
-    flex-wrap: wrap;         
-    justify-content: center;
+    flex-wrap: wrap;          
 }
 
 
