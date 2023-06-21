@@ -1,17 +1,16 @@
 "use client"
 import React, { useState, useEffect } from 'react'
 import { useCreateUserMutation } from '@/app/redux/services/userApi';
-import { validatePassword, validatePhoneNumber, validateEmail, validateLanguages, validateSubjects, validateNotEmpty } from "../../utils/functionsValidation"
+import { validatePassword, validateEmail, validateLanguages, validateSubjects, validateNotEmpty } from "../../utils/functionsValidation"
 import style from './basicForm.module.scss'
 import { ImMagicWand } from "react-icons/im";
 import { GoogleAuthProvider, signInWithPopup, createUserWithEmailAndPassword, } from 'firebase/auth';
 import { auth } from '../../utils/firebase'
+import {useRouter} from 'next/navigation'
 export interface UserFormValues {
     name: string;
-    username: string;
     email: string;
     uidFireBase: string;
-    phoneNumber: string;
     image: string;
     isWizard: boolean;
     languages: string[];
@@ -24,17 +23,16 @@ export interface UserFormValues {
 }
 
 function basicForm() {
+   const router = useRouter()
 
     const languages = ['English', 'Spanish', 'Portuguese', 'German', 'French', 'Chinese', 'Japanese', 'Russian', 'Italian'];
     const subjects = ["Mathematics", "Physics", "Chemistry", "Biology", "Economics", "Business Administration", "Accounting", "Computer Science", "Music Theory", "Political Science", "Law", "Programming"]
 
 
     const [values, setValues] = useState<UserFormValues>({
-        name: '',
-        username: '',
         email: '',
+        name: '',
         uidFireBase: "",
-        phoneNumber: '',
         image: '',
         isWizard: false,
         languages: [],
@@ -48,11 +46,8 @@ function basicForm() {
 
     interface Errors {
         name?: string;
-        username?: string;
         password?: string;
         email?: string;
-        phoneNumber?: string;
-        image?: string;
         languages?: string;
         subjects?: string;
         title?: string;
@@ -60,10 +55,10 @@ function basicForm() {
     }
 
     const [errors, setErrors] = useState<Errors>({});
-    
+
     const [authentication, setAuthentication] = useState({
-       password: "",
-       email: ""
+        password: "",
+        email: ""
     })
 
     const validateForm = () => {
@@ -73,20 +68,12 @@ function basicForm() {
         if (!validateNotEmpty(values.name)) {
             formErrors = { ...formErrors, name: "Name cannot be empty." };
         }
-        if (!validateNotEmpty(values.username)) {
-            formErrors = { ...formErrors, username: "Username cannot be empty." };
-        }
+
         if (!validatePassword(authentication.password)) {
             formErrors = { ...formErrors, password: "Password must contain a capital letter, a number and a symbol." };
         }
         if (!validateEmail(values.email)) {
             formErrors = { ...formErrors, email: "Invalid email format." };
-        }
-        if (!validatePhoneNumber(values.phoneNumber)) {
-            formErrors = { ...formErrors, phoneNumber: "Phone number must start with '+' and contain only digits." };
-        }
-        if (!validateNotEmpty(values.image)) {
-            formErrors = { ...formErrors, image: "Image cannot be empty." };
         }
         if (values.isWizard) {
             if (!validateLanguages(values.languages)) {
@@ -119,15 +106,15 @@ function basicForm() {
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = event.target;
-        if(name == "password"){
+        if (name == "password") {
             setAuthentication({
                 ...authentication,
                 password: value
             });
-        }else{
+        } else {
             setValues((v) => ({ ...v, [name]: value }));
         }
-       
+
     };
 
     const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -163,25 +150,33 @@ function basicForm() {
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
 
-
         if (validateForm()) {
 
-            const userCredential =  await createUserWithEmailAndPassword(auth, values.email, authentication.password)
-            const uid = userCredential.user.uid  
-    
+            const userCredential = await createUserWithEmailAndPassword(auth, values.email, authentication.password)
+            const uid = userCredential.user.uid
+            console.log(uid)
+            console.log(values)
+           if(values.isWizard) {
             createUser({
                 ...values,
                 uidFireBase: uid,
             });
 
+           }else{
+            createUser({
+                name: values.name,
+                email: values.email,
+                isWizard: values.isWizard,
+                uidFireBase: uid,
+            });
+           }
+           
             alert("New user created")
             setValues(
                 {
                     uidFireBase: "",
                     name: '',
-                    username: '',
                     email: '',
-                    phoneNumber: '',
                     image: '',
                     isWizard: false,
                     languages: [],
@@ -192,10 +187,10 @@ function basicForm() {
                         expJobs: 0,
                     }
                 },)
-                setAuthentication ({
-                    password: '',
-                    email: '',
-                })
+            setAuthentication({
+                password: '',
+                email: '',
+            })
         }
     }
 
@@ -209,161 +204,152 @@ function basicForm() {
         }
     }, [error]);
 
-   
+
 
     const handleGoogleSignIn = async () => {
-        const googleProvider = new GoogleAuthProvider();
-        try {
+                const googleProvider = new GoogleAuthProvider();
+                try {
 
-            const userCredential = await signInWithPopup(auth, googleProvider);
-           
-
-    const user = userCredential.user;
-    setValues({
-       ...values,
-       name: user.displayName? user.displayName:"" ,
-       email: user.email? user.email:"",
-       uidFireBase: user.uid?user.uid: "",
-       })
-
-
-            
-        } catch (error) {
-    console.error(error);
-
-}
-    };
-
-return (
+                    const userCredential = await signInWithPopup(auth, googleProvider);
+                    const user = userCredential.user;
+                    console.log({
+                       email: user.email,
+                        uid:user.uid,
+                        name: user.displayName,
+                    })
+       
+                            createUser({
+                                name: user.displayName?user.displayName: "",
+                                email: user.email? user.email: "",
+                                uidFireBase: user.uid? user.uid: "",
+                            isWizard: false,
+                            })
+                  
 
 
-    <form className={style.form} onSubmit={handleSubmit} >
-        <div className={style.block}></div>
-
-        <div className={style.inputcontainer}>
-            <label>
-
-                <input className={style.input} type="text" name="name" value={values.name} placeholder='Name:' onChange={handleChange} />
-            </label>
-            {errors.name && <span className="error">{errors.name}</span>}
-        </div>
-
-        <br />
-        <div className={style.inputcontainer}>
-            <label>
-                <input className={style.input} type="text" name="username" value={values.username} placeholder='Username:' onChange={handleChange} />
-            </label>
-            {errors.username && <span className="error">{errors.username}</span>}
-
-        </div>
-
-        <br />
-
-
-        <div className={style.inputcontainer}>
-            <label>
-
-                <input className={style.input} type="password" name="password" value={authentication.password} placeholder='Password:' onChange={handleChange} />
-            </label>
-            {errors.password && <span className="error">{errors.password}</span>}
-        </div>
-
-        <br />
-        <div className={style.inputcontainer}>
-            <label>
-
-                <input className={style.input} type="email" name="email" value={values.email} placeholder='Email:' onChange={handleChange} />
-            </label>
-            {errors.email && <span className="error">{errors.email}</span>}
-        </div>
-
-        <br />
-        <div className={style.inputcontainer}>
-            <label>
-
-                <input className={style.input} type="text" name="phoneNumber" value={values.phoneNumber} placeholder='Phone Number:' onChange={handleChange} />
-            </label>
-            {errors.phoneNumber && <span className="error">{errors.phoneNumber}</span>}
-        </div>
-
-        <br />
-        <div className={style.inputcontainer}>
-            <label>
-
-                <input className={style.input} type="text" name="image" value={values.image} placeholder='Image:' onChange={handleChange} />
-            </label>
-            {errors.image && <span className="error">{errors.image}</span>}
-        </div>
-
-        <br />
-        <label>
-            <div ><h3 className={style.selectTitle}>Unleash your magic </h3>
-                <div className={style.magic}>
-                    <input type="checkbox" name="isWizard" checked={values.isWizard} onChange={handleCheckboxChange} />
-                    <div className={style.wand}><ImMagicWand className={style.logo} /></div>
-
-                </div>
-            </div>
-        </label>
-
-
-        {
-            values.isWizard ? <div>
-                <br />
-                <div className={style.select}>
-                    <div className={style.selectTitle}>Languages</div>
-                    <div className={style.selectSelect}>
-                        <select multiple value={values.languages} onChange={handleLanguageChange}>
-                            {languages.map((language, index) => (
-                                <option key={index} value={language}>{language}</option>
-                            ))}
-                        </select>
-                        {errors.languages && <span className="error">{errors.languages}</span>}
-                    </div>
-                </div>
-                <br />
-                <div className={style.inputcontainer}>
-                    <div className={style.select}>
-                        <div className={style.selectTitle}>Subjects</div>
-                        <div className={style.selectSelect}>
-                            <select multiple value={values.subjects} onChange={handleSubjectChange}>
-                                {subjects.map((subject, index) => (
-                                    <option key={index} value={subject}>{subject}</option>
-                                ))}
-                            </select>
-                            {errors.subjects && <span className="error">{errors.subjects}</span>}
-                        </div>
-                    </div>
-                </div>
-
-                <br />
-                <div className={style.inputcontainer}>
-                    <label>
-
-                        <input className={style.input} type="text" name="title" value={values.experience.title} placeholder='Title:' onChange={handleExperienceChange} />
-                    </label>
-                    {errors.title && <span className="error">{errors.title}</span>}
-                </div>
-
-                <br />
-                <div className={style.inputcontainer}>
-                    <label>
-
-                        <input className={style.input} type="text" name="origin" value={values.experience.origin} placeholder='Origin:' onChange={handleExperienceChange} />
-                    </label>
-                    {errors.origin && <span className="error">{errors.origin}</span>}
-                </div>
-
-
-            </div> : null
+                } catch (error) {
+            console.error(error);
 
         }
+    };
 
-        <div className={style.button}><button className={style.boton}  >Submit</button><button onClick={handleGoogleSignIn}>Register with Google</button></div>
+    return (
 
 
-    </form>
-)
+        <form className={style.form} onSubmit={handleSubmit} >
+            <div className={style.block}></div>
+
+            <div className={style.inputcontainer}>
+                <label>
+
+                    <input className={style.input} type="text" name="name" value={values.name} placeholder='Name:' onChange={handleChange} />
+                </label>
+                {errors.name && <span className="error">{errors.name}</span>}
+            </div>
+
+            <br />
+
+
+            <br />
+
+
+            <div className={style.inputcontainer}>
+                <label>
+
+                    <input className={style.input} type="password" name="password" value={authentication.password} placeholder='Password:' onChange={handleChange} />
+                </label>
+                {errors.password && <span className="error">{errors.password}</span>}
+            </div>
+
+            <br />
+            <div className={style.inputcontainer}>
+                <label>
+
+                    <input className={style.input} type="email" name="email" value={values.email} placeholder='Email:' onChange={handleChange} />
+                </label>
+                {errors.email && <span className="error">{errors.email}</span>}
+            </div>
+
+            <br />
+
+
+            <br />
+            <div className={style.inputcontainer}>
+                <label>
+
+                    <input className={style.input} type="text" name="image" value={values.image} placeholder='Image:' onChange={handleChange} />
+                </label>
+               
+            </div>
+
+            <br />
+            <label>
+                <div ><h3 className={style.selectTitle}>Unleash your magic </h3>
+                    <div className={style.magic}>
+                        <input type="checkbox" name="isWizard" checked={values.isWizard} onChange={handleCheckboxChange} />
+                        <div className={style.wand}><ImMagicWand className={style.logo} /></div>
+
+                    </div>
+                </div>
+            </label>
+
+            {
+                values.isWizard ? <div>
+                    <br />
+                    <div className={style.select}>
+                        <div className={style.selectTitle}>Languages</div>
+                        <div className={style.selectSelect}>
+                            <select multiple value={values.languages} onChange={handleLanguageChange}>
+                                {languages.map((language, index) => (
+                                    <option key={index} value={language}>{language}</option>
+                                ))}
+                            </select>
+                            {errors.languages && <span className="error">{errors.languages}</span>}
+                        </div>
+                    </div>
+                    <br />
+                    <div className={style.inputcontainer}>
+                        <div className={style.select}>
+                            <div className={style.selectTitle}>Subjects</div>
+                            <div className={style.selectSelect}>
+                                <select multiple value={values.subjects} onChange={handleSubjectChange}>
+                                    {subjects.map((subject, index) => (
+                                        <option key={index} value={subject}>{subject}</option>
+                                    ))}
+                                </select>
+                                {errors.subjects && <span className="error">{errors.subjects}</span>}
+                            </div>
+                        </div>
+                    </div>
+
+                    <br />
+                    <div className={style.inputcontainer}>
+                        <label>
+
+                            <input className={style.input} type="text" name="title" value={values.experience.title} placeholder='Title:' onChange={handleExperienceChange} />
+                        </label>
+                        {errors.title && <span className="error">{errors.title}</span>}
+                    </div>
+
+                    <br />
+                    <div className={style.inputcontainer}>
+                        <label>
+
+                            <input className={style.input} type="text" name="origin" value={values.experience.origin} placeholder='Origin:' onChange={handleExperienceChange} />
+                        </label>
+                        {errors.origin && <span className="error">{errors.origin}</span>}
+                    </div>
+
+
+                </div> : null
+
+            }
+
+            <div className={style.button}><button className={style.boton}  >Submit</button><button onClick={handleGoogleSignIn}>Register with Google</button></div>
+
+
+        </form>
+    )
 }
 
 export default basicForm
