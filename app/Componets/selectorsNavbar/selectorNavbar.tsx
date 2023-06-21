@@ -7,6 +7,8 @@ import { setLanguages, setSubjects } from "@/app/redux/services/filtersSlice";
 import { usePathname } from "next/navigation";
 import { useRouter } from "next/navigation";
 
+
+
 const languagesList = [
   "Chinese",
   "French",
@@ -36,7 +38,7 @@ export default function slectorNavbar({ filter }: { filter: string }) {
   //---Filter---
 
   const router = useRouter();
-  const languages = useAppSelector((state) => state.filters.languages);
+  
 
   const dispatch = useAppDispatch();
 
@@ -78,7 +80,9 @@ export default function slectorNavbar({ filter }: { filter: string }) {
     }
   };
   return (
-    <div className={styles.dropdown} ref={dropdownRef}>
+    
+
+    <div className={styles.dropdown} ref={dropdownRef}>      
       <div className={styles.dropdownToggle}>
         <a
           onClick={(event) => handleDropdown(open)}
