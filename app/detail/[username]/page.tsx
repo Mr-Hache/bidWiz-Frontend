@@ -27,7 +27,7 @@ function detail() {
     <div className={styles.detail}>
       <div className={styles.sidebar}>
         <img src={user.image} alt="" width={200} height={200} />
-        <h2>{`${user.name} ${user.lastName}`}</h2>
+        <h2>{`${user.name} `}</h2>
         <h2>{user.experience.title}</h2>
         <p>⭐⭐⭐⭐⭐</p>
         <h4>{user.experience.expJobs} Reviews</h4>
