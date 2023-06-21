@@ -24,13 +24,13 @@ export default function landingWizards() {
             <div className={styles.cardw} key={user._id}>
               <Link
                 style={{ textDecoration: "none" }}
-                href={`/detail/${user.username}`}
+                href={`/detail/${user._id}`}
               >
                 <div className={styles.containerImg}>
                   <img src={user.image} alt="" width={200} height={200} />
                 </div>
                 <div className={styles.text}>
-                  <h3>{`${user.name} ${user.lastName}`}</h3>
+                  <h3>{`${user.name} `}</h3>
                   <h4>
                     Gives {user.subjects.toString().split(/\W+/)[0]} classes
                   </h4>

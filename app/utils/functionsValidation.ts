@@ -3,11 +3,6 @@ export function validatePassword(password: string): boolean {
     return re.test(password);
 }
   
-export function validatePhoneNumber(phoneNumber: string): boolean {
-    const re = /^\+[1-9]\d{1,14}$/;
-    return re.test(phoneNumber);
-}
-  
 export function validateEmail(email: string): boolean {
     const re = /\S+@\S+\.\S+/;
     return re.test(email);
