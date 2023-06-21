@@ -32,11 +32,12 @@ export default function landingWizards() {
                 <div className={styles.text}>
                   <h3>{`${user.name} `}</h3>
                   <h4>
-                    Gives {user.subjects.toString().split(/\W+/)[0]} classes
+                    Gives <b>{user.subjects.toString().split(/\W+/)[0]}</b>{" "}
+                    classes
                   </h4>
                   <h4>
-                    in {user.languages.toString().split(/\W+/)[1]} or{" "}
-                    {user.languages.toString().split(/\W+/)[0]}
+                    in <b>{user.languages.toString().split(/\W+/)[1]}</b> or{" "}
+                    <b>{user.languages.toString().split(/\W+/)[0]}</b>
                   </h4>
                   <h4 className={styles.online}>Online</h4>
                 </div>
