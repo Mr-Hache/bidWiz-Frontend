@@ -2,12 +2,10 @@
 @import "../../utils/variabls";
 
 .contCards {     
-    //display: flex;  
+    background-color: aquamarine;    
     justify-content: center;   
     align-content: center;
-    align-items: center;
-
-
+    align-items: center;   
     font-family: $ralewayFont;  
     padding: 1vw;
     border: 2px solid;
@@ -43,7 +41,7 @@
 .secondCont {    
     background-color: white;
     border-radius: 10px;    
-    border: 2px solid rgb(235, 211, 211);
+    border: 2px solid rgb(235, 211, 211);    
 }
 
 .secondCont h3 {
