@@ -2,7 +2,7 @@
 @import "../../utils/variabls";
 
 .contCards {     
-    background-color: aquamarine;    
+    background-color: white;    
     justify-content: center;   
     align-content: center;
     align-items: center;   
@@ -57,3 +57,42 @@
 .tittle {
     font-size: 1.5rem;      
 }
+
+// .flags {    
+//     height: 2rem;
+//     display: flex;
+//     justify-content: center;    
+//     gap: 1rem;
+//     margin-top: 0.5rem;
+// }
+.flags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-left: 2rem;
+    margin-top: 0.5rem;
+  }
+  
+  .language {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+.subjects {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;   
+    margin-left: 1rem; 
+    margin-top: 0.5rem;
+  }
+  
+  .subject {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  
+  .siglas {
+    margin-left: 5px;
+  }
