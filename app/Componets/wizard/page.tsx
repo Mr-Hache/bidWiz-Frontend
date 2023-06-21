@@ -9,14 +9,14 @@ interface WizardProps {
 
 const Wizard: React.FC<WizardProps> = ({ wizardUser }) => {
     const imageLoader = ({ src }: { src: string }) => {
-        return src; // Devuelve la ruta original de la imagen sin modificaciones
+        return src; 
       };
   return (
     <div className={style.contCards}>
       <Link style={{textDecoration:'none'}} href={`/detail/${wizardUser.username}` }>
         
           <div>
-          <h2>{`${wizardUser.name} ${wizardUser.lastName}`}</h2>
+          <h2>{`${wizardUser.name} `}</h2>
             <Image className={style.imagen}
               loader={imageLoader}
               src={wizardUser.image}
