@@ -4,7 +4,6 @@ export type User = {
   _id: string;
   username: string;
   name: string;
-  lastName: string;
   password: string;
   email: string;
   phoneNumber: string;
@@ -47,16 +46,7 @@ export const userApi = createApi({
         method: "DELETE",
       }),
     }),
-    updateUserPassword: builder.mutation<
-      User,
-      { username: string; password: string }
-    >({
-      query: ({ username, password }) => ({
-        url: `users/${username}/password`,
-        method: "PATCH",
-        body: { password },
-      }),
-    }),
+    
     updateWizardStatus: builder.mutation<User, { username: string }>({
       query: ({ username }) => ({
         url: `users/${username}/wizard`,
@@ -94,7 +84,6 @@ export const {
   useGetUserByUsernameQuery,
   useCreateUserMutation,
   useDisableUserMutation,
-  useUpdateUserPasswordMutation,
   useUpdateWizardStatusMutation,
   useGetWizardsQuery,
 } = userApi;
