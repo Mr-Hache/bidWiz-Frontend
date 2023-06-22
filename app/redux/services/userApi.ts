@@ -13,17 +13,34 @@ export type User = {
     origin: string;
     expJobs: number;
   };
+  pricePerOne: number;
+  pricePerTwo: number;
+  pricePerThree: number;
+  aboutMe: string;
   image: string;
   reviews: number;
   isDisabled: boolean;
   role: ["admin", "user"];
 };
 
+export type Job = {
+  _id: string;
+  status: string;
+  description: string;
+  price: number;
+  numClasses: number;
+  clientId: string;
+  workerId: string;
+  language: string;
+  subject: string;
+  result: string;
+}
+
 export const userApi = createApi({
   reducerPath: "userApi",
   refetchOnFocus: true, // when the window is refocused, refetch the data
   baseQuery: fetchBaseQuery({
-    baseUrl: "https://bidwiz-backend-production-db77.up.railway.app/",
+    baseUrl: "https://bidwiz-backend-production-db77.up.railway.app",
   }),
   endpoints: (builder) => ({
     getUsers: builder.query<User[], null>({
@@ -75,6 +92,13 @@ export const userApi = createApi({
         return url;
       },
     }),
+    createJob: builder.mutation<Job, Partial<Job>>({
+      query: (newJob) => ({
+        url: `jobs`,
+        method: "POST",
+        body: newJob,
+      }),
+    }),
   }),
 });
 
@@ -85,4 +109,5 @@ export const {
   useDisableUserMutation,
   useUpdateWizardStatusMutation,
   useGetWizardsQuery,
+  useCreateJobMutation
 } = userApi;
