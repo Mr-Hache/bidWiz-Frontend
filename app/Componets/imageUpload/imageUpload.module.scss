@@ -1,3 +1,13 @@
+@import "../../utils/mixin";
+@import "../../utils/variabls";
+
 .label {
+  margin-top: 10px;
   margin-bottom: 12px;
+  @include h-4;
+  font-weight: 700;
+  color: $darkMediumGreen;
+}
+
+.label {
 }

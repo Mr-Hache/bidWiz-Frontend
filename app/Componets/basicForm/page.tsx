@@ -356,6 +356,7 @@ function basicForm() {
         <div>
           <br />
           <ImageUpload onImageUpload={handleImageUpload} />
+
           {errors.image && <span className="error">{errors.image}</span>}
           <br />
           <br />
@@ -373,11 +374,13 @@ function basicForm() {
                   </option>
                 ))}
               </select>
+              <br />
               {errors.languages && (
                 <span className="error">{errors.languages}</span>
               )}
             </div>
           </div>
+          <br />
           <br />
           <div className={style.inputcontainer}>
             <div className={style.select}>
@@ -394,12 +397,15 @@ function basicForm() {
                     </option>
                   ))}
                 </select>
+                <br />
+
                 {errors.subjects && (
                   <span className="error">{errors.subjects}</span>
                 )}
               </div>
             </div>
           </div>
+          <br />
 
           <br />
           <div className={style.inputcontainer}>
