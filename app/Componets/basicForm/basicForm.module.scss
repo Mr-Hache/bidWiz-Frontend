@@ -13,6 +13,14 @@
   border-radius: 0.5rem;
   width: 350px;
 
+  h1 {
+    @include h-1;
+    font-size: 2vw;
+    margin-top: -1vw;
+    margin-bottom: 2vw;
+    text-align: center;
+  }
+
   .block {
     height: 5rem;
   }

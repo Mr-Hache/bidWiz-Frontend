@@ -288,7 +288,7 @@ function basicForm() {
   return (
     <form className={style.form} onSubmit={handleSubmit}>
       <div className={style.block}></div>
-
+      <h1>Unleash Your Magic</h1>
       <div className={style.inputcontainer}>
         <label>
           <input
