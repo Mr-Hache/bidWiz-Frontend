@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import { useCreateUserMutation } from "@/app/redux/services/userApi";
+import { FcGoogle } from "react-icons/fc";
 import {
   validatePassword,
   validateEmail,
@@ -440,8 +441,15 @@ function basicForm() {
       ) : null}
 
       <div className={style.button}>
-        <button className={style.boton}>Submit</button>
-        <button onClick={handleGoogleSignIn}>Register with Google</button>
+        <div className={style.register}>
+          <button className={style.boton}>Register</button>
+        </div>
+        <div className={style.google}>
+          <FcGoogle className={style.icon} />
+          <button className={style.boton2} onClick={handleGoogleSignIn}>
+            Register with Google
+          </button>
+        </div>
       </div>
     </form>
   );

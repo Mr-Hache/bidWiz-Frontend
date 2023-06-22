@@ -83,12 +83,34 @@
   }
 }
 .boton {
-  @include button-styles2(1.3vw);
+  @include button-styles2(1vw);
+}
+.boton2 {
+  @include button-styles1(1vw);
+  margin-top: 0;
 }
 
 .button {
   display: flex;
-  width: 100%;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
+}
+.google {
+  height: 5vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.register {
+  margin-bottom: -4px;
+}
+
+.google .icon {
+  width: 30px;
+  height: 30px;
+  margin-bottom: 6px;
+  background-color: white;
+  border-radius: 50%;
 }
