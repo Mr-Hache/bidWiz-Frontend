@@ -18,35 +18,34 @@
     align-items: center;
     list-style: none;
     margin-left: 3vw;
-    margin-top: -0.5vw;
+    margin-top: 1.5vw;
     text-decoration: none;
   }
 
   .iconsLink {
-    width: 15vw;
     display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    align-items: center;
+    flex-direction: column;
+    align-items: flex-start;
   }
 
   .iconsLink h1 {
     @include h-1;
-    margin-top: 3vw;
     font-size: 2.5vw;
     color: $darkMediumPurple;
+    padding: 0;
   }
 
-  .logo {
-    @include icon($darkMediumPurple);
-    width: 3vw;
-    height: 3vw;
+  .logoN {
     transition: 0.2s;
     transform: rotate(15deg);
+    margin-bottom: -2vw;
+    margin-left: 0.1vw;
+    font-size: 2vw;
+    color: $darkMediumGreen;
   }
 
   .iconsLink:hover {
-    .logo {
+    .logoN {
       transform: rotate(0deg);
     }
   }
@@ -55,7 +54,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 50vw;
+    width: 45vw;
   }
 
   .buttons {

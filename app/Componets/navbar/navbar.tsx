@@ -10,13 +10,12 @@ export default function Navbar() {
       <div className={styles.icons}>
         <Link href="/" style={{ textDecoration: "none" }}>
           <div className={styles.iconsLink}>
-            <FaHatWizard className={styles.logo} />
+            <FaHatWizard className={styles.logoN} />
             <h1>BidWiz</h1>
           </div>
         </Link>
       </div>
       <div className={styles.links}>
-        {/* <SelectorNavbar1 /> */}
         <SelectorNavbar filter="languages" />
         <SelectorNavbar filter="subjects" />
         <SearchBar />
