@@ -40,7 +40,7 @@ export const userApi = createApi({
   reducerPath: "userApi",
   refetchOnFocus: true, // when the window is refocused, refetch the data
   baseQuery: fetchBaseQuery({
-    baseUrl: "https://bidwiz-backend-production-db77.up.railway.app/",
+    baseUrl: "https://bidwiz-backend-production-db77.up.railway.app",
   }),
   endpoints: (builder) => ({
     getUsers: builder.query<User[], null>({
