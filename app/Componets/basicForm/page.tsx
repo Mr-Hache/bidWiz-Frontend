@@ -358,6 +358,7 @@ function basicForm() {
           <ImageUpload onImageUpload={handleImageUpload} />
           {errors.image && <span className="error">{errors.image}</span>}
           <br />
+          <br />
           <div className={style.select}>
             <div className={style.selectTitle}>Languages</div>
             <div className={style.selectSelect}>
