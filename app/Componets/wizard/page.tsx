@@ -81,27 +81,10 @@ const Wizard: React.FC<WizardProps> = ({ wizardUser }) => {
             <p className={style.tittle}>{wizardUser.experience.title}</p>
             <hr />
             <h3>Languages</h3>
-              <div className={style.flags}>
-                {mappedLanguages.map((language, index) => (
-                  <div key={index} className={style.language}>
-                    {language && (
-                      <Flag
-                        height={15}
-                        width={25}
-                        code={language.slice(0, 2).toLowerCase()}
-                        className={style.flag}
-                      />
-                    )}
-                    <span className={style.languageText}>{language}</span>
-                  </div>
-                ))}
-              </div>
-
-
-            {/* <div className={style.flags}>
+            <div className={style.flags}>
               {mappedLanguages
                 .slice() 
-                .sort((a, b) => a.localeCompare(b)) 
+                .sort((a, b) => (a && b ? a.localeCompare(b) : 0))          
                 .map((language, index) => (
                   <div key={index} className={style.language}>
                     {language && (
@@ -115,7 +98,7 @@ const Wizard: React.FC<WizardProps> = ({ wizardUser }) => {
                     <span className={style.languageText}>{language}</span>
                   </div>
                 ))}
-            </div> */}
+            </div>
             <hr />
             <h3>Subjects</h3>
           <div className={style.subjects}>
@@ -126,6 +109,7 @@ const Wizard: React.FC<WizardProps> = ({ wizardUser }) => {
                 const subjectIcon = subjectsIcons.find((item) => item.name === subject);
                 const Icon = subjectIcon ? getSubjectIcon(subjectIcon.icon) : null;
                 const colors = ['#E81DF1 ', '#00FF00', '#0000FF', '#DD963B', '#0E18F1' ]; 
+                //const colors = ['#470457' ];
                 const iconColor = colors[index % colors.length]; 
 
                 return (
