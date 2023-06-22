@@ -86,6 +86,7 @@ function basicForm() {
     subjects?: string;
     title?: string;
     origin?: string;
+    image?: string;
   }
 
   const [errors, setErrors] = useState<Errors>({});
@@ -281,6 +282,7 @@ function basicForm() {
   const handleImageUpload = (imageUrl: string) => {
     // Utilizar la URL de la imagen cargada
     console.log("Imagen cargada:", imageUrl);
+    setValues((v) => ({ ...v, image: imageUrl }));
   };
 
   return (
@@ -301,8 +303,7 @@ function basicForm() {
         {errors.name && <span className="error">{errors.name}</span>}
       </div>
       <br />
-      <ImageUpload onImageUpload={handleImageUpload} />
-      <br />
+
       <div className={style.inputcontainer}>
         <label>
           <input
@@ -334,24 +335,9 @@ function basicForm() {
 
       <br />
 
-      <br />
-      <div className={style.inputcontainer}>
-        <label>
-          <input
-            className={style.input}
-            type="text"
-            name="image"
-            value={values.image}
-            placeholder="Image:"
-            onChange={handleChange}
-          />
-        </label>
-      </div>
-
-      <br />
       <label>
         <div>
-          <h3 className={style.selectTitle}>Unleash your magic </h3>
+          <h3 className={style.selectTitle}>Become Wizard</h3>
           <div className={style.magic}>
             <input
               type="checkbox"
@@ -368,6 +354,9 @@ function basicForm() {
 
       {values.isWizard ? (
         <div>
+          <br />
+          <ImageUpload onImageUpload={handleImageUpload} />
+          {errors.image && <span className="error">{errors.image}</span>}
           <br />
           <div className={style.select}>
             <div className={style.selectTitle}>Languages</div>
