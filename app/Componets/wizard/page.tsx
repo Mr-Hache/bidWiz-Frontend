@@ -36,6 +36,7 @@ const Wizard: React.FC<WizardProps> = ({ wizardUser }) => {
             <h3>Subjects</h3>
             <p>{wizardUser.subjects.join(' - ')}</p>    
             <hr /> 
+            <p>{wizardUser.reviews}</p>
             <p>⭐⭐⭐⭐⭐</p>       
           </div>      
     </div>

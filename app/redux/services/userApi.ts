@@ -14,6 +14,7 @@ export type User = {
     expJobs: number;
   };
   image: string;
+  reviews: number;
   isDisabled: boolean;
   role: ["admin", "user"];
 };
