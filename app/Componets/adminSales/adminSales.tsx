@@ -105,8 +105,8 @@ export default function adminSales() {
 
   return (
     <div>
-      <h1>Users</h1>
-      <ApexCharts options={options} series={series} width={500} height={300} />
+      <h1>Sales</h1>
+      <ApexCharts options={options} series={series} width={900} height={500} />
     </div>
   );
 }
