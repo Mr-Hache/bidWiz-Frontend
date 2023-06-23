@@ -1,0 +1,9 @@
+@import "../../utils/mixin";
+@import "../../utils/variabls";
+
+.dashboard {
+  .container {
+    display: flex;
+    justify-content: space-around;
+  }
+}
