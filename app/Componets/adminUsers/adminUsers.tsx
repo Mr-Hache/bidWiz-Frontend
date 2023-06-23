@@ -1,56 +1,62 @@
 "use client";
 
 import React from "react";
-import ApexCharts from "react-apexcharts";
-import { ApexOptions } from "apexcharts";
-import { ChartOptions } from "../adminSales/adminSales";
+import styles from "./adminUsers.module.scss";
+import { FaUserGraduate } from "react-icons/fa";
+import { FaChalkboardTeacher } from "react-icons/fa";
+import { FaUsers } from "react-icons/fa";
+import { FaBookOpen } from "react-icons/fa";
+import { AiOutlineDollarCircle } from "react-icons/ai";
 
 export default function adminUsers() {
-  const options: ChartOptions = {
-    chart: {
-      height: 350,
-      type: "bar",
-      zoom: {
-        enabled: false,
-      },
-    },
-    plotOptions: {
-      bar: {
-        horizontal: false,
-        columnWidth: "55%",
-        borderRadius: 10,
-      },
-    },
-    stroke: {
-      show: false,
-      width: 1,
-      colors: ["transparent"],
-    },
-    dataLabels: {
-      enabled: false,
-    },
-    xaxis: {
-      categories: ["Alumnos", "Wizards", "Total"],
-    },
-    labels: ["Alumnos", "Wizards", "Total"],
-  };
-
-  const series = [
-    {
-      data: [80, 35, 115],
-    },
-  ];
-
   return (
-    <div>
-      <h1>Users</h1>
-      <ApexCharts
-        options={options}
-        series={series}
-        type="bar"
-        width={400}
-        height={300}
-      />
+    <div className={styles.containerCubes}>
+      <div className={styles.cube}>
+        <div className={styles.number}>
+          <h1>300</h1>
+          <div className={styles.icon}>
+            <FaUserGraduate />
+          </div>
+        </div>
+        <h2>Students</h2>
+      </div>
+      <div className={styles.cube}>
+        <div className={styles.number}>
+          <h1>100</h1>
+          <div className={styles.icon}>
+            <FaChalkboardTeacher />
+          </div>
+        </div>
+        <h2>Wisards</h2>
+      </div>
+      <div className={styles.cube}>
+        <div className={styles.number}>
+          <h1>400</h1>
+          <div className={styles.icon}>
+            <FaUsers />
+          </div>
+        </div>
+        <h2>Total Users</h2>
+      </div>
+      <div className={styles.cube}>
+        <div className={styles.number}>
+          <div>
+            <h1>800</h1>
+          </div>
+          <div>
+            <div className={styles.icon}>
+              <FaBookOpen />
+            </div>
+          </div>
+        </div>
+        <h2>Total Classes</h2>
+      </div>
+      <div className={styles.cube}>
+        <div className={styles.number}>
+          <h1>U$D 2.000</h1>
+        </div>
+        <h2>Total Classes</h2>
+      </div>
     </div>
   );
 }
