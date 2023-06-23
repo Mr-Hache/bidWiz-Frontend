@@ -199,83 +199,114 @@ function basicForm() {
   };
   const [createUser, { data, error }] = useCreateUserMutation();
 
+
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+
     event.preventDefault();
 
     if (validateForm()) {
-      const userCredential = await createUserWithEmailAndPassword(
-        auth,
-        values.email,
-        authentication.password
-      );
-      const uid = userCredential.user.uid;
-      console.log(uid);
-      console.log(values);
-      if (values.isWizard) {
-        createUser({
-          ...values,
-          uidFireBase: uid,
-        });
-      } else {
-        createUser({
-          name: values.name,
-          email: values.email,
-          isWizard: values.isWizard,
-          uidFireBase: uid,
-        });
+      try {
+        const response = await fetch('https://bidwiz-backend-production-db77.up.railway.app/users/emails');
+        const data = await response.json();
+      
+        const result = data.includes(values.email);
+        if (result) {
+          alert("Mail already in use")
+        } else {
+          const userCredential = await createUserWithEmailAndPassword(
+            auth,
+            values.email,
+            authentication.password
+          );
+          const uid = userCredential.user.uid;
+
+          if (values.isWizard) {
+            createUser({
+              ...values,
+              uidFireBase: uid,
+            });
+          } else {
+            createUser({
+              name: values.name,
+              email: values.email,
+              isWizard: values.isWizard,
+              uidFireBase: uid,
+            });
+          }
+          alert("New user created");
+          setValues({
+            uidFireBase: "",
+            name: "",
+            email: "",
+            image: "",
+            isWizard: false,
+            languages: [],
+            subjects: [],
+            experience: {
+              title: "",
+              origin: "",
+              expJobs: 0,
+            },
+          });
+          setAuthentication({
+            password: "",
+            email: "",
+          });
+
+        }
+
+      } catch (error) {
+        
+        if (typeof error === 'string') {
+    
+         alert(error);
+        } else {
+       
+          console.error(error);
+        }
       }
 
-      alert("New user created");
-      setValues({
-        uidFireBase: "",
-        name: "",
-        email: "",
-        image: "",
-        isWizard: false,
-        languages: [],
-        subjects: [],
-        experience: {
-          title: "",
-          origin: "",
-          expJobs: 0,
-        },
-      });
-      setAuthentication({
-        password: "",
-        email: "",
-      });
     }
   };
 
-  useEffect(() => {
-    if (error) {
-      if ("message" in error) {
-        alert(`Error: ${error.message}`);
-      } else if ("status" in error) {
-        alert(`Error: ${error.status}`);
-      }
-    }
-  }, [error]);
+  // useEffect(() => {
+  //   if (error) {
+  //     if ("message" in error) {
+  //       alert(`Error: ${error.message}`);
+  //     } else if ("status" in error) {
+  //       alert(`Error: ${error.status}`);
+  //     }
+  //   }
+  // }, [error]);
 
-  const handleGoogleSignIn = async () => {
+  const handleGoogleSignIn = async (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
     const googleProvider = new GoogleAuthProvider();
     try {
-      const userCredential = await signInWithPopup(auth, googleProvider);
-      const user = userCredential.user;
-      console.log({
-        email: user.email,
-        uid: user.uid,
-        name: user.displayName,
-      });
+      const response = await fetch('https://bidwiz-backend-production-db77.up.railway.app/users/emails');
+        const data = await response.json();
+        const userCredential = await signInWithPopup(auth, googleProvider);
+        const user = userCredential.user;
+      
+        const result = data.includes(user.email);
 
-      createUser({
-        name: user.displayName ? user.displayName : "",
-        email: user.email ? user.email : "",
-        uidFireBase: user.uid ? user.uid : "",
-        isWizard: false,
-      });
+        if(result){
+            alert("el usuario ya tiene una cuenta asociada")
+        }else{
+        createUser({
+            name: user.displayName ? user.displayName : "",
+            email: user.email ? user.email : "",
+            uidFireBase: user.uid ? user.uid : "",
+            isWizard: false,
+          });
+  
+          alert("vocreandol usuario")      
+        }
+      
+
+
     } catch (error) {
-      console.error(error);
+      console.log(error);
     }
   };
 
