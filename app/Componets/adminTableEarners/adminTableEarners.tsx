@@ -4,9 +4,10 @@ import React from "react";
 import { useEffect, useState } from "react";
 
 export interface UserFormValues {
-  totalPaid: number;
+  totalEarned: number;
   user_info: {
     name: string;
+    image: string;
   };
 }
 
@@ -25,13 +26,19 @@ export default function adminTableEarners() {
 
   return (
     <div>
-      <h1>Sellers</h1>
+      <h1>Highest Earners</h1>
       <div>
         <ul>
-          {earnersData.map((buyer) => (
+          {earnersData.map((seller) => (
             <li>
-              <p>{buyer.user_info.name}</p>
-              <p>Total Paid: {buyer.totalPaid}</p>
+              <img
+                src={seller.user_info.image}
+                alt={""}
+                width="50"
+                height="50"
+              />
+              <p>{seller.user_info.name}</p>
+              <p> U$D {seller.totalEarned}</p>
             </li>
           ))}
         </ul>
