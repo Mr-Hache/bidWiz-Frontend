@@ -1,50 +1,88 @@
 "use client";
-import {useState} from "react";
+import {useState, useEffect} from "react";
 import { initMercadoPago, Wallet } from '@mercadopago/sdk-react'
 import { usePathname } from "next/navigation";
 import { useGetUserByIdQuery } from "@/app/redux/services/userApi";
 import Navbar from "@/app/Componets/navbar/navbar";
 import styles from "./detail.module.scss";
-import Link from "next/link";
 import { useCreateJobMutation } from "@/app/redux/services/userApi";
 
 function detail() {
   initMercadoPago('TEST-f290c78e-5208-406e-8395-17f2f78dfc23');
   const [preferenceId, setPreferenceId] = useState("")
-  const [createJobDto, setCreateJobDto] = useState({
-    status: "In Progress",
-    description: "Test",
-    price: 20,
-    numClasses: 1,
-    clientId: "648e17f0c8489b5c103ee650",
-    workerId: "648e1817c8489b5c103ee67a",
-    language: "English",
-    subject: "Mathematics",
-    result: "hola mundo"
-  });
+  const [createJobDto, setCreateJobDto] = useState({});
+
+  const [selectedLanguage, setSelectedLanguage] = useState("");
+  const [selectedSubject, setSelectedSubject] = useState("");
+  const [selectedClasses, setSelectedClasses] = useState<number | null>(null);
+  const [selectedPrice, setSelectedPrice] = useState<number | null>(null); 
 
   const [createJob, { data: job, }] = useCreateJobMutation();
-  const pathname = usePathname(); // imprime la ruta actual
+  const pathname = usePathname(); 
   const _id = pathname.split("/")[2];
+
+  const handleLanguageChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setSelectedLanguage(e.target.value);
+  };
+
+  const handleSubjectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setSelectedSubject(e.target.value);
+  };
+
+  const handleClassesChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const selectedNumber = parseInt(e.target.value);
+    setSelectedClasses(selectedNumber);
+    if (user){
+    switch(selectedNumber){
+      case 1: 
+        setSelectedPrice(user.pricePerOne);
+        break;
+      case 2:
+        setSelectedPrice(user.pricePerTwo);
+        break;
+      case 3:
+        setSelectedPrice(user.pricePerThree);
+        break;
+      default:
+        setSelectedPrice(null);
+    }
+    }
+  };
+
+  const handleClick = async () => {
+    try {
+      console.log(createJobDto)
+      const newJob = await createJob(createJobDto).unwrap();
+      setPreferenceId(newJob.result);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    setCreateJobDto({
+      ...createJobDto,
+      status: "In Progress",
+      description: `Class: ${selectedSubject} in ${selectedLanguage}. Client: ${_id}. Tutor: ${_id}. Price: $${(selectedClasses || 0) * (selectedPrice || 0)} USD.`,
+      price: selectedPrice,
+      numClasses: selectedClasses,
+      clientId: "648e17f0c8489b5c103ee650",
+      workerId: _id,
+      language: selectedLanguage,
+      subject: selectedSubject,
+      result: "default"
+    });
+    console.log(createJobDto); 
+  }, [selectedLanguage, selectedSubject, selectedClasses, _id, selectedPrice]);
+
   const {
     data: user,
     isLoading,
     isError,
   } = useGetUserByIdQuery({ _id});
+
   if (isLoading) return <div>Loading...</div>;
   if (isError || !user) return <div>User not found</div>;
-
-  
-
-  const handleClick = async () => {
-    try {
-      const newJob = await createJob(createJobDto).unwrap();
-      setPreferenceId(newJob.result);
-    } catch (error) {
-      console.error(error);
-      // Aquí manejas el error.
-    }
-  };
 
   return (
     
@@ -57,30 +95,59 @@ function detail() {
         <h2>{`${user.name} `}</h2>
         <h2>{user.experience.title}</h2>
         <p>⭐⭐⭐⭐⭐</p>
+        <p>{user.reviews}</p>
         <h4>{user.experience.expJobs} Reviews</h4>
         <h3>{user.languages.join(' - ')}</h3>
         <h3>{user.subjects.join(' - ')}</h3>
         </div>
         <div className={styles.righbar}>
           <h1>About Me</h1>
-          <h3>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam corporis, cupiditate ex dolores omnis aliquid voluptate facere error sequi sapiente nam praesentium nemo, itaque veniam consequatur recusandae mollitia natus rerum?</h3>
+          <h2>{user.aboutMe}</h2>
           <table>
     <tbody>
-      <tr>
-        <td>1 Class</td>
-        <td>30 USD</td>
-      </tr>
-      <tr>
-        <td>3 Classes</td>
-        <td>28 USD</td>
-      </tr>
-      <tr>
-        <td>5 Classes</td>
-        <td>25 USD</td>
-      </tr>
+    <select value={selectedLanguage} onChange={handleLanguageChange}>
+  <option value="">Choose one</option>
+  {user.languages.map((language) => (
+    <option value={language}>{language}</option>
+  ))}
+</select>
+
+<select value={selectedSubject} onChange={handleSubjectChange}>
+  <option value="">Choose one</option>
+  {user.subjects.map((subject) => (
+    <option value={subject}>{subject}</option>
+  ))}
+</select>
+<br />
+<label htmlFor="">Price per one class {user.pricePerOne} USD</label>
+<input
+  type="radio"
+  name="classes"
+  value={1}
+  checked={selectedClasses === 1}
+  onChange={handleClassesChange}
+/>
+<br />
+<label htmlFor="">Price per two classes {user.pricePerTwo*2} USD</label>
+<input
+  type="radio"
+  name="classes"
+  value={2}
+  checked={selectedClasses === 2}
+  onChange={handleClassesChange}
+/>
+<br />
+<label htmlFor="">Price per three classes {user.pricePerThree*3} USD</label>
+<input
+  type="radio"
+  name="classes"
+  value={3}
+  checked={selectedClasses === 3}
+  onChange={handleClassesChange}
+/>
     </tbody>
   </table>
-  <button onClick={handleClick}>CONFIRM</button> 
+  <button onClick={handleClick} disabled={!selectedLanguage || !selectedSubject || !selectedClasses}>CONFIRM</button> 
   {preferenceId && <Wallet initialization={{ preferenceId: preferenceId }} />}
         </div>
     </div>
