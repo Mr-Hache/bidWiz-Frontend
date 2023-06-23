@@ -1,16 +1,16 @@
 import Navbar from "@/app/Componets/navbar/navbar";
 import AdminDashboard from "../Componets/adminDashboard/adminDashboard";
+import styles from "./admin.module.scss";
 
 export default async function admin() {
   return (
-    <div>
+    <div className={styles.adminPage}>
       <Navbar />
       <br />
-      <br />
-      <br />
-      <br />
       <div>
-        <h1>DASHBOARD</h1>
+        <div className={styles.title}>
+          <h1>Dashboard Admin</h1>
+        </div>
         <AdminDashboard />
       </div>
     </div>
