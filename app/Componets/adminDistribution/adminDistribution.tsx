@@ -5,6 +5,7 @@ import ApexCharts from "react-apexcharts";
 import { ApexOptions } from "apexcharts";
 import { ChartOptions } from "../adminSales/adminSales";
 import styles from "./adminDistribution.module.scss";
+import { useEffect, useState } from "react";
 
 interface ChartData {
   series: number[];
@@ -12,118 +13,127 @@ interface ChartData {
 }
 
 export default function adminDistribution() {
-  const subjectsData: ChartData = {
-    series: [1, 25, 20, 10, 5, 4, 3, 2, 1, 1, 1, 30],
+  const [subjectsData, setSubjectsData] = useState<ChartData>({
+    series: [],
     options: {
-      labels: [
-        "Mathematics",
-        "Physics",
-        "Chemistry",
-        "Biology",
-        "Economics",
-        "Business Administration",
-        "Accounting",
-        "Computer Science",
-        "Music Theory",
-        "Political Science",
-        "Law",
-        "Programming",
-      ],
+      labels: [],
       title: {
         text: "Subjects",
         align: "center",
       },
-      colors: ["#73bc49", "#8cd461", "#a5ed79"],
+      colors: [],
       dataLabels: {
         style: {
           colors: ["#263238"], // Color negro para las letras
         },
-
-        dropShadow: {
-          enabled: false, // Desactivar las sombras
-        },
       },
     },
-  };
+  });
 
-  const languagesData: ChartData = {
-    series: [30, 20, 15, 10, 8, 50, 4, 30, 2],
+  const [languagesData, setLanguagesData] = useState<ChartData>({
+    series: [],
     options: {
-      labels: [
-        "English",
-        "Spanish",
-        "Portuguese",
-        "German",
-        "French",
-        "Chinese",
-        "Japanese",
-        "Russian",
-        "Italian",
-      ],
+      labels: [],
       title: {
         text: "Languages",
         align: "center",
       },
-      colors: ["#71458e", "#83559f", "#9465b1", "#D989B5", "#FFADBC"],
+      colors: [],
       dataLabels: {
         style: {
           colors: ["#263238"], // Color negro para las letras
         },
-
-        dropShadow: {
-          enabled: false, // Desactivar las sombras
-        },
       },
     },
-  };
+  });
 
-  const topSubjectsData: ChartData = {
-    series: subjectsData.series
-      .slice()
-      .sort((a, b) => b - a)
-      .slice(0, 4),
-    options: {
-      ...subjectsData.options,
-      labels: subjectsData.options?.labels
-        ?.map((label, index) => ({ label, value: subjectsData.series[index] }))
-        .sort((a, b) => b.value - a.value)
-        .slice(0, 5)
-        .map((item) => item.label),
-    },
-  };
+  useEffect(() => {
+    fetch(
+      "https://bidwiz-backend-production-db77.up.railway.app/jobs/subject-stats"
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        const series: number[] = data
+          .map((item: { count: number }) => item.count)
+          .slice(0, 3);
+        const labels: string[] = data
+          .map((item: { _id: string }) => item._id)
+          .slice(0, 3);
+        const colors = ["#b280b1", "#d8a6d8", "#ffccff"];
 
-  const topLanguagesData: ChartData = {
-    series: languagesData.series
-      .slice()
-      .sort((a, b) => b - a)
-      .slice(0, 5),
-    options: {
-      ...languagesData.options,
-      labels: languagesData.options?.labels
-        ?.map((label, index) => ({ label, value: languagesData.series[index] }))
-        .sort((a, b) => b.value - a.value)
-        .slice(0, 4)
-        .map((item) => item.label),
-    },
-  };
+        const updatedSubjectsData: ChartData = {
+          series: series,
+          options: {
+            labels: labels,
+            title: {
+              text: "Subjects",
+              align: "center",
+            },
+            colors: colors,
+            dataLabels: {
+              style: {
+                colors: ["#263238"],
+              },
+            },
+          },
+        };
+
+        setSubjectsData(updatedSubjectsData);
+      });
+  }, []);
+
+  useEffect(() => {
+    fetch(
+      "https://bidwiz-backend-production-db77.up.railway.app/jobs/language-stats"
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        const series: number[] = data
+          .map((item: { count: number }) => item.count)
+          .slice(0, 3);
+        const labels: string[] = data
+          .map((item: { _id: string }) => item._id)
+          .slice(0, 3);
+        const colors = ["#8cbf7a", "#bfdfa9", "#f2ffd8"];
+
+        const updatedLanguagesData: ChartData = {
+          series: series,
+          options: {
+            labels: labels,
+            title: {
+              text: "Languages",
+              align: "center",
+            },
+            colors: colors,
+            dataLabels: {
+              style: {
+                colors: ["#263238"],
+              },
+            },
+          },
+        };
+
+        setLanguagesData(updatedLanguagesData);
+      });
+  }, []);
 
   return (
     <div className={styles.five}>
-      <h1>Top Five</h1>
+      <h1>Top Three</h1>
       <div className={styles.grafic}>
         <ApexCharts
-          options={topSubjectsData.options}
-          series={topSubjectsData.series}
+          options={subjectsData.options}
+          series={subjectsData.series}
           type="pie"
-          width={300}
+          width={350}
         />
       </div>
       <div className={styles.grafic}>
         <ApexCharts
-          options={topLanguagesData.options}
-          series={topLanguagesData.series}
+          options={languagesData.options}
+          series={languagesData.series}
           type="pie"
-          width={300}
+          width={350}
         />
       </div>
     </div>
