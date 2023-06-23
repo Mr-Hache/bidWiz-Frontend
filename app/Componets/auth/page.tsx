@@ -3,7 +3,9 @@ import React, { useState, useEffect } from 'react'
 import style from "./auth.module.scss"
 import { useRouter } from 'next/navigation'
 import { auth } from '../../utils/firebase'  
-import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
+import { getAuth, signInWithEmailAndPassword, GoogleAuthProvider,signInWithPopup } from 'firebase/auth'
+import { FcGoogle } from "react-icons/fc";
+import { useCreateUserMutation } from "@/app/redux/services/userApi"
 
 
 function authent() {
@@ -11,6 +13,7 @@ function authent() {
   const [password, setPassword] = useState('');
   const [idAuth, setIdAuth] = useState('');
   const router = useRouter();
+  const [createUser, { data, error }] = useCreateUserMutation();
 
 
 useEffect(() =>{
@@ -20,15 +23,47 @@ useEffect(() =>{
   const handleSubmit = async (event :React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     try {
-     const userCredential =  await signInWithEmailAndPassword(auth, email, password);
+      const userCredential =  await signInWithEmailAndPassword(auth, email, password);
       setIdAuth(userCredential.user.uid)
       
-      router.push('/'); // redirige al usuario a la página de inicio después del inicio de sesión exitoso
+      router.push('/'); 
     } catch (error) {
       console.error(error);
-      // manejo de errores avaAnder$10
+      // avaAnder$10
     }
   }
+
+  const handleGoogleSignIn = async (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+    const googleProvider = new GoogleAuthProvider();
+    try {
+      const response = await fetch('https://bidwiz-backend-production-db77.up.railway.app/users/emails');
+        const data = await response.json();
+        const userCredential = await signInWithPopup(auth, googleProvider);
+        const user = userCredential.user;
+      
+        const result = data.includes(user.email);
+
+        if(result){
+            alert("el usuario ya tiene una cuenta asociada")
+        }else{
+        createUser({
+            name: user.displayName ? user.displayName : "",
+            email: user.email ? user.email : "",
+            uidFireBase: user.uid ? user.uid : "",
+            isWizard: false,
+          });
+  
+          alert("creando usuario")      
+        }
+      
+
+
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
 
   
 
@@ -56,6 +91,12 @@ useEffect(() =>{
         />
       </div>
       <button type="submit" className={style.button}>Login</button>
+      <div>
+          <FcGoogle className={style.icon} />
+          <button onClick={handleGoogleSignIn}>
+            Register with Google
+          </button>
+        </div>
     </form>
   )
 }
