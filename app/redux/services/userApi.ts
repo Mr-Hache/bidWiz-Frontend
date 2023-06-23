@@ -36,6 +36,31 @@ export type Job = {
   result: string;
 }
 
+export type UpdateUserWizardDto = {
+  isWizard?: boolean;
+  languages?: string[];
+  subjects?: string[];
+  experience?: {
+    title?: string;
+    origin?: string;
+  };
+  image?: string;
+  aboutMe?: string;
+  pricePerOne?: number;
+  pricePerTwo?: number;
+  pricePerThree?: number;
+};
+
+export type JobStatus = 'In Progress' | 'Finished'
+
+export type UpdateJobWorkerDto = {
+  status: JobStatus;
+};
+
+export type UpdateJobReviewDto = {
+  rating: number;
+};
+
 export const userApi = createApi({
   reducerPath: "userApi",
   refetchOnFocus: true, // when the window is refocused, refetch the data
@@ -63,10 +88,11 @@ export const userApi = createApi({
       }),
     }),
     
-    updateWizardStatus: builder.mutation<User, { _id: string }>({
-      query: ({ _id }) => ({
+    updateWizardStatus: builder.mutation<User, { _id: string; updateUserWizardDto: UpdateUserWizardDto }>({
+      query: ({ _id, updateUserWizardDto }) => ({
         url: `users/${_id}/wizard`,
         method: "PATCH",
+        body: updateUserWizardDto,
       }),
     }),
     getWizards: builder.query<
@@ -98,6 +124,29 @@ export const userApi = createApi({
         method: "POST",
         body: newJob,
       }),
+    }),
+    updateJobWorker: builder.mutation<Job, { jobId: string; workerId: string; updateJobWorkerDto: UpdateJobWorkerDto }>({
+      query: ({ jobId, workerId, updateJobWorkerDto }) => ({
+        url: `jobs/finish/${jobId}/${workerId}`,
+        method: "PATCH",
+        body: updateJobWorkerDto,
+      }),
+    }),
+
+    updateJobReview: builder.mutation<Job, { jobId: string; clientId: string; updateJobReviewDto: UpdateJobReviewDto }>({
+      query: ({ jobId, clientId, updateJobReviewDto }) => ({
+        url: `jobs/review/${jobId}/${clientId}`,
+        method: "PATCH",
+        body: updateJobReviewDto,
+      }),
+    }),
+
+    getJobsByWorker: builder.query<Job[], { workerId: string }>({
+      query: ({ workerId }) => `jobs/worker/${workerId}`,
+    }),
+
+    getJobsByClient: builder.query<Job[], { clientId: string }>({
+      query: ({ clientId }) => `jobs/client/${clientId}`,
     }),
   }),
 });
