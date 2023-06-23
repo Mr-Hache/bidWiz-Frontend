@@ -1,17 +1,76 @@
+// @import "../../utils/mixin";
+// @import "../../utils/variabls";
+
+// .contCards {     
+//     // display: flex;     
+//     font-family: $ralewayFont;  
+//     padding: 1vw;
+//     border: 2px solid;
+//     border-radius: 10px;
+//     box-shadow: 5px 5px 5px 0px rgba(1, 0, 8, 0.808);    
+//     text-align: center;
+//     margin-left: 7vw;          
+//     margin-top: 6vw; 
+//     width: 16vw;    
+//     border-color: rgb(230, 228, 240);
+//     background-image: linear-gradient(to right, $lightMediumGreen, $darkMediumGreen, $lightMediumGreen);
+//     background-size: 300% 100%;
+//     transition: background-position 0.6s ease-in-out;
+// }
+
+// .contCards:hover {
+//     background-position: 100% 0;
+// }
+
+// .contCards h2 {    
+//     font-family: $ralewayFont;
+//     font-size: 30px;
+//     font-weight: 700;
+//     color: $darkPurple;    
+// }
+
+// .contCards p {
+//     padding: 0.5rem;
+//     margin: 0;
+//     color: $darkGray;
+// }
+
+// .secondCont {    
+//     background-color: white;
+//     border-radius: 10px;    
+//     border: 2px solid rgb(235, 211, 211);
+// }
+
+// .secondCont h3 {
+//     color: rgba(11, 12, 12, 0.527);
+//     margin: 0;       
+// }
+
+// .imagen {
+//     border: 2px solid rgb(235, 211, 211);
+//     border-radius: 10px;
+// }
+
+// .tittle {
+//     font-size: 1.5rem;      
+// }
 @import "../../utils/mixin";
 @import "../../utils/variabls";
 
-.contCards {     
-    // display: flex;     
-    font-family: $ralewayFont;  
+.contCards {
+    background-color: white;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    font-family: $ralewayFont;
     padding: 1vw;
     border: 2px solid;
     border-radius: 10px;
-    box-shadow: 5px 5px 5px 0px rgba(1, 0, 8, 0.808);    
+    box-shadow: 5px 5px 5px 0px rgba(1, 0, 8, 0.808);
     text-align: center;
-    margin-left: 7vw;          
+    margin-left: 7vw;
     margin-top: 6vw; 
-    width: 16vw;    
+    width: 16vw;
     border-color: rgb(230, 228, 240);
     background-image: linear-gradient(to right, $lightMediumGreen, $darkMediumGreen, $lightMediumGreen);
     background-size: 300% 100%;
@@ -22,11 +81,11 @@
     background-position: 100% 0;
 }
 
-.contCards h2 {    
+.contCards h2 {
     font-family: $ralewayFont;
     font-size: 30px;
     font-weight: 700;
-    color: $darkPurple;    
+    color: $darkPurple;
 }
 
 .contCards p {
@@ -35,15 +94,15 @@
     color: $darkGray;
 }
 
-.secondCont {    
+.secondCont {
     background-color: white;
-    border-radius: 10px;    
+    border-radius: 10px;
     border: 2px solid rgb(235, 211, 211);
 }
 
 .secondCont h3 {
     color: rgba(11, 12, 12, 0.527);
-    margin: 0;       
+    margin: 0;
 }
 
 .imagen {
@@ -52,5 +111,44 @@
 }
 
 .tittle {
-    font-size: 1.5rem;      
+    font-size: 1.5rem;
 }
+
+// .flags {
+//     height: 2rem;
+//     display: flex;
+//     justify-content: center;
+//     gap: 1rem;
+//     margin-top: 0.5rem;
+// }
+.flags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-left: 2rem;
+    margin-top: 0.5rem;
+  }
+
+  .language {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+.subjects {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-left: 1rem; 
+    margin-top: 0.5rem;
+  }
+
+  .subject {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .siglas {
+    margin-left: 5px;
+  }
