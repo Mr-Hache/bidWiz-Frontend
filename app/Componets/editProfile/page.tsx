@@ -8,7 +8,33 @@ function EditProfile() {
     const [updateWizardStatus, { isLoading }] = useUpdateWizardStatusMutation();
     const [formState, setFormState] = useState<UpdateUserWizardDto>({} as UpdateUserWizardDto);
 
-    useEffect(() => {
+    const allPossibleLanguages = [
+        "English",
+        "Spanish",
+        "Portuguese",
+        "German",
+        "French",
+        "Chinese",
+        "Japanese",
+        "Russian",
+        "Italian",
+      ];
+      const allPossibleSubjects = [
+        "Mathematics",
+        "Physics",
+        "Chemistry",
+        "Biology",
+        "Economics",
+        "Business Administration",
+        "Accounting",
+        "Computer Science",
+        "Music Theory",
+        "Political Science",
+        "Law",
+        "Programming",
+      ];
+
+      const fetchUserData = () => {
         fetch(`https://bidwiz-backend-production-db77.up.railway.app/users/user/${localUid}`)
         .then(response => response.json())
         .then(data => {
@@ -25,13 +51,46 @@ function EditProfile() {
             });
         })
         .catch(error => console.error(error));
+    }
+    
+    useEffect(() => {
+        fetchUserData(); // Llamar a la función en el useEffect
     }, [localUid]);
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setFormState({
-        ...formState,
-        [e.target.name]: e.target.value,
-        });
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+        console.log(formState);
+        
+        const { name, value } = e.target;
+        if (name === "pricePerOne" || name === "pricePerTwo" || name === "pricePerThree") {
+            setFormState({
+                ...formState,
+                [name]: parseInt(value),  // convertir a número
+            });
+        }
+        if (name === "languages" || name === "subjects") {
+            const selectElement = e.target as HTMLSelectElement;
+            const selectedOptions = Array.from(selectElement.selectedOptions, option => option.value);
+            setFormState({
+                ...formState,
+                [name]: selectedOptions,
+            });
+        } else if (name.startsWith("experience.")) {
+            const field = name.split(".")[1]; // obtiene 'title' o 'origin' de 'experience.title' o 'experience.origin'
+            setFormState({
+                ...formState,
+                experience: {
+                    ...formState.experience,
+                    [field]: value
+                }
+            });
+        } else {
+            setFormState({
+                ...formState,
+                [name]: value,
+            });
+        }
+        console.log(formState);
+        
     };
 
     const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -39,24 +98,25 @@ function EditProfile() {
         ...formState,
         isWizard: e.target.checked,
         });
+        console.log(formState);
+        
     };
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         try {
             const response = await updateWizardStatus({
-            _id: 'userId', // Actualiza con el ID real del usuario
+            _id: 'userId', 
             updateUserWizardDto: formState,
             });
             console.log(response);
-            // Realiza algo con la respuesta, como redirigir o mostrar un mensaje de éxito.
+            fetchUserData(); 
         } catch (error) {
             console.error(error);
-            // Maneja el error aquí
         }
     };
 
-    // Si el estado del formulario aún no se ha inicializado, renderiza un mensaje de carga o un componente de carga.
+    
     if (!formState) return 'Loading...';
 
     return (
@@ -82,21 +142,29 @@ function EditProfile() {
 
                 <br />
                 <label htmlFor="languages">I speak</label>
-                <input
-                    type="text"
+                <select
+                    multiple
                     name="languages"
-                    value={formState.languages?.join(', ') || ''}
+                    value={formState.languages || []}
                     onChange={handleChange}
-                />
+                >
+                    {allPossibleLanguages.map((language, index) => (
+                        <option key={index} value={language}>{language}</option>
+                    ))}
+                </select>
 
                 <br />
-                <label htmlFor="subjects">I want to teach</label>  
-                <input
-                    type="text"
+                <label htmlFor="subjects">I want to teach</label>
+                <select
+                    multiple
                     name="subjects"
-                    value={formState.subjects?.join(', ') || ''}
+                    value={formState.subjects || []}
                     onChange={handleChange}
-                />
+                >
+                    {allPossibleSubjects.map((subject, index) => (
+                        <option key={index} value={subject}>{subject}</option>
+                    ))}
+                </select>
 
                 <br />
                 <label htmlFor="experience.title">I am</label>  
