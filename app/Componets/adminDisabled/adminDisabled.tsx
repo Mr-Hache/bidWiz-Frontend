@@ -45,11 +45,11 @@ function AdminDisabled() {
           borderRadius: "5px",
           overflowY: "scroll",
           maxHeight: "400px",
-          width: "400px",
+          width: "500px",
           backgroundColor: "white",
         }}
       >
-        {filteredUsers?.sort((a,b) => a.name.localeCompare(b.name)).map((user: User) => (
+          {filteredUsers?.filter(user => !user.isDisabled).sort((a,b) => a.reviews - b.reviews).map((user: User) => (
           <div
             key={user._id}
             style={{
@@ -59,12 +59,13 @@ function AdminDisabled() {
               borderBottom: "1px solid gray",
               padding: "10px",
             }}
-          >
+            >
+          
             <img src={user.image} alt={user.name} width="50" height="50" />
-            <div>
+            <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+            <p>{Number(user.reviews.toFixed(1))}</p>
               <p>{user.name}</p>
               <p>{user.email}</p>
-              <p>{user.reviews}</p>
             </div>
             {!user.isDisabled && (
               <button
