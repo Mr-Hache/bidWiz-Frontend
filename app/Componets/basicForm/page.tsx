@@ -300,7 +300,7 @@ function basicForm() {
             isWizard: false,
           });
   
-          alert("vocreandol usuario")      
+          alert("creando usuario")      
         }
       
 

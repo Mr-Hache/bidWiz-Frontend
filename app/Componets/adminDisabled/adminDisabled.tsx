@@ -1,4 +1,6 @@
-import React, { useEffect } from "react";
+"use client"
+
+import React, { useEffect, useState } from "react";
 import {
   useGetUsersQuery,
   useDisableUserMutation,
@@ -8,6 +10,7 @@ import { User } from "../../redux/services/userApi";
 function AdminDisabled() {
   const { data: users, refetch } = useGetUsersQuery(null);
   const [disableUser, { isLoading: disableLoading }] = useDisableUserMutation();
+  const [search, setSearch] = useState("");
 
   useEffect(() => {
     refetch();
@@ -16,26 +19,37 @@ function AdminDisabled() {
   const handleDisableUser = async (userId: string) => {
     try {
       await disableUser({ _id: userId });
+      // Refetch users after disabling a user
       refetch();
     } catch (error) {
       console.error(error);
     }
   };
 
+  const filteredUsers = users?.filter((user) =>
+    user.name.toLowerCase().includes(search.toLowerCase())
+  );
+
   return (
     <div>
       <h1>Disable Panel</h1>
+      <input
+        type="text"
+        placeholder="Search by name"
+        value={search}
+        onChange={(e) => setSearch(e.target.value)}
+      />
       <div
         style={{
           border: "1px solid black",
           borderRadius: "5px",
           overflowY: "scroll",
           maxHeight: "400px",
-          width: "400px", // Puedes ajustar el ancho según tus necesidades
+          width: "400px",
           backgroundColor: "white",
         }}
       >
-        {users?.map((user: User) => (
+        {filteredUsers?.sort((a,b) => a.name.localeCompare(b.name)).map((user: User) => (
           <div
             key={user._id}
             style={{
@@ -69,3 +83,6 @@ function AdminDisabled() {
 }
 
 export default AdminDisabled;
+
+
+
