@@ -3,6 +3,7 @@
 import React from "react";
 import ApexCharts from "react-apexcharts";
 import { ApexOptions } from "apexcharts";
+import styles from "./adminSales.module.scss";
 
 export interface ChartOptions extends ApexOptions {
   chart: {
@@ -104,7 +105,7 @@ export default function adminSales() {
   ];
 
   return (
-    <div>
+    <div className={styles.sales}>
       <h1>Sales</h1>
       <ApexCharts options={options} series={series} width={900} height={500} />
     </div>

@@ -19,8 +19,8 @@ export default function adminDashboard() {
         <AdminDistribution />
       </div>
       <div className={styles.container}>
-        <AdminTableSeller />
         <AdminTableEarners />
+        <AdminTableSeller />
         <AdminTableBuyers />
       </div>
       <div>
