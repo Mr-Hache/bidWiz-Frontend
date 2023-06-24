@@ -1,6 +1,9 @@
 import Navbar from "@/app/Componets/navbar/navbar";
 import EditProfile from "../Componets/editProfile/page";
 
+import UnableAccount from "../Componets/UnableAccount/page";
+import JobsPanel from "../Componets/JobsPanel/page";
+
 export default async function profile(){
 
     return (
@@ -12,6 +15,8 @@ export default async function profile(){
             <br />
             <br />
             <EditProfile/>
+            <JobsPanel></JobsPanel>
+            <UnableAccount></UnableAccount>
         </div>
     )
 }
