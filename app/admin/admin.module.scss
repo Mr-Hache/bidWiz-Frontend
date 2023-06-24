@@ -1,0 +1,14 @@
+@import "../utils/mixin";
+@import "../utils/variabls";
+
+.adminPage {
+  .title {
+    margin-top: 6vw;
+    width: 100%;
+    text-align: center;
+    @include h-1;
+    font-size: 20px;
+    color: $darkMediumPurple;
+    margin-bottom: -1vw;
+  }
+}
