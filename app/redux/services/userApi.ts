@@ -158,5 +158,9 @@ export const {
   useDisableUserMutation,
   useUpdateWizardStatusMutation,
   useGetWizardsQuery,
-  useCreateJobMutation
+  useCreateJobMutation,
+  useGetJobsByWorkerQuery,
+  useGetJobsByClientQuery,
+  useUpdateJobWorkerMutation,
+  useUpdateJobReviewMutation,
 } = userApi;
