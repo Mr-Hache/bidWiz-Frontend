@@ -2,10 +2,24 @@
 import {useState, useEffect} from "react";
 import { initMercadoPago, Wallet } from '@mercadopago/sdk-react'
 import { usePathname } from "next/navigation";
-import { useGetUserByIdQuery } from "@/app/redux/services/userApi";
+import { User, useGetUserByIdQuery } from "@/app/redux/services/userApi";
 import Navbar from "@/app/Componets/navbar/navbar";
 import styles from "./detail.module.scss";
 import { useCreateJobMutation } from "@/app/redux/services/userApi";
+
+
+import Flag from "react-world-flags";
+import { flags, subjectsIcons } from "@/app/utils/flagsAndObjectsIcons";
+import {  FaBook,  FaMicroscope,  FaBriefcase,  FaVial,  FaCode,  FaRegChartBar,  FaBalanceScale,  FaCalculator,  FaMusic,  FaAtom,  FaUserGraduate,  FaLaptopCode,} from 'react-icons/fa';
+import { IconType } from 'react-icons';
+import  FaIconName  from 'react-icons/fa';
+
+
+interface LanguageFlag {
+  name: string;
+  flag: string | null;
+}
+
 
 function detail() {
   initMercadoPago('TEST-f290c78e-5208-406e-8395-17f2f78dfc23');
@@ -84,42 +98,133 @@ function detail() {
   if (isLoading) return <div>Loading...</div>;
   if (isError || !user) return <div>User not found</div>;
 
-  return (
-    
+
+  const mappedLanguages: (string | null)[] = user.languages.map((language: string | null) => {
+    const flagObject = flags.find((flag: LanguageFlag) => flag.name === language);
+    return flagObject ? flagObject.flag : null;
+  })
+
+  const getSubjectIcon = (iconName: string): IconType | null => {
+    switch (iconName) {
+      case "FaBook":
+        return FaBook;
+      case "FaMicroscope":
+        return FaMicroscope;
+      case "FaBriefcase":
+        return FaBriefcase;
+      case "FaVial":
+        return FaVial;
+      case "FaCode":
+        return FaCode;
+      case "FaRegChartBar":
+        return FaRegChartBar;
+      case "FaBalanceScale":
+        return FaBalanceScale;
+      case "FaCalculator":
+        return FaCalculator;
+      case "FaMusic":
+        return FaMusic;
+      case "FaAtom":
+        return FaAtom;
+      case "FaUserGraduate":
+        return FaUserGraduate;
+      case "FaLaptopCode":
+        return FaLaptopCode;
+      default:
+        return null;
+    }
+  };  
+
+  const renderStars = (numStars: number) => {
+    const stars = '⭐';
+    return stars.repeat(Math.round(numStars));
+  };
+
+  return (    
     <div>
       <Navbar/>
       <div className={styles.block}></div>
-    <div className={styles.detail}>
+      <div className={styles.detail}>
       <div className={styles.sidebar}>
-        <img src={user.image} alt="" width={200} height={200} />
-        <h2>{`${user.name} `}</h2>
-        <h2>{user.experience.title}</h2>
-        <p>⭐⭐⭐⭐⭐</p>
-        <p>{user.reviews}</p>
-        <h4>{user.experience.expJobs} Reviews</h4>
-        <h3>{user.languages.join(' - ')}</h3>
-        <h3>{user.subjects.join(' - ')}</h3>
-        </div>
+        <h2 className={styles.name}>{`${user.name} `}</h2>
+        <img src={user.image} alt="" width={200} height={200} className={styles.imagen} />
+        <div className={styles.secondCont}>
+        <h2>{user.experience.title}</h2>      
+        <p>{renderStars(user.reviews)}</p>   
+        <hr />
+
+              
+        <h3>Available Languages</h3>      
+
+        <div className={styles.flags}>
+              {mappedLanguages
+                .slice() 
+                .sort((a, b) => (a && b ? a.localeCompare(b) : 0))          
+                .map((language, index) => (
+                  <div key={index} className={styles.language}>
+                    {language && (
+                      <Flag
+                        height={20}
+                        width={30}
+                        code={language.slice(0, 2).toLowerCase()}                                          
+                      />
+                    )}
+                    <span >{language}</span>
+                  </div>
+                ))}
+                </div>
+                <hr />
+                <h3>Available Subjects</h3>
+                <div className={styles.subjects} >
+            {user.subjects
+              .slice() 
+              .sort((a, b) => a.localeCompare(b)) 
+              .map((subject, index) => {
+                const subjectIcon = subjectsIcons.find((item) => item.name === subject);
+                const Icon = subjectIcon ? getSubjectIcon(subjectIcon.icon) : null;
+                const colors = ['#E81DF1 ', '#00FF00', '#0000FF', '#DD963B', '#0E18F1' ]; 
+                //const colors = ['#470457' ];
+                const iconColor = colors[index % colors.length]; 
+
+                return (
+                  <div key={index} className={styles.subject}>
+                    {Icon && <Icon style={{ color: iconColor }} />}
+                    <span className={styles.siglas}>{subject}</span>
+                  </div>
+                );
+              })}
+          </div>         
+        </div>          
+        </div>                       
         <div className={styles.righbar}>
+          <br /><br />
+          
           <h1>About Me</h1>
           <h2>{user.aboutMe}</h2>
           <table>
-    <tbody>
-    <select value={selectedLanguage} onChange={handleLanguageChange}>
-  <option value="">Choose one</option>
-  {user.languages.map((language) => (
-    <option value={language}>{language}</option>
-  ))}
-</select>
+    <tbody>      
 
-<select value={selectedSubject} onChange={handleSubjectChange}>
-  <option value="">Choose one</option>
-  {user.subjects.map((subject) => (
-    <option value={subject}>{subject}</option>
-  ))}
-</select>
-<br />
-<label htmlFor="">Price per one class {user.pricePerOne} USD</label>
+      <div className={styles.contSelect}>
+        <h4>Choose your language</h4>
+         <select value={selectedLanguage} onChange={handleLanguageChange} className={styles.chooseLang}>      
+          <option value="">Choose one</option>
+           {user.languages.map((language) => (
+          <option value={language}>{language}</option>
+        ))}
+         </select>
+
+          <h4>Choose your subject</h4>
+          <select value={selectedSubject} onChange={handleSubjectChange} className={styles.chooseSubj}>
+            <option value="">Choose one</option>
+            {user.subjects.map((subject) => (
+              <option value={subject}>{subject}</option>
+            ))}
+          </select>
+      </div>
+
+      <div className={styles.contInputs}>
+      <hr />
+      
 <input
   type="radio"
   name="classes"
@@ -127,8 +232,9 @@ function detail() {
   checked={selectedClasses === 1}
   onChange={handleClassesChange}
 />
-<br />
-<label htmlFor="">Price per two classes {user.pricePerTwo*2} USD</label>
+<label htmlFor="">Price per one class {user.pricePerOne} USD</label>
+<hr />
+
 <input
   type="radio"
   name="classes"
@@ -136,8 +242,9 @@ function detail() {
   checked={selectedClasses === 2}
   onChange={handleClassesChange}
 />
-<br />
-<label htmlFor="">Price per three classes {user.pricePerThree*3} USD</label>
+<label htmlFor="">Price per two classes {user.pricePerTwo*2} USD</label>
+
+<hr />
 <input
   type="radio"
   name="classes"
@@ -145,8 +252,12 @@ function detail() {
   checked={selectedClasses === 3}
   onChange={handleClassesChange}
 />
+<label htmlFor="">Price per three classes {user.pricePerThree*3} USD</label>
+<hr />
+      </div>
     </tbody>
   </table>
+  
   <button onClick={handleClick} disabled={!selectedLanguage || !selectedSubject || !selectedClasses}>CONFIRM</button> 
   {preferenceId && <Wallet initialization={{ preferenceId: preferenceId }} />}
         </div>
