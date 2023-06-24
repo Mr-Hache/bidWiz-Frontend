@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
-import { getAuth } from "firebase/auth";
-import { getAnalytics } from "firebase/analytics";
+import { getAuth, GithubAuthProvider, signInWithRedirect, GoogleAuthProvider, createUserWithEmailAndPassword, signOut } from "firebase/auth";
+
 
 const firebaseConfig = {
   apiKey: "AIzaSyBlzPhkSErym_sgwdh2A-n_rcJh2cDgPBg",
@@ -13,8 +13,26 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
+
 const auth = getAuth();
 
-export { app, analytics, auth };
+export const loginWithGithub =  () => {
+  const githubProvider = new GithubAuthProvider();
+  return signInWithRedirect(auth, githubProvider);
+}
+
+export const loginWithGoogle =  () => {
+  const googleProvider = new GoogleAuthProvider();
+  return signInWithRedirect(auth, googleProvider); 
+}
+
+export const createWithEmailAndPassword =  (email: string, password: string) => {
+  return createUserWithEmailAndPassword(auth, email, password);
+}
+
+export const userSignout = () => {
+  return signOut(auth);
+}
+
+export { app, auth };
 

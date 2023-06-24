@@ -23,12 +23,15 @@ useEffect(() =>{
   const handleSubmit = async (event :React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     try {
+
       const userCredential =  await signInWithEmailAndPassword(auth, email, password);
       setIdAuth(userCredential.user.uid)
-      
-      router.push('/'); 
+      console.log("usuario autenticado")
+      router.push('/offerBoard');
+       
     } catch (error) {
       console.error(error);
+console.log("usuario no autenticado")
       // avaAnder$10
     }
   }

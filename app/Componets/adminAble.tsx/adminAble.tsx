@@ -47,7 +47,7 @@ function AdminAble() {
             borderRadius: "5px",
             overflowY: "scroll",
             maxHeight: "400px",
-            width: "500px",
+            width: "600px",
             backgroundColor: "white",
           }}
         >
