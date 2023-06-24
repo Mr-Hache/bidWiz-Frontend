@@ -11,14 +11,11 @@ import {
 } from "../../utils/functionsValidation";
 import style from "./basicForm.module.scss";
 import { ImMagicWand } from "react-icons/im";
-import {
-  GoogleAuthProvider,
-  signInWithPopup,
-  createUserWithEmailAndPassword,
-} from "firebase/auth";
-import { auth } from "../../utils/firebase";
+
+import { auth, loginWithGoogle, loginWithGithub, createWithEmailAndPassword,userSignout } from "../../utils/firebase";
 import { useRouter } from "next/navigation";
 import ImageUpload from "../imageUpload/imageUpload";
+import {setPersistence, browserSessionPersistence } from "firebase/auth";
 
 export interface UserFormValues {
   name: string;
@@ -204,111 +201,79 @@ function basicForm() {
 
     event.preventDefault();
 
+
+
     if (validateForm()) {
-      try {
-        const response = await fetch('https://bidwiz-backend-production-db77.up.railway.app/users/emails');
-        const data = await response.json();
-      
-        const result = data.includes(values.email);
-        if (result) {
-          alert("Mail already in use")
-        } else {
-          const userCredential = await createUserWithEmailAndPassword(
-            auth,
-            values.email,
-            authentication.password
-          );
-          const uid = userCredential.user.uid;
-
-          if (values.isWizard) {
-            createUser({
-              ...values,
-              uidFireBase: uid,
-            });
-          } else {
-            createUser({
-              name: values.name,
-              email: values.email,
-              isWizard: values.isWizard,
-              uidFireBase: uid,
-            });
-          }
-          alert("New user created");
-          setValues({
-            uidFireBase: "",
-            name: "",
-            email: "",
-            image: "",
-            isWizard: false,
-            languages: [],
-            subjects: [],
-            experience: {
-              title: "",
-              origin: "",
-              expJobs: 0,
-            },
-          });
-          setAuthentication({
-            password: "",
-            email: "",
-          });
-
-        }
-
-      } catch (error) {
-        
-        if (typeof error === 'string') {
+     try{
+    const userCreated = await createWithEmailAndPassword(values.email, authentication.password)
+    const uid = userCreated.user.uid
     
-          alert(error);
-        } else {
-       
-          console.error(error);
-        }
-      }
-
-    }
+      values.isWizard? createUser({...values, uidFireBase: uid}) : createUser({name: values.name, uidFireBase: uid, email: values.email, isWizard: values.isWizard})
+      setValues({
+                uidFireBase: "",
+                name: "",
+                email: "",
+                image: "",
+                isWizard: false,
+                languages: [],
+                subjects: [],
+                experience: {
+                  title: "",
+                  origin: "",
+                  expJobs: 0,
+                },
+              });
+              setAuthentication({
+                password: "",
+                email: "",
+              });
+            router.push('/login')
+  }catch (error) {
+    console.log(error);
+  }
   };
+  }
 
-  // useEffect(() => {
-  //   if (error) {
-  //     if ("message" in error) {
-  //       alert(`Error: ${error.message}`);
-  //     } else if ("status" in error) {
-  //       alert(`Error: ${error.status}`);
-  //     }
-  //   }
-  // }, [error]);
 
   const handleGoogleSignIn = async (event: React.MouseEvent<HTMLButtonElement>) => {
+
     event.preventDefault();
-    const googleProvider = new GoogleAuthProvider();
-    try {
-      const response = await fetch('https://bidwiz-backend-production-db77.up.railway.app/users/emails');
-        const data = await response.json();
-        const userCredential = await signInWithPopup(auth, googleProvider);
-        const user = userCredential.user;
-      
-        const result = data.includes(user.email);
 
-        if(result){
-            alert("el usuario ya tiene una cuenta asociada")
-        }else{
-        createUser({
-            name: user.displayName ? user.displayName : "",
-            email: user.email ? user.email : "",
-            uidFireBase: user.uid ? user.uid : "",
-            isWizard: false,
-          });
-  
-          alert("creando usuario")      
-        }
-      
-
-
-    } catch (error) {
+    setPersistence (auth, browserSessionPersistence).then(() => {
+      loginWithGoogle().then((user) => {
+        console.log(user)
+      }) .catch((error) => {
+        console.log(error);
+      }) 
+    }) .catch((error) => {
       console.log(error);
-    }
+    })
   };
+
+  const handleGithubSignIn = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setPersistence (auth, browserSessionPersistence).then(() => {
+      event.preventDefault();
+      loginWithGithub().then((user) => {
+       console.log(user)
+      }).catch((error) => {
+         console.log(error);
+      })
+
+    }) .catch((error) => {
+      console.log(error);
+    })
+   
+    
+  }
+
+  const handleSignout =  (event: React.MouseEvent<HTMLButtonElement>) => {
+     event.preventDefault();
+      userSignout().then(() => {
+        console.log("Signed out");
+      }).catch((error) => {
+        console.log(error);
+      })
+  }
 
   // -------------HandleImage-------------------
   const handleImageUpload = (imageUrl: string) => {
@@ -482,6 +447,16 @@ function basicForm() {
           </button>
         </div>
       </div>
+      <div>
+          <button  onClick={handleGithubSignIn}>
+            Register with gitHub
+          </button>
+        </div>
+        <div>
+          <button  onClick={handleSignout}>
+            SignOut
+          </button>
+        </div>
     </form>
   );
 }
