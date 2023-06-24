@@ -26,26 +26,24 @@ export default function JobsPanel() {
   const [jobToChange, setJobToChange] = useState({
     jobId: "",
     workerId: "648e1817c8489b5c103ee67a",
-    updateJobReviewDto: "", //'In Progress' | 'Finished'
+    updateJobWorkerDto: {status: 'Finished'}, //'In Progress' | 'Finished'
   });
   const [jobReview, setJobReview] = useState({
     jobId: "",
     clientId: "648e17f0c8489b5c103ee650",
-    updateJobReviewDto: 1, //DEL 1 AL 5
+    updateJobReviewDto: {rating: 1}, //DEL 1 AL 5
   });
 
   // Acceder a los resultados de la consulta
   const { data: jobsByWorker, isLoading: isLoadingJobsByWorker, isError: isErrorJobsByWorker } = getJobsByWorkerQuery;
   const { data: jobsByClient, isLoading: isLoadingJobsByClient, isError: isErrorJobsByClient } = getJobsByClientQuery;
 
-  console.log(jobsByWorker)
-  console.log(jobsByClient)
   ////////////////////////////////////////////////////////////
   const onChangeReview = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const value: number = Number(event.target.value);
     setJobReview(() => ({
       ...jobReview,
-      updateJobReviewDto: value ,
+      updateJobReviewDto: {rating:value} ,
     }));
     console.log(jobReview)
   };
@@ -60,32 +58,49 @@ export default function JobsPanel() {
     console.log(jobReview)
     try {
       await updateJobReviewMutation({jobId: jobReview.jobId, clientId: jobReview.clientId, updateJobReviewDto: jobReview.updateJobReviewDto });
-      // Realiza algo con la respuesta, como redirigir o mostrar un mensaje de éxito.
     } catch (error) {
       console.error(error);
-      // Maneja el error aquí
     }
   }
   ////////////////////////////////////////////////////////////
+
+  const onChangeStatusJobId = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const value: string = event.target.value;
+    console.log(jobToChange)
+    setJobToChange(() => ({
+      ...jobToChange,
+      jobId: value ,
+    }));
+  };
+  const onClickHandlerJobStatus = async () => {
+    console.log(jobToChange)
+    try {
+      await updateJobWorkerMutation({jobId: jobToChange.jobId, workerId: jobToChange.workerId, updateJobWorkerDto: jobToChange.updateJobWorkerDto });
+    } catch (error) {
+      console.error(error);
+    }
+  }
     return (
       <div>
-        WORK:
-        <select>
-          {jobsByWorker?.map((job)  => {return(<option>{job.description}</option>)}  )}
+        WORKER/// WORK IN PROGRESS:
+        <select name="" onChange={onChangeStatusJobId}>
+          {jobsByWorker?.map((job)  => {if (job.status ==='In Progress') {return(<option value={job._id}>{job.description}</option>)}}  )}
         </select>
-        Work status:
-        <select>
-          <option>Select status</option>
-          <option>In Progress</option>
-          <option>Finished</option>
+        <button onClick={onClickHandlerJobStatus}>Complete Job</button>
+        <select name="">
+          {jobsByWorker?.map((job)  => {if (job.status ==="Finished") {return(<option value={job._id}>{job.description}</option>)}}  )}
         </select>
-        <button>Update Work</button>
         <br></br>
-        CLIENT:
-        <select name="" onChange={onChangeReviewJobId}>
-          {jobsByClient?.map((job)  => {return(<option value={job._id}>{job.description}</option>)}  )}
+        CLIENT/// jobs in progress:
+        <select name="">
+          {jobsByClient?.map((job)  => {if (job.status ==='In Progress') {return(<option value={job._id}>{job.description}</option>)}}  )}
         </select>
-        Work status:
+        <br></br>
+        CLIENT/// jobs to review:
+        <select name="" onChange={onChangeReviewJobId}>
+          {jobsByClient?.map((job)  => {if (job.status ==="Finished") {return(<option value={job._id}>{job.description}</option>)}}  )}
+        </select>
+        CLIENT/// Work Rating:
         <select name="" onChange={onChangeReview}>
         <option value="1">Select Points</option>
         <option value="1">1</option>
@@ -100,12 +115,4 @@ export default function JobsPanel() {
   }
 
 
-
-  // updateJobReview: builder.mutation<Job, { jobId: string; clientId: string; updateJobReviewDto: UpdateJobReviewDto }>({
-  //   query: ({ jobId, clientId, updateJobReviewDto }) => ({
-  //     url: `jobs/review/${jobId}/${clientId}`,
-  //     method: "PATCH",
-  //     body: updateJobReviewDto,
-  //   }),
-  // }),
 
