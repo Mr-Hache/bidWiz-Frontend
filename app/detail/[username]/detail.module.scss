@@ -143,10 +143,11 @@
 
 .contInputs {
     background-color: $lightGreen;
-    height: 1.5rem;
-    display: flex;           
+    height: 3.5rem;
+    display: flex;     
+    align-items: center;     
     margin-top: 3rem;
     margin-bottom: 5rem;
     border: 0.5px solid rgba(0, 0, 0, 0.123);
-    border-radius: 6px;
+    border-radius: 10px;
 }
