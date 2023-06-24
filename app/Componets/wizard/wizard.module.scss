@@ -2,7 +2,10 @@
 @import "../../utils/variabls";
 
 .contCards {     
-    // display: flex;     
+    background-color: white;    
+    justify-content: center;   
+    align-content: center;
+    align-items: center;   
     font-family: $ralewayFont;  
     padding: 1vw;
     border: 2px solid;
@@ -38,7 +41,7 @@
 .secondCont {    
     background-color: white;
     border-radius: 10px;    
-    border: 2px solid rgb(235, 211, 211);
+    border: 2px solid rgb(235, 211, 211);    
 }
 
 .secondCont h3 {
@@ -54,3 +57,36 @@
 .tittle {
     font-size: 1.5rem;      
 }
+
+.flags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-left: 2rem;
+    margin-top: 0.5rem;
+  }
+  
+  .language {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+.subjects {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;   
+    margin-left: 1rem; 
+    margin-top: 0.5rem;
+  }
+  
+  .subject {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-bottom: 1rem;
+  }
+  
+  .siglas {
+    margin-left: 5px;
+  }
