@@ -8,6 +8,7 @@ import AdminDistribution from "../adminDistribution/adminDistribution";
 import AdminTableSeller from "../adminTableSellers/adminTableSeller";
 import AdminTableBuyers from "../adminTableBuyers/adminTableBuyers";
 import AdminDisabled from "../adminDisabled/adminDisabled";
+import AdminAble from "../adminAble.tsx/adminAble";
 import AdminTableEarners from "../adminTableEarners/adminTableEarners";
 
 export default function adminDashboard() {
@@ -23,8 +24,9 @@ export default function adminDashboard() {
         <AdminTableSeller />
         <AdminTableBuyers />
       </div>
-      <div>
+      <div style={{display: 'flex', justifyContent: 'space-between'}}>
         <AdminDisabled />
+        <AdminAble/>
       </div>
     </div>
   );
