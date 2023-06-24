@@ -259,7 +259,7 @@ function basicForm() {
         
         if (typeof error === 'string') {
     
-         alert(error);
+          alert(error);
         } else {
        
           console.error(error);
@@ -300,7 +300,7 @@ function basicForm() {
             isWizard: false,
           });
   
-          alert("vocreandol usuario")      
+          alert("creando usuario")      
         }
       
 

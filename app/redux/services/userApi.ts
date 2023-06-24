@@ -87,6 +87,12 @@ export const userApi = createApi({
         method: "DELETE",
       }),
     }),
+    ableUser: builder.mutation<void, { _id: string }>({
+      query: ({ _id }) => ({
+        url: `users/able/${_id}`,
+        method: "PATCH",
+      }),
+    }),
     
     updateWizardStatus: builder.mutation<User, { _id: string; updateUserWizardDto: UpdateUserWizardDto }>({
       query: ({ _id, updateUserWizardDto }) => ({
@@ -156,6 +162,7 @@ export const {
   useGetUserByIdQuery,
   useCreateUserMutation,
   useDisableUserMutation,
+  useAbleUserMutation,
   useUpdateWizardStatusMutation,
   useGetWizardsQuery,
   useCreateJobMutation,

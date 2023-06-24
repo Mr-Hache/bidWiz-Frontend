@@ -14,10 +14,6 @@ import {
 import { useEffect, useState } from "react";
 import { useAppSelector, useAppDispatch } from "@/app/redux/hooks";
 
-interface User {
-  pricePerTwo: number;
-}
-
 export default function adminUsers() {
   const dispatch = useAppDispatch();
   const { data: users } = useGetUsersQuery(null);
@@ -80,7 +76,7 @@ export default function adminUsers() {
         <div className={styles.number}>
           <h1>U$D 2.000</h1>
         </div>
-        <h2>Total Classes</h2>
+        <h2>Total Sales</h2>
       </div>
     </div>
   );
