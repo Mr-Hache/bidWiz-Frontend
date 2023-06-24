@@ -152,7 +152,6 @@ function detail() {
         <h2>{user.experience.title}</h2>      
         <p>{renderStars(user.reviews)}</p>   
         <hr />
-
               
         <h3>Available Languages</h3>      
 
