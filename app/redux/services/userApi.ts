@@ -51,10 +51,10 @@ export type UpdateUserWizardDto = {
   pricePerThree?: number;
 };
 
-export type JobStatus = 'In Progress' | 'Finished'
+
 
 export type UpdateJobWorkerDto = {
-  status: JobStatus;
+  status: string;
 };
 
 export type UpdateJobReviewDto = {
@@ -165,5 +165,9 @@ export const {
   useAbleUserMutation,
   useUpdateWizardStatusMutation,
   useGetWizardsQuery,
-  useCreateJobMutation
+  useCreateJobMutation,
+  useGetJobsByWorkerQuery,
+  useGetJobsByClientQuery,
+  useUpdateJobWorkerMutation,
+  useUpdateJobReviewMutation,
 } = userApi;
