@@ -1,0 +1,68 @@
+@import "../../utils/mixin";
+@import "../../utils/variabls";
+
+.div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2em;
+
+  h1 {
+    @include h-1;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 500px; // define ancho maximo para el formulario
+
+    label {
+      @include h-4;
+      margin-bottom: 0.5em;
+    }
+    textarea[name="aboutMe"] {
+        @include p-p; // Usando el mixin que ya tienes para la tipografía
+        border: 1px solid $lightMediumGray;
+        border-radius: 4px;
+        padding: 10px;
+        margin-bottom: 20px;
+        resize: vertical; // Esto permite al usuario ajustar el tamaño verticalmente pero no horizontalmente.
+    
+        &:focus {
+            outline: none;
+            border-color: $darkMediumBlue;
+        }
+    }
+    input[type="text"],
+    input[type="number"],
+    select {
+        width: 100%;
+        padding: 0.5em;
+        font-size: 1em;
+        margin-bottom: 1em;
+        border: 1px solid $darkMediumGray;
+        border-radius: 5px;
+    }
+
+    input[type="text"][name="aboutMe"] {
+      height: 100px; // define una altura mayor para el cuadro de texto "aboutMe"
+    }
+
+    img{
+        border-radius: 50%;
+        border: 2px solid $lightMediumGray;
+    }
+
+    input[type="checkbox"] {
+      width: auto; // ajusta el ancho para checkbox
+      margin-bottom: 0.5em;
+    }
+
+    button {
+      @include button-styles1(1em);
+      margin-top: 1em;
+    }
+  }
+}

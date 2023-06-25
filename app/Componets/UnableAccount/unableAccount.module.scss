@@ -1,0 +1,21 @@
+@import "../../utils/mixin";
+@import "../../utils/variabls";
+
+.div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 2em;
+
+    button {
+        @include button-styles1(1em);
+        margin-top: 1em;
+    }
+
+    label {
+        @include h-4;
+        margin-bottom: 0.5em;
+      }
+
+}

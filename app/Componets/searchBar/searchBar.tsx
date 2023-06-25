@@ -23,7 +23,7 @@ export default function searchBar() {
   const handleUserClick = (userId: string) => {
     router.push(`/detail/${userId}`);
   };
-
+      
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if(filteredUsers?.length === 1) {
@@ -46,15 +46,15 @@ export default function searchBar() {
           <div className={styles.lupa}>🔍︎</div>
         </button>
       </form>
+
+      <div className={styles.contResults}>
       {search && filteredUsers && filteredUsers.slice(0, 3).map((user: User) => (
         <div key={user._id} className={styles.userResult} onClick={() => handleUserClick(user._id)}>
-          {user.name}
+         {user.name}          
         </div>
       ))}
-    </div>
-    
-        
-      
+      </div>   
+      </div> 
     
   );
 }

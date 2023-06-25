@@ -1,8 +1,10 @@
 "use client"
 
+import styles from "./editProfile.module.scss"
 import React, { useState, useEffect } from 'react';
 import { useUpdateWizardStatusMutation, UpdateUserWizardDto } from '../../redux/services/userApi';
 import {useAppSelector} from "../../redux/hooks"
+import ImageUpload from "../imageUpload/imageUpload";
 
 function EditProfile() {
 
@@ -10,6 +12,7 @@ function EditProfile() {
     const [updateWizardStatus, { isLoading }] = useUpdateWizardStatusMutation();
     const [formState, setFormState] = useState<UpdateUserWizardDto>({} as UpdateUserWizardDto);
     const [userId, setUserId] = useState('');
+    const [userName, setUserName] = useState('');
 
     const allPossibleLanguages = [
         "English",
@@ -53,6 +56,7 @@ function EditProfile() {
             pricePerThree: data.pricePerThree,
             });
             setUserId(data._id)
+            setUserName(data.name)
         })
         .catch(error => console.error(error));
     }
@@ -61,7 +65,13 @@ function EditProfile() {
         fetchUserData(); 
     }, [localUid]);
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    const handleImageUpload = (imageUrl: string) => {
+        // Utilizar la URL de la imagen cargada
+        console.log("Imagen cargada:", imageUrl);
+        setFormState((v) => ({ ...v, image: imageUrl }));
+      };
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
         const { name, value } = e.target;
     
         if (name === "pricePerOne" || name === "pricePerTwo" || name === "pricePerThree") {
@@ -122,6 +132,8 @@ function EditProfile() {
     if (!formState) return 'Loading...';
 
     return (
+        <div className={styles.div}>
+        <h1>{userName}</h1>
         <form onSubmit={handleSubmit}>
         <label htmlFor="isWIzard">Are you a Wizard?</label>
         <input
@@ -135,11 +147,12 @@ function EditProfile() {
             <div>
                 <br />
                 <label htmlFor="aboutMe">Tell something about you</label>
-                <input
-                    type="text"
-                    name="aboutMe"
-                    value={formState.aboutMe || ''}
-                    onChange={handleChange}
+                <textarea
+                name="aboutMe"
+                value={formState.aboutMe || ''}
+                onChange={handleChange}
+                rows={5}  // puedes ajustar esto para cambiar la altura inicial
+                style={{ width: '100%' }} // esto hará que el textarea ocupe todo el espacio disponible
                 />
 
                 <br />
@@ -187,14 +200,11 @@ function EditProfile() {
                 />
 
                 <br />
-                <label htmlFor="image">This is me</label> 
-                <input
-                    type="text"
-                    name="image"
-                    value={formState.image || ''}
-                    onChange={handleChange}
-                />
-
+                <ImageUpload onImageUpload={handleImageUpload} />
+                <br />
+                <label htmlFor="image">Latest</label>
+                <img src={formState.image} alt={userName} width="50" height="50" />
+                <br />
                 <br />
                 <label htmlFor="pricePerOne">My offer for one class is</label> 
                 <input
@@ -226,6 +236,7 @@ function EditProfile() {
 
         <button type="submit" disabled={isLoading || !formState.isWizard}>Update</button>
         </form>
+        </div>
     );
 }
 
