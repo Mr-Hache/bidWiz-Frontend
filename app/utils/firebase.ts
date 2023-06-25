@@ -30,7 +30,7 @@ export const createWithEmailAndPassword =  (email: string, password: string) => 
   return createUserWithEmailAndPassword(auth, email, password);
 }
 
-export const userSignout = () => {
+export const userSignOut = () => {
   return signOut(auth);
 }
 
