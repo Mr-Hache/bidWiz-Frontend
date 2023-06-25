@@ -7,37 +7,38 @@ import { setLanguages, setSubjects } from "@/app/redux/services/filtersSlice";
 import { usePathname } from "next/navigation";
 import { useRouter } from "next/navigation";
 
+
+
 const languagesList = [
-  "English",
-  "Spanish",
-  "Portuguese",
-  "German",
-  "French",
   "Chinese",
-  "Japanese",
-  "Russian",
+  "French",
+  "German",
   "Italian",
+  "Japanese",
+  "Portuguese",
+  "Russian",
+  "Spanish",
 ];
 const subjectsList = [
-  "Physics",
-  "Chemistry",
+  "Accounting",
   "Biology",
-  "Mathematics",
+  "Business Administration",
+  "Chemistry",
+  "Computer Science",
   "Economics",
   "Law",
-  "Accounting",
-  "Programming",
+  "Mathematics",
   "Music Theory",
-  "Computer Science",
+  "Physics",
   "Political Science",
-  "Business Administration",
+  "Programming",
 ];
 
 export default function slectorNavbar({ filter }: { filter: string }) {
   //---Filter---
 
   const router = useRouter();
-  const languages = useAppSelector((state) => state.filters.languages);
+  
 
   const dispatch = useAppDispatch();
 
@@ -79,7 +80,9 @@ export default function slectorNavbar({ filter }: { filter: string }) {
     }
   };
   return (
-    <div className={styles.dropdown} ref={dropdownRef}>
+    
+
+    <div className={styles.dropdown} ref={dropdownRef}>      
       <div className={styles.dropdownToggle}>
         <a
           onClick={(event) => handleDropdown(open)}
@@ -99,10 +102,11 @@ export default function slectorNavbar({ filter }: { filter: string }) {
           className={
             filter === "languages"
               ? styles.containerColumn
-              : styles.containerColumn2
+              : styles.containerColumn2              
           }
         >
           <div className={styles.column}>
+            {filter === 'languages'? <h3>Wizards speak</h3>:<h3>Wizards knowledge</h3>}
             <ul className={styles.list}>
               {filterList.map((filter, index) => (
                 <div className={styles.line} key={index}>
