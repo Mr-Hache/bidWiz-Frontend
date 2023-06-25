@@ -3,7 +3,7 @@
 import React from "react";
 import styles from "./adminDashboard.module.scss";
 import AdminUsers from "../adminUsers/adminUsers";
-import AdminSales from "../adminSales/adminSales";
+import AdminReview from "../adminReview/adminReview";
 import AdminDistribution from "../adminDistribution/adminDistribution";
 import AdminTableSeller from "../adminTableSellers/adminTableSeller";
 import AdminTableBuyers from "../adminTableBuyers/adminTableBuyers";
@@ -16,7 +16,7 @@ export default function adminDashboard() {
     <div className={styles.dashboard}>
       <AdminUsers />
       <div className={styles.container}>
-        <AdminSales />
+        <AdminReview />
         <AdminDistribution />
       </div>
       <div className={styles.container}>
@@ -24,9 +24,10 @@ export default function adminDashboard() {
         <AdminTableSeller />
         <AdminTableBuyers />
       </div>
-      <div style={{display: 'flex', justifyContent: 'space-between'}}>
+      <h1>User Managment</h1>
+      <div className={styles.container}>
         <AdminDisabled />
-        <AdminAble/>
+        <AdminAble />
       </div>
     </div>
   );
