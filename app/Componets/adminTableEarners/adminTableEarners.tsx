@@ -29,7 +29,7 @@ export default function adminTableEarners() {
       <h1>Highest Earners</h1>
       <div>
         <ul>
-          {earnersData.map((seller) => (
+          {earnersData.slice(0, 5).map((seller) => (
             <li>
               <img
                 src={seller.user_info.image}

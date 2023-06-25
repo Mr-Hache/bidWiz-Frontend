@@ -29,7 +29,7 @@ export default function adminTableBuyer() {
       <h1>Best Buyers</h1>
       <div>
         <ul>
-          {buyerData.map((buyer) => (
+          {buyerData.slice(0, 5).map((buyer) => (
             <li>
               <img
                 src={buyer.user_info.image}
