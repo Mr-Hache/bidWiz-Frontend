@@ -74,6 +74,9 @@ export default function adminDistribution() {
               style: {
                 colors: ["#263238"],
               },
+              dropShadow: {
+                enabled: false,
+              },
             },
           },
         };
@@ -109,6 +112,9 @@ export default function adminDistribution() {
               style: {
                 colors: ["#263238"],
               },
+              dropShadow: {
+                enabled: false,
+              },
             },
           },
         };
@@ -125,7 +131,7 @@ export default function adminDistribution() {
           options={subjectsData.options}
           series={subjectsData.series}
           type="pie"
-          width={350}
+          width={360}
         />
       </div>
       <div className={styles.grafic}>
