@@ -36,7 +36,6 @@ useEffect(() =>{
           console.log("usuario autenticado")
           router.push("/offerBoard")
         }
-       
       }) .catch((error) => {
           console.log(error)
       })

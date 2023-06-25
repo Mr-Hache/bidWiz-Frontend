@@ -38,12 +38,12 @@
     input[type="text"],
     input[type="number"],
     select {
-      width: 100%;
-      padding: 0.5em;
-      font-size: 1em;
-      margin-bottom: 1em;
-      border: 1px solid $darkMediumGray;
-      border-radius: 5px;
+        width: 100%;
+        padding: 0.5em;
+        font-size: 1em;
+        margin-bottom: 1em;
+        border: 1px solid $darkMediumGray;
+        border-radius: 5px;
     }
 
     input[type="text"][name="aboutMe"] {
