@@ -4,9 +4,10 @@ import React, { useState, useEffect } from 'react';
 import { useUpdateWizardStatusMutation, UpdateUserWizardDto } from '../../redux/services/userApi';
 
 function EditProfile() {
-    const localUid = "dDQ6nhCDlMRyl0UUpETKTJNANhA2"; // reemplaza esto con el uid real
+    const localUid = "dDQ6nhCDlMRyl0UUpETKTJNANhA2"; 
     const [updateWizardStatus, { isLoading }] = useUpdateWizardStatusMutation();
     const [formState, setFormState] = useState<UpdateUserWizardDto>({} as UpdateUserWizardDto);
+    const [userId, setUserId] = useState('');
 
     const allPossibleLanguages = [
         "English",
@@ -49,66 +50,65 @@ function EditProfile() {
             pricePerTwo: data.pricePerTwo,
             pricePerThree: data.pricePerThree,
             });
+            setUserId(data._id)
         })
         .catch(error => console.error(error));
     }
     
     useEffect(() => {
-        fetchUserData(); // Llamar a la función en el useEffect
+        fetchUserData(); 
     }, [localUid]);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-        console.log(formState);
-        
         const { name, value } = e.target;
+    
         if (name === "pricePerOne" || name === "pricePerTwo" || name === "pricePerThree") {
-            setFormState({
-                ...formState,
-                [name]: parseInt(value),  // convertir a número
-            });
-        }
-        if (name === "languages" || name === "subjects") {
+            setFormState(prevState => ({
+                ...prevState,
+                [name]: parseFloat(value), 
+            }));
+        } else if (name === "languages" || name === "subjects") {
             const selectElement = e.target as HTMLSelectElement;
             const selectedOptions = Array.from(selectElement.selectedOptions, option => option.value);
-            setFormState({
-                ...formState,
+            setFormState(prevState => ({
+                ...prevState,
                 [name]: selectedOptions,
-            });
+            }));
         } else if (name.startsWith("experience.")) {
-            const field = name.split(".")[1]; // obtiene 'title' o 'origin' de 'experience.title' o 'experience.origin'
-            setFormState({
-                ...formState,
+            const field = name.split(".")[1]; 
+            setFormState(prevState => ({
+                ...prevState,
                 experience: {
-                    ...formState.experience,
+                    ...(prevState.experience || {}),
                     [field]: value
                 }
-            });
+            }));
         } else {
-            setFormState({
-                ...formState,
+            setFormState(prevState => ({
+                ...prevState,
                 [name]: value,
-            });
+            }));
         }
-        console.log(formState);
-        
     };
+    
 
     const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setFormState({
-        ...formState,
-        isWizard: e.target.checked,
-        });
-        console.log(formState);
-        
+        setFormState(prevState => ({
+            ...prevState,
+            isWizard: e.target.checked,
+        }));
     };
+    
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         try {
             const response = await updateWizardStatus({
-            _id: 'userId', 
+            _id: userId, 
             updateUserWizardDto: formState,
             });
+            console.log(formState);
+            
             console.log(response);
             fetchUserData(); 
         } catch (error) {
