@@ -12,10 +12,10 @@ import {
 import style from "./basicForm.module.scss";
 import { ImMagicWand } from "react-icons/im";
 
-import { auth, loginWithGoogle, loginWithGithub, createWithEmailAndPassword } from "../../utils/firebase";
+import { auth, loginWithGoogle, loginWithGithub, createWithEmailAndPassword,userSignOut } from "../../utils/firebase";
 import { useRouter } from "next/navigation";
 import ImageUpload from "../imageUpload/imageUpload";
-import {setPersistence, browserSessionPersistence } from "firebase/auth";
+import {setPersistence, browserSessionPersistence, sendEmailVerification,   } from "firebase/auth";
 
 export interface UserFormValues {
   name: string;
@@ -204,35 +204,46 @@ function basicForm() {
 
 
     if (validateForm()) {
-     try{
-    const userCreated = await createWithEmailAndPassword(values.email, authentication.password)
-    const uid = userCreated.user.uid
-    
-      values.isWizard? createUser({...values, uidFireBase: uid}) : createUser({name: values.name, uidFireBase: uid, email: values.email, isWizard: values.isWizard})
-      setValues({
-                uidFireBase: "",
-                name: "",
-                email: "",
-                image: "",
-                isWizard: false,
-                languages: [],
-                subjects: [],
-                experience: {
-                  title: "",
-                  origin: "",
-                  expJobs: 0,
-                },
-              });
-              setAuthentication({
-                password: "",
-                email: "",
-              });
-            router.push('/login')
+   
+      setPersistence(auth, browserSessionPersistence).then(() => {
+        try{
+          createWithEmailAndPassword(values.email, authentication.password).then((userCreated) => {
+            const uid = userCreated.user.uid
+            userSignOut()
+            sendEmailVerification(userCreated.user)
+              values.isWizard? createUser({...values, uidFireBase: uid}) : createUser({name: values.name, uidFireBase: uid, email: values.email, isWizard: values.isWizard})
+              setValues({
+                        uidFireBase: "",
+                        name: "",
+                        email: "",
+                        image: "",
+                        isWizard: false,
+                        languages: [],
+                        subjects: [],
+                        experience: {
+                          title: "",
+                          origin: "",
+                          expJobs: 0,
+                        },
+                      });
+
+                      setAuthentication({
+                        password: "",
+                        email: "",
+                      });
+                    router.push('/login')
+          })
+  
+            
   }catch (error) {
     console.log(error);
   }
-  };
-  }
+  ;
+      }).catch((error) => {
+         console.log(error);
+      })
+    
+  }}
 
 
   const handleGoogleSignIn = async (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -265,7 +276,6 @@ function basicForm() {
    
     
   }
-
 
 
   // -------------HandleImage-------------------
