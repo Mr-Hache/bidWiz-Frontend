@@ -12,7 +12,7 @@ import {
 import style from "./basicForm.module.scss";
 import { ImMagicWand } from "react-icons/im";
 
-import { auth, loginWithGoogle, loginWithGithub, createWithEmailAndPassword,userSignout } from "../../utils/firebase";
+import { auth, loginWithGoogle, loginWithGithub, createWithEmailAndPassword } from "../../utils/firebase";
 import { useRouter } from "next/navigation";
 import ImageUpload from "../imageUpload/imageUpload";
 import {setPersistence, browserSessionPersistence } from "firebase/auth";
@@ -266,14 +266,7 @@ function basicForm() {
     
   }
 
-  const handleSignout =  (event: React.MouseEvent<HTMLButtonElement>) => {
-     event.preventDefault();
-      userSignout().then(() => {
-        console.log("Signed out");
-      }).catch((error) => {
-        console.log(error);
-      })
-  }
+
 
   // -------------HandleImage-------------------
   const handleImageUpload = (imageUrl: string) => {
@@ -452,11 +445,7 @@ function basicForm() {
             Register with gitHub
           </button>
         </div>
-        <div>
-          <button  onClick={handleSignout}>
-            SignOut
-          </button>
-        </div>
+
     </form>
   );
 }
