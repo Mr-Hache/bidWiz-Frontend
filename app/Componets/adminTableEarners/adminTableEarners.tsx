@@ -2,6 +2,7 @@
 
 import React from "react";
 import { useEffect, useState } from "react";
+import styles from "./adminTableEarners.module.scss";
 
 export interface UserFormValues {
   totalEarned: number;
@@ -25,23 +26,27 @@ export default function adminTableEarners() {
   }, []);
 
   return (
-    <div>
+    <div className={styles.container}>
       <h1>Highest Earners</h1>
-      <div>
-        <ul>
-          {earnersData.map((seller) => (
-            <li>
-              <img
-                src={seller.user_info.image}
-                alt={""}
-                width="50"
-                height="50"
-              />
+      <div className={styles.containerTable}>
+        {earnersData.slice(0, 5).map((seller) => (
+          <div className={styles.tableContents}>
+            <img
+              className={styles.image}
+              src={seller.user_info.image}
+              alt={""}
+              width="50"
+              height="50"
+            />
+
+            <div className={styles.text}>
               <p>{seller.user_info.name}</p>
-              <p> U$D {seller.totalEarned}</p>
-            </li>
-          ))}
-        </ul>
+              <p>
+                <b> U$D {seller.totalEarned}</b>
+              </p>
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   );

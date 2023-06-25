@@ -1,0 +1,82 @@
+@import "../../utils/mixin";
+@import "../../utils/variabls";
+
+.disabled {
+  text-align: center;
+  font-family: $ralewayFont;
+  margin-bottom: 5vw;
+  h1 {
+    font-family: $ralewayFont;
+    color: $darkMediumGreen;
+    margin-bottom: 5px;
+  }
+
+  .search {
+    font-size: 18px;
+    border-radius: 5px;
+    padding-left: 5px;
+    border: 1px solid $darkMediumPurple;
+  }
+
+  .search::placeholder {
+    font-size: 18px;
+  }
+
+  .selector {
+    margin-top: 15px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+    overflow-x: hidden;
+    height: 30vw;
+    width: 42vw;
+    background-color: #f9f9f9;
+
+    .titles {
+      display: flex;
+      justify-content: space-between;
+      width: 18vw;
+      margin-left: 6.3vw;
+      font-weight: 700;
+      color: $darkMediumGray;
+    }
+  }
+  .contens {
+    display: flex;
+    align-items: center;
+    height: 60px;
+    padding: 10px;
+    box-shadow: 0px -5px 5px -5px rgba(0, 0, 0, 0.25);
+
+    .image {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+    }
+
+    .text {
+      width: 25vw;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-left: 2vw;
+      margin-right: 2vw;
+    }
+
+    .botton {
+      @include button-styles1(14px);
+      height: 2.3vw;
+      width: 5vw;
+      padding: 2px 4px 2px 4px;
+    }
+    .botton2 {
+      @include button-styles2(14px);
+      height: 2vw;
+      width: 5vw;
+      padding: 2px 4px 2px 4px;
+    }
+  }
+  .contens:hover {
+    background-color: $lightMediumGreen;
+  }
+}
