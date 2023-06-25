@@ -28,17 +28,18 @@
 
 
 .searchContainer {
-  position: relative;  
+  position: relative;    
 }
 
 .contResults {
-  position: fixed;     
+  position: fixed;         
 }
 
 .userResult {       
   display: flex;
+  
   background-color: #fff;
-  padding: 8px;  
+  padding: 8px;   
   border: 1px solid #ccc;    
   flex-direction: column; 
   cursor: pointer;

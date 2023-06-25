@@ -53,9 +53,14 @@ export default function searchBar() {
          {user.name}          
         </div>
       ))}
-      </div>   
+
       </div> 
+      </div>      
+
+        
+      
     
+ 
   );
 }
 

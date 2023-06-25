@@ -12,18 +12,18 @@
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
     border-radius: 10px;
     max-width: 1600px;
-    max-height: 650px;
+    max-height: 750px;
     margin: 0 auto;
     
 
     .sidebar{               
         background-color: $lightMediumGreen;                
         float: left;
-        width: 1800px;
+        width: 2350px;
         text-align: center;
         border-radius: 10px 10px 10px 10px;
         box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
-        height: 650px;
+        height: 700px;
         margin: 20px;              
     }
 
@@ -31,7 +31,7 @@
         background-color: white;
         border-radius: 10px;    
         border: 2px solid rgb(235, 211, 211);   
-        width: 20rem;         
+        width: 25rem;         
         margin-left: 2rem;
     }
 
@@ -106,7 +106,7 @@
                 font-weight: 700;
                 height: 2vw;
                 position: relative;
-                margin-bottom:100%;
+                
         }
     }
 
@@ -128,15 +128,15 @@
     margin-top: 1.2rem;
     margin-left: 0.5rem;
     margin-right: 10rem;
-    width: 10rem;
+    width: 8rem;
     height: 1.5rem;    
-    border-radius: 6px;       
+    border-radius: 6px;           
 }
 
 .chooseSubj {
     margin-top: 1.2rem;
     margin-left: 0.5rem;
-    width: 10rem;
+    width: 8rem;
     height: 1.5rem;    
     border-radius: 6px;       
 }

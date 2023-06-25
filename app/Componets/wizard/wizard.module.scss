@@ -19,6 +19,7 @@
     background-image: linear-gradient(to right, $lightMediumGreen, $darkMediumGreen, $lightMediumGreen);
     background-size: 300% 100%;
     transition: background-position 0.6s ease-in-out;
+    height: auto;
 }
 
 .contCards:hover {
@@ -41,7 +42,8 @@
 .secondCont {    
     background-color: white;
     border-radius: 10px;    
-    border: 2px solid rgb(235, 211, 211);    
+    border: 2px solid rgb(235, 211, 211);  
+    height: 24rem;  
 }
 
 .secondCont h3 {
