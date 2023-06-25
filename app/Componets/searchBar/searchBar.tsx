@@ -23,15 +23,15 @@ export default function searchBar() {
   const handleUserClick = (userId: string) => {
     router.push(`/detail/${userId}`);
   };
-
+      
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if(filteredUsers?.length === 1) {
       handleUserClick(filteredUsers[0]._id);
     }
   };
-
-
+  
+  
   return (
     <div className={styles.searchContainer}>
       <form onSubmit={handleSubmit}>
@@ -53,8 +53,8 @@ export default function searchBar() {
          {user.name}          
         </div>
       ))}
-      </div>
-    </div>
+      </div>   
+    
   );
 }
 

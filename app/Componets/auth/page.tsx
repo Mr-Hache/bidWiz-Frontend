@@ -2,8 +2,8 @@
 import React, { useState, useEffect } from 'react'
 import style from "./auth.module.scss"
 import { useRouter } from 'next/navigation'
-import { auth } from '../../utils/firebase'  
-import { getAuth, signInWithEmailAndPassword, GoogleAuthProvider,signInWithPopup } from 'firebase/auth'
+import { auth, userSignOut } from '../../utils/firebase'  
+import { getAuth, signInWithEmailAndPassword, GoogleAuthProvider,signInWithPopup, browserLocalPersistence, setPersistence } from 'firebase/auth'
 import { FcGoogle } from "react-icons/fc";
 import { useCreateUserMutation } from "@/app/redux/services/userApi"
 
@@ -22,15 +22,28 @@ useEffect(() =>{
 
   const handleSubmit = async (event :React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    try {
-      const userCredential =  await signInWithEmailAndPassword(auth, email, password);
-      setIdAuth(userCredential.user.uid)
-      
-      router.push('/'); 
-    } catch (error) {
-      console.error(error);
-      // avaAnder$10
-    }
+   
+    setPersistence (auth, browserLocalPersistence).then(() => {
+      signInWithEmailAndPassword(auth, email, password).then((userCredential) => {
+        const user = userCredential.user;
+        setIdAuth(user.uid)
+        if(!user.emailVerified) {
+          router.push("/login")
+          userSignOut()
+          alert("email not verified")
+
+        }else{
+          console.log("usuario autenticado")
+          router.push("/offerBoard")
+        }
+       
+      }) .catch((error) => {
+         console.log(error)
+      })
+    }) .catch((error) => {
+      console.log(error)
+    })
+
   }
 
   const handleGoogleSignIn = async (event: React.MouseEvent<HTMLButtonElement>) => {
