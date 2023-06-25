@@ -1,10 +1,61 @@
+"use client"
 import Link from "next/link";
 import styles from "./navbar.module.scss";
 import { FaHatWizard } from "react-icons/fa";
 import SearchBar from "../searchBar/searchBar";
 import SelectorNavbar from "../selectorsNavbar/selectorNavbar";
+import { useState, useEffect } from "react";
+import { userSignOut } from "../../utils/firebase";
+import { onAuthStateChanged } from "firebase/auth";
+import {auth} from "../../utils/firebase";
+import { usePathname, useRouter } from "next/navigation";
+import {setUser, setAuth, setEmail, setUid} from "../../redux/services/userAuthSlice"
+import {useAppDispatch} from "../../redux/hooks"
 
 export default function Navbar() {
+const pathname = usePathname()
+const router = useRouter()
+const dispatch = useAppDispatch()
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
+
+
+  useEffect (() => {
+
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        pathname == "/login"? router.push("/"):null
+        pathname == "/register"? router.push("/"):null
+        console.log({
+          name: user.displayName,
+          email: user.email,
+          uidFireBase: user.uid,
+        })
+        setIsLoggedIn(true)
+        dispatch(setUser(user.displayName))
+        dispatch(setAuth(true))
+        dispatch(setEmail(user.email))
+        dispatch(setUid(user.uid))
+      } else {
+        console.log("no hay usuario")
+        setIsLoggedIn(false)
+        pathname == "/profile"? router.push("/"):null
+        pathname == "/admin"? router.push("/"):null
+      }
+    });
+    return () => unsubscribe();
+   },[]) 
+  
+
+   const handleSignOut = async (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+    try {
+      await userSignOut();
+      console.log("usuario deslogeado")
+    } catch (error) {
+      console.log(error);
+    }
+   }
+   
   return (
     <div className={styles.navCont}>
       <div className={styles.icons}>
@@ -21,16 +72,31 @@ export default function Navbar() {
         <SearchBar />
       </div>
       <div className={styles.buttons}>
-        <h3 className={styles.log}>
-          <Link href="/login" passHref>
-            Login
-          </Link>
-        </h3>
-        <button className={styles.button2}>
-          <Link href="/register" passHref>
-            Sign Up
-          </Link>
-        </button>
+      { isLoggedIn? (
+          <>
+            <h3 className={styles.log}>
+              <Link href="/profile" passHref>
+                My Profile
+              </Link>
+            </h3>
+            <button onClick={handleSignOut} className={styles.button2} >
+              Sign Out
+            </button>
+          </>
+        ) : (
+          <>
+            <h3 className={styles.log}>
+              <Link href="/login" passHref>
+                Login
+              </Link>
+            </h3>
+            <button className={styles.button2}>
+              <Link href="/register" passHref>
+                Sign Up
+              </Link>
+            </button>
+          </>
+        )}
       </div>
     </div>
   );
