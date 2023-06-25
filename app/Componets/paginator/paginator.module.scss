@@ -6,7 +6,7 @@
     margin-bottom: 2vw;
     justify-content: center;
     width: 100%;
-    margin-left: 30vw;
+    margin-left: 20vw;    
 }
 
 .contPaginator button {
@@ -16,13 +16,27 @@
     height: 30px;
     width: 70px;
     border: none;
-    padding: 5px 15px 5px 15px;
-    cursor: pointer;
+    padding: 5px 5px 5px 5px;
+    cursor: pointer;  
 }
 
 .contPaginator span{
     margin-left: 20px;
     margin-right: 20px;
     @include h-4;
-    font-weight: 600;
+    font-weight: 600;    
+}
+
+.btnPrevius {
+    width: 5rem;
+    background-color:$lightGreen;    
+}
+
+.btnNext {
+    width: 5rem;
+    background-color: $lightGreen;
+}
+
+.numbers {    
+    display: inline;   
 }
