@@ -3,7 +3,6 @@
 import React from "react";
 import ApexCharts from "react-apexcharts";
 import { ApexOptions } from "apexcharts";
-import { ChartOptions } from "../adminSales/adminSales";
 import styles from "./adminDistribution.module.scss";
 import { useEffect, useState } from "react";
 
