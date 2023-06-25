@@ -2,8 +2,7 @@
 @import "../../utils/variabls";
 
 .button {
-  @include button-styles1(1vw);
-  margin: 0;
+  @include button-styles1(1vw);  
 }
 
 .input {
@@ -15,14 +14,40 @@
   border: solid 1px $darkPurple;
   letter-spacing: 1px;
   text-transform: capitalize;
-  padding: 4px 0 4px 8px;
+  padding: 4px 0 4px 8px;      
 }
 
 .input::placeholder {
   font-size: 15px;
-  padding: 4px;
+  padding: 4px;  
 }
 
 .input::first-letter {
   padding-left: 4px;
 }
+
+
+.searchContainer {
+  position: relative;  
+}
+
+.contResults {
+  position: fixed;     
+}
+
+.userResult {       
+  display: flex;
+  background-color: #fff;
+  padding: 8px;  
+  border: 1px solid #ccc;    
+  flex-direction: column; 
+  cursor: pointer;
+}
+
+
+
+
+
+
+
+
