@@ -6,8 +6,7 @@ import { User, useGetUserByIdQuery } from "@/app/redux/services/userApi";
 import Navbar from "@/app/Componets/navbar/navbar";
 import styles from "./detail.module.scss";
 import { useCreateJobMutation } from "@/app/redux/services/userApi";
-
-
+import {useAppSelector} from "../../redux/hooks"
 import Flag from "react-world-flags";
 import { flags, subjectsIcons } from "@/app/utils/flagsAndObjectsIcons";
 import {  FaBook,  FaMicroscope,  FaBriefcase,  FaVial,  FaCode,  FaRegChartBar,  FaBalanceScale,  FaCalculator,  FaMusic,  FaAtom,  FaUserGraduate,  FaLaptopCode,} from 'react-icons/fa';
@@ -22,10 +21,11 @@ interface LanguageFlag {
 
 
 function detail() {
+  const localUid = useAppSelector((state) => state.userAuth.uid)
   initMercadoPago('TEST-f290c78e-5208-406e-8395-17f2f78dfc23');
   const [preferenceId, setPreferenceId] = useState("")
   const [createJobDto, setCreateJobDto] = useState({});
-
+  const [buyerId, setBuyerId] = useState("")
   const [selectedLanguage, setSelectedLanguage] = useState("");
   const [selectedSubject, setSelectedSubject] = useState("");
   const [selectedClasses, setSelectedClasses] = useState<number | null>(null);
@@ -34,6 +34,18 @@ function detail() {
   const [createJob, { data: job, }] = useCreateJobMutation();
   const pathname = usePathname(); 
   const _id = pathname.split("/")[2];
+
+  const fetchUserData = () => {
+    fetch(`https://bidwiz-backend-production-db77.up.railway.app/users/user/${localUid}`)
+    .then(response => response.json())
+    .then(data => {
+      setBuyerId(data._id)
+    })
+    .catch(error => console.error(error));
+}
+  useEffect(() => {
+    fetchUserData(); 
+  }, [localUid]);
 
   const handleLanguageChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedLanguage(e.target.value);
@@ -77,17 +89,17 @@ function detail() {
     setCreateJobDto({
       ...createJobDto,
       status: "In Progress",
-      description: `Class: ${selectedSubject} in ${selectedLanguage}. Client: ${_id}. Tutor: ${_id}. Price: $${(selectedClasses || 0) * (selectedPrice || 0)} USD.`,
+      description: `Class: ${selectedSubject} in ${selectedLanguage}. Client: ${buyerId}. Tutor: ${_id}. Price: $${(selectedClasses || 0) * (selectedPrice || 0)} USD.`,
       price: selectedPrice,
       numClasses: selectedClasses,
-      clientId: "648e17f0c8489b5c103ee650",
+      clientId: buyerId,
       workerId: _id,
       language: selectedLanguage,
       subject: selectedSubject,
       result: "default"
     });
     console.log(createJobDto); 
-  }, [selectedLanguage, selectedSubject, selectedClasses, _id, selectedPrice]);
+  }, [selectedLanguage, selectedSubject, selectedClasses, _id, selectedPrice, buyerId]);
 
   const {
     data: user,
