@@ -2,28 +2,27 @@
 @import "../../utils/variabls";
 
 .contPaginator {
-    margin-top: 2vw;
+    margin-top: 4vw;
     margin-bottom: 2vw;
-    display: flex;        
-    justify-content: center;   
+    justify-content: center;
     width: 100%;
-
+    margin-left: 30vw;
 }
 
 .contPaginator button {
     @include p-p;
-    font-weight: 600;        
+    font-weight: 600;
     border-radius: 7px;
     height: 30px;
     width: 70px;
     border: none;
     padding: 5px 15px 5px 15px;
-    cursor: pointer;  
+    cursor: pointer;
 }
 
 .contPaginator span{
     margin-left: 20px;
     margin-right: 20px;
     @include h-4;
-    font-weight: 600;   
+    font-weight: 600;
 }
