@@ -1,28 +1,41 @@
 "use client"
-import React from 'react'
-import style from "./paginator.module.scss"
+ 
+import React from 'react';
+import style from "./paginator.module.scss";
 import { useAppSelector, useAppDispatch } from "@/app/redux/hooks";
 import { setPage } from "@/app/redux/services/filtersSlice";
 
 interface PaginatorProps {
-   statePage: boolean;
- }
+  statePage: boolean;
+}
 
+export default function Paginator({ statePage }: PaginatorProps) {
+  const dispatch = useAppDispatch();
+  const page = useAppSelector((state) => state.filters.page);
+  const totalPages = 5; 
 
-export default function paginator({ statePage }: PaginatorProps) {
-    
-const dispatch = useAppDispatch();
-    const page = useAppSelector((state) => state.filters.page);
+  const handlePage = (event: React.MouseEvent<HTMLButtonElement>) => {
+    const value = event.currentTarget.value;
 
-    const handlePage = (event: React.MouseEvent<HTMLButtonElement>) => {
-        event.currentTarget.value === "Next" ? statePage?dispatch(setPage(page + 1)): null : page==1?null:dispatch(setPage(page - 1));         
+    if (value === "Next" && page < totalPages) {
+      statePage ? dispatch(setPage(page + 1)) : null;
+    } else if (value === "Prev" && page > 1) {
+      dispatch(setPage(page - 1));
     }
-    
-  return (
-     <div className={style.contPaginator}>
-        <button  onClick={handlePage}>Prev</button>
-        <span>{page}</span>
-        <button value="Next" onClick={handlePage}>Next</button>
-     </div> 
-  )
   }
+
+  const isLastPage = page === totalPages;
+  const isFirstPage = page === 1;
+
+  return (
+    <div className={style.contPaginator}>
+      <button onClick={handlePage} value="Prev" disabled={isFirstPage}>
+        Prev
+      </button>
+      <span>{page}</span>
+      <button onClick={handlePage} value="Next" disabled={isLastPage}>
+        Next
+      </button>
+    </div>
+  );
+}
