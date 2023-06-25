@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { useUpdateWizardStatusMutation, UpdateUserWizardDto } from '../../redux/services/userApi';
 import {useAppSelector} from "../../redux/hooks"
+import ImageUpload from "../imageUpload/imageUpload";
 
 function EditProfile() {
 
@@ -10,6 +11,7 @@ function EditProfile() {
     const [updateWizardStatus, { isLoading }] = useUpdateWizardStatusMutation();
     const [formState, setFormState] = useState<UpdateUserWizardDto>({} as UpdateUserWizardDto);
     const [userId, setUserId] = useState('');
+    const [userName, setUserName] = useState('');
 
     const allPossibleLanguages = [
         "English",
@@ -53,6 +55,7 @@ function EditProfile() {
             pricePerThree: data.pricePerThree,
             });
             setUserId(data._id)
+            setUserName(data.name)
         })
         .catch(error => console.error(error));
     }
@@ -60,6 +63,12 @@ function EditProfile() {
     useEffect(() => {
         fetchUserData(); 
     }, [localUid]);
+
+    const handleImageUpload = (imageUrl: string) => {
+        // Utilizar la URL de la imagen cargada
+        console.log("Imagen cargada:", imageUrl);
+        setFormState((v) => ({ ...v, image: imageUrl }));
+      };
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         const { name, value } = e.target;
@@ -122,6 +131,8 @@ function EditProfile() {
     if (!formState) return 'Loading...';
 
     return (
+        <div>
+        <h1>{userName}</h1>
         <form onSubmit={handleSubmit}>
         <label htmlFor="isWIzard">Are you a Wizard?</label>
         <input
@@ -188,12 +199,7 @@ function EditProfile() {
 
                 <br />
                 <label htmlFor="image">This is me</label> 
-                <input
-                    type="text"
-                    name="image"
-                    value={formState.image || ''}
-                    onChange={handleChange}
-                />
+                <ImageUpload onImageUpload={handleImageUpload} />
 
                 <br />
                 <label htmlFor="pricePerOne">My offer for one class is</label> 
@@ -226,6 +232,7 @@ function EditProfile() {
 
         <button type="submit" disabled={isLoading || !formState.isWizard}>Update</button>
         </form>
+        </div>
     );
 }
 
