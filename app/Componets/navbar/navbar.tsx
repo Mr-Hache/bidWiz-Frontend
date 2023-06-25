@@ -13,11 +13,12 @@ import {setUser, setAuth, setEmail, setUid} from "../../redux/services/userAuthS
 import {useAppDispatch} from "../../redux/hooks"
 
 export default function Navbar() {
-const pathname = usePathname()
-const router = useRouter()
-const dispatch = useAppDispatch()
+  const pathname = usePathname()
+  const router = useRouter()
+  const dispatch = useAppDispatch()
   const [isLoggedIn, setIsLoggedIn] = useState(false)
-
+  const [userImage, setUserImage] = useState('')
+  const [userName, setUserName] = useState('')
 
   useEffect (() => {
 
@@ -35,6 +36,13 @@ const dispatch = useAppDispatch()
         dispatch(setAuth(true))
         dispatch(setEmail(user.email))
         dispatch(setUid(user.uid))
+        fetch(`https://bidwiz-backend-production-db77.up.railway.app/users/user/${user.uid}`)
+        .then(response => response.json())
+        .then(data => {
+        setUserImage(data.image)
+        setUserName(data.name)
+        })
+        .catch(error => console.error(error));
       } else {
         console.log("no hay usuario")
         setIsLoggedIn(false)
@@ -76,7 +84,10 @@ const dispatch = useAppDispatch()
           <>
             <h3 className={styles.log}>
               <Link href="/profile" passHref>
-                My Profile
+                <div className={styles.profileLink}>
+                  <img src={userImage} alt={userName} width="35" height="35" />
+                  My Profile
+                </div>
               </Link>
             </h3>
             <button onClick={handleSignOut} className={styles.button2} >

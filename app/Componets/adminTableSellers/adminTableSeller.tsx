@@ -2,6 +2,7 @@
 
 import React from "react";
 import { useEffect, useState } from "react";
+import styles from "../adminTableEarners/adminTableEarners.module.scss";
 
 export interface UserFormValues {
   name: string;
@@ -25,18 +26,26 @@ export default function adminTableSeller() {
   }, []);
 
   return (
-    <div>
+    <div className={styles.container}>
       <h1>Best Sellers</h1>
-      <div>
-        <ul>
-          {sellerData.slice(0, 5).map((seller) => (
-            <li>
-              <img src={seller.image} alt={""} width="50" height="50" />
+      <div className={styles.containerTable}>
+        {sellerData.slice(0, 5).map((seller) => (
+          <div className={styles.tableContents}>
+            <img
+              className={styles.image}
+              src={seller.image}
+              alt={""}
+              width="50"
+              height="50"
+            />
+            <div className={styles.text}>
               <p>{seller.name}</p>
-              <p>{seller.experience.expJobs}</p>
-            </li>
-          ))}
-        </ul>
+              <p>
+                <b>{seller.experience.expJobs} class</b>
+              </p>
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   );

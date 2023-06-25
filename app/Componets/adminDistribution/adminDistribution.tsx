@@ -3,7 +3,6 @@
 import React from "react";
 import ApexCharts from "react-apexcharts";
 import { ApexOptions } from "apexcharts";
-import { ChartOptions } from "../adminSales/adminSales";
 import styles from "./adminDistribution.module.scss";
 import { useEffect, useState } from "react";
 
@@ -74,6 +73,9 @@ export default function adminDistribution() {
               style: {
                 colors: ["#263238"],
               },
+              dropShadow: {
+                enabled: false,
+              },
             },
           },
         };
@@ -109,6 +111,9 @@ export default function adminDistribution() {
               style: {
                 colors: ["#263238"],
               },
+              dropShadow: {
+                enabled: false,
+              },
             },
           },
         };
@@ -125,7 +130,7 @@ export default function adminDistribution() {
           options={subjectsData.options}
           series={subjectsData.series}
           type="pie"
-          width={350}
+          width={360}
         />
       </div>
       <div className={styles.grafic}>
