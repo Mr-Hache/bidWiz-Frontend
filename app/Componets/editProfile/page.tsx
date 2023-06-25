@@ -2,9 +2,11 @@
 
 import React, { useState, useEffect } from 'react';
 import { useUpdateWizardStatusMutation, UpdateUserWizardDto } from '../../redux/services/userApi';
+import {useAppSelector} from "../../redux/hooks"
 
 function EditProfile() {
-    const localUid = "dDQ6nhCDlMRyl0UUpETKTJNANhA2"; 
+
+    const localUid = useAppSelector((state) => state.userAuth.uid)
     const [updateWizardStatus, { isLoading }] = useUpdateWizardStatusMutation();
     const [formState, setFormState] = useState<UpdateUserWizardDto>({} as UpdateUserWizardDto);
     const [userId, setUserId] = useState('');
