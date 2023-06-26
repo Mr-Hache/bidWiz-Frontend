@@ -59,6 +59,7 @@ export default function Navbar() {
     try {
       await userSignOut();
       console.log("usuario deslogeado")
+      router.push("/")
     } catch (error) {
       console.log(error);
     }

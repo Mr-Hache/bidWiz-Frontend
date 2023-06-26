@@ -37,6 +37,7 @@ useEffect(() =>{
           router.push("/offerBoard")
         }
       }) .catch((error) => {
+        alert("Unregistered user or incorrect password")
           console.log(error)
       })
     }) .catch((error) => {
