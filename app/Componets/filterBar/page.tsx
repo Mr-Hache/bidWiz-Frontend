@@ -9,30 +9,30 @@ import style from "./filterBar.module.scss"
 
 
 const languagesList = [
-  "English",
-  "Spanish",
-  "Portuguese",
-  "German",
-  "French",
   "Chinese",
-  "Japanese",
-  "Russian",
+  "English",
+  "French",
+  "German",
   "Italian",
-];
+  "Japanese",
+  "Portuguese",
+  "Russian",
+  "Spanish",
+]
 const subjectsList = [
-  "Mathematics",
-  "Physics",
-  "Chemistry",
-  "Biology",
-  "Economics",
-  "Business Administration",
   "Accounting",
+  "Biology",
+  "Business Administration",
+  "Chemistry",
   "Computer Science",
-  "Music Theory",
-  "Political Science",
+  "Economics",
   "Law",
+  "Mathematics",
+  "Music Theory",
+  "Physics",
+  "Political Science",
   "Programming",
-];
+]
 
 function FilterBar() {
   const dispatch = useAppDispatch();
