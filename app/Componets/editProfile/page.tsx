@@ -15,28 +15,28 @@ function EditProfile() {
     const [userName, setUserName] = useState('');
 
     const allPossibleLanguages = [
-        "English",
-        "Spanish",
-        "Portuguese",
-        "German",
-        "French",
         "Chinese",
-        "Japanese",
-        "Russian",
+        "English",
+        "French",
+        "German",
         "Italian",
+        "Japanese",
+        "Portuguese",
+        "Russian",
+        "Spanish",
       ];
       const allPossibleSubjects = [
-        "Mathematics",
-        "Physics",
-        "Chemistry",
-        "Biology",
-        "Economics",
-        "Business Administration",
         "Accounting",
+        "Biology",
+        "Business Administration",
+        "Chemistry",
         "Computer Science",
-        "Music Theory",
-        "Political Science",
+        "Economics",
         "Law",
+        "Mathematics",
+        "Music Theory",
+        "Physics",
+        "Political Science",
         "Programming",
       ];
 
@@ -123,6 +123,7 @@ function EditProfile() {
             
             console.log(response);
             fetchUserData(); 
+            alert("Info updated")
         } catch (error) {
             console.error(error);
         }
@@ -215,7 +216,7 @@ function EditProfile() {
                 />
 
                 <br />
-                <label htmlFor="pricePerTwo">My offer for two classes is</label> 
+                <label htmlFor="pricePerTwo">My offer for two classes is (each)</label> 
                 <input
                     type="number"
                     name="pricePerTwo"
@@ -224,7 +225,7 @@ function EditProfile() {
                 />
 
                 <br />
-                <label htmlFor="pricePerThree">My offer for three classes is</label> 
+                <label htmlFor="pricePerThree">My offer for three classes is (each)</label> 
                 <input
                     type="number"
                     name="pricePerThree"

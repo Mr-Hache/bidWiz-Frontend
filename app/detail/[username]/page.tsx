@@ -81,6 +81,7 @@ function detail() {
       const newJob = await createJob(createJobDto).unwrap();
       setPreferenceId(newJob.result);
     } catch (error) {
+      alert("need to login")
       console.error(error);
     }
   };
@@ -253,7 +254,7 @@ function detail() {
   checked={selectedClasses === 2}
   onChange={handleClassesChange}
 />
-<label htmlFor="">Price per two classes {user.pricePerTwo*2} USD</label>
+<label htmlFor="">Unitary price per two classes {user.pricePerTwo*2} USD</label>
 
 <hr />
 <input
@@ -263,7 +264,7 @@ function detail() {
   checked={selectedClasses === 3}
   onChange={handleClassesChange}
 />
-<label htmlFor="">Price per three classes {user.pricePerThree*3} USD</label>
+<label htmlFor="">Unitary price per three classes {user.pricePerThree*3} USD</label>
 <hr />
       </div>
     </tbody>

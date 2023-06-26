@@ -111,11 +111,13 @@ useEffect( () => {
   const onChangeStatusJobIdFinished = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const value: string = event.target.value;
     setCompletedJobViews(() => jobsByWorker?.find((objeto: any) => objeto._id === value));
+    alert("Job completed")
   };
 
   const onChangeInProgressClient = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const value: string = event.target.value;
     setClientInProgressViews(() => jobsByClient?.find((objeto: any) => objeto._id === value));
+    alert("Review completed")
   };
   /////////////////////////////////////////////////
   const [InProgessJobViews, setInProgessJobViews] = useState({
@@ -132,7 +134,7 @@ useEffect( () => {
   })
     return (
 <div className={styles.div}>
-      <h1>In Progress jobs:</h1>
+      <h1>In Progress Jobs as Worker to Complete</h1>
       <select name="" onChange={onChangeStatusJobId}>
         <option>Select</option>
         {jobsByWorker?.map((job) => {
@@ -152,7 +154,7 @@ useEffect( () => {
       )}
       <button  onClick={onClickHandlerJobStatus}>Complete Job</button>
 
-      <h1>Completed:</h1>
+      <h1>Completed Jobs as Worker</h1>
       <select  name="" onChange={onChangeStatusJobIdFinished}>
         <option>Select</option>
         {jobsByWorker?.map((job) => {
@@ -172,7 +174,7 @@ useEffect( () => {
           </div>
         )}
       </div>
-  <h1>Jobs in progress:</h1>
+  <h1>Jobs in Progress as Client</h1>
   <select name="" onChange={onChangeInProgressClient}>
     <option>Select</option>
     {jobsByClient?.map((job) => {
@@ -190,7 +192,7 @@ useEffect( () => {
       <div >Subject: {clientInProgressViews.subject}</div>
     </div>
   )}
-  <h1>Jobs to review:</h1>
+  <h1>Jobs to Review as Client</h1>
   <select name="" onChange={onChangeReviewJobId}>
     <option>Select</option>
     {jobsByClient?.map((job) => {
@@ -199,7 +201,7 @@ useEffect( () => {
       }
     })}
   </select>
-  <h2>Work Rating:</h2>
+  <h2>Select Your Rating</h2>
   <select name="" onChange={onChangeReview}>
     <option value="1">Select Points</option>
     <option value="1">1</option>

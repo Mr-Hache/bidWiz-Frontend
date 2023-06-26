@@ -14,18 +14,18 @@ import { usePathname } from "next/navigation";
 import { useRouter } from "next/navigation";
 
 const subjectsList = [
-  "Physics",
-  "Chemistry",
+  "Accounting",
   "Biology",
-  "Mathematics",
+  "Business Administration",
+  "Chemistry",
+  "Computer Science",
   "Economics",
   "Law",
-  "Accounting",
-  "Business Administration",
-  "Programming",
-  "Computer Science",
-  "Political Science",
+  "Mathematics",
   "Music Theory",
+  "Physics",
+  "Political Science",
+  "Programming",
 ];
 
 export default function Footer() {
