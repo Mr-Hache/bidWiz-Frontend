@@ -36,6 +36,9 @@ export default function hero() {
           />
         </div>
       </div>
+      <div className={styles.whyText}>
+        <h1>Discover Why BidWiz Make a Difference</h1>
+      </div>
     </section>
   );
 }

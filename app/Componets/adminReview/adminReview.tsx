@@ -35,18 +35,33 @@ export default function AdminSales() {
         show: false,
       },
     },
+
+    xaxis: {
+      categories: chartData.map((user) => user.name),
+    },
+    tooltip: {
+      custom: function ({ seriesIndex, dataPointIndex, w }) {
+        const user = chartData[dataPointIndex];
+        return `<div class="custom-tooltip"><img src="${user.image}" alt="${user.name}" style="display: block; margin: 0 auto;" width="70" height="70" /><h4>${user.name}</h4></div>`;
+      },
+    },
+    colors: ["#5e35b1"],
     plotOptions: {
       bar: {
         horizontal: false,
       },
     },
-    xaxis: {
-      categories: chartData.map((user) => user._id),
-    },
-    tooltip: {
-      custom: function ({ seriesIndex, dataPointIndex, w }) {
-        const user = chartData[dataPointIndex];
-        return `<div class="custom-tooltip"><img src="${user.image}" alt="${user.name}" width="50" height="50" /><p>${user.name}</p></div>`;
+    fill: {
+      type: "gradient",
+      gradient: {
+        shade: "light",
+        type: "vertical",
+        shadeIntensity: 0.5,
+        gradientToColors: ["#b39ddb"],
+        inverseColors: false,
+        opacityFrom: 1,
+        opacityTo: 1,
+        stops: [0, 100],
       },
     },
   };
@@ -59,7 +74,7 @@ export default function AdminSales() {
 
   return (
     <div>
-      <h1>Top 10 Reviews</h1>
+      <h1>Top Reviews</h1>
       <ApexCharts
         options={options}
         series={series}
