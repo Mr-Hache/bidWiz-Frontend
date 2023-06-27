@@ -45,9 +45,9 @@ function AdminAble() {
 
       <div className={styles.selector}>
         <div className={styles.titles}>
-          <p>&#9733;</p>
-          <p>Name</p>
-          <p>E-mail</p>
+          <p style={{ minWidth: "50px", maxWidth: "50px" }}>&#9733;</p>
+          <p style={{ minWidth: "150px", maxWidth: "150px" }}>Name</p>
+          <p style={{ minWidth: "50px", maxWidth: "50px" }}>User</p>
         </div>
         {filteredUsers
           ?.filter((user) => user.isDisabled)
@@ -56,9 +56,15 @@ function AdminAble() {
             <div className={styles.contens}>
               <img className={styles.image} src={user.image} alt={user.name} />
               <div className={styles.text}>
-                <p>{Number(user.reviews.toFixed(1))}</p>
-                <p>{user.name}</p>
-                <p>{user.email}</p>
+                <p style={{ minWidth: "50px", maxWidth: "50px" }}>
+                  {Number(user.reviews.toFixed(1))}
+                </p>
+                <p style={{ minWidth: "150px", maxWidth: "150px" }}>
+                  {user.name}
+                </p>
+                <p style={{ minWidth: "50px", maxWidth: "50px" }}>
+                  {user.isWizard ? "Wizard" : "Student"}
+                </p>
               </div>
               {user.isDisabled && (
                 <button
