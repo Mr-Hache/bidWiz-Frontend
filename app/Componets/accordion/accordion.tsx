@@ -21,16 +21,20 @@ export default function accordion({ title, children }: AccordionProps) {
 
   return (
     <div className={styles.accordion}>
-      <h1
-        className={`${styles.title} ${isOpen ? styles.open : ""}`}
+      <p
+        className={`${styles.titleAccordion} ${isOpen ? styles.open : ""}`}
         onClick={toggleAccordion}
+        style={{ position: "relative", zIndex: 2 }}
       >
         {title}
-      </h1>
+      </p>
       {isOpen && (
-        <div>
+        <div
+          className={styles.component}
+          style={{ position: "relative", zIndex: 1 }}
+        >
           {children}
-          <button className={styles.closeButton} onClick={closeAccordion}>
+          <button className={styles.buttonClosed} onClick={closeAccordion}>
             Close
           </button>
         </div>
