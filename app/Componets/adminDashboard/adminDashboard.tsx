@@ -8,7 +8,7 @@ import AdminDistribution from "../adminDistribution/adminDistribution";
 import AdminTableSeller from "../adminTableSellers/adminTableSeller";
 import AdminTableBuyers from "../adminTableBuyers/adminTableBuyers";
 import AdminDisabled from "../adminDisabled/adminDisabled";
-import AdminAble from "../adminAble.tsx/adminAble";
+import AdminAble from "../adminAble/adminAble";
 import AdminTableEarners from "../adminTableEarners/adminTableEarners";
 
 export default function adminDashboard() {
