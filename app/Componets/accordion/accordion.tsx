@@ -1,0 +1,33 @@
+"use client";
+
+import { useState, ReactNode, useEffect } from "react";
+import styles from "./accordion.module.scss";
+
+interface AccordionProps {
+  title: string;
+  children: ReactNode;
+}
+
+export default function accordion({ title, children }: AccordionProps) {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleAccordion = () => {
+    setIsOpen(!isOpen);
+  };
+
+  const closeAccordion = () => {
+    setIsOpen(false);
+  };
+
+  return (
+    <div className={styles.accordion}>
+      <h1
+        className={`${isOpen ? styles.open : styles.closed}`}
+        onClick={toggleAccordion}
+      >
+        {title}
+      </h1>
+      {isOpen && <div onClick={closeAccordion}>{children}</div>}
+    </div>
+  );
+}
