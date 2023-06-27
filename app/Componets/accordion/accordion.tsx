@@ -22,12 +22,19 @@ export default function accordion({ title, children }: AccordionProps) {
   return (
     <div className={styles.accordion}>
       <h1
-        className={`${isOpen ? styles.open : styles.closed}`}
+        className={`${styles.title} ${isOpen ? styles.open : ""}`}
         onClick={toggleAccordion}
       >
         {title}
       </h1>
-      {isOpen && <div onClick={closeAccordion}>{children}</div>}
+      {isOpen && (
+        <div>
+          {children}
+          <button className={styles.closeButton} onClick={closeAccordion}>
+            Close
+          </button>
+        </div>
+      )}
     </div>
   );
 }
