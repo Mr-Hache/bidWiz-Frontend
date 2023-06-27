@@ -2,7 +2,7 @@
 
 import React from "react";
 import styles from "./adminUsers.module.scss";
-import { FaUserGraduate } from "react-icons/fa";
+import { FaGraduationCap } from "react-icons/fa";
 import { FaChalkboardTeacher } from "react-icons/fa";
 import { FaUsers } from "react-icons/fa";
 import { FaBookOpen } from "react-icons/fa";
@@ -17,66 +17,72 @@ import { useAppSelector, useAppDispatch } from "@/app/redux/hooks";
 export default function adminUsers() {
   const dispatch = useAppDispatch();
   const { data: users } = useGetUsersQuery(null);
+  const [jobsData, setJobsData] = useState({ totalSales: 0, totalRevenue: 0 });
+
+  //-------------USERS---------------
 
   useEffect(() => {}, [users]);
 
-  const isStudents = users?.filter((item) => item.isWizard === false);
-  const isWizards = users?.filter((item) => item.isWizard === true);
-  const totalClases = isWizards?.reduce(
-    (total, item) => total + item.experience.expJobs,
-    0
+  const isStudents = users?.filter(
+    (item) => item.isWizard === false && item.isDisabled === false
   );
-  // const averagePerClass = isWizards?.map((user) => user.pricePerTwo).reduce((sum, price) => sum + price, 0);
+  const isWizards = users?.filter(
+    (item) => item.isWizard === true && item.isDisabled === false
+  );
+
+  //--------------SALES AND REVENUE------------
+
+  useEffect(() => {
+    fetch("https://bidwiz-backend-production-db77.up.railway.app/jobs/totals")
+      .then((response) => response.json())
+      .then((data) => {
+        setJobsData(data);
+      });
+  }, []);
+
+  let totalRevenue = jobsData.totalRevenue
+    .toLocaleString("en", {
+      minimumFractionDigits: 0,
+    })
+    .replace(",", ".");
 
   return (
     <div className={styles.containerCubes}>
       <div className={styles.cube}>
         <div className={styles.number}>
           <h1>{isStudents?.length}</h1>
-          <div className={styles.icon}>
-            <FaUserGraduate />
-          </div>
+          <FaGraduationCap className={styles.icon} />
         </div>
-        <h2>Students</h2>
+        <h2>Enabled Students</h2>
       </div>
       <div className={styles.cube}>
         <div className={styles.number}>
           <h1>{isWizards?.length}</h1>
-          <div className={styles.icon}>
-            <FaChalkboardTeacher />
-          </div>
+          <FaChalkboardTeacher className={styles.icon} />
         </div>
-        <h2>Wizards</h2>
+        <h2>Enabled Wizards</h2>
       </div>
 
       <div className={styles.cube}>
         <div className={styles.number}>
           <h1>{users?.length}</h1>
-          <div className={styles.icon}>
-            <FaUsers />
-          </div>
+          <FaUsers className={styles.icon} />
         </div>
         <h2>Total Users</h2>
       </div>
 
       <div className={styles.cube}>
         <div className={styles.number}>
-          <div>
-            <h1>{totalClases}</h1>
-          </div>
-          <div>
-            <div className={styles.icon}>
-              <FaBookOpen />
-            </div>
-          </div>
+          <h1>{jobsData.totalSales}</h1>
+          <FaBookOpen className={styles.icon} />
         </div>
         <h2>Total Classes</h2>
       </div>
       <div className={styles.cube}>
         <div className={styles.number}>
-          <h1>U$D 2.000</h1>
+          <h1>{totalRevenue}</h1>
         </div>
-        <h2>Total Sales</h2>
+        <h2>Total Revenue</h2>
       </div>
     </div>
   );
