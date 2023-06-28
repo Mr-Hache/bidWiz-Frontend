@@ -5,6 +5,8 @@ import React, { useState, useEffect } from 'react';
 import { useUpdateWizardStatusMutation, UpdateUserWizardDto } from '../../redux/services/userApi';
 import {useAppSelector} from "../../redux/hooks"
 import ImageUpload from "../imageUpload/imageUpload";
+import { getAuth, sendPasswordResetEmail } from 'firebase/auth';
+
 
 function EditProfile() {
 
@@ -13,6 +15,7 @@ function EditProfile() {
     const [formState, setFormState] = useState<UpdateUserWizardDto>({} as UpdateUserWizardDto);
     const [userId, setUserId] = useState('');
     const [userName, setUserName] = useState('');
+    const email = useAppSelector((state) => state.userAuth.email)
 
     const allPossibleLanguages = [
         "Chinese",
@@ -132,9 +135,27 @@ function EditProfile() {
     
     if (!formState) return 'Loading...';
 
+    const handleChangePassword = (event: React.MouseEvent<HTMLButtonElement>) => {
+        event.preventDefault();
+        const auth = getAuth();
+        if(email){
+            sendPasswordResetEmail(auth, email)
+            .then(() => {
+              alert('Password reset email sent successfully');
+            
+            })
+            .catch((error) => {
+              alert(`Error sending password reset email: ${error}`);
+          
+            });
+        }
+      
+      };
+
     return (
         <div className={styles.div}>
         <h1>{userName}</h1>
+        <button onClick={handleChangePassword}>Change your password</button>
         <form onSubmit={handleSubmit}>
         <label htmlFor="isWIzard">Are you a Wizard?</label>
         <input
@@ -143,7 +164,7 @@ function EditProfile() {
             checked={formState.isWizard || false}
             onChange={handleCheckboxChange}
         />
-
+   
         {formState.isWizard && (
             <div>
                 <br />
@@ -237,6 +258,7 @@ function EditProfile() {
 
         <button type="submit" disabled={isLoading || !formState.isWizard}>Update</button>
         </form>
+
         </div>
     );
 }
