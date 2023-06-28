@@ -211,8 +211,10 @@ function detail() {
         <div className={styles.righbar}>
           <br /><br />
           
+          <div className={styles.contAbout}>
           <h1>About Me</h1>
           <h2>{user.aboutMe}</h2>
+          </div>          
           <table>
     <tbody>      
 
