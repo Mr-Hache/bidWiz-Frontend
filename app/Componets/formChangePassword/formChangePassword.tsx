@@ -1,6 +1,8 @@
 import React, { useState, ChangeEvent, FormEvent } from 'react';
 import { getAuth, sendPasswordResetEmail } from 'firebase/auth';
 
+import styles from "./formChangePassword.module.scss"
+
 const FormChangePassword: React.FC = () => {
   const [email, setEmail] = useState('');
 
@@ -24,8 +26,8 @@ const FormChangePassword: React.FC = () => {
   };
 
   return (
-    <div>
-      <h2>Formulario de cambio de contraseña</h2>
+    <div className={styles.contPassChange}>
+      <h2>Recover your password</h2>
       <form onSubmit={handleSubmit}>
         <label>
           Email:
