@@ -6,20 +6,19 @@ import { toggleDarkMode } from "../../redux/services/themeSlice";
 import { RootState } from "../../redux/store";
 import { BsSun } from "react-icons/bs";
 import { BsMoon } from "react-icons/bs";
+import { useTheme } from "next-themes";
 
 export default function darkToggle() {
-  const darkMode = useSelector((state: RootState) => state.theme.darkMode);
-  const dispatch = useDispatch();
+  const { theme, setTheme } = useTheme();
 
-  const handleToggleDarkMode = () => {
-    dispatch(toggleDarkMode());
+  const handleToggleTheme = () => {
+    // Si el tema actual es 'dark', cambia a 'light'. Si es 'light', cambia a 'dark'.
+    setTheme(theme === "dark" ? "light" : "dark");
   };
 
-  console.log(darkMode);
-
   return (
-    <button onClick={handleToggleDarkMode}>
-      {darkMode ? <BsSun /> : <BsMoon />}
+    <button onClick={handleToggleTheme}>
+      {theme === "dark" ? <BsSun /> : <BsMoon />}
     </button>
   );
 }
