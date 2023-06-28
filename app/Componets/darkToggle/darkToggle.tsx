@@ -2,7 +2,6 @@
 
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { toggleDarkMode } from "../../redux/services/themeSlice";
 import { RootState } from "../../redux/store";
 import { BsSun } from "react-icons/bs";
 import { BsMoon } from "react-icons/bs";
