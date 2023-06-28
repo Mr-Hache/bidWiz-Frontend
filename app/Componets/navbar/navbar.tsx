@@ -8,7 +8,7 @@ import { useState, useEffect } from "react";
 import { userSignOut } from "../../utils/firebase";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../../utils/firebase";
-import { usePathname, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import {
   setUser,
   setAuth,
@@ -18,7 +18,7 @@ import {
 import { useAppDispatch } from "../../redux/hooks";
 
 export default function Navbar() {
-  const pathname = usePathname();
+
   const router = useRouter();
   const dispatch = useAppDispatch();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -28,8 +28,7 @@ export default function Navbar() {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
-        pathname == "/login" ? router.push("/") : null;
-        pathname == "/register" ? router.push("/") : null;
+      
         console.log({
           name: user.displayName,
           email: user.email,
@@ -49,11 +48,11 @@ export default function Navbar() {
             setUserName(data.name);
           })
           .catch((error) => console.error(error));
+ 
       } else {
         console.log("no hay usuario");
         setIsLoggedIn(false);
-        pathname == "/profile" ? router.push("/") : null;
-        pathname == "/admin" ? router.push("/") : null;
+
       }
     });
     return () => unsubscribe();
