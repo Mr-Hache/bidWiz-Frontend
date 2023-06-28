@@ -4,7 +4,6 @@ import { setupListeners } from "@reduxjs/toolkit/dist/query";
 import filtersReducer from "./services/filtersSlice";
 import wizardsReducer from "./services/wizardsSlice";
 import userAuthReducer from "./services/userAuthSlice";
-import themeSlice from "./services/themeSlice";
 
 export const store = configureStore({
   reducer: {
@@ -12,7 +11,6 @@ export const store = configureStore({
     filters: filtersReducer,
     wizards: wizardsReducer,
     userAuth: userAuthReducer,
-    theme: themeSlice,
   },
   devTools: process.env.NODE_ENV !== "production",
   middleware: (getDefaultMiddleware) =>
