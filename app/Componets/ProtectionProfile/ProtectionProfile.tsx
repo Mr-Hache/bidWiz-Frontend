@@ -6,44 +6,53 @@ import Navbar from "../navbar/navbar";
 import EditProfile from "../editProfile/page";
 import JobsPanel from "../JobsPanel/page";
 import UnableAccount from "../UnableAccount/page";
-import {useRouter} from "next/navigation"
+import Accordion from "../accordion/accordion";
+import styles from "../ProtectionProfile/ProtectionProfile.module.scss";
 
-
+import { useRouter } from "next/navigation";
 
 const ProtectionProfile = () => {
-    const router = useRouter();
-    const [isReady, setIsReady] = useState(false);
-  
-    useEffect(() => {
-      const unsubscribe = onAuthStateChanged(auth, (user) => {
-        if (user) {
-          setIsReady(true);
-  
-        } else {
-            setIsReady(false);
-            router.push("/login");  
-        }
-      });
-      return () => unsubscribe();
-    }, []);
-    return (
-      <div>
-        {
-          isReady?  <div>
+  const router = useRouter();
+  const [isReady, setIsReady] = useState(false);
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setIsReady(true);
+      } else {
+        setIsReady(false);
+        router.push("/login");
+      }
+    });
+    return () => unsubscribe();
+  }, []);
+  return (
+    <div>
+      {isReady ? (
+        <div>
           <Navbar />
           <br />
           <br />
           <br />
           <br />
           <br />
-          <EditProfile />
-          <JobsPanel></JobsPanel>
-          <UnableAccount></UnableAccount>
-        </div> : <div>loading...</div>
-        }
-      </div>
-     
-    );
-}
+          <div className={styles.containerAccordion}>
+            <Accordion title="Edit Profile">
+              <EditProfile />
+            </Accordion>
+            <Accordion title="Jobs Panel">
+              <JobsPanel />
+            </Accordion>
+            <Accordion title="Management Account">
+              <UnableAccount />
+            </Accordion>
+          </div>
+        </div>
+      ) : (
+        <div>loading...</div>
+      )}
+    </div>
+  );
+};
 
-export default ProtectionProfile
+export default ProtectionProfile;
