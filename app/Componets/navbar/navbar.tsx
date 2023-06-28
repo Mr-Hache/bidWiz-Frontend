@@ -4,6 +4,7 @@ import styles from "./navbar.module.scss";
 import { FaHatWizard } from "react-icons/fa";
 import SearchBar from "../searchBar/searchBar";
 import SelectorNavbar from "../selectorsNavbar/selectorNavbar";
+import DarkToggle from "../darkToggle/darkToggle";
 import { useState, useEffect } from "react";
 import { userSignOut } from "../../utils/firebase";
 import { onAuthStateChanged } from "firebase/auth";
@@ -18,7 +19,6 @@ import {
 import { useAppDispatch } from "../../redux/hooks";
 
 export default function Navbar() {
-
   const router = useRouter();
   const dispatch = useAppDispatch();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -28,7 +28,6 @@ export default function Navbar() {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
-      
         console.log({
           name: user.displayName,
           email: user.email,
@@ -48,11 +47,9 @@ export default function Navbar() {
             setUserName(data.name);
           })
           .catch((error) => console.error(error));
- 
       } else {
         console.log("no hay usuario");
         setIsLoggedIn(false);
-
       }
     });
     return () => unsubscribe();
@@ -85,6 +82,7 @@ export default function Navbar() {
         <SelectorNavbar filter="languages" />
         <SelectorNavbar filter="subjects" />
         <SearchBar />
+        <DarkToggle />
       </div>
       <div className={styles.buttons}>
         {isLoggedIn ? (
