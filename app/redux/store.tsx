@@ -1,16 +1,18 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { userApi } from "./services/userApi";
 import { setupListeners } from "@reduxjs/toolkit/dist/query";
-import filtersReducer from './services/filtersSlice'
-import wizardsReducer from './services/wizardsSlice'
-import userAuthReducer from './services/userAuthSlice'
+import filtersReducer from "./services/filtersSlice";
+import wizardsReducer from "./services/wizardsSlice";
+import userAuthReducer from "./services/userAuthSlice";
+import themeSlice from "./services/themeSlice";
 
 export const store = configureStore({
   reducer: {
     [userApi.reducerPath]: userApi.reducer,
     filters: filtersReducer,
     wizards: wizardsReducer,
-    userAuth: userAuthReducer
+    userAuth: userAuthReducer,
+    theme: themeSlice,
   },
   devTools: process.env.NODE_ENV !== "production",
   middleware: (getDefaultMiddleware) =>
@@ -21,5 +23,3 @@ setupListeners(store.dispatch);
 
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
-
-
