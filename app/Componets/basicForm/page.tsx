@@ -12,10 +12,10 @@ import {
 import style from "./basicForm.module.scss";
 import { ImMagicWand } from "react-icons/im";
 
-import { auth, loginWithGoogle, loginWithGithub, createWithEmailAndPassword,userSignOut } from "../../utils/firebase";
+import { auth, loginWithGoogle, createWithEmailAndPassword,userSignOut } from "../../utils/firebase";
 import { useRouter } from "next/navigation";
 import ImageUpload from "../imageUpload/imageUpload";
-import {setPersistence, browserSessionPersistence, sendEmailVerification,   } from "firebase/auth";
+import {setPersistence, browserLocalPersistence, sendEmailVerification, browserSessionPersistence  } from "firebase/auth";
 
 export interface UserFormValues {
   name: string;
@@ -247,35 +247,31 @@ function basicForm() {
 
 
   const handleGoogleSignIn = async (event: React.MouseEvent<HTMLButtonElement>) => {
-
     event.preventDefault();
-
-    setPersistence (auth, browserSessionPersistence).then(() => {
-      loginWithGoogle().then((user) => {
-        console.log(user)
-      }) .catch((error) => {
-        console.log(error);
-      }) 
-    }) .catch((error) => {
-      console.log(error);
-    })
-  };
-
-  const handleGithubSignIn = (event: React.MouseEvent<HTMLButtonElement>) => {
-    setPersistence (auth, browserSessionPersistence).then(() => {
-      event.preventDefault();
-      loginWithGithub().then((user) => {
-       console.log(user)
-      }).catch((error) => {
-         console.log(error);
+setPersistence (auth, browserLocalPersistence).then(() => {
+    loginWithGoogle().then((result) => {
+      const user = result.user;
+     
+      fetch(`https://bidwiz-backend-production-db77.up.railway.app/users/emails`)
+      .then((response) => response.json())
+      .then((data) => {
+        const emails = data.map((item: string) => item)
+        if(emails.includes(user.email)){
+          console.log("usuario solo autenticado")
+        }else{
+          createUser({email: user.email?user.email: "", name: user.displayName? user.displayName:"", uidFireBase:user.uid, isWizard:false})
+          console.log("usuario creado y autenticado")
+        }
       })
-
-    }) .catch((error) => {
-      console.log(error);
+      router.push("/offerBoard")
+    }).catch((error) => {
+      console.log(error)
     })
-   
-    
-  }
+}).catch((error) => {
+  console.log(error)
+})
+  };
+ 
 
 
   // -------------HandleImage-------------------
@@ -450,11 +446,7 @@ function basicForm() {
           </button>
         </div>
       </div>
-      <div>
-          <button  onClick={handleGithubSignIn}>
-            Register with gitHub
-          </button>
-        </div>
+    
 
     </form>
   );
