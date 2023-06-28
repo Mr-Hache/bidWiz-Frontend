@@ -15,7 +15,9 @@ import { ImMagicWand } from "react-icons/im";
 import { auth, loginWithGoogle, createWithEmailAndPassword,userSignOut } from "../../utils/firebase";
 import { useRouter } from "next/navigation";
 import ImageUpload from "../imageUpload/imageUpload";
-import {setPersistence, browserLocalPersistence, sendEmailVerification, browserSessionPersistence  } from "firebase/auth";
+import {setPersistence, browserSessionPersistence, sendEmailVerification, browserLocalPersistence  } from "firebase/auth";
+import { setItem, getItem } from "../../utils/localStorage";
+import { title, origin } from "../../utils/titleAndOrigin";
 
 export interface UserFormValues {
   name: string;
@@ -61,9 +63,24 @@ function basicForm() {
     "Programming",
   ];
 
-  const [values, setValues] = useState<UserFormValues>({
-    email: "",
-    name: "",
+  // const [values, setValues] = useState<UserFormValues>({
+  //   email: "",
+  //   name: "",
+  //   uidFireBase: "",
+  //   image: "",
+  //   isWizard: false,
+  //   languages: [],
+  //   subjects: [],
+  //   experience: {
+  //     title: "",
+  //     origin: "",
+  //     expJobs: 0,
+  //   },
+  // });
+
+  const initialFormValues: UserFormValues = {
+    email: getItem("email") || "",
+    name: getItem("name") || "",
     uidFireBase: "",
     image: "",
     isWizard: false,
@@ -74,7 +91,10 @@ function basicForm() {
       origin: "",
       expJobs: 0,
     },
-  });
+  };
+  
+  const [values, setValues] = useState<UserFormValues>(initialFormValues);
+  
 
   interface Errors {
     name?: string;
@@ -88,6 +108,10 @@ function basicForm() {
   }
 
   const [errors, setErrors] = useState<Errors>({});
+
+  const [selectedTitle, setSelectedTitle] = useState('');
+
+  const [selectedFlag, setSelectedFlag] = useState("");
 
   const [authentication, setAuthentication] = useState({
     password: "",
@@ -140,9 +164,40 @@ function basicForm() {
     return Object.keys(formErrors).length === 0;
   };
 
+  // useEffect(() => {
+  //   validateForm();
+  // }, [values, authentication]);
+
+  // useEffect(() => {
+  //   validateForm();
+  // console.log(values.name);
+  
+  //   // Guardar los datos en el Local Storage
+  //   setItem("email", values.email);
+  //   setItem("name", values.name);
+
+  //   console.log("Datos guardados en el Local Storage - email:", values.email);
+  //   console.log("Datos guardados en el Local Storage - name:", values.name);
+
+
+
+  // }, [values, authentication]);
+
   useEffect(() => {
     validateForm();
+    console.log(values.name);
+  
+    if (values.name != null) {
+      // Guardar los datos en el Local Storage
+      setItem("email", values.email);
+      setItem("name", values.name);
+
+      console.log("Datos guardados en el Local Storage - email:", values.email);
+      console.log("Datos guardados en el Local Storage - name:", values.name);
+    }
   }, [values, authentication]);
+  
+  
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -154,7 +209,10 @@ function basicForm() {
     } else {
       setValues((v) => ({ ...v, [name]: value }));
     }
+   
   };
+
+   
 
   const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, checked } = event.target;
@@ -183,17 +241,32 @@ function basicForm() {
     });
   };
 
-  const handleExperienceChange = (
-    event: React.ChangeEvent<HTMLInputElement>
+  const handleExperienceChanges = (
+    event: React.ChangeEvent<HTMLSelectElement>
   ) => {
     setValues({
       ...values,
       experience: {
         ...values.experience,
-        [event.target.name]: event.target.value,
+        title: event.target.value,
       },
     });
   };
+
+  const handleExperienceChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setValues({
+      ...values,
+      experience: {
+        ...values.experience,
+        origin: event.target.value,
+      },
+    });
+  };
+
+
+
+
+
   const [createUser, { data, error }] = useCreateUserMutation();
 
 
@@ -232,6 +305,10 @@ function basicForm() {
                         email: "",
                       });
                     router.push('/login')
+
+                    setItem("email", "");
+                    setItem("name", "");
+                    
           })
   
             
@@ -292,7 +369,7 @@ setPersistence (auth, browserLocalPersistence).then(() => {
             type="text"
             name="name"
             value={values.name}
-            placeholder="Name:"
+            placeholder="User name is required"
             onChange={handleChange}
           />
         </label>
@@ -307,7 +384,7 @@ setPersistence (auth, browserLocalPersistence).then(() => {
             type="password"
             name="password"
             value={authentication.password}
-            placeholder="Password:"
+            placeholder="Enter your password"
             onChange={handleChange}
           />
         </label>
@@ -322,7 +399,7 @@ setPersistence (auth, browserLocalPersistence).then(() => {
             type="email"
             name="email"
             value={values.email}
-            placeholder="Email:"
+            placeholder="Enter your email address"
             onChange={handleChange}
           />
         </label>
@@ -406,29 +483,62 @@ setPersistence (auth, browserLocalPersistence).then(() => {
           <br />
           <div className={style.inputcontainer}>
             <label>
-              <input
+              {/* <input
                 className={style.input}
                 type="text"
                 name="title"
                 value={values.experience.title}
                 placeholder="Title:"
-                onChange={handleExperienceChange}
-              />
+                onChange={handleExperienceChanges}
+              /> */}         
+               <select
+                className={style.input}
+                name="title"
+                value={values.experience.title}
+                onChange={(event) => {
+                  const selectedValue = event.target.value;
+                  handleExperienceChanges(event);
+                  setSelectedTitle(selectedValue);
+                }}
+              >
+                <option value="">Select a title</option>
+                {title.map((tit, index) => (
+                  <option key={index} value={tit.name}>
+                    {tit.name}
+                  </option>
+                ))}
+              </select>
             </label>
             {errors.title && <span className="error">{errors.title}</span>}
           </div>
-
           <br />
           <div className={style.inputcontainer}>
             <label>
-              <input
+              {/* <input
                 className={style.input}
                 type="text"
                 name="origin"
                 value={values.experience.origin}
                 placeholder="Origin:"
                 onChange={handleExperienceChange}
-              />
+              /> */}
+              <select
+                className={style.input}
+                name="origin"
+                value={values.experience.origin}
+                onChange={(event) => {
+                  const selectedValue = event.target.value;
+                  handleExperienceChange(event);
+                  setSelectedFlag(selectedValue);
+                }}
+              >
+                <option value="">Select a country</option>
+                {origin.map((orig, index) => (
+                  <option key={index} value={orig.name}>
+                    {orig.name}
+                  </option>
+                ))}
+              </select>
             </label>
             {errors.origin && <span className="error">{errors.origin}</span>}
           </div>
