@@ -1,0 +1,6 @@
+@import "../../utils/mixin";
+@import "../../utils/variabls";
+
+.selected {
+    background-color: $darkMediumBlue; // los intervalos de tiempo seleccionados tendrán un fondo gris
+  }
