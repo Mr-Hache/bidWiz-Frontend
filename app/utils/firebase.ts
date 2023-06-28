@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getAuth, GithubAuthProvider, signInWithRedirect, GoogleAuthProvider, createUserWithEmailAndPassword, signOut } from "firebase/auth";
+import { getAuth, GithubAuthProvider, signInWithPopup, GoogleAuthProvider, createUserWithEmailAndPassword, signOut } from "firebase/auth";
 
 
 const firebaseConfig = {
@@ -16,14 +16,11 @@ const app = initializeApp(firebaseConfig);
 
 const auth = getAuth();
 
-export const loginWithGithub =  () => {
-  const githubProvider = new GithubAuthProvider();
-  return signInWithRedirect(auth, githubProvider);
-}
+
 
 export const loginWithGoogle =  () => {
   const googleProvider = new GoogleAuthProvider();
-  return signInWithRedirect(auth, googleProvider); 
+  return signInWithPopup(auth, googleProvider); 
 }
 
 export const createWithEmailAndPassword =  (email: string, password: string) => {
