@@ -32,7 +32,7 @@
         border-radius: 10px;    
         border: 2px solid rgb(235, 211, 211);   
         width: 25rem;         
-        margin-left: 2rem;
+        margin-left: 2vw;
     }
 
     .imagen {
@@ -49,9 +49,9 @@
 
     .flags {
         display: flex;
+        justify-content: center;
         flex-wrap: wrap;
-        gap: 30px;
-        margin-left: 3rem;
+        gap: 30px;        
         margin-top: 0.5rem;
       }
 
@@ -63,18 +63,21 @@
 
       .subjects {
         display: flex;
+        justify-content: center;
+        align-items: center;
         flex-wrap: wrap;
         gap: 10px;   
-        margin-left: 1rem; 
+        margin-left: -1.5vw; 
         margin-top: 0.5rem;
       }
 
       .subject {
         display: flex;
+        justify-content: center;        
         align-items: center;
         gap: 5px;
         margin-bottom: 1rem;
-        margin-left: 2rem;
+        margin-left: 1.4vw;
       }
 
       .siglas {
@@ -150,4 +153,10 @@
     margin-bottom: 5rem;
     border: 0.5px solid rgba(0, 0, 0, 0.123);
     border-radius: 10px;
+}
+
+.contAbout {    
+    width: 66vw;
+    max-width: 150vh;
+    text-align: center;
 }
