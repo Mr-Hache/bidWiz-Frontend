@@ -4,6 +4,7 @@ import styles from "./navbar.module.scss";
 import { FaHatWizard } from "react-icons/fa";
 import SearchBar from "../searchBar/searchBar";
 import SelectorNavbar from "../selectorsNavbar/selectorNavbar";
+import DarkToggle from "../darkToggle/darkToggle";
 import { useState, useEffect } from "react";
 import { userSignOut } from "../../utils/firebase";
 import { onAuthStateChanged } from "firebase/auth";
@@ -86,6 +87,7 @@ export default function Navbar() {
         <SelectorNavbar filter="languages" />
         <SelectorNavbar filter="subjects" />
         <SearchBar />
+        <DarkToggle />
       </div>
       <div className={styles.buttons}>
         {isLoggedIn ? (
