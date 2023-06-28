@@ -1,5 +1,14 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
+export type TimeSlot = {
+  isBooked: boolean;
+  detailClass: string;
+};
+
+export type Day = Map<string, TimeSlot>;
+
+export type Calendar = Map<string, Day>;
+
 export type User = {
   _id: string;
   name: string;
@@ -9,8 +18,8 @@ export type User = {
   languages: string [];
   subjects:  string [];
   experience: {
-    title: string;
-    origin: string;
+    title: [];
+    origin: [];
     expJobs: number;
   };
   pricePerOne: number;
@@ -21,6 +30,7 @@ export type User = {
   reviews: number;
   isDisabled: boolean;
   role: ["admin", "user"];
+  calendar: Calendar;
 };
 
 export type Job = {
@@ -34,12 +44,13 @@ export type Job = {
   language: string;
   subject: string;
   result: string;
+  availability: { day: string, hour: string }[];
 }
 
 export type UpdateUserWizardDto = {
   isWizard?: boolean;
-  languages?: string[];
-  subjects?: string[];
+  languages?: string;
+  subjects?: string;
   experience?: {
     title?: string;
     origin?: string;
