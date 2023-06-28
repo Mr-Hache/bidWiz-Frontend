@@ -1,0 +1,51 @@
+@import "../../utils/mixin";
+@import "../../utils/variabls";
+
+.accordion {
+  justify-content: center;
+
+  .titleAccordion {
+    @include h-3;
+    font-size: 18px;
+    text-align: center;
+    color: $darkMediumPurple;
+    border-radius: 5px 5px 2px 2px;
+    box-shadow: 0px 0px 6px 6px rgba(0, 0, 0, 0.25);
+    width: 60vw;
+    margin: 10px auto 0 auto;
+    padding-top: 0.5vw;
+    padding-bottom: 0.5vw;
+    z-index: 2;
+  }
+  .titleAccordion:hover {
+    cursor: pointer;
+  }
+
+  .open {
+    background-color: $lightMediumGreen;
+  }
+
+  .component {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0px -6px 3px 3px $lightMediumGreen, 0px 0px 0px 1px transparent;
+
+    width: 59.5vw;
+    margin: -1px auto -10px auto;
+    z-index: 1;
+
+    .buttonClosed {
+      @include button-styles2(14px);
+      width: 60px;
+      padding: 2px 0 2px 0;
+      background-color: $darkMediumPurple;
+      margin-top: -2vw;
+    }
+  }
+
+  .title {
+    @include h-3;
+  }
+}
