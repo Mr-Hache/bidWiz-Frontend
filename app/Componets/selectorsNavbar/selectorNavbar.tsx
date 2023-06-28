@@ -6,11 +6,13 @@ import { useAppDispatch, useAppSelector } from "@/app/redux/hooks";
 import { setLanguages, setSubjects } from "@/app/redux/services/filtersSlice";
 import { usePathname } from "next/navigation";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 
 
 const languagesList = [
   "Chinese",
+  "English",
   "French",
   "German",
   "Italian",
@@ -79,9 +81,8 @@ export default function slectorNavbar({ filter }: { filter: string }) {
       router.push("/offerBoard");
     }
   };
-  return (
-    
 
+  return (   
     <div className={styles.dropdown} ref={dropdownRef}>      
       <div className={styles.dropdownToggle}>
         <a
@@ -117,6 +118,11 @@ export default function slectorNavbar({ filter }: { filter: string }) {
                   </label>
                 </div>
               ))}
+              <div className={styles.viewAll}>
+                <Link href="/offerBoard" passHref style={{ textDecoration: "none", color: "black" }}>
+                  <h4>View all</h4>
+                </Link>
+              </div>
             </ul>
           </div>
         </div>
