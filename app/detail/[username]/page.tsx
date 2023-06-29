@@ -12,6 +12,7 @@ import { flags, subjectsIcons } from "@/app/utils/flagsAndObjectsIcons";
 import {  FaBook,  FaMicroscope,  FaBriefcase,  FaVial,  FaCode,  FaRegChartBar,  FaBalanceScale,  FaCalculator,  FaMusic,  FaAtom,  FaUserGraduate,  FaLaptopCode,} from 'react-icons/fa';
 import { IconType } from 'react-icons';
 import  FaIconName  from 'react-icons/fa';
+import CalendarUpdate from "@/app/Componets/calendarUpdate/page";
 
 
 interface LanguageFlag {
@@ -30,6 +31,9 @@ function detail() {
   const [selectedSubject, setSelectedSubject] = useState("");
   const [selectedClasses, setSelectedClasses] = useState<number | null>(null);
   const [selectedPrice, setSelectedPrice] = useState<number | null>(null); 
+  const [buyerName, setBuyerName] = useState("")
+  const [availability, setAvailability] = useState<{ day: string; hour: string }[]>([]);
+
 
   const [createJob, { data: job, }] = useCreateJobMutation();
   const pathname = usePathname(); 
@@ -40,6 +44,7 @@ function detail() {
     .then(response => response.json())
     .then(data => {
       setBuyerId(data._id)
+      setBuyerName(data.name)
     })
     .catch(error => console.error(error));
 }
@@ -90,14 +95,15 @@ function detail() {
     setCreateJobDto({
       ...createJobDto,
       status: "In Progress",
-      description: `Class: ${selectedSubject} in ${selectedLanguage}. Client: ${buyerId}. Tutor: ${_id}. Price: $${(selectedClasses || 0) * (selectedPrice || 0)} USD.`,
+      description: `Class: ${selectedSubject} in ${selectedLanguage}. Client name: ${buyerName}. Client ID: ${buyerId}. Wizard name: ${user?.name}. Wizard ID: ${_id}. Price: $${(selectedClasses || 0) * (selectedPrice || 0)} USD.`,
       price: selectedPrice,
       numClasses: selectedClasses,
       clientId: buyerId,
       workerId: _id,
       language: selectedLanguage,
       subject: selectedSubject,
-      result: "default"
+      result: "default",
+      availability: availability
     });
     console.log(createJobDto); 
   }, [selectedLanguage, selectedSubject, selectedClasses, _id, selectedPrice, buyerId]);
@@ -152,6 +158,16 @@ function detail() {
     const stars = '⭐';
     return stars.repeat(Math.round(numStars));
   };
+
+  
+
+  const handleSelectedTimeslots = (timeslots: {day: string, hour: string}[]) => {
+    setCreateJobDto((prevCreateJobDto) => ({
+      ...prevCreateJobDto,
+      availability: timeslots,
+    }));
+  };
+  
 
   return (    
     <div>
@@ -271,6 +287,9 @@ function detail() {
       </div>
     </tbody>
   </table>
+
+ 
+  <CalendarUpdate calendarData={user.calendar} numberClasses={selectedClasses || 0} onSelectedTimeslots={handleSelectedTimeslots}/>
   
   <button onClick={handleClick} disabled={!selectedLanguage || !selectedSubject || !selectedClasses}>CONFIRM</button> 
   {preferenceId && <Wallet initialization={{ preferenceId: preferenceId }} />}

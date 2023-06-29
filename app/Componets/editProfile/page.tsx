@@ -47,11 +47,16 @@ function EditProfile() {
         fetch(`https://bidwiz-backend-production-db77.up.railway.app/users/user/${localUid}`)
         .then(response => response.json())
         .then(data => {
+
+            
             setFormState({
             isWizard: data.isWizard,
             languages: data.languages,
             subjects: data.subjects,
-            experience: data.experience,
+            experience: {
+                title: data.experience.title[0],
+                origin: data.experience.origin[0]
+            },
             image: data.image,
             aboutMe: data.aboutMe,
             pricePerOne: data.pricePerOne,
