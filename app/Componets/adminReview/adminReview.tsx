@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import ApexCharts from "react-apexcharts";
 import { ApexOptions } from "apexcharts";
-import styles from "./adminSales.module.scss";
+import styles from "./adminReview.module.scss";
 
 interface User {
   _id: string;
@@ -73,7 +73,7 @@ export default function AdminSales() {
   ];
 
   return (
-    <div>
+    <div className={styles.reviews}>
       <h1>Top Reviews</h1>
       <ApexCharts
         options={options}

@@ -1,13 +1,22 @@
+"use client";
+
 import styles from "./hero.module.scss";
 import Image from "next/image";
 import Link from "next/link";
+import { useTheme } from "next-themes";
 
 import landing1 from "../../src/images/landing/landing2.png";
 
 export default function hero() {
+  const { theme } = useTheme();
+
   return (
     <section className={styles.hero}>
-      <div className={styles.container}>
+      <div
+        className={`${styles.container} ${
+          theme === "dark" ? styles.containerDark : styles.containerLight
+        }`}
+      >
         <div className={styles.containerText}>
           <div className={styles.text}>
             <h1>Unlock Your Potential, Together!</h1>
