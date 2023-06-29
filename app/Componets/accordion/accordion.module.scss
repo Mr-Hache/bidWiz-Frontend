@@ -7,8 +7,9 @@
   .titleAccordion {
     @include h-3;
     font-size: 18px;
+    font-weight: 700;
     text-align: center;
-    color: $darkMediumPurple;
+    color: $darkMediumGreen;
     border-radius: 5px 5px 2px 2px;
     box-shadow: 0px 0px 6px 6px rgba(0, 0, 0, 0.25);
     width: 60vw;
@@ -22,7 +23,7 @@
   }
 
   .open {
-    background-color: $lightMediumGreen;
+    background-color: $darkMediumPurple;
   }
 
   .component {
@@ -30,7 +31,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    box-shadow: 0px -6px 3px 3px $lightMediumGreen, 0px 0px 0px 1px transparent;
+    box-shadow: 0px -6px 3px 3px $lightMediumPurple, 0px 0px 0px 1px transparent;
 
     width: 59.5vw;
     margin: -1px auto -10px auto;

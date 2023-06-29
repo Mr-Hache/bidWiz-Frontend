@@ -12,7 +12,7 @@
   .dropdownToggle a {
     @include h-3;
     font-size: 18px;
-    color: $darkGray;
+    color: $darkMediumGreen;
     font-weight: 500;
     text-decoration: none;
     cursor: pointer;
@@ -32,23 +32,40 @@
     }
   }
 
+  .column h3:hover {
+    transform: none;
+  }
+
   .containerColumn {
-    background-color: white;
     width: 29vw;
-    height: 12vw;
+    height: 13vw;
     border-radius: 0px 0px 10px 10px;
     display: flex;
     justify-content: space-between;
     padding-right: 3vw;
-    margin-top: 17vw;
+    margin-top: 18.5vw;
     position: absolute;
-    box-shadow: 0px 6px 4px 2px rgba(0, 0, 0, 0.25);
   }
 
   .containerColumn h3 {
     text-align: center;
     margin-left: 1.9rem;
     font-family: $ralewayFont;
+  }
+
+  .containerColumnLight {
+    background-color: white;
+    box-shadow: 0px 6px 4px 2px rgba(0, 0, 0, 0.25);
+  }
+  .containerColumnDark {
+    background-color: #181123;
+    box-shadow: 0px 0px 6px 4px rgba(93, 4, 153, 0.491);
+    .line span {
+      color: $darkMediumGreen;
+    }
+    .line span:hover {
+      text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.491);
+    }
   }
 
   .containerColumn2 {
@@ -59,7 +76,7 @@
     display: flex;
     justify-content: space-between;
     padding-right: 3vw;
-    margin-top: 24.5vw;
+    margin-top: 25vw;
     position: absolute;
     box-shadow: 0px 6px 4px 2px rgba(0, 0, 0, 0.25);
   }
@@ -70,13 +87,28 @@
     font-family: $ralewayFont;
   }
 
+  .containerColumn2Light {
+    background-color: white;
+    box-shadow: 0px 6px 4px 2px rgba(0, 0, 0, 0.25);
+  }
+  .containerColumn2Dark {
+    background-color: #181123;
+    box-shadow: 0px 0px 6px 4px rgba(93, 4, 153, 0.491);
+    .line span {
+      color: $darkMediumGreen;
+    }
+    .line span:hover {
+      text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.491);
+    }
+  }
+
   .list {
     width: 29vw;
     padding-left: 0.5vw;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(7vw, 1vw));
     grid-gap: 4vw;
-    row-gap: 0.6vw;
+    row-gap: 0.3vw;
     align-items: center;
     margin: 15px 5px;
   }
@@ -88,7 +120,7 @@
 
   .line span {
     @include h-4;
-    font-size: 18px;
+    font-size: 16px;
     color: $darkGray;
     font-weight: 500;
     text-decoration: none;
@@ -101,17 +133,21 @@
   }
 }
 
-.viewAll {    
-  font-family: $ralewayFont;   
-  font-size: 1.1rem;  
+.viewAll {
+  font-family: $ralewayFont;
+
+  font-size: 1.1rem;
   text-align: center;
   width: max-content;
   height: min-content;
   margin-top: -1.1vw;
-  margin-left: 12.9vw;    
-  transition: background-color 300ms linear, transform 300ms ease-in-out;   
+  margin-left: 12.9vw;
+  transition: 0.2s;
+  h4 {
+    color: $darkMediumGreen;
+  }
 }
 
-.viewAll:hover {  
-  transform: scale(1.2);  
+.viewAll:hover {
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
