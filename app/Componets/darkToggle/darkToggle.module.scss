@@ -1,0 +1,25 @@
+.button {
+  background-color: rgba(255, 255, 255, 0);
+  border: none;
+}
+
+.sun {
+  color: yellow;
+  font-size: 20px;
+  font-weight: 700;
+  transition: 0.2s;
+}
+.sun:hover {
+  transform: scale(1.1);
+  transition: 0.2s;
+}
+
+.moon {
+  color: rgb(4, 4, 102);
+  font-size: 20px;
+  font-weight: 700;
+}
+.moon:hover {
+  transform: scale(1.1);
+  transition: 0.2s;
+}
