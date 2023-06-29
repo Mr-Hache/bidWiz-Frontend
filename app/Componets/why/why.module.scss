@@ -4,17 +4,16 @@
 .why {
   padding: 48px;
   text-align: center;
-  background-color: $lightGreen;
   box-shadow: 0px 0px 6px 10px rgba(0, 0, 0, 0.25);
 
   h3 {
     @include h-3;
-    color: $darkGray;
+    color: $darkMediumPurple;
     margin-bottom: -15px;
   }
   h4 {
     @include h-4;
-    color: $darkMediumGray;
+    color: $darkMediumGreen;
   }
 
   .containerWhy {
@@ -42,4 +41,12 @@
     border-radius: 20%;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   }
+}
+
+.whyLight {
+  background-color: $lightGreen;
+}
+
+.whyDark {
+  background-color: #5e35b10e;
 }
