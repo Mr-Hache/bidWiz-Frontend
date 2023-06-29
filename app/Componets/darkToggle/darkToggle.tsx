@@ -1,11 +1,10 @@
 "use client";
 
 import React from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { RootState } from "../../redux/store";
-import { BsSun } from "react-icons/bs";
-import { BsMoon } from "react-icons/bs";
+import { BsSunFill } from "react-icons/bs";
+import { BsMoonFill } from "react-icons/bs";
 import { useTheme } from "next-themes";
+import styles from "./darkToggle.module.scss";
 
 export default function darkToggle() {
   const { theme, setTheme } = useTheme();
@@ -16,8 +15,12 @@ export default function darkToggle() {
   };
 
   return (
-    <button onClick={handleToggleTheme}>
-      {theme === "dark" ? <BsSun /> : <BsMoon />}
+    <button className={styles.button} onClick={handleToggleTheme}>
+      {theme === "dark" ? (
+        <BsSunFill className={styles.sun} title="Ligth Mode" />
+      ) : (
+        <BsMoonFill className={styles.moon} title="Dark Mode" />
+      )}
     </button>
   );
 }
