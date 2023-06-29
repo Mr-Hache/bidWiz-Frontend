@@ -4,12 +4,15 @@ import React from "react";
 import styles from "./loggedin.module.scss";
 import Link from "next/link";
 import { useRef, useState } from "react";
+import { AiOutlineUser } from "react-icons/ai";
+import { VscGraph } from "react-icons/vsc";
+import { FiLogOut } from "react-icons/fi";
 
 interface LoggedInContentProps {
   userName: string;
   userImage: string;
   isAdmin: boolean;
-  handleSignOut: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  handleSignOut: (event: React.MouseEvent<HTMLAnchorElement>) => void;
 }
 
 export default function loggedIn({
@@ -33,37 +36,47 @@ export default function loggedIn({
 
   return (
     <div className={styles.selectorProfile}>
-      <h2>Hi, {userName.split(/[ .]/)[0]}!</h2>
-
-      <div className={styles.dropdown} ref={dropdownRef}>
-        <div className={styles.dropdownToggle}>
-          <a
-            onClick={(event) => handleDropdown(open)}
-            style={{ display: "inline-block" }}
-          >
-            <img src={userImage} alt={userName} width="35" height="35" />
-          </a>
+      <h2>{userName ? `Hi, ${userName.split(/[ .]/)[0]}!` : ""}</h2>
+      <div>
+        <div className={styles.dropdown} ref={dropdownRef}>
+          <div className={styles.dropdownToggle}>
+            <a
+              onClick={(event) => handleDropdown(open)}
+              style={{ display: "inline-block" }}
+            >
+              {userImage ? (
+                <img src={userImage} alt={userName} width="35" height="35" />
+              ) : (
+                <AiOutlineUser className={styles.squeletorImg} />
+              )}
+            </a>
+          </div>
         </div>
-      </div>
-      {open && (
-        <div>
-          <h3 className={styles.log}>
+        {open && (
+          <div className={styles.containerLink}>
             <Link href="/profile" passHref>
-              <div className={styles.profileLink}>My profile</div>
+              <div className={styles.link}>
+                <AiOutlineUser className={styles.icons} />
+                My profile
+              </div>
             </Link>
-          </h3>
-          {isAdmin && (
-            <h3 className={styles.log}>
+            <br />
+            {isAdmin && (
               <Link href="/admin" passHref>
-                <div className={styles.profileLink}>Dashboard</div>
+                <div className={styles.link}>
+                  <VscGraph className={styles.icons} /> Dashboard
+                </div>
               </Link>
-            </h3>
-          )}
-          <h3 className={styles.log}>
-            <button onClick={handleSignOut}>Sign Out</button>
-          </h3>
-        </div>
-      )}
+            )}
+            <br />{" "}
+            <a onClick={handleSignOut}>
+              <div className={styles.link2}>
+                <FiLogOut className={styles.icons2} /> <p>Sign Out</p>
+              </div>
+            </a>{" "}
+          </div>
+        )}
+      </div>
     </div>
   );
 }
