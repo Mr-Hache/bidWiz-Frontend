@@ -6,9 +6,9 @@ import { useAppDispatch, useAppSelector } from "@/app/redux/hooks";
 import { setLanguages, setSubjects } from "@/app/redux/services/filtersSlice";
 import { usePathname } from "next/navigation";
 import { useRouter } from "next/navigation";
+import { useTheme } from "next-themes";
+
 import Link from "next/link";
-
-
 
 const languagesList = [
   "Chinese",
@@ -37,10 +37,11 @@ const subjectsList = [
 ];
 
 export default function slectorNavbar({ filter }: { filter: string }) {
+  const { theme } = useTheme();
+
   //---Filter---
 
   const router = useRouter();
-  
 
   const dispatch = useAppDispatch();
 
@@ -82,8 +83,8 @@ export default function slectorNavbar({ filter }: { filter: string }) {
     }
   };
 
-  return (   
-    <div className={styles.dropdown} ref={dropdownRef}>      
+  return (
+    <div className={styles.dropdown} ref={dropdownRef}>
       <div className={styles.dropdownToggle}>
         <a
           onClick={(event) => handleDropdown(open)}
@@ -102,12 +103,24 @@ export default function slectorNavbar({ filter }: { filter: string }) {
         <div
           className={
             filter === "languages"
-              ? styles.containerColumn
-              : styles.containerColumn2              
+              ? `${styles.containerColumn} ${
+                  theme === "dark"
+                    ? styles.containerColumnDark
+                    : styles.containerColumnLight
+                }`
+              : `${styles.containerColumn2} ${
+                  theme === "dark"
+                    ? styles.containerColumn2Dark
+                    : styles.containerColum2Light
+                }`
           }
         >
           <div className={styles.column}>
-            {filter === 'languages'? <h3>Wizards speak</h3>:<h3>Wizards knowledge</h3>}
+            {filter === "languages" ? (
+              <h3>Wizards speak</h3>
+            ) : (
+              <h3>Wizards knowledge</h3>
+            )}
             <ul className={styles.list}>
               {filterList.map((filter, index) => (
                 <div className={styles.line} key={index}>
@@ -119,7 +132,11 @@ export default function slectorNavbar({ filter }: { filter: string }) {
                 </div>
               ))}
               <div className={styles.viewAll}>
-                <Link href="/offerBoard" passHref style={{ textDecoration: "none", color: "black" }}>
+                <Link
+                  href="/offerBoard"
+                  passHref
+                  style={{ textDecoration: "none", color: "black" }}
+                >
                   <h4>View all</h4>
                 </Link>
               </div>
