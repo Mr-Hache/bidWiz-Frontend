@@ -272,7 +272,7 @@ function detail() {
   checked={selectedClasses === 2}
   onChange={handleClassesChange}
 />
-<label htmlFor="">Unitary price per two classes {user.pricePerTwo*2} USD</label>
+<label htmlFor="">Price per two classes {user.pricePerTwo*2} USD</label>
 
 <hr />
 <input
@@ -282,7 +282,7 @@ function detail() {
   checked={selectedClasses === 3}
   onChange={handleClassesChange}
 />
-<label htmlFor="">Unitary price per three classes {user.pricePerThree*3} USD</label>
+<label htmlFor="">Price per three classes {user.pricePerThree*3} USD</label>
 <hr />
       </div>
     </tbody>
