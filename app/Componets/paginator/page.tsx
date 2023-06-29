@@ -52,7 +52,7 @@ interface PaginatorProps {
 export default function Paginator({ statePage }: PaginatorProps) {
   const dispatch = useAppDispatch();
   const page = useAppSelector((state) => state.filters.page);
-  const totalPages = 5; 
+  const totalPages = 6; 
 
   const handlePage = (newPage: number) => {
     if (newPage >= 1 && newPage <= totalPages) {
