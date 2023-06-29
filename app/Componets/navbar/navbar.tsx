@@ -17,8 +17,10 @@ import {
   setUid,
 } from "../../redux/services/userAuthSlice";
 import { useAppDispatch } from "../../redux/hooks";
+import { useTheme } from "next-themes";
 
 export default function Navbar() {
+  const { theme } = useTheme();
   const router = useRouter();
   const dispatch = useAppDispatch();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -69,7 +71,11 @@ export default function Navbar() {
   };
 
   return (
-    <div className={styles.navCont}>
+    <div
+      className={`${styles.navCont} ${
+        theme === "dark" ? styles.navContDark : styles.navContLight
+      }`}
+    >
       <div className={styles.icons}>
         <Link href="/" style={{ textDecoration: "none" }}>
           <div className={styles.iconsLink}>
