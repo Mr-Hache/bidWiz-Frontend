@@ -15,8 +15,14 @@
     justify-content: space-around;
     height: auto;
     max-width: 100%;
-    background-color: #d3d3d365;
+
     padding: 0 7vw;
+  }
+  .containerDark {
+  }
+
+  .containerLight {
+    background-color: #d3d3d365;
   }
 
   .containerText {
@@ -41,7 +47,7 @@
     width: 34vw;
     text-align: start;
     margin-bottom: -1.5vw;
-    color: $darkPurple;
+    color: $darkMediumPurple;
   }
 
   .buttons {
@@ -81,7 +87,7 @@
       @include h-1;
       font-size: 40px;
       text-align: center;
-      color: $darkMediumGray;
+      color: $darkMediumPurple;
       letter-spacing: 1px;
     }
   }
