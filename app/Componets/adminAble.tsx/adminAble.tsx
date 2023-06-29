@@ -72,7 +72,7 @@ function AdminAble() {
                   disabled={ableLoading}
                   className={styles.botton2}
                 >
-                  Able User
+                  Able
                 </button>
               )}
             </div>
