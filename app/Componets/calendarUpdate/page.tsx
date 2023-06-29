@@ -14,6 +14,7 @@ const CalendarUpdate: React.FC<CalendarProps> = ({calendarData, numberClasses, o
 
   const handleTimeSlotClick = (day: string, timeSlot: string) => {
     const isSelected = isTimeSlotSelected(day, timeSlot);
+  
     if (isSelected) {
       setSelectedTimeslots((currentTimeslots) =>
         currentTimeslots.filter(
@@ -21,7 +22,8 @@ const CalendarUpdate: React.FC<CalendarProps> = ({calendarData, numberClasses, o
         )
       );
     } else {
-      if (selectedTimeslots.length < numberClasses) {
+      // Verificar si el timeslot está reservado
+      if (!calendarData.days[day].timeSlots[timeSlot].isBooked && selectedTimeslots.length < numberClasses) {
         setSelectedTimeslots((currentTimeslots) => [
           ...currentTimeslots,
           { day, hour: timeSlot },
@@ -29,10 +31,16 @@ const CalendarUpdate: React.FC<CalendarProps> = ({calendarData, numberClasses, o
       }
     }
   };
+  
 
   useEffect(() => {
     onSelectedTimeslots(selectedTimeslots);
   }, [selectedTimeslots]);
+
+  useEffect(() => {
+    setSelectedTimeslots([]);
+  }, [numberClasses]);
+
 
   const isTimeSlotSelected = (day: string, timeSlot: string) => {
     return selectedTimeslots.some(timeslot => timeslot.day === day && timeslot.hour === timeSlot && !isTimeslotDeselected(timeslot));
@@ -47,11 +55,11 @@ const CalendarUpdate: React.FC<CalendarProps> = ({calendarData, numberClasses, o
   
 
   return (
-    <table>
-      <thead>
-        <tr>
+    <table className={styles.table}>
+      <thead >
+        <tr >
           {Object.keys(calendarData.days).map(day => (
-            <th key={day}>{day}</th>
+            <th style={{ backgroundColor: "#a5d6a7" }} key={day}>{day}</th>
           ))}
         </tr>
       </thead>
@@ -60,16 +68,16 @@ const CalendarUpdate: React.FC<CalendarProps> = ({calendarData, numberClasses, o
           <tr key={timeSlot}>
             {Object.keys(calendarData.days).map(day => (
               <td 
-                key={day}
-                onClick={() => handleTimeSlotClick(day, timeSlot)}
-                style={{
-                    cursor: "pointer",
-                    backgroundColor: isTimeSlotSelected(day, timeSlot) ? 'blue' : 'white',
-                    color: isTimeSlotSelected(day, timeSlot) ? 'white' : 'black',
-                }}
-              >
-                {timeSlot}: {calendarData.days[day].timeSlots[timeSlot]?.isBooked ? 'Reserved' : 'Available'}
-              </td>
+              className={`
+                ${calendarData.days[day].timeSlots[timeSlot]?.isBooked ? styles.reserved : ''}
+                ${isTimeSlotSelected(day, timeSlot) ? styles.selected : ''}
+              `}
+              key={day}
+              onClick={() => handleTimeSlotClick(day, timeSlot)}
+              style={{ cursor: "pointer" }}
+            >
+              {timeSlot}: {calendarData.days[day].timeSlots[timeSlot]?.isBooked ? 'Reserved' : 'Available'}
+            </td>
             ))}
           </tr>
         ))}
