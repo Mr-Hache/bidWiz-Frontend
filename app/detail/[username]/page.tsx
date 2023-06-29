@@ -287,14 +287,18 @@ function detail() {
       </div>
     </tbody>
   </table>
-
- 
-  <CalendarUpdate calendarData={user.calendar} numberClasses={selectedClasses || 0} onSelectedTimeslots={handleSelectedTimeslots}/>
+      {selectedClasses === null 
+      ? <p>Select your classes</p>
+      : selectedClasses === 0 
+        ? <p>Select your classes</p> 
+        : <p>Please select {selectedClasses} {selectedClasses > 1 ? 'classes' : 'class'}</p>
+      }
+      <CalendarUpdate calendarData={user.calendar} numberClasses={selectedClasses || 0} onSelectedTimeslots={handleSelectedTimeslots}/>
   
-  <button onClick={handleClick} disabled={!selectedLanguage || !selectedSubject || !selectedClasses}>CONFIRM</button> 
-  {preferenceId && <Wallet initialization={{ preferenceId: preferenceId }} />}
-        </div>
-    </div>
+                <button onClick={handleClick} disabled={!selectedLanguage || !selectedSubject || !selectedClasses}>CONFIRM</button> 
+                {preferenceId && <Wallet initialization={{ preferenceId: preferenceId }} />}
+          </div>
+      </div>
     </div>
   );
 }
