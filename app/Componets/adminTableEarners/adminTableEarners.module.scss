@@ -5,8 +5,8 @@
   width: 22vw;
   text-align: center;
   font-family: $ralewayFont;
-  background-color: #f9f9f9;
-  box-shadow: 0px 0px 4px 4px rgba(0, 0, 0, 0.25);
+  background-color: #a0a0a000;
+  box-shadow: 0px 0px 6px 6px rgba(102, 102, 102, 0.25);
   border-radius: 0.5rem;
 
   h1 {
@@ -20,7 +20,7 @@
     align-items: center;
     padding-left: 2vw;
     margin-left: 0%;
-    box-shadow: 0px -5px 5px -5px rgba(0, 0, 0, 0.25);
+    box-shadow: 0px -5px 5px -5px rgba(102, 102, 102, 0.25);
     padding-top: 4px;
     padding-bottom: 4px;
 
@@ -45,6 +45,6 @@
   }
 
   .tableContents:hover {
-    background-color: $lightMediumGreen;
+    background-color: $darkMediumGreen;
   }
 }
