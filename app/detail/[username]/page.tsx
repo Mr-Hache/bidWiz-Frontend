@@ -272,7 +272,7 @@ function detail() {
   checked={selectedClasses === 2}
   onChange={handleClassesChange}
 />
-<label htmlFor="">Unitary price per two classes {user.pricePerTwo*2} USD</label>
+<label htmlFor="">Price per two classes {user.pricePerTwo*2} USD</label>
 
 <hr />
 <input
@@ -282,19 +282,23 @@ function detail() {
   checked={selectedClasses === 3}
   onChange={handleClassesChange}
 />
-<label htmlFor="">Unitary price per three classes {user.pricePerThree*3} USD</label>
+<label htmlFor="">Price per three classes {user.pricePerThree*3} USD</label>
 <hr />
       </div>
     </tbody>
   </table>
-
- 
-  <CalendarUpdate calendarData={user.calendar} numberClasses={selectedClasses || 0} onSelectedTimeslots={handleSelectedTimeslots}/>
+      {selectedClasses === null 
+      ? <p>Select your classes</p>
+      : selectedClasses === 0 
+        ? <p>Select your classes</p> 
+        : <p>Please select {selectedClasses} {selectedClasses > 1 ? 'classes' : 'class'}</p>
+      }
+      <CalendarUpdate calendarData={user.calendar} numberClasses={selectedClasses || 0} onSelectedTimeslots={handleSelectedTimeslots}/>
   
-  <button onClick={handleClick} disabled={!selectedLanguage || !selectedSubject || !selectedClasses}>CONFIRM</button> 
-  {preferenceId && <Wallet initialization={{ preferenceId: preferenceId }} />}
-        </div>
-    </div>
+                <button onClick={handleClick} disabled={!selectedLanguage || !selectedSubject || !selectedClasses}>CONFIRM</button> 
+                {preferenceId && <Wallet initialization={{ preferenceId: preferenceId }} />}
+          </div>
+      </div>
     </div>
   );
 }

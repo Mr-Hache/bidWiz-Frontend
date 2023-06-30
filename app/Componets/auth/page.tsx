@@ -11,6 +11,8 @@ import {
 import { FcGoogle } from "react-icons/fc";
 import { useCreateUserMutation } from "@/app/redux/services/userApi";
 
+import Swal from "sweetalert2";
+
 function authent() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -30,14 +32,14 @@ function authent() {
             if (!user.emailVerified) {
               router.push("/login");
               userSignOut();
-              alert("email not verified");
+              Swal.fire("email not verified");
             } else {
               console.log("usuario autenticado");
               router.push("/offerBoard");
             }
           })
           .catch((error) => {
-            alert("Unregistered user or incorrect password");
+            Swal.fire("Unregistered user or incorrect password");
             console.log(error);
           });
       })
