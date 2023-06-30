@@ -1,6 +1,23 @@
 @import "../../utils/mixin";
 @import "../../utils/variabls";
 
-.selected {
-    background-color: $darkMediumBlue; // los intervalos de tiempo seleccionados tendrán un fondo gris
+.table{
+  @include p-p;
+  font-size: medium;
+  border-radius: 10px;
+  overflow: hidden; 
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+  
+  th, td {
+    border: none;  
   }
+}
+
+.reserved {
+  background-color: $lightPurple;
+}
+
+.selected {
+  background-color: $lightGreen;
+}
+

@@ -13,6 +13,9 @@ import {  FaBook,  FaMicroscope,  FaBriefcase,  FaVial,  FaCode,  FaRegChartBar,
 import { IconType } from 'react-icons';
 import  FaIconName  from 'react-icons/fa';
 import CalendarUpdate from "@/app/Componets/calendarUpdate/page";
+import Swal from "sweetalert2";
+import firebase from 'firebase/app';
+import { getFunctions, httpsCallable } from "firebase/functions";
 
 
 interface LanguageFlag {
@@ -86,7 +89,7 @@ function detail() {
       const newJob = await createJob(createJobDto).unwrap();
       setPreferenceId(newJob.result);
     } catch (error) {
-      alert("need to login")
+      Swal.fire("Need to login or wrong select")
       console.error(error);
     }
   };
@@ -167,6 +170,10 @@ function detail() {
       availability: timeslots,
     }));
   };
+
+  
+  
+
   
 
   return (    
@@ -272,7 +279,7 @@ function detail() {
   checked={selectedClasses === 2}
   onChange={handleClassesChange}
 />
-<label htmlFor="">Unitary price per two classes {user.pricePerTwo*2} USD</label>
+<label htmlFor="">Price per two classes {user.pricePerTwo*2} USD</label>
 
 <hr />
 <input
@@ -282,19 +289,23 @@ function detail() {
   checked={selectedClasses === 3}
   onChange={handleClassesChange}
 />
-<label htmlFor="">Unitary price per three classes {user.pricePerThree*3} USD</label>
+<label htmlFor="">Price per three classes {user.pricePerThree*3} USD</label>
 <hr />
       </div>
     </tbody>
   </table>
-
- 
-  <CalendarUpdate calendarData={user.calendar} numberClasses={selectedClasses || 0} onSelectedTimeslots={handleSelectedTimeslots}/>
-  
-  <button onClick={handleClick} disabled={!selectedLanguage || !selectedSubject || !selectedClasses}>CONFIRM</button> 
-  {preferenceId && <Wallet initialization={{ preferenceId: preferenceId }} />}
-        </div>
-    </div>
+      {selectedClasses === null 
+      ? <p>Select your classes</p>
+      : selectedClasses === 0 
+        ? <p>Select your classes</p> 
+        : <p>Please select {selectedClasses} {selectedClasses > 1 ? 'classes' : 'class'}</p>
+      }
+      <CalendarUpdate calendarData={user.calendar} numberClasses={selectedClasses || 0} onSelectedTimeslots={handleSelectedTimeslots} />
+      
+                <button onClick={handleClick} disabled={!selectedLanguage || !selectedSubject || !selectedClasses}>CONFIRM</button> 
+                {preferenceId && <Wallet initialization={{ preferenceId: preferenceId }} />}
+          </div>
+      </div>
     </div>
   );
 }

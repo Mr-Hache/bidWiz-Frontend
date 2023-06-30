@@ -18,8 +18,8 @@ export type User = {
   languages: string [];
   subjects:  string [];
   experience: {
-    title: [];
-    origin: [];
+    title: []| string;
+    origin: []|string;
     expJobs: number;
   };
   pricePerOne: number;
