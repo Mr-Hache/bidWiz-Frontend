@@ -16,6 +16,7 @@ import CalendarUpdate from "@/app/Componets/calendarUpdate/page";
 import Swal from "sweetalert2";
 import firebase from 'firebase/app';
 import { getFunctions, httpsCallable } from "firebase/functions";
+import Loading from "@/app/Componets/Loading/page";
 
 
 interface LanguageFlag {
@@ -117,7 +118,7 @@ function detail() {
     isError,
   } = useGetUserByIdQuery({ _id});
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <Loading></Loading>;
   if (isError || !user) return <div>User not found</div>;
 
 

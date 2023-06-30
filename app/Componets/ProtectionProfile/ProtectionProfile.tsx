@@ -8,7 +8,7 @@ import UnableAccount from "../UnableAccount/page";
 import Accordion from "../accordion/accordion";
 import styles from "../ProtectionProfile/ProtectionProfile.module.scss";
 import MyCalendar from "../myCalendar/myCalendar";
-
+import Loading from "../Loading/page";
 import { useRouter } from "next/navigation";
 import WizardPanel from "../WizardPanel/page";
 import UserPanel from "../UserPanel/page";
@@ -57,7 +57,7 @@ const ProtectionProfile = () => {
           </div>
         </div>
       ) : (
-        <div>loading...</div>
+        <Loading></Loading>
       )}
     </div>
   );

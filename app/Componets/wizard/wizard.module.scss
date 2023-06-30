@@ -16,10 +16,12 @@
     margin-top: 6vw; 
     width: 16vw;    
     border-color: rgb(230, 228, 240);
-    background-image: linear-gradient(to right, $lightMediumGreen, $darkMediumGreen, $lightMediumGreen);
+    background-image: linear-gradient(to right, white, $darkMediumGray, white);
     background-size: 300% 100%;
     transition: background-position 0.6s ease-in-out;
     height: auto;
+    min-width: 250px;
+    max-width: 400px;
 }
 
 .contCards:hover {

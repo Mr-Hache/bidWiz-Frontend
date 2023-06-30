@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { auth } from "../utils/firebase";
 import { onAuthStateChanged } from "firebase/auth";
+import Loading from "../Componets/Loading/page";
 
 export default function login() {
   const router = useRouter();
@@ -29,9 +30,10 @@ export default function login() {
         <div>
           <Navbar />
           <Authent />
+          <Loading></Loading>
         </div>
       ) : (
-        <div>loading...</div>
+        <Loading></Loading>
       )}
     </div>
   );
