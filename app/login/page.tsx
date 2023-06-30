@@ -30,7 +30,6 @@ export default function login() {
         <div>
           <Navbar />
           <Authent />
-          <Loading></Loading>
         </div>
       ) : (
         <Loading></Loading>
