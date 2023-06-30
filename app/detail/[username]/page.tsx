@@ -16,7 +16,7 @@ import CalendarUpdate from "@/app/Componets/calendarUpdate/page";
 import Swal from "sweetalert2";
 import firebase from 'firebase/app';
 import { getFunctions, httpsCallable } from "firebase/functions";
-import { functions, app } from '../../utils/firebase';
+
 
 interface LanguageFlag {
   name: string;
