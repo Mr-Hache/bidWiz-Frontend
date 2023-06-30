@@ -4,12 +4,13 @@ import { onAuthStateChanged } from "firebase/auth";
 import { useEffect, useState } from "react";
 import Navbar from "../navbar/navbar";
 import EditProfile from "../editProfile/page";
-import JobsPanel from "../JobsPanel/page";
 import UnableAccount from "../UnableAccount/page";
 import Accordion from "../accordion/accordion";
 import styles from "../ProtectionProfile/ProtectionProfile.module.scss";
 
 import { useRouter } from "next/navigation";
+import WizardPanel from "../WizardPanel/page";
+import UserPanel from "../UserPanel/page";
 
 const ProtectionProfile = () => {
   const router = useRouter();
@@ -40,8 +41,11 @@ const ProtectionProfile = () => {
             <Accordion title="Edit Profile">
               <EditProfile />
             </Accordion>
-            <Accordion title="Jobs Panel">
-              <JobsPanel />
+            <Accordion title="Wizard Panel">
+              <WizardPanel />
+            </Accordion>
+            <Accordion title="User Panel">
+              <UserPanel />
             </Accordion>
             <Accordion title="Management Account">
               <UnableAccount />

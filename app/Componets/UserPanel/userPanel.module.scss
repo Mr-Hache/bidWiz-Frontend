@@ -1,0 +1,43 @@
+@import "../../utils/mixin";
+@import "../../utils/variabls";
+
+.div {
+    font-family: $ralewayFont;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 2em;
+    margin: auto;
+    .paneljobs{
+        width: 250px;
+    }
+    h1 {
+        @include h-1;
+    }
+    select {
+        
+        width: 100%;
+        padding: 0.5em;
+        font-size: 1em;
+        margin-bottom: 1em;
+        border: 1px solid $darkMediumGray;
+        border-radius: 5px;
+        width: 450px;
+    }
+    button {
+        @include button-styles1(1em);
+        margin-top: 1em;
+    }
+    .reviewContainer{
+        display:flex;
+    }
+    .reviewNumber{
+        width: 30%;
+        border:none;
+        appearance: none;
+    }
+    .block{
+        height: 4.5em;
+    }
+}

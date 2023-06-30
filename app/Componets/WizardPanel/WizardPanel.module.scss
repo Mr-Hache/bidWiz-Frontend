@@ -13,7 +13,7 @@
         width: 250px;
     }
     h1 {
-      @include h-1;
+        @include h-1;
     }
     select {
         width: 100%;
@@ -28,5 +28,7 @@
         @include button-styles1(1em);
         margin-top: 1em;
     }
-
-  }
+    .block{
+        height: 4.5em;
+    }
+}
