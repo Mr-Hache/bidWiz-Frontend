@@ -5,6 +5,7 @@ import { FaHatWizard } from "react-icons/fa";
 import SearchBar from "../searchBar/searchBar";
 import SelectorNavbar from "../selectorsNavbar/selectorNavbar";
 import DarkToggle from "../darkToggle/darkToggle";
+import LoggedIn from "../loggedIn/loggedIn";
 import { useState, useEffect } from "react";
 import { userSignOut } from "../../utils/firebase";
 import { onAuthStateChanged } from "firebase/auth";
@@ -59,7 +60,7 @@ export default function Navbar() {
 
   const isAdmin = userName === "bidwiz.admin";
 
-  const handleSignOut = async (event: React.MouseEvent<HTMLButtonElement>) => {
+  const handleSignOut = async (event: React.MouseEvent<HTMLAnchorElement>) => {
     event.preventDefault();
     try {
       await userSignOut();
@@ -88,30 +89,15 @@ export default function Navbar() {
         <SelectorNavbar filter="languages" />
         <SelectorNavbar filter="subjects" />
         <SearchBar />
-        <DarkToggle />
       </div>
       <div className={styles.buttons}>
         {isLoggedIn ? (
-          <>
-            <h3 className={styles.log}>
-              <Link href="/profile" passHref>
-                <div className={styles.profileLink}>
-                  <img src={userImage} alt={userName} width="35" height="35" />
-                  My Profile
-                </div>
-              </Link>
-            </h3>
-            {isAdmin ? (
-              <h3 className={styles.log}>
-                <Link href="/admin" passHref>
-                  <div className={styles.profileLink}>Dashboard</div>
-                </Link>
-              </h3>
-            ) : null}
-            <button onClick={handleSignOut} className={styles.button2}>
-              Sign Out
-            </button>
-          </>
+          <LoggedIn
+            userName={userName}
+            userImage={userImage}
+            isAdmin={isAdmin}
+            handleSignOut={handleSignOut}
+          />
         ) : (
           <>
             <h3 className={styles.log}>
@@ -126,6 +112,7 @@ export default function Navbar() {
             </button>
           </>
         )}
+        <DarkToggle />
       </div>
     </div>
   );

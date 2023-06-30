@@ -1,0 +1,125 @@
+@import "../../utils/mixin";
+@import "../../utils/variabls";
+
+.selectorProfile {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+  h2 {
+    @include h-3;
+    color: $darkMediumGreen;
+  }
+
+  .dropdown {
+    align-items: center;
+    transition: 0.2s;
+  }
+
+  .squeletorImg {
+    font-size: 28px;
+    background-color: $darkMediumGreen;
+    border-radius: 50%;
+    padding: 5px;
+    color: $darkMediumPurple;
+    margin-right: 0.7vw;
+  }
+
+  .dropdown:hover {
+    cursor: pointer;
+    transform: scale(1.2);
+  }
+
+  .containerLink {
+    background-color: #181123;
+
+    width: 10vw;
+    right: 2vw;
+    position: absolute;
+    text-align: end;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding: 1vw;
+    border-radius: 10px;
+    margin-top: 1.3vw;
+
+    a {
+      @include h-4;
+      font-size: 18px;
+      color: white;
+      text-decoration: none;
+    }
+    .icons {
+      color: $darkMediumGreen;
+      font-size: 22px;
+      font-size: 700;
+      left: 1px;
+    }
+    .icons2 {
+      color: $darkMediumGreen;
+
+      font-size: 22px;
+      left: 1px;
+
+      font-size: 700;
+    }
+  }
+
+  .link {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    transition: 0.2s;
+  }
+  .link2 {
+    padding: 0;
+    height: 1vw;
+    display: flex;
+    flex-direction: row;
+    align-items: start;
+    justify-content: space-between;
+    margin-top: 0vw;
+    transition: 0.2s;
+
+    p {
+      padding: 0;
+      margin-top: 0vw;
+    }
+  }
+
+  .link:hover {
+    color: $lightMediumPurple;
+    .icons {
+      transform: scale(1.2);
+    }
+  }
+
+  .link2:hover {
+    cursor: pointer;
+    color: $lightMediumPurple;
+    .icons2 {
+      transform: scale(1.2);
+    }
+  }
+}
+
+// .log button {
+//   @include h-3;
+//   text-decoration: none;
+//   margin-right: 2vw;
+//   color: $darkMediumGreen;
+//   border: none;
+//   background-color: transparent;
+// }
+
+// .button1 a {
+//   text-decoration: none;
+//   color: inherit;
+// }
+
+// .profileLink {
+//   display: flex;
+//   align-items: center;
+//   margin-top: 30px;
+//   margin-right: 60px;
+// }

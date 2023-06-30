@@ -16,11 +16,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <ThemeProvider attribute="class">
+     
         <Providers>
           <body className={styles.body}>{children}</body>
         </Providers>
-      </ThemeProvider>
+    
     </html>
   );
 }
