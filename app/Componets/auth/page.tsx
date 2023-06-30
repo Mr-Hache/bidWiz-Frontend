@@ -39,7 +39,8 @@ function authent() {
             }
           })
           .catch((error) => {
-            Swal.fire("Unregistered user or incorrect password");
+            // Swal.fire("Unregistered user or incorrect password");
+            Swal.fire('Unregistered', '<b>user or incorrect</b> password', 'error');
             console.log(error);
           });
       })
