@@ -325,7 +325,7 @@ function basicForm() {
 
   const handleGoogleSignIn = async (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
-setPersistence (auth, browserLocalPersistence).then(() => {
+    setPersistence (auth, browserLocalPersistence).then(() => {
     loginWithGoogle().then((result) => {
       const user = result.user;
      
