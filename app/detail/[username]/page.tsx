@@ -13,7 +13,10 @@ import {  FaBook,  FaMicroscope,  FaBriefcase,  FaVial,  FaCode,  FaRegChartBar,
 import { IconType } from 'react-icons';
 import  FaIconName  from 'react-icons/fa';
 import CalendarUpdate from "@/app/Componets/calendarUpdate/page";
-
+import Swal from "sweetalert2";
+import firebase from 'firebase/app';
+import { getFunctions, httpsCallable } from "firebase/functions";
+import { functions, app } from '../../utils/firebase';
 
 interface LanguageFlag {
   name: string;
@@ -86,7 +89,7 @@ function detail() {
       const newJob = await createJob(createJobDto).unwrap();
       setPreferenceId(newJob.result);
     } catch (error) {
-      alert("need to login")
+      Swal.fire("Need to login or wrong select")
       console.error(error);
     }
   };
@@ -167,6 +170,10 @@ function detail() {
       availability: timeslots,
     }));
   };
+
+  
+  
+
   
 
   return (    
@@ -293,8 +300,8 @@ function detail() {
         ? <p>Select your classes</p> 
         : <p>Please select {selectedClasses} {selectedClasses > 1 ? 'classes' : 'class'}</p>
       }
-      <CalendarUpdate calendarData={user.calendar} numberClasses={selectedClasses || 0} onSelectedTimeslots={handleSelectedTimeslots}/>
-  
+      <CalendarUpdate calendarData={user.calendar} numberClasses={selectedClasses || 0} onSelectedTimeslots={handleSelectedTimeslots} />
+      
                 <button onClick={handleClick} disabled={!selectedLanguage || !selectedSubject || !selectedClasses}>CONFIRM</button> 
                 {preferenceId && <Wallet initialization={{ preferenceId: preferenceId }} />}
           </div>

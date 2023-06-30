@@ -8,6 +8,7 @@ import JobsPanel from "../JobsPanel/page";
 import UnableAccount from "../UnableAccount/page";
 import Accordion from "../accordion/accordion";
 import styles from "../ProtectionProfile/ProtectionProfile.module.scss";
+import MyCalendar from "../myCalendar/myCalendar";
 
 import { useRouter } from "next/navigation";
 
@@ -42,6 +43,9 @@ const ProtectionProfile = () => {
             </Accordion>
             <Accordion title="Jobs Panel">
               <JobsPanel />
+            </Accordion>
+            <Accordion title="My Calendar">
+              <MyCalendar/>
             </Accordion>
             <Accordion title="Management Account">
               <UnableAccount />
