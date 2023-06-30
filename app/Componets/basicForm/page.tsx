@@ -428,7 +428,12 @@ setPersistence (auth, browserLocalPersistence).then(() => {
       {values.isWizard ? (
         <div>
           <br />
-          <ImageUpload onImageUpload={handleImageUpload} />
+          <br />
+
+          <div>          
+          <ImageUpload onImageUpload={handleImageUpload} />       
+          </div>
+
 
           {errors.image && <span className="error">{errors.image}</span>}
           <br />
