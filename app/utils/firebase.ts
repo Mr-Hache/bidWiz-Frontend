@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getAuth, GithubAuthProvider, signInWithPopup, GoogleAuthProvider, createUserWithEmailAndPassword, signOut } from "firebase/auth";
-
+import { getFunctions } from "firebase/functions";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBlzPhkSErym_sgwdh2A-n_rcJh2cDgPBg",
@@ -15,7 +15,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 
 const auth = getAuth();
-
+const functions = getFunctions(app); 
 
 
 export const loginWithGoogle =  () => {
@@ -31,5 +31,5 @@ export const userSignOut = () => {
   return signOut(auth);
 }
 
-export { app, auth };
+export { app, auth, functions };
 
