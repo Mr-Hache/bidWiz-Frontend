@@ -77,8 +77,8 @@ const Wizard: React.FC<WizardProps> = ({ wizardUser }) => {
               loader={imageLoader}
               src={wizardUser.image}
               alt=""
-              width={120}
-              height={120}
+              width={150}
+              height={150}
             />            
           </div>
           </Link>

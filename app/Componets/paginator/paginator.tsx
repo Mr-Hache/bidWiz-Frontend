@@ -1,44 +1,6 @@
-// "use client"
- 
-// import React from 'react';
-// import style from "./paginator.module.scss";
-// import { useAppSelector, useAppDispatch } from "@/app/redux/hooks";
-// import { setPage } from "@/app/redux/services/filtersSlice";
 
-// interface PaginatorProps {
-//   statePage: boolean;
-// }
 
-// export default function Paginator({ statePage }: PaginatorProps) {
-//   const dispatch = useAppDispatch();
-//   const page = useAppSelector((state) => state.filters.page);
-//   const totalPages = 5; 
-
-//   const handlePage = (event: React.MouseEvent<HTMLButtonElement>) => {
-//     const value = event.currentTarget.value;
-
-//     if (value === "Next" && page < totalPages) {
-//       statePage ? dispatch(setPage(page + 1)) : null;
-//     } else if (value === "Prev" && page > 1) {
-//       dispatch(setPage(page - 1));
-//     }
-//   }
-
-//   const isLastPage = page === totalPages;
-//   const isFirstPage = page === 1;
-
-//   return (
-//     <div className={style.contPaginator}>
-//       <button onClick={handlePage} value="Prev" disabled={isFirstPage}>
-//         Prev
-//       </button>
-//       <span>{page}</span>
-//       <button onClick={handlePage} value="Next" disabled={isLastPage}>
-//         Next
-//       </button>
-//     </div>
-//   );
-// }
+"use client"
 
 import React from 'react';
 import style from "./paginator.module.scss";
@@ -47,61 +9,78 @@ import { setPage } from "@/app/redux/services/filtersSlice";
 
 interface PaginatorProps {
   statePage: boolean;
+   totalWizards : number;
+
 }
 
-export default function Paginator({ statePage }: PaginatorProps) {
+ 
+
+export default function Paginator({ totalWizards,  statePage }: PaginatorProps) {
   const dispatch = useAppDispatch();
   const page = useAppSelector((state) => state.filters.page);
-  const totalPages = 6; 
 
-  const handlePage = (newPage: number) => {
-    if (newPage >= 1 && newPage <= totalPages) {
-      dispatch(setPage(newPage));
+ const totalPages =  Math.ceil(totalWizards / 9); 
+  let paginatorView:number[] = [page];
+  const paginatorMax = 3
+  const mediumLeft = paginatorMax % 2 !== 0? Math.floor(paginatorMax/2): paginatorMax/2 ;
+  const mediumRight = paginatorMax % 2 !== 0? Math.floor(paginatorMax/2): paginatorMax/2 -1;
+
+  const paginatorLeft = page > mediumLeft ?  mediumLeft : page -1;
+  const paginatorRight = page + mediumRight <= totalPages ? mediumRight : totalPages - page;
+
+if(paginatorLeft > 0){
+  let numPaginatorLeft = page - 1;
+  for (let i = 1; i <= paginatorLeft; i++) {
+    paginatorView.unshift(numPaginatorLeft);
+    numPaginatorLeft--;
+  }
+}
+
+if(paginatorRight > 0){
+  let numPaginatorRight = page + 1;
+  for (let i = 1; i <= paginatorRight; i++) {
+    paginatorView.push(numPaginatorRight);
+    numPaginatorRight++;
+  }
+}
+
+if(paginatorView.length < paginatorMax){
+  if(paginatorView[0] > 1){
+    let numPaginatorLeft = paginatorView[0] - 1;
+    for (let i = paginatorView.length; i < paginatorMax; i++) {
+      paginatorView.unshift(numPaginatorLeft);
+      numPaginatorLeft--;
     }
-  };
-
-  const renderPageNumbers = () => {
-    const pageNumbers = [];
-
-    for (let i = 1; i <= totalPages; i++) {
-      pageNumbers.push(
-        <button
-          key={i}
-          onClick={() => handlePage(i)}
-          className={page === i ? style.active : ""}
-        >
-          {i}
-        </button>
-      );
+  }else if(paginatorView[paginatorView.length -1] < totalPages){
+    let numPaginatorRight = paginatorView[paginatorView.length -1] + 1;
+    for (let i = paginatorView.length; i < paginatorMax; i++) {
+      paginatorView.push(numPaginatorRight);
+      numPaginatorRight++;
     }
+  }
+}
 
-    return pageNumbers;
-  };
 
-  const handlePreviousPage = () => {
-    if (page > 1) {
-      handlePage(page - 1);
-    }
-  };
+  if (page > totalPages) return null;
 
-  const handleNextPage = () => {
-    if (page < totalPages) {
-      handlePage(page + 1);
-    }
-  };
+
 
   return (
     <div className={style.contPaginator}>
-      <button onClick={handlePreviousPage} disabled={page === 1} className={style.btnPrevius}>
-        Prev
+      <button onClick={() => dispatch(setPage(1))} disabled={page === 1} className={style.btnFirst}> First </button>
+      <button onClick={() => dispatch(setPage(page - 1))} disabled={page === 1} className={style.btn}> Prev </button>
+{
+
+  paginatorView.map((item, index) => {
+    return (
+      <button className={item == page?style.btnSelected:style.btnSelect} key={index} onClick={() => dispatch(setPage(item))}>
+        {item}
       </button>
-      <div className={style.numbers}>
-      {renderPageNumbers()}
-      </div>
-      
-      <button onClick={handleNextPage} disabled={page === totalPages} className={style.btnNext}>
-        Next
-      </button>
-    </div>
-  );
+    )
+  }
+  )
+}
+      <button onClick={() => dispatch(setPage(page + 1))} disabled={page === totalPages} className={style.btn}> Next </button>
+      <button onClick={() => dispatch(setPage(totalPages))} disabled={page === totalPages} className={style.btnFirst}> Last </button>
+    </div>)
 }
