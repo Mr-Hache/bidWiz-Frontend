@@ -4,7 +4,7 @@ import styles from "./navbar.module.scss";
 import { FaHatWizard } from "react-icons/fa";
 import SearchBar from "../searchBar/searchBar";
 import SelectorNavbar from "../selectorsNavbar/selectorNavbar";
-//import DarkToggle from "../darkToggle/darkToggle";
+import DarkToggle from "../darkToggle/darkToggle";
 import LoggedIn from "../loggedIn/loggedIn";
 import { useState, useEffect } from "react";
 import { userSignOut } from "../../utils/firebase";
@@ -21,7 +21,7 @@ import { useAppDispatch } from "../../redux/hooks";
 import { useTheme } from "next-themes";
 
 export default function Navbar() {
-
+  const { theme } = useTheme();
   const router = useRouter();
   const dispatch = useAppDispatch();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -73,7 +73,9 @@ export default function Navbar() {
 
   return (
     <div
-      className={`${styles.navCont}`}
+      className={`${styles.navCont} ${
+        theme === "dark" ? styles.navContDark : styles.navContLight
+      }`}
     >
       <div className={styles.icons}>
         <Link href="/" style={{ textDecoration: "none" }}>
@@ -110,7 +112,7 @@ export default function Navbar() {
             </button>
           </>
         )}
-        {/* <DarkToggle /> */}
+        <DarkToggle />
       </div>
     </div>
   );
