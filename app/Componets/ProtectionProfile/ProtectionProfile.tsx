@@ -3,15 +3,15 @@ import { auth } from "../../utils/firebase";
 import { onAuthStateChanged } from "firebase/auth";
 import { useEffect, useState } from "react";
 import Navbar from "../navbar/navbar";
-import EditProfile from "../editProfile/page";
-import UnableAccount from "../UnableAccount/page";
+import EditProfile from "../editProfile/editProfile";
+import UnableAccount from "../UnableAccount/unableAccount";
 import Accordion from "../accordion/accordion";
 import styles from "../ProtectionProfile/ProtectionProfile.module.scss";
 import MyCalendar from "../myCalendar/myCalendar";
 
 import { useRouter } from "next/navigation";
-import WizardPanel from "../WizardPanel/page";
-import UserPanel from "../UserPanel/page";
+import WizardPanel from "../WizardPanel/wizardPanel";
+import UserPanel from "../UserPanel/userPanel";
 
 const ProtectionProfile = () => {
   const router = useRouter();

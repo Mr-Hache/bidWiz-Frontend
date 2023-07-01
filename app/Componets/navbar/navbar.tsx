@@ -73,9 +73,7 @@ export default function Navbar() {
 
   return (
     <div
-      className={`${styles.navCont} ${
-        theme === "dark" ? styles.navContDark : styles.navContLight
-      }`}
+      className={`${styles.navCont}`}
     >
       <div className={styles.icons}>
         <Link href="/" style={{ textDecoration: "none" }}>
