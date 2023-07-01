@@ -2,6 +2,7 @@ import React, { useState, ChangeEvent, FormEvent } from 'react';
 import { getAuth, sendPasswordResetEmail } from 'firebase/auth';
 
 import styles from "./formChangePassword.module.scss"
+import Swal from "sweetalert2";
 
 const FormChangePassword: React.FC = () => {
   const [email, setEmail] = useState('');
@@ -16,11 +17,13 @@ const FormChangePassword: React.FC = () => {
     const auth = getAuth();
     sendPasswordResetEmail(auth, email)
       .then(() => {
-        alert('Password reset email sent successfully');
+        // alert('Password reset email sent successfully');
+        Swal.fire('Password', 'reset email sent <b>successfully</b>', 'success');
       
       })
       .catch((error) => {
-        alert(`Error sending password reset email: ${error}`);
+        // alert(`Error sending password reset email: ${error}`);
+        Swal.fire('Error', `<b>Sending password reset email:</b> ${error}`, 'error');
     
       });
   };
