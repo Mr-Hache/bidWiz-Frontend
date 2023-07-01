@@ -4,7 +4,7 @@ import styles from "./navbar.module.scss";
 import { FaHatWizard } from "react-icons/fa";
 import SearchBar from "../searchBar/searchBar";
 import SelectorNavbar from "../selectorsNavbar/selectorNavbar";
-import DarkToggle from "../darkToggle/darkToggle";
+//import DarkToggle from "../darkToggle/darkToggle";
 import LoggedIn from "../loggedIn/loggedIn";
 import { useState, useEffect } from "react";
 import { userSignOut } from "../../utils/firebase";
@@ -110,7 +110,7 @@ export default function Navbar() {
             </button>
           </>
         )}
-        <DarkToggle />
+        {/* <DarkToggle /> */}
       </div>
     </div>
   );
