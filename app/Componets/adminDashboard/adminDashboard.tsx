@@ -3,8 +3,8 @@
 import React from "react";
 import styles from "./adminDashboard.module.scss";
 import AdminUsers from "../adminUsers/adminUsers";
-import AdminReview from "../adminReview/adminReview";
-import AdminDistribution from "../adminDistribution/adminDistribution";
+//import AdminReview from "../adminReview/adminReview";
+//import AdminDistribution from "../adminDistribution/adminDistribution";
 import AdminTableSeller from "../adminTableSellers/adminTableSeller";
 import AdminTableBuyers from "../adminTableBuyers/adminTableBuyers";
 import AdminDisabled from "../adminDisabled/adminDisabled";
@@ -16,8 +16,8 @@ export default function adminDashboard() {
     <div className={styles.dashboard}>
       <AdminUsers />
       <div className={styles.container}>
-        <AdminReview />
-        <AdminDistribution />
+        {/* <AdminReview /> */}
+        {/* <AdminDistribution /> */}
       </div>
       <div className={styles.container}>
         <AdminTableEarners />
