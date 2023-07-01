@@ -1,6 +1,6 @@
 import styles from "./pageNotFound.module.scss";
 import Image from "next/image";
-import pnf from "../../src/pnf.png";
+import sombrero from "../../src/sombrero.png";
 import Link from "next/link";
 
 export default function pageNotFound() {
@@ -16,7 +16,7 @@ export default function pageNotFound() {
         </div>
 
         <div>
-          <Image src={pnf} alt="" width={300} height={200} />
+          <Image src={sombrero} alt="" width={300} height={200} />
         </div>
 
         <div className={styles.container3}>

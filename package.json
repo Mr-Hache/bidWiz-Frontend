@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@emailjs/browser": "^3.11.0",
     "@mercadopago/sdk-react": "^0.0.11",
     "@reduxjs/toolkit": "^1.9.5",
     "@types/react-dom": "18.2.5",
@@ -17,6 +18,7 @@
     "cloudinary": "^1.37.2",
     "cloudinary-react": "^1.8.1",
     "dotenv": "^16.3.1",
+    "emailjs-com": "^3.2.0",
     "encoding": "^0.1.13",
     "firebase": "^9.23.0",
     "firebase-functions": "^4.4.1",
@@ -31,7 +33,7 @@
     "react-redux": "^8.1.0",
     "react-world-flags": "^1.5.1",
     "redux": "^4.2.1",
-    "sass": "^1.63.3",
+    "sass": "^1.63.6",
     "sweetalert2": "^11.7.12",
     "uninstall": "^0.0.0"
   },

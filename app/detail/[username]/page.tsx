@@ -11,9 +11,11 @@ import Flag from "react-world-flags";
 import { flags, subjectsIcons } from "@/app/utils/flagsAndObjectsIcons";
 import {  FaBook,  FaMicroscope,  FaBriefcase,  FaVial,  FaCode,  FaRegChartBar,  FaBalanceScale,  FaCalculator,  FaMusic,  FaAtom,  FaUserGraduate,  FaLaptopCode,} from 'react-icons/fa';
 import { IconType } from 'react-icons';
-import  FaIconName  from 'react-icons/fa';
 import CalendarUpdate from "@/app/Componets/calendarUpdate/calendarUpdate";
 import Swal from "sweetalert2";
+import firebase from 'firebase/app';
+import { getFunctions, httpsCallable } from "firebase/functions";
+import emailjs from 'emailjs-com';
 import Loading from "@/app/Componets/Loading/Loading";
 
 interface LanguageFlag {
@@ -34,11 +36,13 @@ function detail() {
   const [selectedPrice, setSelectedPrice] = useState<number | null>(null); 
   const [buyerName, setBuyerName] = useState("")
   const [availability, setAvailability] = useState<{ day: string; hour: string }[]>([]);
-
-
   const [createJob, { data: job, }] = useCreateJobMutation();
   const pathname = usePathname(); 
   const _id = pathname.split("/")[2];
+
+  
+
+    
 
   const fetchUserData = () => {
     fetch(`https://bidwiz-backend-production-db77.up.railway.app/users/user/${localUid}`)
@@ -84,9 +88,14 @@ function detail() {
 
   const handleClick = async () => {
     try {
+      // let templateParams = {
+      //   message: `Class: ${selectedSubject} in ${selectedLanguage}. Client name: ${buyerName}. Client ID: ${buyerId}. Wizard name: ${user?.name}. Wizard ID: ${_id}. Price: $${(selectedClasses || 0) * (selectedPrice || 0)} USD.`,
+      //   to_email: user?.email,
+      // };
       console.log(createJobDto)
       const newJob = await createJob(createJobDto).unwrap();
       setPreferenceId(newJob.result);
+      // sendEmail(templateParams)
     } catch (error) {
       Swal.fire("Need to login or wrong select")
       console.error(error);
@@ -94,6 +103,8 @@ function detail() {
   };
 
   useEffect(() => {
+    
+
     setCreateJobDto({
       ...createJobDto,
       status: "In Progress",
@@ -108,7 +119,17 @@ function detail() {
       availability: availability
     });
     console.log(createJobDto); 
+    
   }, [selectedLanguage, selectedSubject, selectedClasses, _id, selectedPrice, buyerId]);
+
+  function sendEmail(templateParams: {message: string, to_email: string | undefined}) {      
+    emailjs.send("service_09m33gr","template_plhbgod", templateParams, 'UGYQRFU0vkqoRXNx0')
+      .then((response) => {
+        console.log('SUCCESS!', response.status, response.text);
+      }, (error) => {
+        console.error('FAILED...', error);
+      });
+  }
 
   const {
     data: user,
@@ -119,7 +140,8 @@ function detail() {
   if (isLoading) return <Loading />;
   if (isError || !user) return <div>User not found</div>;
 
-
+  
+  
   const mappedLanguages: (string | null)[] = user.languages.map((language: string | null) => {
     const flagObject = flags.find((flag: LanguageFlag) => flag.name === language);
     return flagObject ? flagObject.flag : null;
@@ -156,12 +178,11 @@ function detail() {
     }
   };  
 
+
   const renderStars = (numStars: number) => {
     const stars = '⭐';
     return stars.repeat(Math.round(numStars));
   };
-
-  
 
   const handleSelectedTimeslots = (timeslots: {day: string, hour: string}[]) => {
     setCreateJobDto((prevCreateJobDto) => ({

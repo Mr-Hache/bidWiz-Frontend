@@ -71,7 +71,7 @@ function authent() {
                   data.forEach((item: { email: string; isDisabled: boolean }) => {
                     if (item.email === user.email && item.isDisabled === true) {
                     
-                      Swal.fire("User disabled");
+                      Swal.fire('User', 'disabled', 'success');
                      
                       userSignOut();
                     } else {
@@ -142,9 +142,9 @@ function authent() {
       </button>
       <div>
         <div>
-          <span onClick={handleChangePassword}>
+          <button onClick={handleChangePassword}>
             I have forgotten my password
-          </span>
+          </button>
         </div>
         <FcGoogle className={style.icon} />
         <button onClick={handleGoogleSignIn}>Log In with Google</button>
