@@ -17,7 +17,6 @@ import Swal from "sweetalert2";
 import firebase from 'firebase/app';
 import { getFunctions, httpsCallable } from "firebase/functions";
 
-
 interface LanguageFlag {
   name: string;
   flag: string | null;
@@ -170,11 +169,6 @@ function detail() {
       availability: timeslots,
     }));
   };
-
-  
-  
-
-  
 
   return (    
     <div>

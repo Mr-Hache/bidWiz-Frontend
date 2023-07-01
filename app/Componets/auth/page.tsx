@@ -142,7 +142,7 @@ function authent() {
       <div>
         <div>
           <span onClick={handleChangePassword}>
-          I have forgotten my password
+            I have forgotten my password
           </span>
         </div>
         <FcGoogle className={style.icon} />
