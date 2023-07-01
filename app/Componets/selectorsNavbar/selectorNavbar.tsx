@@ -65,7 +65,13 @@ export default function slectorNavbar({ filter }: { filter: string }) {
     }
   };
 
-  window.addEventListener("click", handleClickDropdown);
+  useEffect(() => {
+    window.addEventListener("click", handleClickDropdown);
+
+    return () => {
+      window.removeEventListener("click", handleClickDropdown);
+    };
+  }, []);
 
   const onClickFilter = (event: React.MouseEvent<HTMLSpanElement>) => {
     event.preventDefault();

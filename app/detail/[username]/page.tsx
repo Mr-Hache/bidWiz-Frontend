@@ -54,6 +54,7 @@ function detail() {
   useEffect(() => {
     fetchUserData(); 
   }, [localUid]);
+  
 
   const handleLanguageChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedLanguage(e.target.value);

@@ -149,6 +149,7 @@ function authent() {
         <button onClick={handleGoogleSignIn}>Log In with Google</button>
       </div>
     </form>
+ 
   );
 }
 
