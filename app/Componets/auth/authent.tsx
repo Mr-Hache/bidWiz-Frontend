@@ -32,14 +32,15 @@ function authent() {
             if (!user.emailVerified) {
               router.push("/login");
               userSignOut();
-              Swal.fire("email not verified");
+              Swal.fire("Email not verified");
             } else {
               console.log("usuario autenticado");
               router.push("/offerBoard");
             }
           })
           .catch((error) => {
-            Swal.fire("Unregistered user or incorrect password");
+            // Swal.fire("Unregistered user or incorrect password");
+            Swal.fire('Unregistered', '<b>user or incorrect</b> password', 'error');
             console.log(error);
           });
       })
@@ -70,7 +71,7 @@ function authent() {
                   data.forEach((item: { email: string; isDisabled: boolean }) => {
                     if (item.email === user.email && item.isDisabled === true) {
                     
-                      alert("user disabled");
+                      Swal.fire("User disabled");
                      
                       userSignOut();
                     } else {
@@ -142,7 +143,7 @@ function authent() {
       <div>
         <div>
           <span onClick={handleChangePassword}>
-          I have forgotten my password
+            I have forgotten my password
           </span>
         </div>
         <FcGoogle className={style.icon} />

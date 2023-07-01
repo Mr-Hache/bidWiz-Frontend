@@ -1,4 +1,4 @@
-"use client";
+
 
 import React from "react";
 import { BsSunFill } from "react-icons/bs";
@@ -23,10 +23,12 @@ export default function darkToggle() {
   return (
     <button className={styles.button} onClick={handleToggleTheme}>
       {theme === "dark" ? (
-        <BsSunFill className={styles.sun} title="Ligth Mode" />
+        <BsSunFill className={styles.sun} title="Light Mode" />
       ) : (
         <BsMoonFill className={styles.moon} title="Dark Mode" />
       )}
     </button>
   );
 }
+
+

@@ -1,8 +1,9 @@
-"use client";
+"use client"
 
 import styles from "./layout.module.scss";
 import { Providers } from "./redux/providers";
 import { ThemeProvider } from "next-themes";
+
 
 
 export default function RootLayout({
@@ -11,13 +12,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
+    
     <html lang="en">
-     <ThemeProvider>
-     <Providers>
+       <ThemeProvider>
+       <Providers>
           <body className={styles.body}>{children}</body>
         </Providers>
-     </ThemeProvider>
-
+       </ThemeProvider>
+       
     
     </html>
   );

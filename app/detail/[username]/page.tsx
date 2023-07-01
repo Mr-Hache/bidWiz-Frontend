@@ -12,11 +12,10 @@ import { flags, subjectsIcons } from "@/app/utils/flagsAndObjectsIcons";
 import {  FaBook,  FaMicroscope,  FaBriefcase,  FaVial,  FaCode,  FaRegChartBar,  FaBalanceScale,  FaCalculator,  FaMusic,  FaAtom,  FaUserGraduate,  FaLaptopCode,} from 'react-icons/fa';
 import { IconType } from 'react-icons';
 import  FaIconName  from 'react-icons/fa';
-import CalendarUpdate from "@/app/Componets/calendarUpdate/page";
+import CalendarUpdate from "@/app/Componets/calendarUpdate/calendarUpdate";
 import Swal from "sweetalert2";
 import firebase from 'firebase/app';
 import { getFunctions, httpsCallable } from "firebase/functions";
-
 
 interface LanguageFlag {
   name: string;
@@ -171,11 +170,6 @@ function detail() {
       availability: timeslots,
     }));
   };
-
-  
-  
-
-  
 
   return (    
     <div>
