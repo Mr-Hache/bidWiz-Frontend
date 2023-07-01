@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import Navbar from "../navbar/navbar";
 import FormChangePassword from "../formChangePassword/formChangePassword";
 import {useRouter} from "next/navigation"
+import Loading from "../Loading/Loading";
 
 const ProtectionChangePassword = () => {
     const [isReady, setIsReady] = useState(true);
@@ -33,7 +34,7 @@ const ProtectionChangePassword = () => {
             <br />
             <br />
             <FormChangePassword></FormChangePassword>
-        </div> : <div>loading...</div>
+        </div> : <Loading></Loading>
         }
     </div>
   )

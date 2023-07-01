@@ -14,8 +14,7 @@ import { IconType } from 'react-icons';
 import  FaIconName  from 'react-icons/fa';
 import CalendarUpdate from "@/app/Componets/calendarUpdate/calendarUpdate";
 import Swal from "sweetalert2";
-import firebase from 'firebase/app';
-import { getFunctions, httpsCallable } from "firebase/functions";
+import Loading from "@/app/Componets/Loading/Loading";
 
 interface LanguageFlag {
   name: string;
@@ -117,7 +116,7 @@ function detail() {
     isError,
   } = useGetUserByIdQuery({ _id});
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <Loading />;
   if (isError || !user) return <div>User not found</div>;
 
 
