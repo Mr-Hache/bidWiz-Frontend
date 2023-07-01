@@ -7,6 +7,8 @@ import {useAppSelector} from "../../redux/hooks"
 import ImageUpload from "../imageUpload/imageUpload";
 import { getAuth, sendPasswordResetEmail } from 'firebase/auth';
 
+import Swal from "sweetalert2";
+
 
 function EditProfile() {
 
@@ -131,7 +133,8 @@ function EditProfile() {
             
             console.log(response);
             fetchUserData(); 
-            alert("Info updated")
+            // alert("Info updated")
+            Swal.fire('Info', '<b>updated</b>', 'success');
         } catch (error) {
             console.error(error);
         }
@@ -146,12 +149,12 @@ function EditProfile() {
         if(email){
             sendPasswordResetEmail(auth, email)
             .then(() => {
-              alert('Password reset email sent successfully');
-            
+            //   alert('Password reset email sent successfully');
+             Swal.fire('Password reset', '<b>email sent</b>', 'success');            
             })
             .catch((error) => {
-              alert(`Error sending password reset email: ${error}`);
-          
+            //   alert(`Error sending password reset email: ${error}`);
+             Swal.fire('Error', `<b>Sending password reset email:</b> ${error}`, 'error');          
             });
         }
       
