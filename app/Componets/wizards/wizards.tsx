@@ -1,7 +1,7 @@
 "use client";
 import { User } from "../../redux/services/userApi";
-import Wizard from "../wizard/page";
-import Paginator from "../paginator/page";
+import Wizard from "../wizard/wizard";
+import Paginator from "../paginator/paginator";
 import { useAppSelector, useAppDispatch } from "@/app/redux/hooks";
 
 import { setWizards } from "@/app/redux/services/wizardsSlice";
@@ -11,7 +11,7 @@ import {
   setPage,
 } from "@/app/redux/services/filtersSlice";
 import { useEffect, useState } from "react";
-import FilterBar from "../filterBar/page";
+import FilterBar from "../filterBar/filterBar";
 
 
 import style from "./wizards.module.scss"

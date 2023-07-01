@@ -1,6 +1,6 @@
 "use client";
 
-import BasicForm from "../Componets/basicForm/page";
+import BasicForm from "../Componets/basicForm/basicForm";
 import Navbar from "@/app/Componets/navbar/navbar";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";

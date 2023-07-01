@@ -1,6 +1,6 @@
 "use client";
 
-import Authent from "../Componets/auth/page";
+import Authent from "../Componets/auth/authent";
 import Navbar from "@/app/Componets/navbar/navbar";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
