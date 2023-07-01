@@ -21,7 +21,7 @@ import { useAppDispatch } from "../../redux/hooks";
 import { useTheme } from "next-themes";
 
 export default function Navbar() {
-  const { theme } = useTheme();
+
   const router = useRouter();
   const dispatch = useAppDispatch();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
