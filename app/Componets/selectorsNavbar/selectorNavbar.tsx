@@ -67,7 +67,7 @@ export default function slectorNavbar({ filter }: { filter: string }) {
 
   useEffect(() => {
     window.addEventListener("click", handleClickDropdown);
-  
+
     return () => {
       window.removeEventListener("click", handleClickDropdown);
     };

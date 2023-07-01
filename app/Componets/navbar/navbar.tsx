@@ -59,7 +59,7 @@ export default function Navbar() {
   }, []);
 
   const isAdmin = userName === "bidwiz.admin";
-//test
+
   const handleSignOut = async (event: React.MouseEvent<HTMLAnchorElement>) => {
     event.preventDefault();
     try {
