@@ -4,7 +4,7 @@ import Image from 'next/image';
 import style from "./wizard.module.scss"
 import Flag from "react-world-flags";
 import { flags, subjectsIcons } from "@/app/utils/flagsAndObjectsIcons";
-import wizards from "../wizards/wizards";
+
 import {  FaBook,  FaMicroscope,  FaBriefcase,  FaVial,  FaCode,  FaRegChartBar,  FaBalanceScale,  FaCalculator,  FaMusic,  FaAtom,  FaUserGraduate,  FaLaptopCode,} from 'react-icons/fa';
 import { IconType } from 'react-icons';
 
@@ -77,8 +77,8 @@ const Wizard: React.FC<WizardProps> = ({ wizardUser }) => {
               loader={imageLoader}
               src={wizardUser.image}
               alt=""
-              width={120}
-              height={120}
+              width={150}
+              height={150}
             />            
           </div>
           </Link>
