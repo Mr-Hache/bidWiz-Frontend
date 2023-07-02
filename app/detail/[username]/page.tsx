@@ -14,6 +14,7 @@ import { IconType } from 'react-icons';
 import CalendarUpdate from "@/app/Componets/calendarUpdate/calendarUpdate";
 import Swal from "sweetalert2";
 import emailjs from 'emailjs-com';
+import Loading from "@/app/Componets/Loading/Loading";
 
 interface LanguageFlag {
   name: string;
@@ -36,6 +37,7 @@ function detail() {
   const [createJob, { data: job, }] = useCreateJobMutation();
   const pathname = usePathname(); 
   const _id = pathname.split("/")[2];
+
 
   
 
@@ -133,7 +135,7 @@ function detail() {
     isError,
   } = useGetUserByIdQuery({ _id});
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <Loading />;
   if (isError || !user) return <div>User not found</div>;
 
 

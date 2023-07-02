@@ -13,9 +13,7 @@ import {
 import { useEffect, useState } from "react";
 import FilterBar from "../filterBar/filterBar";
 
-
-import style from "./wizards.module.scss"
-
+import style from "./wizards.module.scss";
 
 export default function wizards() {
   const size = 9;
@@ -103,7 +101,7 @@ export default function wizards() {
   useEffect(() => {
     dispatch(setPage(1));
     takeCounter(languages, subjects);
-    takeWizards(languages, subjects, 1);    
+    takeWizards(languages, subjects, 1);
   }, [languages, subjects]);
 
   useEffect(() => {
@@ -119,21 +117,25 @@ export default function wizards() {
     }
   }, [page, totalWizards]);
 
-
-  return (    
+  return (
     <div className={style.contCard}>
       <div className={style.containerWizard}>
-
         <div className={style.filterBar}>
           <FilterBar />
         </div>
-          <div className={style.containerCard}>
-          {wizards && wizards.map((wizardUser: User) => {
-            return <Wizard key={wizardUser._id} wizardUser={wizardUser} />
-      })}
-       {wizards && wizards.length > 0 && <Paginator statePage={statePage} />}
+        
+        <div className={style.containerCard}>
+          {wizards &&
+            wizards.map((wizardUser: User) => {
+              return <Wizard key={wizardUser._id} wizardUser={wizardUser} />;
+            })}
+          <div  className={style.paginator}>
+            {wizards && wizards.length > 0 && (
+              <Paginator statePage={statePage} totalWizards={totalWizards} />
+            )}
+          </div>
+        </div>
       </div>
-      </div>             
     </div>
   );
 }

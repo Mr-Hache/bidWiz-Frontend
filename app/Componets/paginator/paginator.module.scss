@@ -5,8 +5,9 @@
     margin-top: 4vw;
     margin-bottom: 2vw;
     justify-content: center;
-    width: 100%;
-    margin-left: 20vw;    
+    
+    min-width: 100%;
+    
 }
 
 .contPaginator button {
@@ -15,9 +16,10 @@
     border-radius: 7px;
     height: 30px;
     width: 70px;
-    border: none;
+
     padding: 5px 5px 5px 5px;
     cursor: pointer;  
+ 
 }
 
 .contPaginator span{
@@ -27,16 +29,49 @@
     font-weight: 600;    
 }
 
-.btnPrevius {
+.btn {
     width: 5rem;
-    background-color:$lightGreen;    
+    background-color:$darkMediumGreen;    
+    transition: 0.3s;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border: none;
+     &:hover {
+        background-color: $darkGreen;
+        transition : 0.3s;
+     }
 }
 
-.btnNext {
-    width: 5rem;
-    background-color: $lightGreen;
+.btnFirst {
+    background-color: rgba(147, 148, 148, 0.527);
+    border: none;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    transition: 0.3s;
+    &:hover {
+        background-color: rgba(78, 78, 78, 0.527);
+        transition: 0.3s;
+     }
 }
+
+
 
 .numbers {    
     display: inline;   
+}
+
+.btnSelect{
+    @include button-styles1(1vw);
+    box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+ margin : 0px;
+
+      
+}
+
+.btnSelected{
+    @include button-styles1(1vw);
+    box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+    margin : 0px;
+    border : 2px solid $darkMediumPurple;
+    
+    
+    
 }

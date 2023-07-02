@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import { auth } from "../utils/firebase";
 import { onAuthStateChanged } from "firebase/auth";
 import style from "./login.module.scss";
+import Loading from "../Componets/Loading/Loading";
 
 export default function login() {
   const router = useRouter();
@@ -32,7 +33,7 @@ export default function login() {
           <Authent />
         </div>
       ) : (
-        <div className={style.spinner}></div>
+        <Loading />
       )}
     </div>
   );

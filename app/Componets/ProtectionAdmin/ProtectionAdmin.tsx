@@ -7,6 +7,7 @@ import { auth } from "../../utils/firebase";
 import { onAuthStateChanged } from "firebase/auth";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import Loading from "../Loading/Loading";
 
 const ProtectionAdmin = () => {
     const router = useRouter();
@@ -51,7 +52,7 @@ const ProtectionAdmin = () => {
             </div>
           </div>
         ) : (
-          <div>loading...</div>
+          <Loading />
         )}
       </div>
     );

@@ -12,6 +12,7 @@ import MyCalendar from "../myCalendar/myCalendar";
 import { useRouter } from "next/navigation";
 import WizardPanel from "../WizardPanel/wizardPanel";
 import UserPanel from "../UserPanel/userPanel";
+import Loading from "../Loading/Loading";
 
 const ProtectionProfile = () => {
   const router = useRouter();
@@ -57,7 +58,7 @@ const ProtectionProfile = () => {
           </div>
         </div>
       ) : (
-        <div>loading...</div>
+        <Loading />
       )}
     </div>
   );
