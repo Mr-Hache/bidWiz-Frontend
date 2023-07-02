@@ -89,6 +89,15 @@ export default function slectorNavbar({ filter }: { filter: string }) {
     }
   };
 
+  const onClickAllWizards  = (event: React.MouseEvent<HTMLSpanElement>) => {
+    event.preventDefault();
+    dispatch(setLanguages([]));
+    dispatch(setSubjects([]));
+    if(pathname !== "/offerBoard"){
+      router.push("/offerBoard");
+    }
+  }
+
   return (
     <div className={styles.dropdown} ref={dropdownRef}>
       <div className={styles.dropdownToggle}>
@@ -138,13 +147,9 @@ export default function slectorNavbar({ filter }: { filter: string }) {
                 </div>
               ))}
               <div className={styles.viewAll}>
-                <Link
-                  href="/offerBoard"
-                  passHref
-                  style={{ textDecoration: "none", color: "black" }}
-                >
-                  <h4>View all</h4>
-                </Link>
+               
+                  <span onClick={onClickAllWizards}>View all</span>
+            
               </div>
             </ul>
           </div>
