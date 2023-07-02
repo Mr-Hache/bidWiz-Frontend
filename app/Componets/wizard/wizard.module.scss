@@ -6,19 +6,10 @@
   align-content: center;
   align-items: center;
   font-family: $ralewayFont;
-
   border-radius: 0.5rem;
   text-align: center;
   margin-left: 3vw;
   margin-top: 6vw;
-  width: 9vw;
-
-  background-image: linear-gradient(
-    to right,
-    rgba(255, 255, 255, 0),
-    rgba(255, 255, 255, 0),
-    $darkMediumPurple
-  );
   background-size: 300% 100%;
   transition: background-position 0.6s ease-in-out;
   height: 36;
@@ -31,10 +22,22 @@
 }
 
 .contCardsDark {
-  box-shadow: 0px 0px 6px 4px rgba(93, 4, 153, 0.491);
+  background-image: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0),
+    rgba(255, 255, 255, 0),
+    $lightPurple,
+    $lightPurple
+  );
 }
 .contCardsLight {
-  box-shadow: 0px 0px 6px 6px rgba(102, 102, 102, 0.25);
+  background-image: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0),
+    rgba(255, 255, 255, 0),
+    $lightGreen,
+    $lightGreen
+  );
 }
 
 .contCards h2 {
@@ -42,14 +45,7 @@
   font-size: 1.5vw;
   font-weight: 700;
   color: $darkMediumGreen;
-}
-
-.contCards p {
-  margin: 0;
-  color: $darkMediumGreen;
-  font-size: 1.5vw;
-  margin-top: 1vw;
-  min-height: 3.5vw;
+  margin-bottom: 0.5vw;
 }
 
 .secondCont {
@@ -58,48 +54,88 @@
   margin-left: 0.5vw;
   margin-right: 0.5vw;
   margin-bottom: 0.5vw;
+  .stars {
+    min-height: 2vw;
+    color: rgb(231, 198, 6);
+    font-size: 1.2vw;
+    height: 5px;
+    margin: 0;
+    margin-top: 5px;
+    padding: 0;
+  }
+}
+
+.experience {
+  margin-top: -8px;
+  b {
+    color: $darkMediumPurple;
+    font-size: 18px;
+  }
 }
 
 .secondCont h3 {
   color: rgba(11, 12, 12, 0.527);
-  margin: 0;
+  margin: 10px 0;
+  color: $darkMediumPurple;
 }
 
-.imagen {
+.image {
   border-radius: 5px;
+  box-shadow: 0px 6px 6px rgba(0, 0, 0, 0.25);
+  margin-bottom: 7px;
+}
+
+.imageDark {
+  box-shadow: 0px 6px 6px $darkMediumPurple;
 }
 
 .flags {
   display: flex;
   flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: start;
   gap: 10px;
-  margin-left: 0.5rem;
-  margin-top: 0.5rem;
+  margin-top: 2vw;
+  min-height: 42.5px;
+  padding-right: 10px;
 }
 
 .language {
   display: flex;
-  align-items: center;
+  align-items: start;
   gap: 5px;
   font-size: 1vw;
+  width: 3vw;
+  height: 1vw;
+}
+
+.languageText {
+  font-size: 14px;
+}
+
+.flag {
+  width: 1.5vw;
 }
 
 .subjects {
   display: flex;
   flex-wrap: wrap;
+  justify-content: space-between;
   gap: 10px;
-  margin-left: 1rem;
   margin-top: 0.5rem;
   font-size: 1vw;
+  height: 5vw;
 }
 
 .subject {
   display: flex;
   align-items: center;
   gap: 5px;
-  margin-bottom: 0.5rem;
 }
 
 .siglas {
   margin-left: 5px;
+}
+.about {
+  text-align: justify;
 }
