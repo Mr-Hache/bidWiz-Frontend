@@ -1,0 +1,29 @@
+@import "../../utils/variabls";
+
+.loading {
+  position: fixed;
+  top: 50%;
+  left: calc(50% + 63px); /* Ajusta el valor para moverlo a la derecha */
+  transform: translate(-50%, -50%);
+  display: inline-block;
+
+  &::after {
+    content: '';
+    display: block;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: 4px solid rgba(255, 255, 255, 0.5);
+    border-top-color: $lightMediumGreen;
+    animation: loading 1s ease-in-out infinite;
+  }
+}
+
+@keyframes loading {
+  from {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
