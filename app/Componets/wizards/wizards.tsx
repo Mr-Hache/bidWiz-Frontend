@@ -12,7 +12,7 @@ import {
 } from "@/app/redux/services/filtersSlice";
 import { useEffect, useState } from "react";
 import FilterBar from "../filterBar/filterBar";
-
+import FilterBarDropDown from "../filterBarDropDown/filterBarDropDown";
 import style from "./wizards.module.scss";
 
 export default function wizards() {
@@ -121,15 +121,16 @@ export default function wizards() {
     <div className={style.contCard}>
       <div className={style.containerWizard}>
         <div className={style.filterBar}>
-          <FilterBar />
+          <FilterBarDropDown />
+          {/* <FilterBar /> */}
         </div>
-        
+
         <div className={style.containerCard}>
           {wizards &&
             wizards.map((wizardUser: User) => {
               return <Wizard key={wizardUser._id} wizardUser={wizardUser} />;
             })}
-          <div  className={style.paginator}>
+          <div className={style.paginator}>
             {wizards && wizards.length > 0 && (
               <Paginator statePage={statePage} totalWizards={totalWizards} />
             )}

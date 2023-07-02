@@ -118,7 +118,6 @@ const Wizard: React.FC<WizardProps> = ({ wizardUser }) => {
           </div>
 
           <div className={style.flags}>
-            <b>Speack in:</b>
             {mappedLanguages
               .slice()
               .sort((a, b) => (a && b ? a.localeCompare(b) : 0))
@@ -140,7 +139,7 @@ const Wizard: React.FC<WizardProps> = ({ wizardUser }) => {
               .slice()
               .sort((a, b) => a.localeCompare(b))
               .map((subject, index) => {
-                if (index < 5) {
+                if (index < 7) {
                   const subjectIcon = subjectsIcons.find(
                     (item) => item.name === subject
                   );

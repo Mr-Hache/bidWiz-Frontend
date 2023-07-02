@@ -37,8 +37,8 @@
     to right,
     rgba(255, 255, 255, 0),
     rgba(255, 255, 255, 0),
-    $lightGreen,
-    $lightGreen
+    rgba(53, 56, 56, 0.13),
+    rgba(53, 56, 56, 0.13)
   );
 }
 
@@ -71,7 +71,7 @@
 .experience {
   margin-top: -0.5vw;
   b {
-    color: $darkMediumPurple;
+    color: $darkMediumGreen;
     font-size: 1.2vw;
   }
 }
