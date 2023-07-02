@@ -1,105 +1,105 @@
 @import "../../utils/mixin";
 @import "../../utils/variabls";
 
-.contCards {     
-    background-color: white;    
-    justify-content: center;   
-    align-content: center;
-    align-items: center;   
-    font-family: $ralewayFont;  
+.contCards {
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  font-family: $ralewayFont;
 
-  border: 2px solid $darkMediumGreen;
-    border-radius: 3px;
-    box-shadow: 5px 5px 5px 0px rgba(1, 0, 8, 0.808);    
-    text-align: center;
-    margin-left: 3vw;          
-    margin-top: 6vw; 
-    width: 9vw;    
- 
-    background-image: linear-gradient(to right, white, white, rgba(147, 148, 148, 0.527));
-    background-size: 300% 100%;
-    transition: background-position 0.6s ease-in-out;
-    height: 36;
-    min-width: 20vw;
-    max-width: 30vw;
+  border-radius: 0.5rem;
+  text-align: center;
+  margin-left: 3vw;
+  margin-top: 6vw;
+  width: 9vw;
+
+  background-image: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0),
+    rgba(255, 255, 255, 0),
+    $darkMediumPurple
+  );
+  background-size: 300% 100%;
+  transition: background-position 0.6s ease-in-out;
+  height: 36;
+  min-width: 20vw;
+  max-width: 30vw;
 }
 
 .contCards:hover {
-    background-position: 100% 0;
+  background-position: 100% 0;
 }
 
-.contCards h2 {    
-    font-family: $ralewayFont;
-    font-size: 1.5vw;
-    font-weight: 700;
-    color: $darkPurple;   
+.contCardsDark {
+  box-shadow: 0px 0px 6px 4px rgba(93, 4, 153, 0.491);
+}
+.contCardsLight {
+  box-shadow: 0px 0px 6px 6px rgba(102, 102, 102, 0.25);
+}
 
+.contCards h2 {
+  font-family: $ralewayFont;
+  font-size: 1.5vw;
+  font-weight: 700;
+  color: $darkMediumGreen;
 }
 
 .contCards p {
-    
-    margin: 0;
-    color: $darkMediumGreen;
-    font-size: 1.5vw;
-    margin-top: 1vw;
-    min-height: 3.5vw;
+  margin: 0;
+  color: $darkMediumGreen;
+  font-size: 1.5vw;
+  margin-top: 1vw;
+  min-height: 3.5vw;
 }
 
-.secondCont {    
-    background-color: white;
-    border-radius: 4px;    
-  
-    height: 25vw; 
-   margin-left: 0.5vw;
-   margin-right: 0.5vw;
-    margin-bottom: 0.5vw;
-    
-  
-
+.secondCont {
+  border-radius: 4px;
+  height: 25vw;
+  margin-left: 0.5vw;
+  margin-right: 0.5vw;
+  margin-bottom: 0.5vw;
 }
 
 .secondCont h3 {
-    color: rgba(11, 12, 12, 0.527);
-    margin: 0;       
+  color: rgba(11, 12, 12, 0.527);
+  margin: 0;
 }
 
 .imagen {
-    border-radius: 5px;
+  border-radius: 5px;
 }
 
-
-
 .flags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-left: 0.5rem;
-    margin-top: 0.5rem;
-  }
-  
-  .language {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    font-size: 1vw;
-  }
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-left: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.language {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 1vw;
+}
 
 .subjects {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;   
-    margin-left: 1rem; 
-    margin-top: 0.5rem;
-    font-size: 1vw;
-  }
-  
-  .subject {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    margin-bottom: 0.5rem;
-  }
-  
-  .siglas {
-    margin-left: 5px;
-  }
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-left: 1rem;
+  margin-top: 0.5rem;
+  font-size: 1vw;
+}
+
+.subject {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-bottom: 0.5rem;
+}
+
+.siglas {
+  margin-left: 5px;
+}
