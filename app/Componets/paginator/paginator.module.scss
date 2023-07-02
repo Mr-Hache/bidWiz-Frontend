@@ -2,12 +2,12 @@
 @import "../../utils/variabls";
 
 .contPaginator {
+    display: flex;
     margin-top: 4vw;
     margin-bottom: 2vw;
     justify-content: center;
-    
     min-width: 100%;
-    
+    flex-direction: row;
 }
 
 .contPaginator button {
@@ -15,7 +15,7 @@
     font-weight: 600;
     border-radius: 7px;
     height: 30px;
-    width: 70px;
+    width: 5vw;
 
     padding: 5px 5px 5px 5px;
     cursor: pointer;  
@@ -62,6 +62,7 @@
     @include button-styles1(1vw);
     box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
  margin : 0px;
+ 
 
       
 }

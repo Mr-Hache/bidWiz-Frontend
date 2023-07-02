@@ -17,20 +17,19 @@
 
 .containerCard {
     margin-top: 1vw;
-    display: flex;
-    flex-wrap: wrap;         
+    display: grid;
+    grid-template-columns: repeat(3, 25%);
     justify-content: center;
+    gap: 5%; 
     min-width:  250px;
-    
 }
 
 
 
 
 .paginator{
- position : relative;
-    margin-left: 37vw;
-    min-width: 100%;
-    
 
+    flex-direction: row;
+    padding-left: 37vw;
+    
 }

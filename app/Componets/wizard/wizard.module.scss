@@ -19,9 +19,9 @@
     background-image: linear-gradient(to right, white, white, rgba(147, 148, 148, 0.527));
     background-size: 300% 100%;
     transition: background-position 0.6s ease-in-out;
-    height: auto;
-    min-width: 250px;
-    max-width: 280px;
+    height: 36;
+    min-width: 20vw;
+    max-width: 30vw;
 }
 
 .contCards:hover {
@@ -30,7 +30,7 @@
 
 .contCards h2 {    
     font-family: $ralewayFont;
-    font-size: 20px;
+    font-size: 1.5vw;
     font-weight: 700;
     color: $darkPurple;   
 
@@ -49,11 +49,11 @@
     background-color: white;
     border-radius: 4px;    
   
-    min-height: 18rem;
-    max-height: 22 rem;  
+    height: 25vw; 
    margin-left: 0.5vw;
    margin-right: 0.5vw;
     margin-bottom: 0.5vw;
+    
   
 
 }
@@ -67,9 +67,7 @@
     border-radius: 5px;
 }
 
-.tittle {
-    font-size: 1.5rem;      
-}
+
 
 .flags {
     display: flex;
