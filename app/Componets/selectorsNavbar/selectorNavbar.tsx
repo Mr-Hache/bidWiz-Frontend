@@ -54,24 +54,49 @@ export default function slectorNavbar({ filter }: { filter: string }) {
 
   const pathname = usePathname();
 
+  // const [open, setOpen] = useState<boolean>(false);
+  // const dropdownRef = useRef<HTMLDivElement>(null);
+  // const handleDropdown = (state: boolean) => {
+  //   setOpen(!state);
+  // };
+  // const handleClickDropdown = (event: MouseEvent) => {
+  //   if (open && !dropdownRef.current?.contains(event.target as Node)) {
+  //     setOpen(false);
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   window.addEventListener("click", handleClickDropdown);
+
+  //   return () => {
+  //     window.removeEventListener("click", handleClickDropdown);
+  //   };
+  // }, []);
+
   const [open, setOpen] = useState<boolean>(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
-  const handleDropdown = (state: boolean) => {
-    setOpen(!state);
-  };
+
   const handleClickDropdown = (event: MouseEvent) => {
-    if (open && !dropdownRef.current?.contains(event.target as Node)) {
+    if (
+      open &&
+      dropdownRef.current &&
+      !dropdownRef.current.contains(event.target as Node)
+    ) {
       setOpen(false);
     }
   };
 
   useEffect(() => {
-    window.addEventListener("click", handleClickDropdown);
+    document.addEventListener("click", handleClickDropdown);
 
     return () => {
-      window.removeEventListener("click", handleClickDropdown);
+      document.removeEventListener("click", handleClickDropdown);
     };
-  }, []);
+  }, [open]);
+
+  const handleDropdownToggle = () => {
+    setOpen((prevOpen) => !prevOpen);
+  };
 
   const onClickFilter = (event: React.MouseEvent<HTMLSpanElement>) => {
     event.preventDefault();
@@ -89,22 +114,19 @@ export default function slectorNavbar({ filter }: { filter: string }) {
     }
   };
 
-  const onClickAllWizards  = (event: React.MouseEvent<HTMLSpanElement>) => {
+  const onClickAllWizards = (event: React.MouseEvent<HTMLSpanElement>) => {
     event.preventDefault();
     dispatch(setLanguages([]));
     dispatch(setSubjects([]));
-    if(pathname !== "/offerBoard"){
+    if (pathname !== "/offerBoard") {
       router.push("/offerBoard");
     }
-  }
+  };
 
   return (
     <div className={styles.dropdown} ref={dropdownRef}>
       <div className={styles.dropdownToggle}>
-        <a
-          onClick={(event) => handleDropdown(open)}
-          style={{ display: "inline-block" }}
-        >
+        <a onClick={handleDropdownToggle} style={{ display: "inline-block" }}>
           {filter}
           <div
             className={styles.arrow}
@@ -147,9 +169,7 @@ export default function slectorNavbar({ filter }: { filter: string }) {
                 </div>
               ))}
               <div className={styles.viewAll}>
-               
-                  <span onClick={onClickAllWizards}>View all</span>
-            
+                <span onClick={onClickAllWizards}>View all</span>
               </div>
             </ul>
           </div>
