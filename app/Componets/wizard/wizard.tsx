@@ -103,8 +103,8 @@ const Wizard: React.FC<WizardProps> = ({ wizardUser }) => {
             loader={imageLoader}
             src={wizardUser.image}
             alt=""
-            width={100}
-            height={100}
+            width={7}
+            height={7}
           />
         </div>
 
@@ -116,6 +116,7 @@ const Wizard: React.FC<WizardProps> = ({ wizardUser }) => {
           <div className={style.about}>
             {wizardUser.aboutMe.split(" ").slice(0, 23).join(" ")}...
           </div>
+
           <div className={style.flags}>
             <b>Speack in:</b>
             {mappedLanguages
@@ -133,26 +134,28 @@ const Wizard: React.FC<WizardProps> = ({ wizardUser }) => {
                 </div>
               ))}
           </div>
-          <hr />
           <h3>Teaches</h3>
           <div className={style.subjects}>
             {wizardUser.subjects
               .slice()
               .sort((a, b) => a.localeCompare(b))
               .map((subject, index) => {
-                const subjectIcon = subjectsIcons.find(
-                  (item) => item.name === subject
-                );
-                const Icon = subjectIcon
-                  ? getSubjectIcon(subjectIcon.icon)
-                  : null;
+                if (index < 5) {
+                  const subjectIcon = subjectsIcons.find(
+                    (item) => item.name === subject
+                  );
+                  const Icon = subjectIcon
+                    ? getSubjectIcon(subjectIcon.icon)
+                    : null;
 
-                return (
-                  <div key={index} className={style.subject}>
-                    {Icon && <Icon style={{ color: "#455a64" }} />}
-                    <span className={style.siglas}>{subject}</span>
-                  </div>
-                );
+                  return (
+                    <div key={index} className={style.subject}>
+                      {Icon && <Icon style={{ color: "#455a64" }} />}
+                      <span className={style.subjectText}>{subject}</span>
+                    </div>
+                  );
+                }
+                return null;
               })}
           </div>
         </div>

@@ -2,7 +2,6 @@
 @import "../../utils/variabls";
 
 .contCard {
-  margin-bottom: 10px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -14,12 +13,12 @@
 }
 
 .containerCard {
-  margin-top: 1vw;
+  margin-top: 8vw;
   display: grid;
-  grid-template-columns: repeat(3, 25%);
+  grid-template-columns: repeat(3, 30%);
   justify-content: center;
-  gap: 5%;
-  min-width: 250px;
+  gap: 3%;
+  min-width: 200px;
 }
 
 .paginator {
