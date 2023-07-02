@@ -5,7 +5,7 @@
   display: flex;
   align-items: center;
   gap: 25px;
-  h2 {
+  h3 {
     @include h-3;
     color: $darkMediumGreen;
   }
@@ -39,13 +39,13 @@
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    padding: 1vw;
+    padding: 1.5vw 2vw 1.5vw 2vw;
     border-radius: 10px;
     margin-top: 1.3vw;
 
     a {
       @include h-4;
-      font-size: 18px;
+      font-size: 1.2vw;
       color: white;
       text-decoration: none;
     }
