@@ -41,7 +41,7 @@ export default function filterBarDropDown() {
         )}
       </div>
       <div className={styles.dropdown} ref={dropdownRef}>
-        <a onClick={handleDropdownToggle}>Filters</a>
+        <a onClick={handleDropdownToggle}>Filters ⮟</a>
       </div>
     </div>
   );
