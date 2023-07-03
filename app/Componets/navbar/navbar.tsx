@@ -86,8 +86,7 @@ export default function Navbar() {
         </Link>
       </div>
       <div className={styles.links}>
-        <SelectorNavbar filter="languages" />
-        <SelectorNavbar filter="subjects" />
+        <SelectorNavbar />
         <SearchBar />
       </div>
       <div className={styles.buttons}>
