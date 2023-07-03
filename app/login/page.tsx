@@ -32,7 +32,7 @@ export default function login() {
           <Authent />
         </div>
       ) : (
-        <div className={style.spinner}></div>
+        <div>Loading...</div>
       )}
     </div>
   );
