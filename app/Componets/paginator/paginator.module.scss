@@ -8,6 +8,10 @@
     justify-content: center;
     min-width: 100%;
     flex-direction: row;
+    gap: 5px;
+    button{
+        max-width: 65px
+    }
 }
 
 .contPaginator button {
@@ -16,7 +20,6 @@
     border-radius: 7px;
     height: 30px;
     width: 5vw;
-
     padding: 5px 5px 5px 5px;
     cursor: pointer;  
  
@@ -30,7 +33,7 @@
 }
 
 .btn {
-    width: 5rem;
+    width: 4rem;
     background-color:$darkMediumGreen;    
     transition: 0.3s;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
@@ -62,9 +65,6 @@
     @include button-styles1(1vw);
     box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
  margin : 0px;
- 
-
-      
 }
 
 .btnSelected{
@@ -72,7 +72,4 @@
     box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
     margin : 0px;
     border : 2px solid $darkMediumPurple;
-    
-    
-    
 }

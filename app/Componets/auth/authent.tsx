@@ -108,11 +108,12 @@ function authent() {
   }
 
 
-  return (
-    <form className={style.form} onSubmit={handleSubmit}>
+  return (    
+      <form className={style.form} onSubmit={handleSubmit}>
+      <h1>Login your account</h1>
       <div className={style.container}>
         <label htmlFor="email" className={style.label}>
-          Email
+          
         </label>
         <br />
         <input
@@ -120,13 +121,13 @@ function authent() {
           name="email"
           className={style.input}
           value={email}
-          onChange={(event) => setEmail(event.target.value)}
+          onChange={(event) => setEmail(event.target.value)} placeholder="Enter your email"
         />
       </div>
       <br />
       <div className={style.container}>
         <label htmlFor="password" className={style.label}>
-          Password
+          
         </label>
         <br />
         <input
@@ -134,23 +135,25 @@ function authent() {
           name="password"
           className={style.input}
           value={password}
-          onChange={(event) => setPassword(event.target.value)}
+          onChange={(event) => setPassword(event.target.value)} placeholder="Enter your password"
         />
       </div>
       <button type="submit" className={style.button}>
         Login
       </button>
+      <br />
       <div>
-        <div>
+        <div className={style.forgoPass}>
           <button onClick={handleChangePassword}>
             I have forgotten my password
           </button>
         </div>
         <FcGoogle className={style.icon} />
-        <button onClick={handleGoogleSignIn}>Log In with Google</button>
+        <button className={style.btnGoogle} onClick={handleGoogleSignIn}>Login with Google</button>
       </div>
     </form>
-  );
+   
+  );    
 }
 
 export default authent;
