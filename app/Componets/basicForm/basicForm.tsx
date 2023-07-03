@@ -191,9 +191,13 @@ function basicForm() {
       // Guardar los datos en el Local Storage
       setItem("email", values.email);
       setItem("name", values.name);
+      setItem("title", values.experience.title);
+      setItem("origin", values.experience.origin);
 
       console.log("Datos guardados en el Local Storage - email:", values.email);
       console.log("Datos guardados en el Local Storage - name:", values.name);
+      console.log("Datos guardados en el Local Storage - title:", values.experience.title);
+      console.log("Datos guardados en el Local Storage - origin:", values.experience.origin);
     }
   }, [values, authentication]);
   
@@ -308,6 +312,8 @@ function basicForm() {
 
                     setItem("email", "");
                     setItem("name", "");
+                    setItem("title", values.experience.title);
+                    setItem("origin", values.experience.origin);
                     
           })
   
