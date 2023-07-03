@@ -118,6 +118,7 @@ export default function wizards() {
   }, [page, totalWizards]);
 
   return (
+    <div>
     <div className={style.contCard}>
       <div className={style.containerWizard}>
         <div className={style.filterBar}>
@@ -130,13 +131,16 @@ export default function wizards() {
             wizards.map((wizardUser: User) => {
               return <Wizard key={wizardUser._id} wizardUser={wizardUser} />;
             })}
-          <div className={style.paginator}>
-            {wizards && wizards.length > 0 && (
-              <Paginator statePage={statePage} totalWizards={totalWizards} />
-            )}
-          </div>
+          
         </div>
       </div>
+      
     </div>
+    <div className={style.paginator}>
+    {wizards && wizards.length > 0 && (
+      <Paginator statePage={statePage} totalWizards={totalWizards} />
+    )}
+  </div>
+  </div>
   );
 }
