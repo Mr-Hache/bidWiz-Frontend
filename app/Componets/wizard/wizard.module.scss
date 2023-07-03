@@ -14,6 +14,7 @@
   height: 32vw;
   min-width: 23vw;
   max-width: 33vw;
+  padding: 0 1vw;
 }
 
 .contCards:hover {
@@ -77,7 +78,7 @@
 }
 
 .about {
-  font-size: 1.2vw;
+  font-size: 1vw;
 }
 
 .image {
@@ -112,7 +113,6 @@
   display: flex;
   align-items: start;
   gap: 0.4vw;
-  font-size: 1vw;
   width: 3vw;
   height: 1vw;
 }
@@ -131,7 +131,7 @@
   justify-content: space-between;
   gap: 0.5vw;
   margin-top: 0.7vw;
-  font-size: 1vw;
+  font-size: 0.9vw;
   height: 2vw;
 }
 
