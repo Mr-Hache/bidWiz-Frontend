@@ -2,7 +2,7 @@
 
 import React, { useState, ChangeEvent } from "react";
 import { useAppDispatch } from "@/app/redux/hooks";
-import { setLanguages, setSubjects } from "@/app/redux/services/filtersSlice";
+import { setLanguages, setSubjects, setSortByReviews } from "@/app/redux/services/filtersSlice";
 import { useAppSelector } from "@/app/redux/hooks";
 import { useEffect } from "react";
 import style from "./filterBar.module.scss";
@@ -34,7 +34,7 @@ const subjectsList = [
   "Programming",
 ];
 
-function FilterBar() {
+function FilterBar({ selectRef }: { selectRef: React.RefObject<HTMLSelectElement> }) {
   const dispatch = useAppDispatch();
   const { theme } = useTheme();
 
@@ -42,6 +42,10 @@ function FilterBar() {
     (state) => state.filters.languages
   );
   const subjects: string[] = useAppSelector((state) => state.filters.subjects);
+
+  const sortByReviews = useAppSelector((state) => state.filters.sortByReviews);
+
+  const [stateSortByReviews, setStateSortByReviews] = useState(sortByReviews);
 
   const [stateLanguagesCheckbox, setStateLanguagesCheckbox] = useState(
     languagesList.map((language) => ({
@@ -85,6 +89,13 @@ function FilterBar() {
     dispatch(setSubjects(selectedSubjects));
   };
 
+  const handleSortByReviewsChange = (event: ChangeEvent<HTMLSelectElement>) => {
+    const value = event.target.value;
+    console.log('Dispatching setSortByReviews with value:', value);
+    setStateSortByReviews(value);
+    dispatch(setSortByReviews(value));
+  };
+
   useEffect(() => {
     if (languages.length == 1) {
       for (let j = 0; j < stateLanguagesCheckbox.length; j++) {
@@ -124,6 +135,18 @@ function FilterBar() {
         theme === "dark" ? style.contAsideDark : style.contAsideLight
       }`}
     >
+            <h2>Sort by Reviews</h2>
+      <div>
+        <label>
+          <select className={style.select} ref={selectRef} value={stateSortByReviews} onChange={handleSortByReviewsChange}>
+            <option value="">None</option>
+            <option value="desc">Top</option>
+            <option value="asc">Bottom</option>
+          </select>
+        </label>
+      </div>
+      <hr />
+
       <h2>Languages</h2>
       {stateLanguagesCheckbox.map((language, index) => (
         <div key={index} className={style.filter}>
@@ -158,6 +181,8 @@ function FilterBar() {
           </label>
         </div>
       ))}
+
+
     </aside>
   );
 }
