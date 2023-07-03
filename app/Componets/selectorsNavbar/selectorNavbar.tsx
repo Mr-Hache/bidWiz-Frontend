@@ -36,7 +36,7 @@ const subjectsList = [
   "Programming",
 ];
 
-export default function slectorNavbar({ filter }: { filter: string }) {
+export default function slectorNavbar() {
   const { theme } = useTheme();
 
   //---Filter---
@@ -45,67 +45,63 @@ export default function slectorNavbar({ filter }: { filter: string }) {
 
   const dispatch = useAppDispatch();
 
-  let filterList: string[] = [""];
-  if (filter === "languages") {
-    filterList = languagesList;
-  } else {
-    filterList = subjectsList;
-  }
-
   const pathname = usePathname();
 
   const [open, setOpen] = useState<boolean>(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
-  const handleDropdown = (state: boolean) => {
-    setOpen(!state);
-  };
+
   const handleClickDropdown = (event: MouseEvent) => {
-    if (open && !dropdownRef.current?.contains(event.target as Node)) {
+    if (
+      open &&
+      dropdownRef.current &&
+      !dropdownRef.current.contains(event.target as Node)
+    ) {
       setOpen(false);
     }
   };
 
   useEffect(() => {
-    window.addEventListener("click", handleClickDropdown);
+    document.addEventListener("click", handleClickDropdown);
 
     return () => {
-      window.removeEventListener("click", handleClickDropdown);
+      document.removeEventListener("click", handleClickDropdown);
     };
-  }, []);
+  }, [open]);
 
-  const onClickFilter = (event: React.MouseEvent<HTMLSpanElement>) => {
+  const handleDropdownToggle = () => {
+    setOpen((prevOpen) => !prevOpen);
+  };
+
+  const onClickFilterSubject = (event: React.MouseEvent<HTMLSpanElement>) => {
     event.preventDefault();
     const nameFilter: string = event.currentTarget.id;
-    console.log(nameFilter);
-    if (filter === "languages") {
-      dispatch(setLanguages([nameFilter]));
-      dispatch(setSubjects([]));
-    } else {
-      dispatch(setSubjects([nameFilter]));
-      dispatch(setLanguages([]));
-    }
+
+    dispatch(setSubjects([nameFilter]));
+    dispatch(setLanguages([]));
+  };
+
+  const onClickFilterLanguage = (event: React.MouseEvent<HTMLSpanElement>) => {
+    event.preventDefault();
+    const nameFilter: string = event.currentTarget.id;
+
+    dispatch(setLanguages([nameFilter]));
+    dispatch(setSubjects([]));
+  };
+
+  const onClickAllWizards = (event: React.MouseEvent<HTMLSpanElement>) => {
+    event.preventDefault();
+    dispatch(setLanguages([]));
+    dispatch(setSubjects([]));
     if (pathname !== "/offerBoard") {
       router.push("/offerBoard");
     }
   };
 
-  const onClickAllWizards  = (event: React.MouseEvent<HTMLSpanElement>) => {
-    event.preventDefault();
-    dispatch(setLanguages([]));
-    dispatch(setSubjects([]));
-    if(pathname !== "/offerBoard"){
-      router.push("/offerBoard");
-    }
-  }
-
   return (
     <div className={styles.dropdown} ref={dropdownRef}>
       <div className={styles.dropdownToggle}>
-        <a
-          onClick={(event) => handleDropdown(open)}
-          style={{ display: "inline-block" }}
-        >
-          {filter}
+        <a onClick={handleDropdownToggle} style={{ display: "inline-block" }}>
+          Uncover Your Wizard
           <div
             className={styles.arrow}
             style={{ marginLeft: "10px", display: "inline-block" }}
@@ -116,42 +112,42 @@ export default function slectorNavbar({ filter }: { filter: string }) {
       </div>
       {open && (
         <div
-          className={
-            filter === "languages"
-              ? `${styles.containerColumn} ${
-                  theme === "dark"
-                    ? styles.containerColumnDark
-                    : styles.containerColumnLight
-                }`
-              : `${styles.containerColumn2} ${
-                  theme === "dark"
-                    ? styles.containerColumn2Dark
-                    : styles.containerColum2Light
-                }`
-          }
+          className={`${styles.container} ${
+            theme === "dark" ? styles.containerDark : styles.containerLight
+          }`}
         >
-          <div className={styles.column}>
-            {filter === "languages" ? (
-              <h3>Wizards speak</h3>
-            ) : (
-              <h3>Wizards knowledge</h3>
-            )}
-            <ul className={styles.list}>
-              {filterList.map((filter, index) => (
+          <div className={styles.containerBy}>
+            {" "}
+            <p className={styles.title}> By Subject</p>
+            <ul className={styles.subjectList}>
+              {subjectsList.map((filter, index) => (
                 <div className={styles.line} key={index}>
                   <label>
-                    <span id={filter} onClick={onClickFilter}>
+                    <span id={filter} onClick={onClickFilterSubject}>
                       {filter}
                     </span>
                   </label>
                 </div>
               ))}
-              <div className={styles.viewAll}>
-               
-                  <span onClick={onClickAllWizards}>View all</span>
-            
-              </div>
             </ul>
+          </div>
+
+          <div className={styles.containerBy}>
+            <p className={styles.title}>By Language</p>
+            <ul className={styles.languageList}>
+              {languagesList.map((filter, index) => (
+                <div className={styles.line} key={index}>
+                  <label>
+                    <span id={filter} onClick={onClickFilterLanguage}>
+                      {filter}
+                    </span>
+                  </label>
+                </div>
+              ))}
+            </ul>
+          </div>
+          <div className={styles.containerAll}>
+            <span onClick={onClickAllWizards}>View all</span>
           </div>
         </div>
       )}

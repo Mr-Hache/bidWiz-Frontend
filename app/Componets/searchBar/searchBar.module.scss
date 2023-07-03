@@ -2,7 +2,18 @@
 @import "../../utils/variabls";
 
 .button {
-  @include button-styles1(1vw);
+  @include h-4;
+  background-color: rgba(255, 228, 196, 0);
+  border: none;
+  font-size: 18px;
+  margin-left: -37px;
+  transition: 0.2s;
+  color: $darkMediumPurple;
+}
+
+.button:hover {
+  transform: scale(1.2);
+  cursor: pointer;
 }
 
 .input {
