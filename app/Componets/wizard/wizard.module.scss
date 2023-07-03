@@ -98,7 +98,7 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  align-items: start;
+  align-items: flex-start;
   gap: 10px;
   margin-top: 1vw;
   min-height: 20px;
@@ -111,7 +111,7 @@
 
 .language {
   display: flex;
-  align-items: start;
+  align-items: flex-start;
   gap: 0.4vw;
   width: 3vw;
   height: 1vw;
