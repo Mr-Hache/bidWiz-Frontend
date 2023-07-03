@@ -55,7 +55,6 @@ useEffect( () => {
   useEffect(() => {
     if (unableJobsByWorker) {
       setJobsByWorker(unableJobsByWorker);
-      divideJobsByStatus(jobsByWorker)
     }
   }, [unableJobsByWorker]);
 
@@ -63,13 +62,10 @@ useEffect( () => {
   const onChangeStatusJobId = (event: React.ChangeEvent<HTMLSelectElement>) => {
     
     const value: string = event.target.value;
-    console.log(jobToChange)
     setJobToChange(() => ({
       ...jobToChange,
       jobId: value ,
     }));
-    setJobsByWorkerFinished(Finished)
-    setJobsByWorkerInProgress(InProgress)
     setInProgessJobViews((prevState: JobViews) => {
       return jobsByWorker?.find((objeto: any) => objeto._id === value) || prevState;
     });
@@ -81,8 +77,6 @@ useEffect( () => {
     try {
 
       await updateJobWorkerMutation({jobId: jobToChange.jobId, workerId: jobToChange.workerId, updateJobWorkerDto: jobToChange.updateJobWorkerDto });
-      setJobsByWorkerFinished(Finished)
-      setJobsByWorkerInProgress(InProgress)
     } catch (error) {
       console.error(error);
     }
@@ -112,38 +106,20 @@ useEffect( () => {
     status: '',
     subject: '',
   });
-  function divideJobsByStatus(jobsByWorker: Job[]): {
-    InProgress: Job[];
-    Finished: Job[];
-  } {
-    const InProgress: Job[] = [];
-    const Finished: Job[] = [];
-  
-    jobsByWorker.forEach((job) => {
-      if (job.status === "Finished") {
-        Finished.push(job);
-      } else {
-        InProgress.push(job);
-      }
-    });
 
-    return {
-      InProgress,
-      Finished,
-    };
-    
-  }
-  const { Finished, InProgress } = divideJobsByStatus(jobsByWorker);
+
     return (
 <div className={styles.div}>
 
 
-      <h1>Completed Jobs as Worker</h1>
+      <h1>Completed Jobs History</h1>
       <select  name="" onChange={onChangeStatusJobIdFinished}>
         <option>Select</option>
-        {jobsByWorkerFinished?.map((job) => {
-            return <option value={job._id} key={job._id}>{job.description}</option>;
-        })}
+        {jobsByWorker?.map((job) => {
+      if (job.status === 'Finished') {
+        return <option value={job._id} key={job._id}>{job.description}</option>;
+      }
+    })}
       </select>
       <div>
         {completedJobViews && (
@@ -156,14 +132,14 @@ useEffect( () => {
           </div>
         )}
       </div>
-      <h1>In Progress Jobs</h1>
+      <h1>In-Progress Jobs</h1>
       <select name="" onChange={onChangeStatusJobId}>
         <option>Select</option>
-        {
-        jobsByWorkerInProgress?.map((job) => {
-            return <option value={job._id} key={job._id}>{job.description}</option>;
-
-            })}
+        {jobsByWorker?.map((job) => {
+      if (job.status === 'In Progress') {
+        return <option value={job._id} key={job._id}>{job.description}</option>;
+      }
+    })}
       </select>
       {InProgessJobViews && (
         <div className={styles.paneljobs}>
