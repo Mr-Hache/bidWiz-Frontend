@@ -31,10 +31,9 @@ const FormChangePassword: React.FC = () => {
   return (
     <div className={styles.contPassChange}>
       <h2>Recover your password</h2>
-      <form onSubmit={handleSubmit}>
-        <label>
-          Email:
-          <input type="email" value={email} onChange={handleChange} required />
+      <form onSubmit={handleSubmit}>      
+        <label>          
+          <input type="email" value={email} onChange={handleChange} placeholder='Enter your mail' required />
         </label>
         <button type="submit">Send password reset email</button>
       </form>
