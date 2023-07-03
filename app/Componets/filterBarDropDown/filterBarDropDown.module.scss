@@ -19,7 +19,6 @@
   .dropdown a {
     @include h-4;
     width: 1.5vw;
-
     font-size: 1vw;
     color: white;
     font-weight: 700;
@@ -29,5 +28,6 @@
     padding: 1vw 0.5vw;
     border-radius: 10px 0px 0 10px;
     letter-spacing: 2px;
+    cursor: pointer;
   }
 }
