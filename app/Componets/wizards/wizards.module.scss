@@ -1,35 +1,27 @@
 @import "../../utils/mixin";
 @import "../../utils/variabls";
 
-.contCard {       
-    margin-bottom: 10px;
-    display: flex;
-    flex-direction: column;     
-    justify-content: center; 
-
+.contCard {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .containerWizard {
-    background-color: white;
-    display: flex;
-    width: 100%;    
+  display: flex;
+  width: 100%;
 }
 
 .containerCard {
-    margin-top: 1vw;
-    display: grid;
-    grid-template-columns: repeat(3, 25%);
-    justify-content: center;
-    gap: 5%; 
-    min-width:  250px;
+  margin-top: 8vw;
+  display: grid;
+  grid-template-columns: repeat(3, 30%);
+  justify-content: center;
+  gap: 3%;
+  min-width: 200px;
 }
 
-
-
-
-.paginator{
-
-    flex-direction: row;
-    padding-left: 37vw;
-    
+.paginator {
+  flex-direction: row;
+  padding-left: 37vw;
 }

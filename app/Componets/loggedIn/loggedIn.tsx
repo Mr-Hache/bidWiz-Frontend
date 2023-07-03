@@ -36,7 +36,7 @@ export default function loggedIn({
 
   return (
     <div className={styles.selectorProfile}>
-      <h2>{userName ? `Hi, ${userName.split(/[ .]/)[0]}!` : ""}</h2>
+      <h3>{userName ? `Hi, ${userName.split(/[ .]/)[0]}!` : ""}</h3>
       <div>
         <div className={styles.dropdown} ref={dropdownRef}>
           <div className={styles.dropdownToggle}>

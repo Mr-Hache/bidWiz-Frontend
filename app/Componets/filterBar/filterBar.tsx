@@ -5,8 +5,8 @@ import { useAppDispatch } from "@/app/redux/hooks";
 import { setLanguages, setSubjects } from "@/app/redux/services/filtersSlice";
 import { useAppSelector } from "@/app/redux/hooks";
 import { useEffect } from "react";
-import style from "./filterBar.module.scss"
-
+import style from "./filterBar.module.scss";
+import { useTheme } from "next-themes";
 
 const languagesList = [
   "Chinese",
@@ -18,7 +18,7 @@ const languagesList = [
   "Portuguese",
   "Russian",
   "Spanish",
-]
+];
 const subjectsList = [
   "Accounting",
   "Biology",
@@ -32,10 +32,12 @@ const subjectsList = [
   "Physics",
   "Political Science",
   "Programming",
-]
+];
 
 function FilterBar() {
   const dispatch = useAppDispatch();
+  const { theme } = useTheme();
+
   const languages: string[] = useAppSelector(
     (state) => state.filters.languages
   );
@@ -117,7 +119,11 @@ function FilterBar() {
   }, [languages, subjects]);
 
   return (
-    <aside className={style.contAside}>
+    <aside
+      className={`${style.contAside} ${
+        theme === "dark" ? style.contAsideDark : style.contAsideLight
+      }`}
+    >
       <h2>Languages</h2>
       {stateLanguagesCheckbox.map((language, index) => (
         <div key={index} className={style.filter}>

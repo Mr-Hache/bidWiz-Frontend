@@ -1,0 +1,33 @@
+@import "../../utils/mixin";
+@import "../../utils/variabls";
+
+.selectorFilter {
+  margin-top: 7vw;
+  padding-top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .dropdown {
+    height: 40vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    writing-mode: vertical-rl;
+  }
+
+  .dropdown a {
+    @include h-4;
+    width: 1.5vw;
+    font-size: 1vw;
+    color: white;
+    font-weight: 700;
+    display: block;
+    transform: rotate(180deg);
+    background-color: rebeccapurple;
+    padding: 1vw 0.5vw;
+    border-radius: 10px 0px 0 10px;
+    letter-spacing: 2px;
+    cursor: pointer;
+  }
+}
