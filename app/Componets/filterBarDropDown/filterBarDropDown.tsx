@@ -8,12 +8,15 @@ import FilterBar from "../filterBar/filterBar";
 export default function filterBarDropDown() {
   const [open, setOpen] = useState<boolean>(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const selectRef = useRef<HTMLSelectElement>(null);
 
   const handleClickDropdown = (event: MouseEvent) => {
     if (
       open &&
       dropdownRef.current &&
-      !dropdownRef.current.contains(event.target as Node)
+      selectRef.current &&
+      !dropdownRef.current.contains(event.target as Node) &&
+      !selectRef.current.contains(event.target as Node)
     ) {
       setOpen(false);
     }
@@ -36,7 +39,7 @@ export default function filterBarDropDown() {
       <div>
         {open && (
           <div className={styles.containerLink}>
-            <FilterBar />
+            <FilterBar selectRef={selectRef}/>
           </div>
         )}
       </div>

@@ -9,6 +9,7 @@ import {
   setLanguages,
   setSubjects,
   setPage,
+  setSortByReviews
 } from "@/app/redux/services/filtersSlice";
 import { useEffect, useState } from "react";
 import FilterBar from "../filterBar/filterBar";
@@ -24,6 +25,8 @@ export default function wizards() {
     (state) => state.filters.languages
   );
   const subjects: string[] = useAppSelector((state) => state.filters.subjects);
+  const sortByReviews = useAppSelector((state) => state.filters.sortByReviews);
+
   const [statePage, setStatePage] = useState(true);
   const [totalWizards, setTotalWizards] = useState(0);
 
@@ -69,11 +72,12 @@ export default function wizards() {
   const takeWizards = (
     languages: string[] = [],
     subjects: string[] = [],
-    page: number
+    page: number,
+    sortByReviews: string
   ) => {
     const filter = concatLanguagesAndSubjects(languages, subjects);
     fetch(
-      `https://bidwiz-backend-production-db77.up.railway.app/users/wizards?page=${page}&size=${size}&${filter}`
+      `https://bidwiz-backend-production-db77.up.railway.app/users/wizards?page=${page}&size=${size}&${filter}&sortByReviews=${sortByReviews}`
     )
       .then((response) => {
         if (!response.ok) {
@@ -91,7 +95,7 @@ export default function wizards() {
 
   useEffect(() => {
     takeCounter(languages, subjects);
-    takeWizards(languages, subjects, 1);
+    takeWizards(languages, subjects, 1, sortByReviews);
     return () => {
       dispatch(setLanguages([]));
       dispatch(setSubjects([]));
@@ -99,14 +103,15 @@ export default function wizards() {
   }, []);
 
   useEffect(() => {
+    console.log('sortByReviews changed to', sortByReviews)
     dispatch(setPage(1));
     takeCounter(languages, subjects);
-    takeWizards(languages, subjects, 1);
-  }, [languages, subjects]);
+    takeWizards(languages, subjects, 1, sortByReviews);
+  }, [languages, subjects, sortByReviews]);
 
   useEffect(() => {
-    takeWizards(languages, subjects, page);
-  }, [page]);
+    takeWizards(languages, subjects, page, sortByReviews);
+  }, [page, sortByReviews]);
 
   useEffect(() => {
     const allowPage = Math.ceil(totalWizards / size);
