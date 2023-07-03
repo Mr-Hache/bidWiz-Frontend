@@ -191,9 +191,13 @@ function basicForm() {
       // Guardar los datos en el Local Storage
       setItem("email", values.email);
       setItem("name", values.name);
+      setItem("title", values.experience.title);
+      setItem("origin", values.experience.origin);
 
       console.log("Datos guardados en el Local Storage - email:", values.email);
       console.log("Datos guardados en el Local Storage - name:", values.name);
+      console.log("Datos guardados en el Local Storage - title:", values.experience.title);
+      console.log("Datos guardados en el Local Storage - origin:", values.experience.origin);
     }
   }, [values, authentication]);
   
@@ -308,6 +312,8 @@ function basicForm() {
 
                     setItem("email", "");
                     setItem("name", "");
+                    setItem("title", values.experience.title);
+                    setItem("origin", values.experience.origin);
                     
           })
   
@@ -413,10 +419,11 @@ function basicForm() {
           <h3 className={style.selectTitle}>Become Wizard</h3>
           <div className={style.magic}>
             <input
-              type="checkbox"
+              type="radio"
               name="isWizard"
               checked={values.isWizard}
               onChange={handleCheckboxChange}
+              className={style.agrandar}
             />
             <div className={style.wand}>
               <ImMagicWand className={style.logo} />
@@ -427,17 +434,14 @@ function basicForm() {
 
       {values.isWizard ? (
         <div>
-          <br />
-          <br />
-
-          <div>          
+          <br />         
+          <div className={style.ImageUpload}>          
           <ImageUpload onImageUpload={handleImageUpload} />       
           </div>
-
-
-          {errors.image && <span className="error">{errors.image}</span>}
           <br />
+           {errors.image && <span className={style.error}>{errors.image}</span>}
           <br />
+          <br /> 
           <div className={style.select}>
             <div className={style.selectTitle}>Languages</div>
             <div className={style.selectSelect}>
@@ -461,9 +465,9 @@ function basicForm() {
           <br />
           <br />
           <div className={style.inputcontainer}>
-            <div className={style.select}>
-              <div className={style.selectTitle}>Subjects</div>
-              <div className={style.selectSelect}>
+            <div className={style.select1}>
+              <div className={style.selectTitle1}>Subjects</div>
+              <div className={style.selectSelect1}>
                 <select
                   multiple
                   value={values.subjects}

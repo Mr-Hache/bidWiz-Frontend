@@ -1,17 +1,135 @@
+// @import "../../utils/mixin";
+// @import "../../utils/variabls";
+
+// .form {
+//   font-family: $ralewayFont;
+//   color: $darkPurple;
+//   font-weight: 500;
+//   background-color: $lightGreen;
+//   box-shadow: 0px 6px 4px 2px rgba(0, 0, 0, 0.25);
+//   margin: auto;
+//   // margin: 1rem auto;
+//   padding: 3rem;
+//   border-radius: 0.5rem;
+//   width: 350px;
+
+//   h1 {
+//     @include h-1;
+//     font-size: 2vw;
+//     margin-top: -1vw;
+//     margin-bottom: 2vw;
+//     text-align: center;
+//   }
+
+//   .block {
+//     height: 5rem;
+//   }
+//   .inputcontainer {
+//     width: 100%;
+//     min-height: 20px;
+//     position: relative;
+//     // background-color: blue;
+//     .input {
+//       width: 100%;
+//       height: 30px;
+//       border: 2px solid #999;
+//       border-radius: 5px;
+//       color: #999;
+//     }
+
+//     label {
+//       position: relative;
+//     }
+//   }
+//   .logo {
+//     @include icon($darkMediumPurple);
+//     width: 1.5vw;
+//     height: 1.5vw;
+//     transition: 0.2s;
+//     transform: rotate(15deg);
+//   }
+//   .magic {
+//     transition: 0.2s;
+//     display: flex;
+//     gap: 10px;
+//     margin-top: 10px;
+//   }
+//   .wand {
+//     margin-top: -5px;
+//     transform: rotate(15deg);
+//   }
+//   .magic:hover {
+//     .wand {
+//       transform: rotate(-50deg);
+//     }
+//   }
+//   .select {
+//     display: flex;
+//     flex-direction: column;
+//   }
+//   .selectTitle {
+//     margin-bottom: 8px;
+//     @include h-4;
+//     font-weight: 700;
+//     color: $darkMediumGreen;
+//   }
+//   .selectSelect option {
+//     font-family: $ralewayFont;
+//     width: 10vw;
+//   }
+//   .selectSelect {
+//     width: 20vw;
+//     height: 5vw;
+//   }
+// }
+// .boton {
+//   @include button-styles2(1vw);
+// }
+// .boton2 {
+//   @include button-styles1(1vw);
+//   margin-top: 0;
+// }
+
+// .button {
+//   display: flex;
+//   flex-direction: column;
+//   align-items: center;
+// }
+// .google {
+//   height: 5vw;
+//   display: flex;
+//   flex-direction: column;
+//   align-items: center;
+//   justify-content: center;
+// }
+
+// .register {
+//   margin-bottom: -4px;
+// }
+
+// .google .icon {
+//   width: 30px;
+//   height: 30px;
+//   margin-bottom: 6px;
+//   background-color: white;
+//   border-radius: 50%;
+// }
+
 @import "../../utils/mixin";
 @import "../../utils/variabls";
 
-.form {
+.form { 
   font-family: $ralewayFont;
   color: $darkPurple;
-  font-weight: 500;
-  background-color: $lightGreen;
+  font-weight: 700;
+  // background-color: $lightGreen;
+  // background-color: blue($color: #000000);
   box-shadow: 0px 6px 4px 2px rgba(0, 0, 0, 0.25);
   margin: auto;
   // margin: 1rem auto;
   padding: 3rem;
   border-radius: 0.5rem;
-  width: 350px;
+  width: 850px; 
 
   h1 {
     @include h-1;
@@ -22,29 +140,33 @@
   }
 
   .block {
-    height: 5rem;
+    height: 10rem;
   }
-  .inputcontainer {
+  .inputcontainer {    
     width: 100%;
     min-height: 20px;
     position: relative;
-    // background-color: blue;
+   margin-left: 14rem;
     .input {
-      width: 100%;
-      height: 30px;
+      width: 44%;
+      height: 40px;
       border: 2px solid #999;
       border-radius: 5px;
       color: #999;
+      display: grid;
     }
 
     label {
       position: relative;
+      display: flex; 
+        
+      
     }
   }
   .logo {
     @include icon($darkMediumPurple);
-    width: 1.5vw;
-    height: 1.5vw;
+    width: 3vw;
+    height: 2.5vw;
     transition: 0.2s;
     transform: rotate(15deg);
   }
@@ -56,32 +178,55 @@
   }
   .wand {
     margin-top: -5px;
-    transform: rotate(15deg);
+    transform: rotate(16deg);
   }
   .magic:hover {
     .wand {
-      transform: rotate(-50deg);
+      transform: rotate(-52deg);
     }
   }
   .select {
     display: flex;
-    flex-direction: column;
+    flex-direction: column;    
+    width: auto;
+    margin-left: 14rem;
   }
   .selectTitle {
     margin-bottom: 8px;
     @include h-4;
     font-weight: 700;
-    color: $darkMediumGreen;
+    color: $darkMediumGreen;    
   }
   .selectSelect option {
     font-family: $ralewayFont;
-    width: 10vw;
+    width: 20vw;
+    height: 1.2vw;    
+      
   }
   .selectSelect {
-    width: 20vw;
+    width: 100vw;
     height: 5vw;
+     
   }
 }
+
+.selectTitle1 {
+  margin-bottom: 8px;
+  @include h-4;
+  font-weight: 700;
+  color: $darkMediumGreen;    
+}
+
+.selectSelect1 option {
+  font-family: $ralewayFont;
+  width: 20vw; 
+  height: 1.2vw;  
+}
+.selectSelect1 {
+  width: 20vw;
+  height: 5vw;
+}
+
 .boton {
   @include button-styles2(1vw);
 }
@@ -115,5 +260,15 @@
   border-radius: 50%;
 }
 
+.agrandar{
+  transform: scale(1.7);
+}
 
+// .ImageUpload{ 
+//   margin-left: 14rem;
+// }
+
+// .error{
+//   margin-left: 14rem;
+// }
 

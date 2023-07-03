@@ -71,19 +71,19 @@ export default function Footer() {
       </div>
       <div className={styles.containerSmall}>
         <div className={styles.icons}>
-          <Link href="https://www.facebook.com/tu_perfil" className={styles.link}>
+          <Link href="/not found" className={styles.link}>
             <BsFacebook className={styles.face} />
           </Link>
-          <Link href="https://www.instagram.com/tu_perfil" className={styles.link}>
+          <Link href="/not found"  className={styles.link}>
             <BsInstagram className={styles.inst} />
           </Link>
-          <Link href="https://twitter.com/home" className={styles.link}>
+          <Link href="https://twitter.com/home" target="_blank" className={styles.link}>
             <BsTwitter className={styles.twit} />
           </Link>
-          <Link href="https://www.youtube.com/channel/UC6T-APDv6ywdM9aUy2QxrFg" className={styles.link}>
+          <Link href="https://www.youtube.com/channel/UC6T-APDv6ywdM9aUy2QxrFg" target="_blank" className={styles.link}>
             <BsYoutube className={styles.yout} />
           </Link>
-          <Link href="https://www.linkedin.com/in/tu_perfil" className={styles.link}>
+          <Link href="/not found" className={styles.link}>
             <BsLinkedin className={styles.lin} />
           </Link>
         </div>
