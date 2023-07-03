@@ -33,23 +33,15 @@ export default function filterBarDropDown() {
 
   return (
     <div className={styles.selectorFilter}>
-      <h3>FILTRO</h3>
       <div>
-        <div className={styles.dropdown} ref={dropdownRef}>
-          <div className={styles.dropdownToggle}>
-            <a
-              onClick={handleDropdownToggle}
-              style={{ display: "inline-block" }}
-            >
-              mostrar
-            </a>
-          </div>
-        </div>
         {open && (
           <div className={styles.containerLink}>
             <FilterBar />
           </div>
         )}
+      </div>
+      <div className={styles.dropdown} ref={dropdownRef}>
+        <a onClick={handleDropdownToggle}>Filters</a>
       </div>
     </div>
   );
