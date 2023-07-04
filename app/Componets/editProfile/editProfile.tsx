@@ -9,6 +9,7 @@ import {
 import { useAppSelector } from "../../redux/hooks";
 import ImageUpload from "../imageUpload/imageUpload";
 import { getAuth, sendPasswordResetEmail } from "firebase/auth";
+import { ImMagicWand } from "react-icons/im";
 
 import Swal from "sweetalert2";
 
@@ -176,18 +177,27 @@ function EditProfile() {
   return (
     <div className={styles.div}>
       <h1>{userName}</h1>
+
       <button className={styles.change} onClick={handleChangePassword}>
         Change your password
       </button>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="isWIzard">Are you a Wizard?</label>
-        <input
-          type="checkbox"
-          name="isWizard"
-          checked={formState.isWizard || false}
-          onChange={handleCheckboxChange}
-        />
 
+      <form onSubmit={handleSubmit}>
+        <div className={styles.isWizard}>
+          <label htmlFor="isWIzard">Do you want to become a wizard?</label>
+          <div className={styles.magic}>
+            <input
+              type="checkbox"
+              name="isWizard"
+              checked={formState.isWizard || false}
+              onChange={handleCheckboxChange}
+            />
+
+            <div className={styles.wand}>
+              <ImMagicWand className={styles.logo} />
+            </div>
+          </div>
+        </div>
         {formState.isWizard && (
           <div>
             <br />
@@ -286,7 +296,6 @@ function EditProfile() {
             />
           </div>
         )}
-
         <button
           className={styles.update}
           type="submit"
