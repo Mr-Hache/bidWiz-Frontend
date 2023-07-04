@@ -99,7 +99,6 @@ function FilterBar({
 
   const handleSortByReviewsChange = (event: ChangeEvent<HTMLSelectElement>) => {
     const value = event.target.value;
-    console.log("Dispatching setSortByReviews with value:", value);
     setStateSortByReviews(value);
     dispatch(setSortByReviews(value));
   };

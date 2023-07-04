@@ -103,7 +103,6 @@ export default function wizards() {
   }, []);
 
   useEffect(() => {
-    console.log('sortByReviews changed to', sortByReviews)
     dispatch(setPage(1));
     takeCounter(languages, subjects);
     takeWizards(languages, subjects, 1, sortByReviews);
