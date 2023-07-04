@@ -11,15 +11,13 @@
     flex-direction: row;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
     border-radius: 10px;
-    max-width: 1600px;
-    max-height: 1200px;
     margin: 0 auto;
-    
+    max-width: 1740px;
+    overflow: hidden;
 
     .sidebar{               
         background-color: $lightMediumGreen;                
         float: left;
-        width: 2350px;
         text-align: center;
         border-radius: 10px 10px 10px 10px;
         box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
@@ -32,7 +30,7 @@
         border-radius: 10px;    
         border: 2px solid rgb(235, 211, 211);   
         width: 25rem;         
-        margin-left: 2vw;
+        margin:0px 20px;
     }
 
     .imagen {
@@ -67,8 +65,6 @@
         align-items: center;
         flex-wrap: wrap;
         gap: 10px;   
-        margin-left: -1.5vw; 
-        margin-top: 0.5rem;
       }
 
       .subject {
@@ -119,44 +115,69 @@
 }
 
 .contSelect {
+    font-family: $ralewayFont;
     background-color: $lightGreen;
-    display: flex;    
+    display: flex;
+    align-items: center;
     justify-content: center;
     border: 0.5px solid rgba(0, 0, 0, 0.123);
     border-radius: 10px;
     margin-top: 4rem;
+    height: 80px;
+    select{
+        padding: 8px;
+        font-size: 14px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        background-color: #fff;
+        width: 200px;
+        margin-left: 10px;
+    }
+}
+.chooseLang{
+    margin-right: 20px;
+    margin-left: 5px;
 }
 
-.chooseLang {
-    margin-top: 1.2rem;
-    margin-left: 0.5rem;
-    margin-right: 10rem;
-    width: 8rem;
-    height: 1.5rem;    
-    border-radius: 6px;           
-}
-
-.chooseSubj {
-    margin-top: 1.2rem;
-    margin-left: 0.5rem;
-    width: 8rem;
-    height: 1.5rem;    
-    border-radius: 6px;       
-}
 
 .contInputs {
+    font-family: $ralewayFont;
     background-color: $lightGreen;
     height: 3.5rem;
     display: flex;     
-    align-items: center;     
+    align-items: center;
     margin-top: 3rem;
     margin-bottom: 5rem;
     border: 0.5px solid rgba(0, 0, 0, 0.123);
     border-radius: 10px;
-}
-
-.contAbout {    
-    width: 66vw;
-    max-width: 150vh;
-    text-align: center;
+    
+    font-weight: 700;
+    input[type="radio"] {
+        margin-right: 5px;
+        width: 20px;
+        height: 20px;
+        appearance: none;
+        border: 2px solid #aaa;
+        border-radius: 15px;
+        outline: none;
+        position: relative;
+    }
+    
+        input[type="radio"]:before {
+        content: "";
+        display: block;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 12px;
+        height: 12px;
+        border-radius: 12px;
+        background-color: transparent;
+        transition: background-color 0.2s ease-in-out;
+    }
+    
+        input[type="radio"]:checked:before {
+        background-color: #007bff;
+    }
 }
