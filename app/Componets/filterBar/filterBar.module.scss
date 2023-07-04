@@ -8,7 +8,7 @@
   width: 13vw;
   height: auto;
   border: 2px solid rgb(197, 188, 188);
-  border-radius: 10px;
+  border-radius: 0 10px 10px 0;
   align-content: center;
   box-shadow: 0px 0px 4px 4px rgba(102, 102, 102, 0.25);
   padding-bottom: 1vw;
@@ -17,6 +17,8 @@
 .contAside h2 {
   color: $darkMediumPurple;
   text-align: center;
+  font-size: 1vw;
+  margin-bottom: 0;
 }
 
 .contAsideDark {
@@ -26,13 +28,11 @@
 }
 
 .contAsideDark h2 {
-  background-color: $lightMediumGray;
   color: $darkMediumGreen;
 }
 
 .filter {
   padding-left: 10px;
-
   input {
     cursor: pointer;
   }
@@ -42,10 +42,22 @@
   margin-right: 10px;
 }
 
+.sort {
+  height: 21px;
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
 .select {
   display: block;
-  padding-left: 1px;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  margin-left: 12px;
+  color: $darkMediumPurple;
+  font-size: 0.9vw;
+  font-family: $ralewayFont;
+  border: none;
+  padding: 1px 2px 1px 2px;
+  border: none;
+  border-radius: 0px;
+  width: 90px;
+  background-color: #18112300;
 }
