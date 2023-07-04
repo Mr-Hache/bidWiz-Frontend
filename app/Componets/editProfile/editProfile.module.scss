@@ -7,9 +7,48 @@
   justify-content: center;
   align-items: center;
   padding: 2em;
+  min-width: 700px;
+  max-width: 700px;
 
   h1 {
     @include h-1;
+  }
+
+  .change {
+    @include button-styles1(1vw);
+    margin-bottom: 2vw;
+  }
+
+  .isWizard {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    min-width: 500px;
+    max-width: 500px;
+    margin-bottom: 5px;
+
+    .magic {
+      transition: 0.2s;
+      display: flex;
+      gap: 5px;
+    }
+    .wand {
+      margin-top: -5px;
+      transform: rotate(16deg);
+    }
+    .magic:hover {
+      .wand {
+        transform: rotate(-52deg);
+      }
+    }
+
+    .logo {
+      @include icon($darkMediumPurple);
+      width: 2vw;
+      height: 1.5vw;
+      transition: 0.2s;
+      transform: rotate(15deg);
+    }
   }
 
   form {
@@ -23,36 +62,36 @@
       margin-bottom: 0.5em;
     }
     textarea[name="aboutMe"] {
-        @include p-p; // Usando el mixin que ya tienes para la tipografía
-        border: 1px solid $lightMediumGray;
-        border-radius: 4px;
-        padding: 10px;
-        margin-bottom: 20px;
-        resize: vertical; // Esto permite al usuario ajustar el tamaño verticalmente pero no horizontalmente.
-    
-        &:focus {
-            outline: none;
-            border-color: $darkMediumBlue;
-        }
+      @include p-p; // Usando el mixin que ya tienes para la tipografía
+      border: 1px solid $lightMediumGray;
+      border-radius: 4px;
+      padding: 10px;
+      margin-bottom: 20px;
+      resize: vertical; // Esto permite al usuario ajustar el tamaño verticalmente pero no horizontalmente.
+
+      &:focus {
+        outline: none;
+        border-color: $darkMediumBlue;
+      }
     }
     input[type="text"],
     input[type="number"],
     select {
-        width: 100%;
-        padding: 0.5em;
-        font-size: 1em;
-        margin-bottom: 1em;
-        border: 1px solid $darkMediumGray;
-        border-radius: 5px;
+      width: 100%;
+      padding: 0.5em;
+      font-size: 1em;
+      margin-bottom: 1em;
+      border: 1px solid $darkMediumGray;
+      border-radius: 5px;
     }
 
     input[type="text"][name="aboutMe"] {
       height: 100px; // define una altura mayor para el cuadro de texto "aboutMe"
     }
 
-    img{
-        border-radius: 50%;
-        border: 2px solid $lightMediumGray;
+    img {
+      border-radius: 50%;
+      border: 2px solid $lightMediumGray;
     }
 
     input[type="checkbox"] {
@@ -60,8 +99,8 @@
       margin-bottom: 0.5em;
     }
 
-    button {
-      @include button-styles1(1em);
+    .update {
+      @include button-styles2(1vw);
       margin-top: 1em;
     }
   }
