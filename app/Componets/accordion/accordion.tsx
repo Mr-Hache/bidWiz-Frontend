@@ -41,8 +41,6 @@ export default function Accordion({ title, children }: AccordionProps) {
     };
   }, [isOpen]);
 
-  // borrar esta linea
-
   return (
     <div className={styles.accordion} ref={accordionRef}>
       <p
