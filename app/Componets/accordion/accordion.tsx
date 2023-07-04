@@ -41,18 +41,6 @@ export default function Accordion({ title, children }: AccordionProps) {
     };
   }, [isOpen]);
 
-  useEffect(() => {
-    const closeOtherAccordions = () => {
-      closeAccordion();
-    };
-
-    document.addEventListener("keydown", closeOtherAccordions);
-
-    return () => {
-      document.removeEventListener("keydown", closeOtherAccordions);
-    };
-  }, []);
-
   return (
     <div className={styles.accordion} ref={accordionRef}>
       <p
