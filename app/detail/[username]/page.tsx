@@ -325,7 +325,7 @@ function detail() {
                   value={selectedSubject}
                   onChange={handleSubjectChange}
                   className={styles.chooseSubj}
-                >
+                  >
                   <option value="">Choose one</option>
                   {user.subjects.map((subject) => (
                     <option value={subject}>{subject}</option>
