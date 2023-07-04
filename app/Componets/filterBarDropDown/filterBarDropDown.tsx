@@ -5,11 +5,14 @@ import { useRef, useState, useEffect } from "react";
 import styles from "./filterBarDropDown.module.scss";
 import FilterBar from "../filterBar/filterBar";
 import { HiChevronLeft } from "react-icons/hi";
+import { HiChevronRight } from "react-icons/hi";
 
 export default function filterBarDropDown() {
   const [open, setOpen] = useState<boolean>(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const selectRef = useRef<HTMLSelectElement>(null);
+  const up = <HiChevronRight />;
+  const down = <HiChevronLeft />;
 
   const handleClickDropdown = (event: MouseEvent) => {
     if (
@@ -46,7 +49,8 @@ export default function filterBarDropDown() {
       </div>
       <div className={styles.dropdown} ref={dropdownRef}>
         <a onClick={handleDropdownToggle}>
-          Filters <HiChevronLeft />
+          <span>Filters</span>
+          <span style={{ marginTop: "8px" }}>{open ? up : down}</span>
         </a>
       </div>
     </div>

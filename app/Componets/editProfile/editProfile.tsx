@@ -184,7 +184,7 @@ function EditProfile() {
 
       <form onSubmit={handleSubmit}>
         <div className={styles.isWizard}>
-          <label htmlFor="isWIzard">Do you want to become a wizard?</label>
+          <label htmlFor="isWIzard">Be a Wizard?</label>
           <div className={styles.magic}>
             <input
               type="checkbox"
