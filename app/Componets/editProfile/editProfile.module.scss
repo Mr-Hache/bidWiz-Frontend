@@ -37,6 +37,10 @@
       transform: rotate(16deg);
     }
     .magic:hover {
+      input {
+        cursor: pointer;
+      }
+
       .wand {
         transform: rotate(-52deg);
       }
