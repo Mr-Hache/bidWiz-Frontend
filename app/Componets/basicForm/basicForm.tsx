@@ -215,8 +215,7 @@ function basicForm() {
     }
    
   };
-
-   
+  
 
   const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, checked } = event.target;
@@ -266,10 +265,6 @@ function basicForm() {
       },
     });
   };
-
-
-
-
 
   const [createUser, { data, error }] = useCreateUserMutation();
 
@@ -415,11 +410,11 @@ function basicForm() {
       <br />
 
       <label>
-        <div>
+        <div className={style.center}>
           <h3 className={style.selectTitle}>Become Wizard</h3>
           <div className={style.magic}>
             <input
-              type="radio"
+              type="checkbox"
               name="isWizard"
               checked={values.isWizard}
               onChange={handleCheckboxChange}
@@ -488,18 +483,9 @@ function basicForm() {
             </div>
           </div>
           <br />
-
           <br />
           <div className={style.inputcontainer}>
-            <label>
-              {/* <input
-                className={style.input}
-                type="text"
-                name="title"
-                value={values.experience.title}
-                placeholder="Title:"
-                onChange={handleExperienceChanges}
-              /> */}         
+            <label>                  
                <select
                 className={style.input}
                 name="title"
