@@ -9,8 +9,6 @@ import { useRouter } from "next/navigation";
 import { useTheme } from "next-themes";
 import { HiChevronDown } from "react-icons/hi";
 
-import Link from "next/link";
-
 const languagesList = [
   "Chinese",
   "English",
@@ -39,8 +37,6 @@ const subjectsList = [
 
 export default function slectorNavbar() {
   const { theme } = useTheme();
-
-  //---Filter---
 
   const router = useRouter();
 
