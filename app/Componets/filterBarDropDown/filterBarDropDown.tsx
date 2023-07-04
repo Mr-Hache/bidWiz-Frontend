@@ -4,6 +4,7 @@ import React from "react";
 import { useRef, useState, useEffect } from "react";
 import styles from "./filterBarDropDown.module.scss";
 import FilterBar from "../filterBar/filterBar";
+import { HiChevronLeft } from "react-icons/hi";
 
 export default function filterBarDropDown() {
   const [open, setOpen] = useState<boolean>(false);
@@ -39,12 +40,14 @@ export default function filterBarDropDown() {
       <div>
         {open && (
           <div className={styles.containerLink}>
-            <FilterBar selectRef={selectRef}/>
+            <FilterBar selectRef={selectRef} />
           </div>
         )}
       </div>
       <div className={styles.dropdown} ref={dropdownRef}>
-        <a onClick={handleDropdownToggle}>Filters ⮟</a>
+        <a onClick={handleDropdownToggle}>
+          Filters <HiChevronLeft />
+        </a>
       </div>
     </div>
   );

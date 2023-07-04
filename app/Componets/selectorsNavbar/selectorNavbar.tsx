@@ -7,6 +7,7 @@ import { setLanguages, setSubjects } from "@/app/redux/services/filtersSlice";
 import { usePathname } from "next/navigation";
 import { useRouter } from "next/navigation";
 import { useTheme } from "next-themes";
+import { HiChevronDown } from "react-icons/hi";
 
 import Link from "next/link";
 
@@ -106,7 +107,7 @@ export default function slectorNavbar() {
             className={styles.arrow}
             style={{ marginLeft: "10px", display: "inline-block" }}
           >
-            ⮟
+            <HiChevronDown />
           </div>
         </a>
       </div>

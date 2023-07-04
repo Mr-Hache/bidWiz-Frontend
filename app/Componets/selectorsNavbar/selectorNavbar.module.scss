@@ -22,13 +22,14 @@
   .arrow {
     transition: 0.3s;
     color: $lightPurple;
+    font-size: 20px;
   }
 
   .dropdownToggle:hover {
     .arrow {
       transition: 0.3s;
       transform: scale(1.2);
-      color: $darkMediumPurple;
+      color: $darkMediumGreen;
     }
   }
 
