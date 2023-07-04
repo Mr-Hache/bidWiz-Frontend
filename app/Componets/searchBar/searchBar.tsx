@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useGetUsersQuery, User } from "../../redux/services/userApi";
 import { useTheme } from "next-themes";
+import { BsSearch } from "react-icons/bs";
 
 export default function searchBar() {
   const router = useRouter();
@@ -45,7 +46,7 @@ export default function searchBar() {
           onChange={handleSearch}
         />
         <button type="submit" className={styles.button}>
-          <div className={styles.lupa}>🔍︎</div>
+          <BsSearch />
         </button>
       </form>
 

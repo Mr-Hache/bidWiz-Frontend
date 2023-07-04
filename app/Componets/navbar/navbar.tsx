@@ -2,6 +2,7 @@
 import Link from "next/link";
 import styles from "./navbar.module.scss";
 import { FaHatWizard } from "react-icons/fa";
+
 import SearchBar from "../searchBar/searchBar";
 import SelectorNavbar from "../selectorsNavbar/selectorNavbar";
 import DarkToggle from "../darkToggle/darkToggle";
@@ -111,6 +112,8 @@ export default function Navbar() {
             </button>
           </>
         )}
+      </div>
+      <div className={styles.darkToggle}>
         <DarkToggle />
       </div>
     </div>
