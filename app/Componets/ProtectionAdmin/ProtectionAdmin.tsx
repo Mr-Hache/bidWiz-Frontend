@@ -16,7 +16,6 @@ const ProtectionAdmin = () => {
     useEffect(() => {
       const unsubscribe = onAuthStateChanged(auth, (user) => {
         if (user) {
-          setIsReady(true);
           fetch(
               `https://bidwiz-backend-production-db77.up.railway.app/users/user/${user.uid}`
             ).then ((response) => response.json())
