@@ -79,6 +79,10 @@ export default function slectorNavbar() {
 
     dispatch(setSubjects([nameFilter]));
     dispatch(setLanguages([]));
+
+    if (pathname !== "/offerBoard") {
+      router.push("/offerBoard");
+    }
   };
 
   const onClickFilterLanguage = (event: React.MouseEvent<HTMLSpanElement>) => {
@@ -87,6 +91,10 @@ export default function slectorNavbar() {
 
     dispatch(setLanguages([nameFilter]));
     dispatch(setSubjects([]));
+
+    if (pathname !== "/offerBoard") {
+      router.push("/offerBoard");
+    }
   };
 
   const onClickAllWizards = (event: React.MouseEvent<HTMLSpanElement>) => {
