@@ -91,7 +91,6 @@ function FilterBar({ selectRef }: { selectRef: React.RefObject<HTMLSelectElement
 
   const handleSortByReviewsChange = (event: ChangeEvent<HTMLSelectElement>) => {
     const value = event.target.value;
-    console.log('Dispatching setSortByReviews with value:', value);
     setStateSortByReviews(value);
     dispatch(setSortByReviews(value));
   };
