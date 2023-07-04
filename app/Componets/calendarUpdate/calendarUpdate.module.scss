@@ -1,23 +1,39 @@
 @import "../../utils/mixin";
 @import "../../utils/variabls";
 
-.table{
+.table {
   @include p-p;
   font-size: medium;
-  border-radius: 10px;
-  overflow: hidden; 
+  border-radius: 0px;
+  overflow: hidden;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
-  
-  th, td {
-    border: none;  
+
+  th,
+  td {
+    border: none;
   }
+}
+
+.tableDark {
+  border: none;
+}
+
+.days {
+  background-color: $darkGreen;
 }
 
 .reserved {
   background-color: $lightPurple;
 }
 
+.reservedDark {
+  background-color: #584080;
+}
+
 .selected {
   background-color: $lightGreen;
 }
 
+.selectedDark {
+  background-color: #181123;
+}
