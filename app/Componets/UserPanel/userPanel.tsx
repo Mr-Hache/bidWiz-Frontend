@@ -1,15 +1,16 @@
 "use client"
 
 import styles from "./userPanel.module.scss";
-import { useGetJobsByClientQuery, useUpdateJobReviewMutation, Job } from "@/app/redux/services/userApi";
+import { useGetJobsByClientQuery, useUpdateJobReviewMutation, Job, useGetUserByIdQuery } from "@/app/redux/services/userApi";
 import { useEffect, useState } from "react";
 import {useAppSelector} from "../../redux/hooks"
+import emailjs from 'emailjs-com';
 
 
 interface JobReview {
   jobId: string;
   clientId: string;
-  updateJobReviewDto: number; // Actualizado a number | null
+  updateJobReviewDto: number; 
 }
 interface JobViews {
   language: string;
@@ -23,20 +24,22 @@ export default function UserPanel() {
   const [jobReview, setJobReview] = useState({
     jobId: "",
     clientId: "",
-    updateJobReviewDto: {rating: 1}, //DEL 1 AL 5
+    updateJobReviewDto: {rating: 1}, 
   });
 
   const localUid = useAppSelector((state) => state.userAuth.uid)
   const [userId, setUserId] = useState('');
+  const [userName, setUserName] = useState('');
+  const [selectedWizard, setSelectedWizard] = useState('');
   const fetchUserData = async () => {
     await fetch(`https://bidwiz-backend-production-db77.up.railway.app/users/user/${localUid}`)
     .then(response => response.json())
     .then(data => {
     setUserId(data._id)
+    setUserName(data.name)
 })
     .catch(error => console.error(error));
 }
-console.log(userId)
 
 const getJobsByClientQuery = useGetJobsByClientQuery({ clientId:userId });
 
@@ -45,6 +48,15 @@ const [updateJobReviewMutation] = useUpdateJobReviewMutation();
 const { data: unableJobsByClient, isLoading: isLoadingJobsByClient, isError: isErrorJobsByClient } = getJobsByClientQuery;
 
 const [jobsByClient, setJobsByClient] = useState<Job[]>([]);
+
+function sendEmail(templateParams: {message: string, to_email: string | undefined}) {      
+  emailjs.send("service_09m33gr","template_zdim09n", templateParams, 'UGYQRFU0vkqoRXNx0')
+    .then((response) => {
+      console.log('SUCCESS!', response.status, response.text);
+    }, (error) => {
+      console.error('FAILED...', error);
+    });
+}
 
 
 useEffect( () => {
@@ -83,11 +95,28 @@ useEffect( () => {
     });
     checkButton()
   };
+
+  useEffect(() => {
+    const selectedJob = jobsByClient?.find(job => job._id === jobReview.jobId) as any;
+    if (selectedJob) {
+      setSelectedWizard(selectedJob.worker);
+    }
+  }, [jobReview.jobId, jobsByClient]);
+  
+  const { data: wizardDetails, isLoading: isWizardDetailsLoading, isError: isWizardDetailsError } = useGetUserByIdQuery({_id: selectedWizard});
+
+
   const onClickHandlerReview = async () => {
     console.log(jobReview)
     try {
+      let templateParams = {
+        message: `${userName} has rated your ${clientInReviewViews.subject} class in ${clientInReviewViews.language} just got a ${jobReview.updateJobReviewDto.rating} rating.`,
+        to_email: wizardDetails?.email,
+      };
       await updateJobReviewMutation({jobId: jobReview.jobId, clientId: jobReview.clientId, updateJobReviewDto: jobReview.updateJobReviewDto });
-
+      if (wizardDetails && wizardDetails.email) {
+        sendEmail(templateParams)
+      }
     } catch (error) {
       console.error(error);
     }
@@ -147,7 +176,7 @@ const [buttonDisabled, setButtonDisabled] = useState(false)
   <select name="" onChange={onChangeReviewJobId}>
     <option>Select</option>
     {jobsByClient?.map((job) => {
-      if (Object.keys(job).length == 11 ) {
+      if (job.status === "Finished") {
         return <option value={job._id} key={job._id}>{job.description}</option>;
       }
     })}
