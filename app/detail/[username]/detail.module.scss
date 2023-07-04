@@ -1,183 +1,198 @@
 @import "../../utils/mixin";
 @import "../../utils/variabls";
 
-.block{
-    height: 7.5vw;
-}
-
 .detail {
-    font-family: $ralewayFont;
-    display: flex;
-    flex-direction: row;
+  font-family: $ralewayFont;
+  display: flex;
+  flex-direction: row;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+
+  padding-top: 7.5vw;
+  max-width: 1740px;
+  overflow: hidden;
+
+  .sidebar {
+    background-color: $lightMediumGreen;
+    float: left;
+    text-align: center;
+    border-radius: 10px 10px 10px 10px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    height: 45vw;
+    margin-top: 10.4vw;
+    margin-left: 10vw;
+  }
+
+  .sidebarDark {
+    background-color: #181123;
+    box-shadow: 0px 0px 6px 4px rgba(93, 4, 153, 0.491);
+  }
+
+  .secondCont {
+    background-color: white;
     border-radius: 10px;
-    margin: 0 auto;
-    max-width: 1740px;
-    overflow: hidden;
+    border: 2px solid rgb(235, 211, 211);
+    width: 25rem;
+    margin: 0px 20px;
+  }
 
-    .sidebar{               
-        background-color: $lightMediumGreen;                
-        float: left;
-        text-align: center;
-        border-radius: 10px 10px 10px 10px;
-        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
-        height: 700px;
-        margin: 20px;              
+  .secondContDark {
+    background-color: #4c3d63;
+  }
+
+  .imagen {
+    border: 2px solid rgb(235, 211, 211);
+    border-radius: 10px;
+  }
+
+  .name {
+    font-family: $ralewayFont;
+    font-size: 30px;
+    font-weight: 700;
+    color: $darkPurple;
+  }
+
+  .flags {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 30px;
+    margin-top: 0.5rem;
+  }
+
+  .language {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .subjects {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .subject {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    margin-bottom: 1rem;
+    margin-left: 1.4vw;
+  }
+
+  .siglas {
+    margin-left: 5px;
+  }
+
+  .righbar {
+    float: right;
+    text-align: center;
+    align-items: center;
+    table {
+      margin-left: auto;
+      margin-right: auto;
+      border-collapse: collapse;
+      width: 80%;
     }
 
-    .secondCont {          
-        background-color: white;
-        border-radius: 10px;    
-        border: 2px solid rgb(235, 211, 211);   
-        width: 25rem;         
-        margin:0px 20px;
+    th,
+    td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: center;
     }
 
-    .imagen {
-        border: 2px solid rgb(235, 211, 211);
-        border-radius: 10px;
+    th {
+      background-color: #f2f2f2;
     }
-
-    .name {
-        font-family: $ralewayFont;
-        font-size: 30px;
-        font-weight: 700;
-        color: $darkPurple;
+    button {
+      @include button-styles2(1vw);
+      font-weight: 700;
+      height: 2vw;
+      position: relative;
     }
+  }
 
-    .flags {
-        display: flex;
-        justify-content: center;
-        flex-wrap: wrap;
-        gap: 30px;        
-        margin-top: 0.5rem;
-      }
-
-      .language {
-        display: flex;
-        align-items: center;
-        gap: 5px;
-      }
-
-      .subjects {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-wrap: wrap;
-        gap: 10px;   
-      }
-
-      .subject {
-        display: flex;
-        justify-content: center;        
-        align-items: center;
-        gap: 5px;
-        margin-bottom: 1rem;
-        margin-left: 1.4vw;
-      }
-
-      .siglas {
-        margin-left: 5px;
-      }
-
-    .righbar{
-        float: right;
-        text-align: center;
-        align-items: center;
-        table {
-            margin-left: auto;
-            margin-right: auto;
-            border-collapse: collapse;
-            width: 80%;
-        }
-          
-        th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: center;
-        }
-          
-        th {
-            background-color: #f2f2f2;
-        }
-        button{
-                @include button-styles2(1vw);
-                font-weight: 700;
-                height: 2vw;
-                position: relative;
-                
-        }
-    }
-
-    .link {
-        text-decoration: none;
-      }
+  .link {
+    text-decoration: none;
+  }
 }
 
 .contSelect {
-    font-family: $ralewayFont;
-    background-color: $lightGreen;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 0.5px solid rgba(0, 0, 0, 0.123);
-    border-radius: 10px;
-    margin-top: 4rem;
-    height: 80px;
-    select{
-        padding: 8px;
-        font-size: 14px;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        background-color: #fff;
-        width: 200px;
-        margin-left: 10px;
-    }
-}
-.chooseLang{
-    margin-right: 20px;
-    margin-left: 5px;
+  font-family: $ralewayFont;
+  background-color: $lightMediumGreen;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 0.5px solid rgba(0, 0, 0, 0.123);
+  border-radius: 10px;
+  margin-top: 4rem;
+  height: 80px;
+  select {
+    padding: 8px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+    width: 200px;
+    margin-left: 10px;
+  }
 }
 
+.contSelectDark {
+  background-color: #181123;
+  box-shadow: 0px 0px 6px 4px rgba(93, 4, 153, 0.491);
+}
+.chooseLang {
+  margin-right: 20px;
+  margin-left: 5px;
+}
 
 .contInputs {
-    font-family: $ralewayFont;
-    background-color: $lightGreen;
-    height: 3.5rem;
-    display: flex;     
-    align-items: center;
-    margin-top: 3rem;
-    margin-bottom: 5rem;
-    border: 0.5px solid rgba(0, 0, 0, 0.123);
-    border-radius: 10px;
-    
-    font-weight: 700;
-    input[type="radio"] {
-        margin-right: 5px;
-        width: 20px;
-        height: 20px;
-        appearance: none;
-        border: 2px solid #aaa;
-        border-radius: 15px;
-        outline: none;
-        position: relative;
-    }
-    
-        input[type="radio"]:before {
-        content: "";
-        display: block;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 12px;
-        height: 12px;
-        border-radius: 12px;
-        background-color: transparent;
-        transition: background-color 0.2s ease-in-out;
-    }
-    
-        input[type="radio"]:checked:before {
-        background-color: #007bff;
-    }
+  font-family: $ralewayFont;
+  background-color: $lightMediumGreen;
+  height: 3.5rem;
+  display: flex;
+  align-items: center;
+  margin-top: 3rem;
+  margin-bottom: 5rem;
+  border: 0.5px solid rgba(0, 0, 0, 0.123);
+  border-radius: 10px;
+
+  font-weight: 700;
+  input[type="radio"] {
+    margin-right: 5px;
+    width: 20px;
+    height: 20px;
+    appearance: none;
+    border: 2px solid #aaa;
+    border-radius: 15px;
+    outline: none;
+    position: relative;
+  }
+
+  input[type="radio"]:before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 12px;
+    height: 12px;
+    border-radius: 12px;
+    background-color: transparent;
+    transition: background-color 0.2s ease-in-out;
+  }
+
+  input[type="radio"]:checked:before {
+    background-color: #007bff;
+  }
+}
+.contInputsDark {
+  background-color: #181123;
+  box-shadow: 0px 0px 6px 4px rgba(93, 4, 153, 0.491);
 }
