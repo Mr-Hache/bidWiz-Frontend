@@ -6,6 +6,7 @@ export const filtersSlice = createSlice({
     page: 1,
     subjects: [],
     languages: [],
+    sortByReviews: "",
   },
   reducers: {
     setPage: (state, action) => {
@@ -17,10 +18,13 @@ export const filtersSlice = createSlice({
     setLanguages: (state, action) => {
       state.languages = action.payload;
     },
+    setSortByReviews: (state, action) => {
+      state.sortByReviews = action.payload;
+    },
   },
 });
 
 
-export const { setPage, setSubjects, setLanguages } = filtersSlice.actions;
+export const { setPage, setSubjects, setLanguages, setSortByReviews } = filtersSlice.actions;
 
 export default filtersSlice.reducer;
