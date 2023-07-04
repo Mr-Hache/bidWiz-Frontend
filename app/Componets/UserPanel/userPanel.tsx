@@ -46,6 +46,7 @@ const { data: unableJobsByClient, isLoading: isLoadingJobsByClient, isError: isE
 
 const [jobsByClient, setJobsByClient] = useState<Job[]>([]);
 
+
 useEffect( () => {
   fetchUserData(); 
   setJobReview(() => ({
@@ -62,8 +63,15 @@ useEffect( () => {
       updateJobReviewDto: {rating:value} ,
     }));
     console.log(jobReview)
-    
+    checkButton()
   };
+  const checkButton = () =>{
+    if (jobReview.updateJobReviewDto.rating === 0){
+      setButtonDisabled(true)
+    }
+    else{
+      setButtonDisabled(false)
+    }}
   const onChangeReviewJobId = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const value: string = event.target.value;
     setJobReview(() => ({
@@ -73,6 +81,7 @@ useEffect( () => {
     setClientInReviewViews((prevState: JobViews) => {
       return jobsByClient?.find((objeto: any) => objeto._id === value) || prevState;
     });
+    checkButton()
   };
   const onClickHandlerReview = async () => {
     console.log(jobReview)
@@ -110,15 +119,17 @@ useEffect( () => {
     status: '',
     subject: '',
   });
+const [buttonDisabled, setButtonDisabled] = useState(false)
+
     return (
 <div className={styles.div}>
       
-  <h1>Jobs in Progress</h1>
+  <h1>Pending Classes</h1>
   <select name="" onChange={onChangeInProgressClient}>
     <option>Select</option>
     {jobsByClient?.map((job) => {
       if (job.status === 'In Progress') {
-        return <option value={job._id}>{job.description}</option>;
+        return <option value={job._id} key={job._id}>{job.description}</option>;
       }
     })}
   </select>
@@ -131,19 +142,19 @@ useEffect( () => {
       <div >Subject: {clientInProgressViews.subject}</div>
     </div>
   )}
-  <h1>Jobs to Review</h1>
+  <h1>Class Feedback</h1>
   <div className={styles.reviewContainer}>
   <select name="" onChange={onChangeReviewJobId}>
     <option>Select</option>
     {jobsByClient?.map((job) => {
       if (Object.keys(job).length == 11 ) {
-        return <option value={job._id}>{job.description}</option>;
+        return <option value={job._id} key={job._id}>{job.description}</option>;
       }
     })}
   </select>
   </div>
   <select name="" onChange={onChangeReview} className={styles.reviewNumber}>
-    <option value="1">Select Points</option>
+    <option value="0">Select Points</option>
     <option value="1">⭐</option>
     <option value="2">⭐⭐</option>
     <option value="3">⭐⭐⭐</option>
@@ -160,7 +171,7 @@ useEffect( () => {
       <div >Subject: {clientInReviewViews.subject}</div>
     </div>
   )}
-  <button onClick={onClickHandlerReview}>Give Review</button>
+  <button onClick={onClickHandlerReview} disabled={buttonDisabled}>Give Review</button>
   <div className={styles.block}></div>
 </div>
 
