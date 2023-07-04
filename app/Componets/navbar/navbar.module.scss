@@ -54,13 +54,16 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 45vw;
+    width: 40vw;
+    margin-left: 5vw;
   }
 
   .buttons {
     display: flex;
     align-items: center;
-    margin-right: 0.5vw;
+    min-width: 20vw;
+    margin-right: -120px;
+    justify-content: flex-end;
   }
 
   h3 {
@@ -93,7 +96,11 @@
   img {
     border-radius: 50%;
     border: 2px solid $lightMediumGray;
-    margin-right: 10px;
+    margin-right: 5px;
+  }
+  .darkToggle {
+    margin-top: 35px;
+    margin-right: 5px;
   }
 }
 

@@ -2,7 +2,11 @@
 
 import React, { useState, ChangeEvent } from "react";
 import { useAppDispatch } from "@/app/redux/hooks";
-import { setLanguages, setSubjects, setSortByReviews } from "@/app/redux/services/filtersSlice";
+import {
+  setLanguages,
+  setSubjects,
+  setSortByReviews,
+} from "@/app/redux/services/filtersSlice";
 import { useAppSelector } from "@/app/redux/hooks";
 import { useEffect } from "react";
 import style from "./filterBar.module.scss";
@@ -34,7 +38,11 @@ const subjectsList = [
   "Programming",
 ];
 
-function FilterBar({ selectRef }: { selectRef: React.RefObject<HTMLSelectElement> }) {
+function FilterBar({
+  selectRef,
+}: {
+  selectRef: React.RefObject<HTMLSelectElement>;
+}) {
   const dispatch = useAppDispatch();
   const { theme } = useTheme();
 
@@ -134,17 +142,21 @@ function FilterBar({ selectRef }: { selectRef: React.RefObject<HTMLSelectElement
         theme === "dark" ? style.contAsideDark : style.contAsideLight
       }`}
     >
-            <h2>Sort by Reviews</h2>
-      <div>
+      <h2>Sort by Reviews</h2>
+      <div className={style.sort}>
         <label>
-          <select className={style.select} ref={selectRef} value={stateSortByReviews} onChange={handleSortByReviewsChange}>
+          <select
+            className={style.select}
+            ref={selectRef}
+            value={stateSortByReviews}
+            onChange={handleSortByReviewsChange}
+          >
             <option value="">None</option>
             <option value="desc">Top</option>
             <option value="asc">Bottom</option>
           </select>
         </label>
       </div>
-      <hr />
 
       <h2>Languages</h2>
       {stateLanguagesCheckbox.map((language, index) => (
@@ -162,7 +174,6 @@ function FilterBar({ selectRef }: { selectRef: React.RefObject<HTMLSelectElement
           </label>
         </div>
       ))}
-      <hr />
 
       <h2>Subjects</h2>
       {stateSubjectsCheckbox.map((subject, index) => (
@@ -180,8 +191,6 @@ function FilterBar({ selectRef }: { selectRef: React.RefObject<HTMLSelectElement
           </label>
         </div>
       ))}
-
-
     </aside>
   );
 }

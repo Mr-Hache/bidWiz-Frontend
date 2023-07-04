@@ -5,7 +5,7 @@
   display: flex;
   align-items: center;
   gap: 25px;
-  h3 {
+  h4 {
     @include h-3;
     color: $darkMediumGreen;
   }
@@ -102,24 +102,3 @@
     }
   }
 }
-
-// .log button {
-//   @include h-3;
-//   text-decoration: none;
-//   margin-right: 2vw;
-//   color: $darkMediumGreen;
-//   border: none;
-//   background-color: transparent;
-// }
-
-// .button1 a {
-//   text-decoration: none;
-//   color: inherit;
-// }
-
-// .profileLink {
-//   display: flex;
-//   align-items: center;
-//   margin-top: 30px;
-//   margin-right: 60px;
-// }
