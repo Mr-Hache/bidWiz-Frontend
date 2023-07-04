@@ -117,9 +117,9 @@ function detail() {
     setCreateJobDto({
       ...createJobDto,
       status: "In Progress",
-      description: `Class: ${selectedSubject} in ${selectedLanguage}. Client name: ${buyerName}. Client ID: ${buyerId}. Wizard name: ${
+      description: `Class: ${selectedSubject} in ${selectedLanguage}. Client name: ${buyerName}. Wizard name: ${
         user?.name
-      }. Wizard ID: ${_id}. Price: $${
+      }. Price: $${
         (selectedClasses || 0) * (selectedPrice || 0)
       } USD.`,
       price: selectedPrice,
