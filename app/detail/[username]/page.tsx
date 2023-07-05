@@ -101,10 +101,14 @@ function detail() {
 
   const handleClick = async () => {
     try {
-      // let templateParams = {
-      //   message: `Class: ${selectedSubject} in ${selectedLanguage}. Client name: ${buyerName}. Client ID: ${buyerId}. Wizard name: ${user?.name}. Wizard ID: ${_id}. Price: $${(selectedClasses || 0) * (selectedPrice || 0)} USD.`,
-      //   to_email: user?.email,
-      // };
+      let templateParams = {
+        message: `Class: ${selectedSubject} in ${selectedLanguage}. Client name: ${buyerName}. Client ID: ${buyerId}. Wizard name: ${
+          user?.name
+        }. Wizard ID: ${_id}. Price: $${
+          (selectedClasses || 0) * (selectedPrice || 0)
+        } USD.`,
+        to_email: user?.email,
+      };
       console.log(createJobDto);
       const newJob = await createJob(createJobDto).unwrap();
       setPreferenceId(newJob.result);
