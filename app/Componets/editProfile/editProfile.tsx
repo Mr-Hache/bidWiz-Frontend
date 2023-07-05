@@ -10,10 +10,9 @@ import { useAppSelector } from "../../redux/hooks";
 import ImageUpload from "../imageUpload/imageUpload";
 import { getAuth, sendPasswordResetEmail } from "firebase/auth";
 import { ImMagicWand } from "react-icons/im";
-import Select from 'react-select';
+import Select from "react-select";
 import Swal from "sweetalert2";
 import { title, origin } from "@/app/utils/titleAndOrigin";
-
 
 function EditProfile() {
   const localUid = useAppSelector((state) => state.userAuth.uid);
@@ -25,27 +24,26 @@ function EditProfile() {
   const [userName, setUserName] = useState("");
   const email = useAppSelector((state) => state.userAuth.email);
   const [imageState, setImageState] = useState("");
-  const titleOptions = title.map(t => ({ value: t.name, label: t.name }));
-  const originOptions = origin.map(o => ({ value: o.name, label: o.name }));
+  const titleOptions = title.map((t) => ({ value: t.name, label: t.name }));
+  const originOptions = origin.map((o) => ({ value: o.name, label: o.name }));
 
   const customStyles = {
     control: (base: any, state: any) => ({
       ...base,
-      border: state.isFocused ? '1px solid black' : '1px solid black',
-      boxShadow: state.isFocused ? '0 0 0 1px black' : 0,
-      borderRadius: '5px',
-      fontSize: '1em',
-      width: '100%',
-      color: '#999',
-      fontFamily: 'Raleway, sans-serif',
+      border: state.isFocused ? "1px solid black" : "1px solid black",
+      boxShadow: state.isFocused ? "0 0 0 1px black" : 0,
+      borderRadius: "5px",
+      fontSize: "1em",
+      width: "100%",
+      color: "#999",
+      fontFamily: "Raleway, sans-serif",
     }),
     option: (base: any) => ({
       ...base,
-      color: '#999',
-      fontFamily: 'Raleway, sans-serif',
+      color: "#999",
+      fontFamily: "Raleway, sans-serif",
     }),
   };
-  
 
   const allPossibleLanguages = [
     "Chinese",
@@ -94,11 +92,10 @@ function EditProfile() {
         });
         setUserId(data._id);
         setUserName(data.name);
-        setImageState(data.image); 
+        setImageState(data.image);
       })
       .catch((error) => console.error(error));
   };
-  
 
   useEffect(() => {
     fetchUserData();
@@ -173,29 +170,27 @@ function EditProfile() {
     e.preventDefault();
     try {
       let newFormState;
-      
+
       // If the user is not a wizard, we only send the image
       if (!formState.isWizard) {
         newFormState = { image: imageState };
       } else {
-        newFormState = {...formState, image: imageState};
+        newFormState = { ...formState, image: imageState };
       }
-      
+
       await updateWizardStatus({
         _id: userId,
         updateUserWizardDto: newFormState,
       });
-  
+
       console.log(newFormState);
-  
+
       fetchUserData();
       Swal.fire("Info", "<b>updated</b>", "success");
     } catch (error) {
       console.error(error);
     }
   };
-  
-
 
   if (!formState) return "Loading...";
 
@@ -217,11 +212,17 @@ function EditProfile() {
           );
         });
     }
-
   };
 
   return (
     <div className={styles.div}>
+      <img
+        className={styles.image}
+        src={imageState}
+        alt=""
+        width={100}
+        height={100}
+      />
       <h1>{userName}</h1>
 
       <button className={styles.change} onClick={handleChangePassword}>
@@ -229,13 +230,13 @@ function EditProfile() {
       </button>
 
       <form onSubmit={handleSubmit}>
-
-      <br />
-            <ImageUpload onImageUpload={handleImageUpload} />
-            <br />
-            <label htmlFor="image">Latest</label>
-            <img src={imageState} alt={userName} width="50" height="50" />
-            <br />
+        <br />
+        <label htmlFor="abatar">Change your avatar</label>
+        <div className={styles.changeImage}>
+          <ImageUpload onImageUpload={handleImageUpload} />
+        </div>
+        <br />
+        <br />
         <div className={styles.isWizard}>
           <label htmlFor="isWIzard">Be a Wizard?</label>
           <div className={styles.magic}>
@@ -254,13 +255,14 @@ function EditProfile() {
         {formState.isWizard && (
           <div>
             <br />
+            <br />
             <label htmlFor="aboutMe">Tell something about you</label>
             <textarea
               name="aboutMe"
               value={formState.aboutMe || ""}
               onChange={handleChange}
-              rows={5} 
-              style={{ width: "100%" }} 
+              rows={5}
+              style={{ width: "100%" }}
             />
 
             <br />
@@ -299,8 +301,12 @@ function EditProfile() {
               styles={customStyles}
               options={titleOptions}
               name="title"
-              value={titleOptions.find(option => option.value === formState.experience?.title)}
-              onChange={(selectedOption) => handleSelectChange("title", selectedOption)}
+              value={titleOptions.find(
+                (option) => option.value === formState.experience?.title
+              )}
+              onChange={(selectedOption) =>
+                handleSelectChange("title", selectedOption)
+              }
             />
 
             <br />
@@ -309,11 +315,14 @@ function EditProfile() {
               styles={customStyles}
               options={originOptions}
               name="origin"
-              value={originOptions.find(option => option.value === formState.experience?.origin)}
-              onChange={(selectedOption) => handleSelectChange("origin", selectedOption)}
+              value={originOptions.find(
+                (option) => option.value === formState.experience?.origin
+              )}
+              onChange={(selectedOption) =>
+                handleSelectChange("origin", selectedOption)
+              }
             />
 
-            
             <br />
             <label htmlFor="pricePerOne">My offer for one class is</label>
             <input
@@ -346,11 +355,7 @@ function EditProfile() {
             />
           </div>
         )}
-        <button
-          className={styles.update}
-          type="submit"
-          disabled={isLoading}
-        >
+        <button className={styles.update} type="submit" disabled={isLoading}>
           Update
         </button>
       </form>
