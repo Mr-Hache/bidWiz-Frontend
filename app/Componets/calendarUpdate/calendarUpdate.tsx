@@ -110,7 +110,7 @@ const CalendarUpdate: React.FC<CalendarProps> = ({
                     ? theme === "dark"
                       ? styles.reservedDark
                       : styles.reserved
-                    : styles.reserved
+                    : styles.available
                 }
                 ${
                   isTimeSlotSelected(day, timeSlot)
