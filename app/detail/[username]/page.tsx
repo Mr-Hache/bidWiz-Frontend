@@ -47,7 +47,7 @@ function detail() {
   const [selectedClasses, setSelectedClasses] = useState<number | null>(null);
   const [selectedPrice, setSelectedPrice] = useState<number | null>(null);
   const [buyerName, setBuyerName] = useState("");
-  
+
   const [availability, setAvailability] = useState<
     { day: string; hour: string }[]
   >([]);
@@ -121,9 +121,7 @@ function detail() {
       status: "In Progress",
       description: `Class: ${selectedSubject} in ${selectedLanguage}. Client name: ${buyerName}. Wizard name: ${
         user?.name
-      }. Price: $${
-        (selectedClasses || 0) * (selectedPrice || 0)
-      } USD.`,
+      }. Price: $${(selectedClasses || 0) * (selectedPrice || 0)} USD.`,
       price: selectedPrice,
       numClasses: selectedClasses,
       clientId: buyerId,
@@ -209,14 +207,13 @@ function detail() {
     }
   };
 
-
   const renderStars = (numStars: number) => {
     const stars: JSX.Element[] = [];
-  
+
     for (let i = 0; i < Math.round(numStars); i++) {
       stars.push(<IoIosStar key={i} />);
     }
-  
+
     return stars;
   };
 
@@ -304,8 +301,8 @@ function detail() {
           <br />
 
           <div className={styles.contAbout}>
-            <h1>About Me</h1>
-            <h2>{user.aboutMe}</h2>
+            <h2>About Me</h2>
+            <h3>{user.aboutMe}</h3>
           </div>
           <table>
             <tbody>
@@ -333,7 +330,7 @@ function detail() {
                   value={selectedSubject}
                   onChange={handleSubjectChange}
                   className={styles.chooseSubj}
-                  >
+                >
                   <option value="">Choose one</option>
                   {user.subjects.map((subject) => (
                     <option value={subject}>{subject}</option>
@@ -411,9 +408,9 @@ function detail() {
             CONFIRM
           </button>
           <div>
-          {preferenceId && (
-            <Wallet initialization={{ preferenceId: preferenceId }} />
-          )}
+            {preferenceId && (
+              <Wallet initialization={{ preferenceId: preferenceId }} />
+            )}
           </div>
         </div>
       </div>
