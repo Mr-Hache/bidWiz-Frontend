@@ -13,6 +13,8 @@ import { setSubjects } from "@/app/redux/services/filtersSlice";
 import { usePathname } from "next/navigation";
 import { useRouter } from "next/navigation";
 
+
+
 const subjectsList = [
   "Accounting",
   "Biology",
@@ -70,7 +72,8 @@ export default function Footer() {
         </div>
       </div>
       <div className={styles.containerSmall}>
-        <div className={styles.icons}>
+        <div className={styles.icons}>         
+                 
           <Link href="/not found" className={styles.link}>
             <BsFacebook className={styles.face} />
           </Link>
@@ -89,6 +92,7 @@ export default function Footer() {
         </div>
         <div className={styles.containerCopy}>
           <small>Copyright &copy; BidWiz Company</small>
+          <Link href="/about" className={styles.about}>About us</Link>
         </div>
       </div>
     </section>
