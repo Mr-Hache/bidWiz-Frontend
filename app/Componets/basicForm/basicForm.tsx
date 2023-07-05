@@ -18,6 +18,7 @@ import ImageUpload from "../imageUpload/imageUpload";
 import {setPersistence, browserSessionPersistence, sendEmailVerification, browserLocalPersistence  } from "firebase/auth";
 import { setItem, getItem } from "../../utils/localStorage";
 import { title, origin } from "../../utils/titleAndOrigin";
+import Select from "react-select"
 
 export interface UserFormValues {
   name: string;
@@ -36,6 +37,8 @@ export interface UserFormValues {
 
 function basicForm() {
   const router = useRouter();
+
+  type SelectedOptionType = { value: string; label: string } | null;
 
   const languages = [
     "English",
@@ -62,21 +65,6 @@ function basicForm() {
     "Law",
     "Programming",
   ];
-
-  // const [values, setValues] = useState<UserFormValues>({
-  //   email: "",
-  //   name: "",
-  //   uidFireBase: "",
-  //   image: "",
-  //   isWizard: false,
-  //   languages: [],
-  //   subjects: [],
-  //   experience: {
-  //     title: "",
-  //     origin: "",
-  //     expJobs: 0,
-  //   },
-  // });
 
   const initialFormValues: UserFormValues = {
     email: getItem("email") || "",
@@ -164,25 +152,6 @@ function basicForm() {
     return Object.keys(formErrors).length === 0;
   };
 
-  // useEffect(() => {
-  //   validateForm();
-  // }, [values, authentication]);
-
-  // useEffect(() => {
-  //   validateForm();
-  // console.log(values.name);
-  
-  //   // Guardar los datos en el Local Storage
-  //   setItem("email", values.email);
-  //   setItem("name", values.name);
-
-  //   console.log("Datos guardados en el Local Storage - email:", values.email);
-  //   console.log("Datos guardados en el Local Storage - name:", values.name);
-
-
-
-  // }, [values, authentication]);
-
   useEffect(() => {
     validateForm();
     console.log(values.name);
@@ -201,8 +170,6 @@ function basicForm() {
     }
   }, [values, authentication]);
   
-  
-
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     if (name == "password") {
@@ -213,10 +180,8 @@ function basicForm() {
     } else {
       setValues((v) => ({ ...v, [name]: value }));
     }
-   
   };
 
-   
 
   const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, checked } = event.target;
@@ -257,31 +222,38 @@ function basicForm() {
     });
   };
 
-  const handleExperienceChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setValues({
-      ...values,
-      experience: {
-        ...values.experience,
-        origin: event.target.value,
-      },
-    });
+  const handleTitleChange = (selectedOption: SelectedOptionType) => {
+    if (selectedOption === null) {
+      // manejar el caso en que no se selecciona ninguna opción
+    } else {
+      setValues({
+        ...values,
+        experience: {
+          ...values.experience,
+          title: selectedOption.value,
+        },
+      });
+    }
+  };
+  
+  const handleOriginChange = (selectedOption: SelectedOptionType) => {
+    if (selectedOption === null) {
+      // manejar el caso en que no se selecciona ninguna opción
+    } else {
+      setValues({
+        ...values,
+        experience: {
+          ...values.experience,
+          origin: selectedOption.value,
+        },
+      });
+    }
   };
 
-
-
-
-
   const [createUser, { data, error }] = useCreateUserMutation();
-
-
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-
     event.preventDefault();
-
-
-
     if (validateForm()) {
-   
       setPersistence(auth, browserSessionPersistence).then(() => {
         try{
           createWithEmailAndPassword(values.email, authentication.password).then((userCreated) => {
@@ -314,10 +286,7 @@ function basicForm() {
                     setItem("name", "");
                     setItem("title", values.experience.title);
                     setItem("origin", values.experience.origin);
-                    
           })
-  
-            
   }catch (error) {
     console.log(error);
   }
@@ -325,9 +294,7 @@ function basicForm() {
       }).catch((error) => {
          console.log(error);
       })
-    
   }}
-
 
   const handleGoogleSignIn = async (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
@@ -355,11 +322,7 @@ function basicForm() {
 })
   };
  
-
-
-  // -------------HandleImage-------------------
   const handleImageUpload = (imageUrl: string) => {
-    // Utilizar la URL de la imagen cargada
     console.log("Imagen cargada:", imageUrl);
     setValues((v) => ({ ...v, image: imageUrl }));
   };
@@ -491,65 +454,33 @@ function basicForm() {
 
           <br />
           <div className={style.inputcontainer}>
-            <label>
-              {/* <input
-                className={style.input}
-                type="text"
-                name="title"
-                value={values.experience.title}
-                placeholder="Title:"
-                onChange={handleExperienceChanges}
-              /> */}         
-               <select
-                className={style.input}
-                name="title"
-                value={values.experience.title}
-                onChange={(event) => {
-                  const selectedValue = event.target.value;
-                  handleExperienceChanges(event);
-                  setSelectedTitle(selectedValue);
-                }}
-              >
-                <option value="">Select a title</option>
-                {title.map((tit, index) => (
-                  <option key={index} value={tit.name}>
-                    {tit.name}
-                  </option>
-                ))}
-              </select>
-            </label>
-            {errors.title && <span className="error">{errors.title}</span>}
-          </div>
-          <br />
-          <div className={style.inputcontainer}>
-            <label>
-              {/* <input
-                className={style.input}
-                type="text"
-                name="origin"
-                value={values.experience.origin}
-                placeholder="Origin:"
-                onChange={handleExperienceChange}
-              /> */}
-              <select
-                className={style.input}
-                name="origin"
-                value={values.experience.origin}
-                onChange={(event) => {
-                  const selectedValue = event.target.value;
-                  handleExperienceChange(event);
-                  setSelectedFlag(selectedValue);
-                }}
-              >
-                <option value="">Select a country</option>
-                {origin.map((orig, index) => (
-                  <option key={index} value={orig.name}>
-                    {orig.name}
-                  </option>
-                ))}
-              </select>
-            </label>
-            {errors.origin && <span className="error">{errors.origin}</span>}
+          <label>
+    Title:
+    <Select
+      className={style.input}
+      name="title"
+      options={title.map(tit => ({ value: tit.name, label: tit.name }))}
+      onChange={handleTitleChange}
+      isSearchable
+      placeholder="Select a title"
+    />
+  </label>
+  {errors.title && <span className="error">{errors.title}</span>}
+</div>
+
+<div className={style.inputcontainer}>
+  <label>
+    Origin:
+    <Select
+      className={style.input}
+      name="origin"
+      options={origin.map(orig => ({ value: orig.name, label: orig.name }))}
+      onChange={handleOriginChange}
+      isSearchable
+      placeholder="Select a country"
+    />
+  </label>
+  {errors.origin && <span className="error">{errors.origin}</span>}
           </div>
         </div>
       ) : null}
