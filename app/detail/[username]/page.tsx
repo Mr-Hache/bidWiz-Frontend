@@ -48,9 +48,9 @@ function detail() {
   const [selectedPrice, setSelectedPrice] = useState<number | null>(null);
   const [buyerName, setBuyerName] = useState("");
 
-  const [availability, setAvailability] = useState<
-    { day: string; hour: string }[]
-  >([]);
+  const [available, setAvailable] = useState<{ day: string; hour: string }[]>(
+    []
+  );
   const [createJob, { data: job }] = useCreateJobMutation();
   const pathname = usePathname();
   const _id = pathname.split("/")[2];
@@ -101,14 +101,10 @@ function detail() {
 
   const handleClick = async () => {
     try {
-      let templateParams = {
-        message: `Class: ${selectedSubject} in ${selectedLanguage}. Client name: ${buyerName}. Client ID: ${buyerId}. Wizard name: ${
-          user?.name
-        }. Wizard ID: ${_id}. Price: $${
-          (selectedClasses || 0) * (selectedPrice || 0)
-        } USD.`,
-        to_email: user?.email,
-      };
+      // let templateParams = {
+      //   message: `Class: ${selectedSubject} in ${selectedLanguage}. Client name: ${buyerName}. Client ID: ${buyerId}. Wizard name: ${user?.name}. Wizard ID: ${_id}. Price: $${(selectedClasses || 0) * (selectedPrice || 0)} USD.`,
+      //   to_email: user?.email,
+      // };
       console.log(createJobDto);
       const newJob = await createJob(createJobDto).unwrap();
       setPreferenceId(newJob.result);
@@ -133,7 +129,7 @@ function detail() {
       language: selectedLanguage,
       subject: selectedSubject,
       result: "default",
-      availability: availability,
+      availability: available,
     });
     console.log(createJobDto);
   }, [
@@ -143,6 +139,7 @@ function detail() {
     _id,
     selectedPrice,
     buyerId,
+    available,
   ]);
 
   function sendEmail(templateParams: {
@@ -224,6 +221,7 @@ function detail() {
   const handleSelectedTimeslots = (
     timeslots: { day: string; hour: string }[]
   ) => {
+    setAvailable(timeslots);
     setCreateJobDto((prevCreateJobDto) => ({
       ...prevCreateJobDto,
       availability: timeslots,
@@ -405,12 +403,7 @@ function detail() {
             onSelectedTimeslots={handleSelectedTimeslots}
           />
 
-          <button
-            onClick={handleClick}
-            disabled={!selectedLanguage || !selectedSubject || !selectedClasses}
-          >
-            CONFIRM
-          </button>
+          <button onClick={handleClick}>CONFIRM</button>
           <div>
             {preferenceId && (
               <Wallet initialization={{ preferenceId: preferenceId }} />
