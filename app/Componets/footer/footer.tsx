@@ -72,12 +72,17 @@ export default function Footer() {
         </div>
       </div>
       <div className={styles.containerSmall}>
-        <div className={styles.icons}>         
+
+                
                  
-          <Link href="/not found" className={styles.link}>
+          
+
+        <div className={styles.icons}>
+          <Link href="https://web.facebook.com/profile.php?id=100094452996515" className={styles.link}>
+
             <BsFacebook className={styles.face} />
           </Link>
-          <Link href="/not found"  className={styles.link}>
+          <Link href="/notfound"  className={styles.link}>
             <BsInstagram className={styles.inst} />
           </Link>
           <Link href="https://twitter.com/home" target="_blank" className={styles.link}>
@@ -86,7 +91,7 @@ export default function Footer() {
           <Link href="https://www.youtube.com/channel/UC6T-APDv6ywdM9aUy2QxrFg" target="_blank" className={styles.link}>
             <BsYoutube className={styles.yout} />
           </Link>
-          <Link href="/not found" className={styles.link}>
+          <Link href="www.linkedin.com/in/bidwiz-undefined-548593282" className={styles.link}>
             <BsLinkedin className={styles.lin} />
           </Link>
         </div>
