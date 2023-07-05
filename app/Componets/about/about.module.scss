@@ -1,0 +1,79 @@
+@import "../../utils/mixin";
+@import "../../utils/variabls";
+
+.contAbout {
+    padding-top: 16vh;       
+}
+
+.contAbout h1 {        
+    font-family: $ralewayFont;
+    color: $darkBlue;
+    font-size: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.contAbout span {    
+    font-family: $ralewayFont;   
+    color: $darkBlue;    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 4vw;
+}
+
+.contImage {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;   
+    justify-content: center; 
+    flex-wrap: wrap;    
+    gap: 3vw;             
+}
+
+.contImage h2 {
+    color: $darkMediumGreen;
+    font-family: $ralewayFont;
+    border-radius: 6px;
+    margin-left: 1vw;
+    font-size: 20px;
+    text-align: center;
+    margin-left: -0.5vw;
+}
+
+.contImage h3 {    
+    color: $darkMediumGreen;
+    font-family: $ralewayFont;
+    border-radius: 6px;
+    margin-left: 1vw;
+    font-size: 16px;
+    text-align: center;
+    margin-left: -0.5vw;
+}
+
+.image {
+    border: 5px solid whitesmoke;
+    box-shadow: 0px 6px 4px 2px rgba(0, 0, 0, 0.25);
+    border-radius: 50%;
+}
+
+.image:hover {
+    transform: scale(1.1);    
+    box-shadow: 0 0 6px 1.5px rgba(2, 1, 8, 0.571);
+}
+
+
+.logos {
+    width: 27px;
+    height: auto;
+    cursor: pointer;
+    border-radius: 999px;
+    transition: 0.5s;
+    margin-left: 4.5vw;    
+}
+
+.logos:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 6px 1.5px rgba(2, 1, 8, 0.571);
+}
