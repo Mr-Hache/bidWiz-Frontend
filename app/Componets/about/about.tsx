@@ -1,6 +1,6 @@
 import styles from "./about.module.scss";
 import Image from "next/image";
-import Hernan from "../../src/Hernan.png";
+import Hernan from "../../src/Hernan.jpg";
 import Joaquin from "../../src/Joaquin.png";
 import Gerald from "../../src/Gerald.jpg";
 import Juan from "../../src/Juan.png";
