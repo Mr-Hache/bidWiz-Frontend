@@ -4,6 +4,7 @@ import { useState, ReactNode, useEffect, useRef } from "react";
 import styles from "./accordion.module.scss";
 import { HiChevronUp } from "react-icons/hi";
 import { HiChevronDown } from "react-icons/hi";
+import { useTheme } from "next-themes";
 
 interface AccordionProps {
   title: string;
@@ -12,6 +13,8 @@ interface AccordionProps {
 
 export default function Accordion({ title, children }: AccordionProps) {
   const [isOpen, setIsOpen] = useState(false);
+  const { theme } = useTheme();
+
   const accordionRef = useRef<HTMLDivElement>(null);
   const down = <HiChevronDown />;
   const up = <HiChevronUp />;
@@ -44,7 +47,7 @@ export default function Accordion({ title, children }: AccordionProps) {
   return (
     <div className={styles.accordion} ref={accordionRef}>
       <p
-        className={`${styles.titleAccordion} ${isOpen ? styles.open : ""}`}
+        className={`${styles.titleAccordion} ${isOpen && styles.open}`}
         onClick={toggleAccordion}
         style={{ position: "relative", zIndex: 2 }}
       >
