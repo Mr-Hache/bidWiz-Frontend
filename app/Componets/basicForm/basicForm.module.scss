@@ -1,63 +1,51 @@
-
 @import "../../utils/mixin";
 @import "../../utils/variabls";
 
-.form { 
+.form {
   font-family: $ralewayFont;
   color: $darkPurple;
-  font-weight: 700;   
-  box-shadow: 0px 0.54vw 0.36vw 0.18vw  rgba(0, 0, 0, 0.25);
-  margin: auto; 
-  padding: 3.52941vw;
+  box-shadow: 0px 0px 6px 4px rgba(0, 0, 0, 0.25);
+  background-color: rgb(238, 238, 238);
+  margin: auto;
   border-radius: 0.5vw;
-  width: 46vw;
+  width: 35vw;
+  padding-top: 3vw;
 
   h1 {
     @include h-1;
-    font-size: 2vw;
+    font-size: 1.5vw;
     margin-top: -1vw;
     margin-bottom: 2vw;
     text-align: center;
   }
 
-  .block {
-    height: 8vw;
-  }
-  .inputcontainer {    
+  .inputcontainer {
     width: 100%;
     min-height: 2vw;
     position: relative;
-    margin-left: 12vw;
+    margin-left: 7vw;
     .input {
-      width: 47%;
+      width: 20.5vw;
       height: 2vw;
-      border: 0.2vw solid #999;
-      border-radius: 0.2vw;
+      border: 1px solid gray;
+      border-radius: 5px;
       color: #999;
       display: grid;
+      padding: 4px 8px;
     }
 
     label {
       position: relative;
-      display: flex; 
-        
-      
+      display: flex;
     }
   }
-  .logo {
-    @include icon($darkMediumPurple);
-    width: 3vw;
-    height: 2vw;
-    transition: 0.2s;
-    transform: rotate(15deg);
-  }
+
   .magic {
     transition: 0.2s;
     display: flex;
-    gap: 10px;
+    gap: 5px;
     margin-top: 1vw;
     width: 2vw;
-    
   }
   .wand {
     margin-top: -5px;
@@ -68,108 +56,103 @@
       transform: rotate(-52deg);
     }
   }
-  .select {
-    display: flex;
-    flex-direction: column;    
-    width: auto;
-    margin-left: 12vw;
-    
-  }
-  .selectTitle {
-    margin-bottom: 0.8vw;
-    @include h-4;
-    font-weight: 700;
-    color: $darkMediumGreen;
-       
+
+  .logo {
+    @include icon($darkMediumPurple);
+    width: 3vw;
+    height: 2vw;
+    transition: 0.2s;
+    transform: rotate(15deg);
   }
 
-  .exp{
-    margin-bottom: 0.8vw;
+  .ImageUpload {
+    margin-left: 7vw;
+  }
+  .select {
+    display: flex;
+    flex-direction: column;
+    width: auto;
+    margin-left: 7vw;
+    margin-bottom: 2vw;
+    .selectTitle {
+      @include h-4;
+      font-weight: 700;
+      color: $darkMediumGreen;
+      margin-bottom: 5px;
+    }
+  }
+
+  .exp {
     @include h-4;
     font-weight: 700;
     color: $darkMediumGreen;
+    margin-top: 10px;
   }
   .selectSelect option {
     font-family: $ralewayFont;
     width: 20vw;
     // height: 0vw;
-      
-      
   }
   .selectSelect {
-    width: 100vw;
-    height: 5vw;
+    width: 110vw;
+    height: 6vw;
+    margin-top: 10px;
+    select {
+      border-radius: 5px;
+      width: 21.5vw;
+      height: 8vw;
+      border: solid 1px gray;
+    }
   }
 
-  span{
+  span {
     font-size: 0.8vw;
   }
 }
 
-.selectTitle1 {
-  margin-bottom: 0.8vw;
-  @include h-4;
-  font-weight: 700;
-  color: $darkMediumGreen;    
+.google {
+  @include button-styles1(0.6vw);
+  font-size: 12px;
+  background-color: white;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  .icon {
+    font-size: 16px;
+    cursor: pointer;
+  }
 }
 
-.selectSelect1 option {
-  font-family: $ralewayFont;
-  width: 20vw; 
-  // height: 1.2vw;  
-}
-.selectSelect1 {
-  width: 28vw;
-  height: 5vw;
+.formDark {
+  background-color: #181123;
+  box-shadow: 0px 0px 6px 4px rgba(93, 4, 153, 0.491);
 }
 
 .boton {
   @include button-styles2(1vw);
 }
-.boton2 {
-  @include button-styles1(1vw);
-  margin-top: 0;
-}
 
-.button {
+.buttons {
   display: flex;
   flex-direction: column;
   align-items: center;
-}
-.google {
-  height: 5vw;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  margin-top: 10px;
 }
 
 .register {
   margin-bottom: -0.4vw;
 }
 
-.google .icon {
-  width: 3vw;
-  height: 3vw;
-  margin-bottom: 0.6vw;
-  background-color: white;
-  border-radius: 50%;
+.center {
+  margin-left: 7vw;
+  width: 2vw;
+}
+.become {
+  margin-left: 7vw;
 }
 
-.agrandar{
-  transform: scale(1.5);  
-}
-
-.center{
+.error {
   margin-left: 12vw;
 }
-
-
-.ImageUpload{ 
-  margin-left: 12vw;
-}
-
-.error{
-  margin-left: 12vw;
-}
-
