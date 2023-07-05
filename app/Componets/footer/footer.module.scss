@@ -84,10 +84,11 @@
 
   .icons {
     height: 6vw;
-    padding: 0vw 40vw 0 40vw;
+    padding: 0vw 10vw 0 10vw;
     display: flex;
     justify-content: space-around;
     align-items: center;
+    gap: 20px;
   }
 
   .face {
@@ -132,18 +133,31 @@
   }
 }
 
-.about { 
-  font-family: $ralewayFont;
-  color: $lightGray;
-  font-size: 17px;  
-  border-radius: 6px;  
-  text-decoration: none;
-  width: 6vw;
-  text-align: center;
-  margin-left: 78vw;
+.containerIcon {
+  width: 10vw;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 20px;
 }
 
-.about:hover {
-  transform: scale(1.1);  
-  box-shadow: 0 0 6px 1.5px rgba(2, 1, 8, 0.571);
+.about2 {
+  font-family: $ralewayFont;
+  color: $lightGray;
+  font-size: 1.8vw;
+  text-decoration: none;
+  text-align: center;
+  margin-left: 40px;
+}
+.ab {
+  transition: 0.3s;
+  width: 300px;
+  height: 1vw;
+  display: flex;
+  justify-content: center;
+  padding-bottom: 1vw;
+}
+
+.ab:hover {
+  transform: scale(1.1);
 }
