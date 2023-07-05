@@ -120,4 +120,19 @@
     margin-bottom: 10px;
     color: rgba(0, 0, 139, 0);
   }
+
+  .image {
+    border-radius: 50%;
+  }
+
+  .squeletorImg {
+    font-size: 90px;
+    font-weight: 200;
+    background-color: white;
+    border-radius: 50%;
+    border: solid 1px $darkMediumGreen;
+    color: $darkMediumPurple;
+    margin-top: 1vw;
+    margin-bottom: 2.9vw;
+  }
 }
