@@ -29,6 +29,7 @@ import Swal from "sweetalert2";
 import emailjs from "emailjs-com";
 import Loading from "@/app/Componets/Loading/Loading";
 import { useTheme } from "next-themes";
+import { IoIosStar } from "react-icons/io";
 
 interface LanguageFlag {
   name: string;
@@ -46,6 +47,7 @@ function detail() {
   const [selectedClasses, setSelectedClasses] = useState<number | null>(null);
   const [selectedPrice, setSelectedPrice] = useState<number | null>(null);
   const [buyerName, setBuyerName] = useState("");
+
   const [availability, setAvailability] = useState<
     { day: string; hour: string }[]
   >([]);
@@ -119,9 +121,7 @@ function detail() {
       status: "In Progress",
       description: `Class: ${selectedSubject} in ${selectedLanguage}. Client name: ${buyerName}. Wizard name: ${
         user?.name
-      }. Price: $${
-        (selectedClasses || 0) * (selectedPrice || 0)
-      } USD.`,
+      }. Price: $${(selectedClasses || 0) * (selectedPrice || 0)} USD.`,
       price: selectedPrice,
       numClasses: selectedClasses,
       clientId: buyerId,
@@ -208,8 +208,13 @@ function detail() {
   };
 
   const renderStars = (numStars: number) => {
-    const stars = "⭐";
-    return stars.repeat(Math.round(numStars));
+    const stars: JSX.Element[] = [];
+
+    for (let i = 0; i < Math.round(numStars); i++) {
+      stars.push(<IoIosStar key={i} />);
+    }
+
+    return stars;
   };
 
   const handleSelectedTimeslots = (
@@ -224,7 +229,7 @@ function detail() {
   return (
     <div>
       <Navbar />
-
+      <div className={styles.block} />
       <div className={styles.detail}>
         <div
           className={`${styles.sidebar} ${
@@ -245,7 +250,7 @@ function detail() {
             }`}
           >
             <h2>{user.experience.title}</h2>
-            <p>{renderStars(user.reviews)}</p>
+            <p className={styles.stars}>{renderStars(user.reviews)}</p>
             <hr />
 
             <h3>Available Languages</h3>
@@ -296,8 +301,8 @@ function detail() {
           <br />
 
           <div className={styles.contAbout}>
-            <h1>About Me</h1>
-            <h2>{user.aboutMe}</h2>
+            <h2>About Me</h2>
+            <h3>{user.aboutMe}</h3>
           </div>
           <table>
             <tbody>
@@ -325,7 +330,7 @@ function detail() {
                   value={selectedSubject}
                   onChange={handleSubjectChange}
                   className={styles.chooseSubj}
-                  >
+                >
                   <option value="">Choose one</option>
                   {user.subjects.map((subject) => (
                     <option value={subject}>{subject}</option>
@@ -402,11 +407,14 @@ function detail() {
           >
             CONFIRM
           </button>
-          {preferenceId && (
-            <Wallet initialization={{ preferenceId: preferenceId }} />
-          )}
+          <div>
+            {preferenceId && (
+              <Wallet initialization={{ preferenceId: preferenceId }} />
+            )}
+          </div>
         </div>
       </div>
+      <div className={styles.block2} />
     </div>
   );
 }

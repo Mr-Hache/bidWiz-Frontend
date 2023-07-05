@@ -1,26 +1,34 @@
 @import "../../utils/mixin";
 @import "../../utils/variabls";
 
+.block {
+  height: 150px;
+}
+.block2 {
+  height: 70px;
+}
 .detail {
   font-family: $ralewayFont;
   display: flex;
   flex-direction: row;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
   border-radius: 10px;
-
-  padding-top: 7.5vw;
+  margin: auto;
+  width: 95vw;
   max-width: 1740px;
   overflow: hidden;
-
+  .stars {
+    color: rgb(231, 198, 6);
+    font-size: 20px;
+  }
   .sidebar {
     background-color: $lightMediumGreen;
-    float: left;
     text-align: center;
     border-radius: 10px 10px 10px 10px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
-    height: 45vw;
-    margin-top: 10.4vw;
-    margin-left: 10vw;
+    height: 670px;
+    margin: auto 2vw;
+    margin-top: 2vw;
   }
 
   .sidebarDark {
@@ -88,7 +96,6 @@
   }
 
   .righbar {
-    float: right;
     text-align: center;
     align-items: center;
     table {
@@ -111,7 +118,7 @@
     button {
       @include button-styles2(1vw);
       font-weight: 700;
-      height: 2vw;
+      height: 4vh;
       position: relative;
     }
   }
@@ -129,7 +136,7 @@
   justify-content: center;
   border: 0.5px solid rgba(0, 0, 0, 0.123);
   border-radius: 10px;
-  margin-top: 4rem;
+  margin-top: 2rem;
   height: 80px;
   select {
     padding: 8px;
@@ -149,6 +156,8 @@
 .chooseLang {
   margin-right: 20px;
   margin-left: 5px;
+  color: $darkMediumGray;
+  font-weight: 600;
 }
 
 .contInputs {
@@ -163,36 +172,25 @@
   border-radius: 10px;
 
   font-weight: 700;
-  input[type="radio"] {
-    margin-right: 5px;
-    width: 20px;
-    height: 20px;
-    appearance: none;
-    border: 2px solid #aaa;
-    border-radius: 15px;
-    outline: none;
-    position: relative;
-  }
-
-  input[type="radio"]:before {
-    content: "";
-    display: block;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 12px;
-    height: 12px;
-    border-radius: 12px;
-    background-color: transparent;
-    transition: background-color 0.2s ease-in-out;
-  }
-
-  input[type="radio"]:checked:before {
-    background-color: #007bff;
-  }
 }
 .contInputsDark {
   background-color: #181123;
   box-shadow: 0px 0px 6px 4px rgba(93, 4, 153, 0.491);
+}
+.mercadopago {
+  font-size: 500px;
+}
+.chooseSubj {
+  margin-right: 5px;
+  color: $darkMediumGray;
+  font-weight: 600;
+}
+@media only screen and (max-width: 1130px) {
+  .detail {
+    width: 100vw;
+    font-size: 12px;
+    .secondCont {
+      width: 20rem;
+    }
+  }
 }
