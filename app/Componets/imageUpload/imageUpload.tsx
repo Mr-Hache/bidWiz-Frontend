@@ -45,9 +45,7 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ onImageUpload }) => {
 
   return (
     <div>
-      <div className={styles.label}>
-        <label>Select Avatar</label>
-      </div>
+      <div className={styles.label}></div>
       <input
         type="file"
         accept="image/*"
