@@ -13,6 +13,7 @@ import { ImMagicWand } from "react-icons/im";
 import Select from "react-select";
 import Swal from "sweetalert2";
 import { title, origin } from "@/app/utils/titleAndOrigin";
+import { FaUser } from "react-icons/fa";
 
 function EditProfile() {
   const localUid = useAppSelector((state) => state.userAuth.uid);
@@ -216,13 +217,17 @@ function EditProfile() {
 
   return (
     <div className={styles.div}>
-      <img
-        className={styles.image}
-        src={imageState}
-        alt=""
-        width={100}
-        height={100}
-      />
+      {imageState ? (
+        <img
+          className={styles.image}
+          src={imageState}
+          alt=""
+          width={100}
+          height={100}
+        />
+      ) : (
+        <FaUser className={styles.squeletorImg} />
+      )}
       <h1>{userName}</h1>
 
       <button className={styles.change} onClick={handleChangePassword}>
