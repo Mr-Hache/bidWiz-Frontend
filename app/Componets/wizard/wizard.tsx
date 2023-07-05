@@ -111,7 +111,11 @@ const Wizard: React.FC<WizardProps> = ({ wizardUser }) => {
         <div className={style.secondCont}>
           <p className={style.stars}>{renderStars(wizardUser.reviews)}</p>
           <p className={style.experience}>
-            <b>{wizardUser.experience.expJobs}</b> class taught
+            {wizardUser.experience.expJobs > 2 ? (
+              <b>{wizardUser.experience.expJobs} class taught</b>
+            ) : (
+              <b>New Wizard</b>
+            )}
           </p>
           <div className={style.about}>
             {wizardUser.aboutMe.split(" ").slice(0, 23).join(" ")}...
