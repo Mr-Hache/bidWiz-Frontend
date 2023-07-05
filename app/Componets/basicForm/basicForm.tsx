@@ -11,14 +11,25 @@ import {
 } from "../../utils/functionsValidation";
 import style from "./basicForm.module.scss";
 import { ImMagicWand } from "react-icons/im";
+import { useTheme } from "next-themes";
 
-import { auth, loginWithGoogle, createWithEmailAndPassword,userSignOut } from "../../utils/firebase";
+import {
+  auth,
+  loginWithGoogle,
+  createWithEmailAndPassword,
+  userSignOut,
+} from "../../utils/firebase";
 import { useRouter } from "next/navigation";
 import ImageUpload from "../imageUpload/imageUpload";
-import {setPersistence, browserSessionPersistence, sendEmailVerification, browserLocalPersistence  } from "firebase/auth";
+import {
+  setPersistence,
+  browserSessionPersistence,
+  sendEmailVerification,
+  browserLocalPersistence,
+} from "firebase/auth";
 import { setItem, getItem } from "../../utils/localStorage";
 import { title, origin } from "../../utils/titleAndOrigin";
-import Select from "react-select"
+import Select from "react-select";
 
 export interface UserFormValues {
   name: string;
@@ -37,6 +48,7 @@ export interface UserFormValues {
 
 function basicForm() {
   const router = useRouter();
+  const { theme } = useTheme();
 
   type SelectedOptionType = { value: string; label: string } | null;
 
@@ -80,9 +92,8 @@ function basicForm() {
       expJobs: 0,
     },
   };
-  
+
   const [values, setValues] = useState<UserFormValues>(initialFormValues);
-  
 
   interface Errors {
     name?: string;
@@ -102,24 +113,55 @@ function basicForm() {
     email: "",
   });
 
-  const titleOptions = title.map(t => ({ value: t.name, label: t.name }));
-  const originOptions = origin.map(o => ({ value: o.name, label: o.name }));
+  const titleOptions = title.map((t) => ({ value: t.name, label: t.name }));
+  const originOptions = origin.map((o) => ({ value: o.name, label: o.name }));
 
   const customStyles = {
     control: (base: any, state: any) => ({
       ...base,
-      border: state.isFocused ? '1px solid black' : '1px solid black',
-      boxShadow: state.isFocused ? '0 0 0 1px black' : 0,
-      borderRadius: '5px',
-      fontSize: '1em',
-      width: '47%',
-      color: '#999',
-      fontFamily: 'Raleway, sans-serif',
+      border: state.isFocused ? "1px solid gray" : "1px solid gray",
+      boxShadow: state.isFocused ? "0 0 0 1px black" : 0,
+      backgroundColor: "transparent",
+      borderRadius: "5px",
+      fontSize: "16px",
+      fontWeight: "lighter",
+      width: "21.5vw",
+      color: "red",
+      fontFamily: "Raleway, sans-serif",
+      height: "2vw",
     }),
     option: (base: any) => ({
       ...base,
-      color: '#999',
-      fontFamily: 'Raleway, sans-serif',
+      color: "black",
+      fontFamily: "Raleway, sans-serif",
+      fontSize: "16px",
+      fontWeight: "lighter",
+    }),
+  };
+
+  const customStylesDark = {
+    control: (base: any, state: any) => ({
+      ...base,
+      border: state.isFocused ? "1px solid gray" : "1px solid gray",
+      boxShadow: state.isFocused ? "0 0 0 1px black" : 0,
+      backgroundColor: state.isFocused ? "rgb(59, 59, 59)" : "rgb(59, 59, 59)",
+      borderRadius: "5px",
+      fontSize: "14px",
+      fontWeight: "lighter",
+      width: "21.5vw",
+      fontFamily: "Raleway, sans-serif",
+      height: "2vw",
+    }),
+    option: (base: any) => ({
+      ...base,
+      fontFamily: "Raleway, sans-serif",
+      fontSize: "14px",
+      fontWeight: "lighter",
+    }),
+    singleValue: (base: any) => ({
+      ...base,
+      color: "white",
+      fontSize: "14px",
     }),
   };
 
@@ -172,7 +214,7 @@ function basicForm() {
   useEffect(() => {
     validateForm();
     console.log(values.name);
-  
+
     if (values.name != null) {
       // Guardar los datos en el Local Storage
       setItem("email", values.email);
@@ -181,7 +223,7 @@ function basicForm() {
       setItem("origin", values.experience.origin);
     }
   }, [values, authentication]);
-  
+
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     if (name == "password") {
@@ -220,7 +262,10 @@ function basicForm() {
     });
   };
 
-  const handleSelectChange = (fieldName: string, selectedOption: SelectedOptionType) => {
+  const handleSelectChange = (
+    fieldName: string,
+    selectedOption: SelectedOptionType
+  ) => {
     if (selectedOption === null) {
       // manejar el caso en que no se selecciona ninguna opción
     } else {
@@ -237,82 +282,109 @@ function basicForm() {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (validateForm()) {
-      setPersistence(auth, browserSessionPersistence).then(() => {
-        try{
-          createWithEmailAndPassword(values.email, authentication.password).then((userCreated) => {
-            const uid = userCreated.user.uid
-            userSignOut()
-            sendEmailVerification(userCreated.user)
-              values.isWizard? createUser({...values, uidFireBase: uid}) : createUser({name: values.name, uidFireBase: uid, email: values.email, isWizard: values.isWizard})
+      setPersistence(auth, browserSessionPersistence)
+        .then(() => {
+          try {
+            createWithEmailAndPassword(
+              values.email,
+              authentication.password
+            ).then((userCreated) => {
+              const uid = userCreated.user.uid;
+              userSignOut();
+              sendEmailVerification(userCreated.user);
+              values.isWizard
+                ? createUser({ ...values, uidFireBase: uid })
+                : createUser({
+                    name: values.name,
+                    uidFireBase: uid,
+                    email: values.email,
+                    isWizard: values.isWizard,
+                  });
               setValues({
-                        uidFireBase: "",
-                        name: "",
-                        email: "",
-                        image: "",
-                        isWizard: false,
-                        languages: [],
-                        subjects: [],
-                        experience: {
-                          title: "",
-                          origin: "",
-                          expJobs: 0,
-                        },
-                      });
+                uidFireBase: "",
+                name: "",
+                email: "",
+                image: "",
+                isWizard: false,
+                languages: [],
+                subjects: [],
+                experience: {
+                  title: "",
+                  origin: "",
+                  expJobs: 0,
+                },
+              });
 
-                      setAuthentication({
-                        password: "",
-                        email: "",
-                      });
-                    router.push('/login')
+              setAuthentication({
+                password: "",
+                email: "",
+              });
+              router.push("/login");
 
-                    setItem("email", "");
-                    setItem("name", "");
-                    setItem("title", values.experience.title);
-                    setItem("origin", values.experience.origin);
-          })
-  }catch (error) {
-    console.log(error);
-  }
-  ;
-      }).catch((error) => {
-         console.log(error);
-      })
-  }}
-
-  const handleGoogleSignIn = async (event: React.MouseEvent<HTMLButtonElement>) => {
-    event.preventDefault();
-    setPersistence (auth, browserLocalPersistence).then(() => {
-    loginWithGoogle().then((result) => {
-      const user = result.user;
-     
-      fetch(`https://bidwiz-backend-production-db77.up.railway.app/users/emails`)
-      .then((response) => response.json())
-      .then((data) => {
-        const emails = data.map((item: string) => item)
-        if(emails.includes(user.email)){
-          console.log("usuario solo autenticado")
-        }else{
-          createUser({email: user.email?user.email: "", name: user.displayName? user.displayName:"", uidFireBase:user.uid, isWizard:false})
-          console.log("usuario creado y autenticado")
-        }
-      })
-      router.push("/offerBoard")
-    }).catch((error) => {
-      console.log(error)
-    })
-}).catch((error) => {
-  console.log(error)
-})
+              setItem("email", "");
+              setItem("name", "");
+              setItem("title", values.experience.title);
+              setItem("origin", values.experience.origin);
+            });
+          } catch (error) {
+            console.log(error);
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
   };
- 
+
+  const handleGoogleSignIn = async (
+    event: React.MouseEvent<HTMLButtonElement>
+  ) => {
+    event.preventDefault();
+    setPersistence(auth, browserLocalPersistence)
+      .then(() => {
+        loginWithGoogle()
+          .then((result) => {
+            const user = result.user;
+
+            fetch(
+              `https://bidwiz-backend-production-db77.up.railway.app/users/emails`
+            )
+              .then((response) => response.json())
+              .then((data) => {
+                const emails = data.map((item: string) => item);
+                if (emails.includes(user.email)) {
+                  console.log("usuario solo autenticado");
+                } else {
+                  createUser({
+                    email: user.email ? user.email : "",
+                    name: user.displayName ? user.displayName : "",
+                    uidFireBase: user.uid,
+                    isWizard: false,
+                  });
+                  console.log("usuario creado y autenticado");
+                }
+              });
+            router.push("/offerBoard");
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   const handleImageUpload = (imageUrl: string) => {
     console.log("Imagen cargada:", imageUrl);
     setValues((v) => ({ ...v, image: imageUrl }));
   };
 
   return (
-    <form className={style.form} onSubmit={handleSubmit}>
-      <div className={style.block}></div>
+    <form
+      className={`${style.form} ${theme === "dark" && style.formDark}`}
+      onSubmit={handleSubmit}
+    >
       <h1>Unleash Your Magic</h1>
       <div className={style.inputcontainer}>
         <label>
@@ -361,15 +433,15 @@ function basicForm() {
       <br />
 
       <label>
+        {" "}
+        <h3 className={style.become}>Become Wizard</h3>
         <div className={style.center}>
-          <h3 className={style.selectTitle}>Become Wizard</h3>
           <div className={style.magic}>
             <input
               type="checkbox"
               name="isWizard"
               checked={values.isWizard}
               onChange={handleCheckboxChange}
-              className={style.agrandar}
             />
             <div className={style.wand}>
               <ImMagicWand className={style.logo} />
@@ -380,14 +452,14 @@ function basicForm() {
 
       {values.isWizard ? (
         <div>
-          <br />         
-          <div className={style.ImageUpload}>          
-          <ImageUpload onImageUpload={handleImageUpload} />       
+          <br />
+          <div className={style.ImageUpload}>
+            <ImageUpload onImageUpload={handleImageUpload} />
           </div>
           <br />
-           {errors.image && <span className={style.error}>{errors.image}</span>}
+          {errors.image && <span className={style.error}>{errors.image}</span>}
           <br />
-          <br /> 
+          <br />
           <div className={style.select}>
             <div className={style.selectTitle}>Languages</div>
             <div className={style.selectSelect}>
@@ -410,68 +482,77 @@ function basicForm() {
           </div>
           <br />
           <br />
-          <div className={style.inputcontainer}>
-            <div className={style.select1}>
-              <div className={style.selectTitle1}>Subjects</div>
-              <div className={style.selectSelect1}>
-                <select
-                  multiple
-                  value={values.subjects}
-                  onChange={handleSubjectChange}
-                >
-                  {subjects.map((subject, index) => (
-                    <option key={index} value={subject}>
-                      {subject}
-                    </option>
-                  ))}
-                </select>
-                <br />
+          <div className={style.select}>
+            <div className={style.selectTitle}>Subjects</div>
+            <div className={style.selectSelect}>
+              <select
+                multiple
+                value={values.subjects}
+                onChange={handleSubjectChange}
+              >
+                {subjects.map((subject, index) => (
+                  <option key={index} value={subject}>
+                    {subject}
+                  </option>
+                ))}
+              </select>
+              <br />
 
-                {errors.subjects && (<span className="error">{errors.subjects}</span>)}
-              </div>
+              {errors.subjects && (
+                <span className="error">{errors.subjects}</span>
+              )}
             </div>
           </div>
           <br />
           <br />
           <div className={style.inputcontainer}>
-          <label className={style.exp} htmlFor="experience.title">Title</label>
-          <Select
-            styles={customStyles}
-            options={titleOptions}
-            name="title"
-            value={titleOptions.find(option => option.value === values.experience.title)}
-            onChange={(selectedOption) => handleSelectChange("title", selectedOption)}
-          />
+            <label className={style.exp} htmlFor="experience.title">
+              Title
+            </label>
+            <Select
+              styles={theme === "dark" ? { ...customStylesDark } : customStyles}
+              options={titleOptions}
+              name="title"
+              value={titleOptions.find(
+                (option) => option.value === values.experience.title
+              )}
+              onChange={(selectedOption) =>
+                handleSelectChange("title", selectedOption)
+              }
+            />
             {errors.title && <span className="error">{errors.title}</span>}
           </div>
           <br />
           <div className={style.inputcontainer}>
-          <label className={style.exp} htmlFor="experience.origin">Origin</label>
-          <Select
-            styles={customStyles}
-            options={originOptions}
-            name="origin"
-            value={originOptions.find(option => option.value === values.experience.origin)}
-            onChange={(selectedOption) => handleSelectChange("origin", selectedOption)}
-          />
+            <label className={style.exp} htmlFor="experience.origin">
+              Origin
+            </label>
+            <Select
+              styles={theme === "dark" ? { ...customStylesDark } : customStyles}
+              options={originOptions}
+              name="origin"
+              value={originOptions.find(
+                (option) => option.value === values.experience.origin
+              )}
+              onChange={(selectedOption) =>
+                handleSelectChange("origin", selectedOption)
+              }
+            />
             {errors.origin && <span className="error">{errors.origin}</span>}
           </div>
         </div>
       ) : null}
 
-      <div className={style.button}>
+      <div className={style.buttons}>
         <div className={style.register}>
           <button className={style.boton}>Register</button>
         </div>
-        <div className={style.google}>
-          <FcGoogle className={style.icon} />
-          <button className={style.boton2} onClick={handleGoogleSignIn}>
-            Register with Google
+        <div>
+          <button className={style.google} onClick={handleGoogleSignIn}>
+            <FcGoogle className={style.icon} /> Continue Whit Google
           </button>
         </div>
       </div>
-    
-
     </form>
   );
 }

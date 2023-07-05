@@ -48,9 +48,9 @@ function detail() {
   const [selectedPrice, setSelectedPrice] = useState<number | null>(null);
   const [buyerName, setBuyerName] = useState("");
 
-  const [available, setAvailable] = useState<
-    { day: string; hour: string }[]
-  >([]);
+  const [available, setAvailable] = useState<{ day: string; hour: string }[]>(
+    []
+  );
   const [createJob, { data: job }] = useCreateJobMutation();
   const pathname = usePathname();
   const _id = pathname.split("/")[2];
@@ -101,14 +101,18 @@ function detail() {
 
   const handleClick = async () => {
     try {
-      // let templateParams = {
-      //   message: `Class: ${selectedSubject} in ${selectedLanguage}. Client name: ${buyerName}. Client ID: ${buyerId}. Wizard name: ${user?.name}. Wizard ID: ${_id}. Price: $${(selectedClasses || 0) * (selectedPrice || 0)} USD.`,
-      //   to_email: user?.email,
-      // };
-      console.log("del click", createJobDto);
+      let templateParams = {
+        message: `Class: ${selectedSubject} in ${selectedLanguage}. Client name: ${buyerName}. Client ID: ${buyerId}. Wizard name: ${
+          user?.name
+        }. Wizard ID: ${_id}. Price: $${
+          (selectedClasses || 0) * (selectedPrice || 0)
+        } USD.`,
+        to_email: user?.email,
+      };
+      console.log(createJobDto);
       const newJob = await createJob(createJobDto).unwrap();
       setPreferenceId(newJob.result);
-      // sendEmail(templateParams)
+      sendEmail(templateParams);
     } catch (error) {
       Swal.fire("Need to login or wrong select");
       console.error(error);
@@ -119,7 +123,9 @@ function detail() {
     setCreateJobDto({
       ...createJobDto,
       status: "In Progress",
-      description: `Class: ${selectedSubject} in ${selectedLanguage}. Client name: ${buyerName}. Wizard name: ${user?.name}. Price: $${(selectedClasses || 0) * (selectedPrice || 0)} USD.`,
+      description: `Class: ${selectedSubject} in ${selectedLanguage}. Client name: ${buyerName}. Wizard name: ${
+        user?.name
+      }. Price: $${(selectedClasses || 0) * (selectedPrice || 0)} USD.`,
       price: selectedPrice,
       numClasses: selectedClasses,
       clientId: buyerId,
@@ -137,9 +143,8 @@ function detail() {
     _id,
     selectedPrice,
     buyerId,
-    available
+    available,
   ]);
-
 
   function sendEmail(templateParams: {
     message: string;
@@ -219,13 +224,13 @@ function detail() {
 
   const handleSelectedTimeslots = (
     timeslots: { day: string; hour: string }[]
-) => {
+  ) => {
     setAvailable(timeslots);
     setCreateJobDto((prevCreateJobDto) => ({
-        ...prevCreateJobDto,
-        availability: timeslots,
+      ...prevCreateJobDto,
+      availability: timeslots,
     }));
-};
+  };
 
   return (
     <div>
@@ -402,12 +407,7 @@ function detail() {
             onSelectedTimeslots={handleSelectedTimeslots}
           />
 
-          <button
-            onClick={handleClick}
-            
-          >
-            CONFIRM
-          </button>
+          <button onClick={handleClick}>CONFIRM</button>
           <div>
             {preferenceId && (
               <Wallet initialization={{ preferenceId: preferenceId }} />

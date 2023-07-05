@@ -36,14 +36,6 @@ export default function Accordion({ title, children }: AccordionProps) {
     }
   };
 
-  useEffect(() => {
-    document.addEventListener("mouseup", handleClickOutside);
-
-    return () => {
-      document.removeEventListener("mouseup", handleClickOutside);
-    };
-  }, [isOpen]);
-
   return (
     <div className={styles.accordion} ref={accordionRef}>
       <p

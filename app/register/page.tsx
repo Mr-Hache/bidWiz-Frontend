@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import { auth } from "../utils/firebase";
 import { onAuthStateChanged } from "firebase/auth";
 import Loading from "../Componets/Loading/Loading";
+import styles from "./register.module.scss";
 
 export default function register() {
   const router = useRouter();
@@ -28,11 +29,12 @@ export default function register() {
       {isReady ? (
         <div>
           <Navbar />
-
-          <BasicForm />
+          <div className={styles.register}>
+            <BasicForm />
+          </div>
         </div>
       ) : (
-         <Loading/>
+        <Loading />
       )}
     </div>
   );
