@@ -194,3 +194,12 @@
     }
   }
 }
+
+.contAbout {
+  width: 57vw;
+
+  h3 {
+    @include h-3;
+    font-size: 1.2vw;
+  }
+}
