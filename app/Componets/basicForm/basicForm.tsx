@@ -181,8 +181,6 @@ function basicForm() {
       setValues((v) => ({ ...v, [name]: value }));
     }
   };
-
-
   const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, checked } = event.target;
     setValues((v) => ({ ...v, [name]: checked }));
@@ -235,21 +233,6 @@ function basicForm() {
       });
     }
   };
-  
-  const handleOriginChange = (selectedOption: SelectedOptionType) => {
-    if (selectedOption === null) {
-      // manejar el caso en que no se selecciona ninguna opción
-    } else {
-      setValues({
-        ...values,
-        experience: {
-          ...values.experience,
-          origin: selectedOption.value,
-        },
-      });
-    }
-  };
-
   const [createUser, { data, error }] = useCreateUserMutation();
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -378,11 +361,11 @@ function basicForm() {
       <br />
 
       <label>
-        <div>
+        <div className={style.center}>
           <h3 className={style.selectTitle}>Become Wizard</h3>
           <div className={style.magic}>
             <input
-              type="radio"
+              type="checkbox"
               name="isWizard"
               checked={values.isWizard}
               onChange={handleCheckboxChange}
@@ -451,36 +434,53 @@ function basicForm() {
             </div>
           </div>
           <br />
-
           <br />
           <div className={style.inputcontainer}>
-          <label>
-    Title:
-    <Select
-      className={style.input}
-      name="title"
-      options={title.map(tit => ({ value: tit.name, label: tit.name }))}
-      onChange={handleTitleChange}
-      isSearchable
-      placeholder="Select a title"
-    />
-  </label>
-  {errors.title && <span className="error">{errors.title}</span>}
-</div>
-
-<div className={style.inputcontainer}>
-  <label>
-    Origin:
-    <Select
-      className={style.input}
-      name="origin"
-      options={origin.map(orig => ({ value: orig.name, label: orig.name }))}
-      onChange={handleOriginChange}
-      isSearchable
-      placeholder="Select a country"
-    />
-  </label>
-  {errors.origin && <span className="error">{errors.origin}</span>}
+            <label>
+                    
+               <select
+                className={style.input}
+                name="title"
+                value={values.experience.title}
+                onChange={(event) => {
+                  const selectedValue = event.target.value;
+                  handleExperienceChanges(event);
+                  setSelectedTitle(selectedValue);
+                }}
+              >
+                <option value="">Select a title</option>
+                {title.map((tit, index) => (
+                  <option key={index} value={tit.name}>
+                    {tit.name}
+                  </option>
+                ))}
+              </select>
+            </label>
+            {errors.title && <span className="error">{errors.title}</span>}
+          </div>
+          <br />
+          <div className={style.inputcontainer}>
+            <label>
+              
+              <select
+                className={style.input}
+                name="origin"
+                value={values.experience.origin}
+                onChange={(event) => {
+                  const selectedValue = event.target.value;
+                  handleExperienceChange(event);
+                  setSelectedFlag(selectedValue);
+                }}
+              >
+                <option value="">Select a country</option>
+                {origin.map((orig, index) => (
+                  <option key={index} value={orig.name}>
+                    {orig.name}
+                  </option>
+                ))}
+              </select>
+            </label>
+            {errors.origin && <span className="error">{errors.origin}</span>}
           </div>
         </div>
       ) : null}
