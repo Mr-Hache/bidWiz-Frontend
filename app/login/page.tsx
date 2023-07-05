@@ -6,8 +6,8 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { auth } from "../utils/firebase";
 import { onAuthStateChanged } from "firebase/auth";
-import style from "./login.module.scss";
 import Loading from "../Componets/Loading/Loading";
+import styles from "./login.module.scss";
 
 export default function login() {
   const router = useRouter();
@@ -30,7 +30,9 @@ export default function login() {
       {isReady ? (
         <div>
           <Navbar />
-          <Authent />
+          <div className={styles.login}>
+            <Authent />
+          </div>
         </div>
       ) : (
         <Loading />

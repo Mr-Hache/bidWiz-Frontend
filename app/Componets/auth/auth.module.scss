@@ -2,96 +2,73 @@
 @import "../../utils/variabls";
 
 .form {
+  font-family: $ralewayFont;
+  margin: 0vw auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0px 0px 6px 4px rgba(0, 0, 0, 0.25);
+  background-color: rgb(238, 238, 238);
+  width: 25vw;
+  height: 25vw;
+  border-radius: 10px;
+
+  h1 {
     font-family: $ralewayFont;
-    margin: auto;    
+    color: $darkMediumGreen;
+    font-size: 1vw;
+  }
+
+  .input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    outline: none;
+    width: 18vw;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    background-color: white;
+  }
+
+  .input::placeholder {
+    font-family: $ralewayFont;
+    padding: 4px;
+  }
+
+  .input:focus {
+    border-color: $darkMediumPurple;
+  }
+  .button {
+    @include button-styles2(0.8vw);
+    margin-bottom: -10px;
+  }
+  .forgot {
+    font-size: 12px;
+    margin-left: -11vw;
+    margin-bottom: 30px;
+  }
+  .forgot:hover {
+    color: $darkMediumPurple;
+    cursor: pointer;
+  }
+  .google {
+    @include button-styles1(0.6vw);
+    font-size: 12px;
+    background-color: white;
     display: flex;
-    flex-direction: column;    
-    justify-content: center;
+    flex-direction: row;
     align-items: center;
-    padding-top: 100px;    
-    background-color: $lightGreen;
-    box-shadow: 0px 6px 4px 2px rgba(0, 0, 0, 0.25);
-    width: 32vw;
-    height: 30vw;
-
-    h1 {
-      font-family: $ralewayFont;
-      color: $darkPurple;
-      margin-top: -3vw;
-      margin-bottom: 2vw;
+    justify-content: center;
+    gap: 10px;
+    .icon {
+      font-size: 16px;
+      cursor: pointer;
     }
-
-    .label{
-        margin-top: 10px;
-    }
-    .input {
-        padding: 10px;
-        border: 1px solid #ccc;
-        border-radius: 6px;
-        font-size: 16px;
-        outline: none;
-        width: 15vw;
-        height: 1vw;
-      }
-      
-      .input::placeholder {
-        font-family: $ralewayFont;
-        font-size: 14px;
-        padding: 4px;
-      }
-
-      .input:focus {
-        border-color: #007bff;
-        box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
-      }
-    .button{
-        @include button-styles2(1vw);
-  }
-  .link {
-    text-decoration: none;
   }
 }
 
-.icon {  
-  display: grid;
-  width: 100px;
-  height: 30px;
-  margin-top: 0.5vw;
-  margin-bottom: 0.5vw;
-  margin-left: 3vw;
-}
-
-.btnGoogle {
-  height: 30px;
-  font-family: $ralewayFont;
-  color: $darkPurple;
-  border-radius: 6px;
-  font-weight: 600; 
-  border: none;
-  margin-left: 2vw;
-  box-shadow: (0px 4px 4px rgba(0, 0, 0, 0.25));  
-  transition: background-color 300ms linear, transform 300ms ease-in-out;
-  cursor: pointer;
-}
-
-.btnGoogle:hover { 
-  background-color: #ccc;
-  box-shadow: 0px 6px 4px 2px rgba(0, 0, 0, 0.25); 
-}
-
-.forgoPass button {  
-  font-family: $ralewayFont;
-  color: $darkPurple;
-  border-radius: 6px;
-  font-weight: 600;    
-  height: 2vw;
-  border: none;
-  box-shadow: (0px 4px 4px rgba(0, 0, 0, 0.25));  
-  transition: background-color 300ms linear, transform 300ms ease-in-out;
-  cursor: pointer;
-}
-
-.forgoPass button:hover {
-  background-color: #ccc;
-  box-shadow: 0px 6px 4px 2px rgba(0, 0, 0, 0.25); 
+.formDark {
+  background-color: #181123;
+  box-shadow: 0px 0px 6px 4px rgba(93, 4, 153, 0.491);
 }
