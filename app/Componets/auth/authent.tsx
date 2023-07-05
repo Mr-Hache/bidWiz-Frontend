@@ -36,7 +36,6 @@ function authent() {
               userSignOut();
               Swal.fire("Email not verified");
             } else {
-              console.log("usuario autenticado");
               router.push("/offerBoard");
             }
           })
@@ -47,12 +46,9 @@ function authent() {
               "<b>user or incorrect</b> password",
               "error"
             );
-            console.log(error);
           });
       })
-      .catch((error) => {
-        console.log(error);
-      });
+      .catch((error) => {});
   };
 
   const handleGoogleSignIn = async (
@@ -84,7 +80,6 @@ function authent() {
 
                         userSignOut();
                       } else {
-                        console.log("usuario solo autenticado");
                         router.push("/offerBoard");
                       }
                     }
@@ -96,21 +91,14 @@ function authent() {
                     uidFireBase: user.uid,
                     isWizard: false,
                   });
-                  console.log("usuario creado y autenticado");
                   router.push("/offerBoard");
                 }
               })
-              .catch((error) => {
-                console.log(error);
-              });
+              .catch((error) => {});
           })
-          .catch((error) => {
-            console.log(error);
-          });
+          .catch((error) => {});
       })
-      .catch((error) => {
-        console.log(error);
-      });
+      .catch((error) => {});
   };
 
   const handleChangePassword = () => {

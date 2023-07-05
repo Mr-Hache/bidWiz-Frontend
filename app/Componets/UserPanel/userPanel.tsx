@@ -70,9 +70,7 @@ export default function UserPanel() {
         "UGYQRFU0vkqoRXNx0"
       )
       .then(
-        (response) => {
-          console.log("SUCCESS!", response.status, response.text);
-        },
+        (response) => {},
         (error) => {
           console.error("FAILED...", error);
         }
@@ -152,7 +150,6 @@ export default function UserPanel() {
   } = useGetUserByIdQuery({ _id: selectedWizard });
 
   const onClickHandlerReview = async () => {
-    console.log(jobReview);
     try {
       if (jobReview.updateJobReviewDto.rating === 0 || jobReview.jobId === "") {
         Swal.fire("Please select a class and review", "", "error");

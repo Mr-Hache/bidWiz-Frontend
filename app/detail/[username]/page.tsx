@@ -109,7 +109,6 @@ function detail() {
         } USD.`,
         to_email: user?.email,
       };
-      console.log(createJobDto);
       const newJob = await createJob(createJobDto).unwrap();
       setPreferenceId(newJob.result);
       sendEmail(templateParams);
@@ -135,7 +134,6 @@ function detail() {
       result: "default",
       availability: available,
     });
-    console.log(createJobDto);
   }, [
     selectedLanguage,
     selectedSubject,
@@ -158,9 +156,7 @@ function detail() {
         "UGYQRFU0vkqoRXNx0"
       )
       .then(
-        (response) => {
-          console.log("SUCCESS!", response.status, response.text);
-        },
+        (response) => {},
         (error) => {
           console.error("FAILED...", error);
         }

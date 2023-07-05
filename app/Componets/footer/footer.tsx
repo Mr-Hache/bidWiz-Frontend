@@ -40,7 +40,6 @@ export default function Footer() {
   const onClickFilter = (event: React.MouseEvent<HTMLSpanElement>) => {
     event.preventDefault();
     const nameFilter: string = event.currentTarget.id;
-    console.log(nameFilter);
     dispatch(setSubjects([nameFilter]));
     if (pathname !== "/offerBoard") {
       router.push("/offerBoard");

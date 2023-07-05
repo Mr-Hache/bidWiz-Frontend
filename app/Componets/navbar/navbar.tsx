@@ -32,11 +32,6 @@ export default function Navbar() {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
-        console.log({
-          name: user.displayName,
-          email: user.email,
-          uidFireBase: user.uid,
-        });
         setIsLoggedIn(true);
         dispatch(setUser(user.displayName));
         dispatch(setAuth(true));
@@ -52,7 +47,6 @@ export default function Navbar() {
           })
           .catch((error) => console.error(error));
       } else {
-        console.log("no hay usuario");
         setIsLoggedIn(false);
       }
     });
@@ -65,11 +59,8 @@ export default function Navbar() {
     event.preventDefault();
     try {
       await userSignOut();
-      console.log("usuario deslogeado");
       router.push("/");
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
 
   return (
