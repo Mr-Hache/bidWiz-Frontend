@@ -82,6 +82,13 @@
     color: $darkMediumGreen;
        
   }
+
+  .exp{
+    margin-bottom: 0.8vw;
+    @include h-4;
+    font-weight: 700;
+    color: $darkMediumGreen;
+  }
   .selectSelect option {
     font-family: $ralewayFont;
     width: 20vw;
@@ -92,7 +99,10 @@
   .selectSelect {
     width: 100vw;
     height: 5vw;
-     
+  }
+
+  span{
+    font-size: 0.8vw;
   }
 }
 
@@ -109,7 +119,7 @@
   // height: 1.2vw;  
 }
 .selectSelect1 {
-  width: 20vw;
+  width: 28vw;
   height: 5vw;
 }
 
