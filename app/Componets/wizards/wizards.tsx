@@ -9,7 +9,7 @@ import {
   setLanguages,
   setSubjects,
   setPage,
-  setSortByReviews
+  setSortByReviews,
 } from "@/app/redux/services/filtersSlice";
 import { useEffect, useState } from "react";
 import FilterBar from "../filterBar/filterBar";
@@ -64,9 +64,7 @@ export default function wizards() {
       .then((data) => {
         setTotalWizards(data);
       })
-      .catch((error) => {
-        console.log(error);
-      });
+      .catch((error) => {});
   };
 
   const takeWizards = (
@@ -88,9 +86,7 @@ export default function wizards() {
       .then((data) => {
         dispatch(setWizards(data));
       })
-      .catch((error) => {
-        console.log(error);
-      });
+      .catch((error) => {});
   };
 
   useEffect(() => {
@@ -123,28 +119,26 @@ export default function wizards() {
 
   return (
     <div>
-    <div className={style.contCard}>
-      <div className={style.containerWizard}>
-        <div className={style.filterBar}>
-          <FilterBarDropDown />
-          {/* <FilterBar /> */}
-        </div>
+      <div className={style.contCard}>
+        <div className={style.containerWizard}>
+          <div className={style.filterBar}>
+            <FilterBarDropDown />
+            {/* <FilterBar /> */}
+          </div>
 
-        <div className={style.containerCard}>
-          {wizards &&
-            wizards.map((wizardUser: User) => {
-              return <Wizard key={wizardUser._id} wizardUser={wizardUser} />;
-            })}
-          
+          <div className={style.containerCard}>
+            {wizards &&
+              wizards.map((wizardUser: User) => {
+                return <Wizard key={wizardUser._id} wizardUser={wizardUser} />;
+              })}
+          </div>
         </div>
       </div>
-      
+      <div className={style.paginator}>
+        {wizards && wizards.length > 0 && (
+          <Paginator statePage={statePage} totalWizards={totalWizards} />
+        )}
+      </div>
     </div>
-    <div className={style.paginator}>
-    {wizards && wizards.length > 0 && (
-      <Paginator statePage={statePage} totalWizards={totalWizards} />
-    )}
-  </div>
-  </div>
   );
 }

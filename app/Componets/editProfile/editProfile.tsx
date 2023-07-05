@@ -103,7 +103,6 @@ function EditProfile() {
   }, [localUid]);
 
   const handleImageUpload = (imageUrl: string) => {
-    console.log("Imagen cargada:", imageUrl);
     setImageState(imageUrl);
   };
 
@@ -183,8 +182,6 @@ function EditProfile() {
         _id: userId,
         updateUserWizardDto: newFormState,
       });
-
-      console.log(newFormState);
 
       fetchUserData();
       Swal.fire("Info", "<b>updated</b>", "success");

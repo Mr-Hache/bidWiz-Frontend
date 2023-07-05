@@ -213,7 +213,6 @@ function basicForm() {
 
   useEffect(() => {
     validateForm();
-    console.log(values.name);
 
     if (values.name != null) {
       // Guardar los datos en el Local Storage
@@ -326,13 +325,9 @@ function basicForm() {
               setItem("title", values.experience.title);
               setItem("origin", values.experience.origin);
             });
-          } catch (error) {
-            console.log(error);
-          }
+          } catch (error) {}
         })
-        .catch((error) => {
-          console.log(error);
-        });
+        .catch((error) => {});
     }
   };
 
@@ -353,7 +348,6 @@ function basicForm() {
               .then((data) => {
                 const emails = data.map((item: string) => item);
                 if (emails.includes(user.email)) {
-                  console.log("usuario solo autenticado");
                 } else {
                   createUser({
                     email: user.email ? user.email : "",
@@ -361,22 +355,16 @@ function basicForm() {
                     uidFireBase: user.uid,
                     isWizard: false,
                   });
-                  console.log("usuario creado y autenticado");
                 }
               });
             router.push("/offerBoard");
           })
-          .catch((error) => {
-            console.log(error);
-          });
+          .catch((error) => {});
       })
-      .catch((error) => {
-        console.log(error);
-      });
+      .catch((error) => {});
   };
 
   const handleImageUpload = (imageUrl: string) => {
-    console.log("Imagen cargada:", imageUrl);
     setValues((v) => ({ ...v, image: imageUrl }));
   };
 

@@ -18,10 +18,8 @@ function AdminAble() {
   }, [refetch]);
 
   const handleAbleUser = async (userId: string) => {
-    console.log("handleAbleUser called with userId: ", userId);
     try {
       const response = await ableUser({ _id: userId });
-      console.log("Mutation response: ", response);
       refetch();
     } catch (error) {
       console.error(error);

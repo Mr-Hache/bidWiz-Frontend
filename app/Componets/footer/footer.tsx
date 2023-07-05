@@ -40,7 +40,6 @@ export default function Footer() {
   const onClickFilter = (event: React.MouseEvent<HTMLSpanElement>) => {
     event.preventDefault();
     const nameFilter: string = event.currentTarget.id;
-    console.log(nameFilter);
     dispatch(setSubjects([nameFilter]));
     if (pathname !== "/offerBoard") {
       router.push("/offerBoard");
@@ -74,12 +73,14 @@ export default function Footer() {
           <div className={styles.containerIcon}>
             <Link
               href="https://web.facebook.com/profile.php?id=100094452996515"
+              target="_blank"
               className={styles.link}
             >
               <BsFacebook className={styles.face} />
             </Link>
             <Link
               href="https://www.instagram.com/bidwiz.ok/"
+              target="_blank"
               className={styles.link}
             >
               <BsInstagram className={styles.inst} />
@@ -100,6 +101,7 @@ export default function Footer() {
             </Link>
             <Link
               href="www.linkedin.com/in/bidwiz-undefined-548593282"
+              target="_blank"
               className={styles.link}
             >
               <BsLinkedin className={styles.lin} />
