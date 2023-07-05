@@ -10,8 +10,9 @@ import { useAppSelector } from "../../redux/hooks";
 import ImageUpload from "../imageUpload/imageUpload";
 import { getAuth, sendPasswordResetEmail } from "firebase/auth";
 import { ImMagicWand } from "react-icons/im";
-
+import Select from 'react-select';
 import Swal from "sweetalert2";
+import { title, origin } from "@/app/utils/titleAndOrigin";
 
 function EditProfile() {
   const localUid = useAppSelector((state) => state.userAuth.uid);
@@ -22,6 +23,18 @@ function EditProfile() {
   const [userId, setUserId] = useState("");
   const [userName, setUserName] = useState("");
   const email = useAppSelector((state) => state.userAuth.email);
+  const [imageState, setImageState] = useState("");
+  const titleOptions = title.map(t => ({ value: t.name, label: t.name }));
+  const originOptions = origin.map(o => ({ value: o.name, label: o.name }));
+
+  const customStyles = {
+    control: (base: any, state: any) => ({
+      ...base,
+      
+      
+    }),
+  };
+  
 
   const allPossibleLanguages = [
     "Chinese",
@@ -63,7 +76,6 @@ function EditProfile() {
             title: data.experience.title[0],
             origin: data.experience.origin[0],
           },
-          image: data.image,
           aboutMe: data.aboutMe,
           pricePerOne: data.pricePerOne,
           pricePerTwo: data.pricePerTwo,
@@ -71,9 +83,11 @@ function EditProfile() {
         });
         setUserId(data._id);
         setUserName(data.name);
+        setImageState(data.image); 
       })
       .catch((error) => console.error(error));
   };
+  
 
   useEffect(() => {
     fetchUserData();
@@ -81,7 +95,17 @@ function EditProfile() {
 
   const handleImageUpload = (imageUrl: string) => {
     console.log("Imagen cargada:", imageUrl);
-    setFormState((v) => ({ ...v, image: imageUrl }));
+    setImageState(imageUrl);
+  };
+
+  const handleSelectChange = (name: string, selectedOption: any) => {
+    setFormState((prevState) => ({
+      ...prevState,
+      experience: {
+        ...(prevState.experience || {}),
+        [name]: selectedOption.value,
+      },
+    }));
   };
 
   const handleChange = (
@@ -137,20 +161,30 @@ function EditProfile() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      const response = await updateWizardStatus({
+      let newFormState;
+      
+      // If the user is not a wizard, we only send the image
+      if (!formState.isWizard) {
+        newFormState = { image: imageState };
+      } else {
+        newFormState = {...formState, image: imageState};
+      }
+      
+      await updateWizardStatus({
         _id: userId,
-        updateUserWizardDto: formState,
+        updateUserWizardDto: newFormState,
       });
-      console.log(formState);
-
-      console.log(response);
+  
+      console.log(newFormState);
+  
       fetchUserData();
-      // alert("Info updated")
       Swal.fire("Info", "<b>updated</b>", "success");
     } catch (error) {
       console.error(error);
     }
   };
+  
+
 
   if (!formState) return "Loading...";
 
@@ -172,6 +206,8 @@ function EditProfile() {
           );
         });
     }
+
+    
   };
 
   return (
@@ -183,6 +219,13 @@ function EditProfile() {
       </button>
 
       <form onSubmit={handleSubmit}>
+
+      <br />
+            <ImageUpload onImageUpload={handleImageUpload} />
+            <br />
+            <label htmlFor="image">Latest</label>
+            <img src={imageState} alt={userName} width="50" height="50" />
+            <br />
         <div className={styles.isWizard}>
           <label htmlFor="isWIzard">Be a Wizard?</label>
           <div className={styles.magic}>
@@ -206,8 +249,8 @@ function EditProfile() {
               name="aboutMe"
               value={formState.aboutMe || ""}
               onChange={handleChange}
-              rows={5} // puedes ajustar esto para cambiar la altura inicial
-              style={{ width: "100%" }} // esto hará que el textarea ocupe todo el espacio disponible
+              rows={5} 
+              style={{ width: "100%" }} 
             />
 
             <br />
@@ -242,28 +285,25 @@ function EditProfile() {
 
             <br />
             <label htmlFor="experience.title">I am</label>
-            <input
-              type="text"
-              name="experience.title"
-              value={formState.experience?.title || ""}
-              onChange={handleChange}
+            <Select
+              styles={customStyles}
+              options={titleOptions}
+              name="title"
+              value={titleOptions.find(option => option.value === formState.experience?.title)}
+              onChange={(selectedOption) => handleSelectChange("title", selectedOption)}
             />
 
             <br />
             <label htmlFor="experience.origin">I am from</label>
-            <input
-              type="text"
-              name="experience.origin"
-              value={formState.experience?.origin || ""}
-              onChange={handleChange}
+            <Select
+              styles={customStyles}
+              options={originOptions}
+              name="origin"
+              value={originOptions.find(option => option.value === formState.experience?.origin)}
+              onChange={(selectedOption) => handleSelectChange("origin", selectedOption)}
             />
 
-            <br />
-            <ImageUpload onImageUpload={handleImageUpload} />
-            <br />
-            <label htmlFor="image">Latest</label>
-            <img src={formState.image} alt={userName} width="50" height="50" />
-            <br />
+            
             <br />
             <label htmlFor="pricePerOne">My offer for one class is</label>
             <input
@@ -299,7 +339,7 @@ function EditProfile() {
         <button
           className={styles.update}
           type="submit"
-          disabled={isLoading || !formState.isWizard}
+          disabled={isLoading}
         >
           Update
         </button>

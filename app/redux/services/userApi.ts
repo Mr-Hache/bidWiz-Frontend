@@ -45,6 +45,7 @@ export type Job = {
   subject: string;
   result: string;
   availability: { day: string, hour: string }[];
+  rating?: number;
 }
 
 export type UpdateUserWizardDto = {

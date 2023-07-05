@@ -2,15 +2,18 @@
 
 import styles from "./userPanel.module.scss";
 import { useGetJobsByClientQuery, useUpdateJobReviewMutation, Job, useGetUserByIdQuery } from "@/app/redux/services/userApi";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import {useAppSelector} from "../../redux/hooks"
 import emailjs from 'emailjs-com';
+import Swal from "sweetalert2";
 
 
 interface JobReview {
   jobId: string;
   clientId: string;
-  updateJobReviewDto: number; 
+  updateJobReviewDto: {
+    rating: number;
+  };
 }
 interface JobViews {
   language: string;
@@ -21,31 +24,26 @@ interface JobViews {
 }
 
 export default function UserPanel() {
-  const [jobReview, setJobReview] = useState({
+  const [jobReview, setJobReview] = useState<JobReview>({
     jobId: "",
     clientId: "",
-    updateJobReviewDto: {rating: 1}, 
+    updateJobReviewDto: {rating: 0},
   });
 
   const localUid = useAppSelector((state) => state.userAuth.uid)
   const [userId, setUserId] = useState('');
   const [userName, setUserName] = useState('');
   const [selectedWizard, setSelectedWizard] = useState('');
-  const fetchUserData = async () => {
-    await fetch(`https://bidwiz-backend-production-db77.up.railway.app/users/user/${localUid}`)
-    .then(response => response.json())
-    .then(data => {
-    setUserId(data._id)
-    setUserName(data.name)
-})
-    .catch(error => console.error(error));
-}
+ 
 
 const getJobsByClientQuery = useGetJobsByClientQuery({ clientId:userId });
 
-const [updateJobReviewMutation] = useUpdateJobReviewMutation();
+const [updateJobReviewMutation, {isSuccess: isUpdateReviewSuccess, isError: isUpdateReviewError}] = useUpdateJobReviewMutation();
 
-const { data: unableJobsByClient, isLoading: isLoadingJobsByClient, isError: isErrorJobsByClient } = getJobsByClientQuery;
+const { data: unableJobsByClient, isLoading: isLoadingJobsByClient, isError: isErrorJobsByClient, refetch } = useGetJobsByClientQuery({ clientId: userId });
+
+const jobReviewRef = useRef<HTMLSelectElement>(null);
+const reviewValueRef = useRef<HTMLSelectElement>(null);
 
 const [jobsByClient, setJobsByClient] = useState<Job[]>([]);
 
@@ -58,43 +56,62 @@ function sendEmail(templateParams: {message: string, to_email: string | undefine
     });
 }
 
+const [isUserLoading, setIsUserLoading] = useState(true);
+
+const fetchUserData = async () => {
+  setIsUserLoading(true);
+  await fetch(`https://bidwiz-backend-production-db77.up.railway.app/users/user/${localUid}`)
+    .then(response => response.json())
+    .then(data => {
+      setUserId(data._id);
+      setUserName(data.name);
+      setIsUserLoading(false);
+    })
+    .catch(error => {
+      console.error(error);
+      setIsUserLoading(false);
+    });
+}
 
 useEffect( () => {
-  fetchUserData(); 
+  fetchUserData();
+}, [localUid]); 
+
+
+useEffect( () => {
+  if (isUserLoading) {
+    return;
+  }
+
   setJobReview(() => ({
     ...jobReview,
     clientId: userId,
   }));
-}, [userId]);
+}, [userId, isUserLoading]);
 
   ////////////////////////////////////////////////////////////
   const onChangeReview = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const value: number = Number(event.target.value);
-    setJobReview(() => ({
-      ...jobReview,
-      updateJobReviewDto: {rating:value} ,
+    setJobReview((currentJobReview) => ({
+      ...currentJobReview,
+      updateJobReviewDto: {rating:value},
     }));
-    console.log(jobReview)
-    checkButton()
   };
-  const checkButton = () =>{
-    if (jobReview.updateJobReviewDto.rating === 0){
-      setButtonDisabled(true)
-    }
-    else{
-      setButtonDisabled(false)
-    }}
+
+
+
   const onChangeReviewJobId = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const value: string = event.target.value;
-    setJobReview(() => ({
-      ...jobReview,
+    setJobReview((currentJobReview) => ({
+      ...currentJobReview,
       jobId: value ,
     }));
+  
     setClientInReviewViews((prevState: JobViews) => {
       return jobsByClient?.find((objeto: any) => objeto._id === value) || prevState;
     });
-    checkButton()
   };
+  
 
   useEffect(() => {
     const selectedJob = jobsByClient?.find(job => job._id === jobReview.jobId) as any;
@@ -109,15 +126,20 @@ useEffect( () => {
   const onClickHandlerReview = async () => {
     console.log(jobReview)
     try {
-      let templateParams = {
-        message: `${userName} has rated your ${clientInReviewViews.subject} class in ${clientInReviewViews.language} just got a ${jobReview.updateJobReviewDto.rating} rating.`,
-        to_email: wizardDetails?.email,
-      };
+      if(jobReview.updateJobReviewDto.rating === 0 || jobReview.jobId === '') {
+        Swal.fire("Please select a class and review", "", "error");
+        return;
+      }
+      // let templateParams = {
+      //   message: `${userName} has rated your ${clientInReviewViews.subject} class in ${clientInReviewViews.language} just got a ${jobReview.updateJobReviewDto.rating} rating.`,
+      //   to_email: wizardDetails?.email,
+      // };
       await updateJobReviewMutation({jobId: jobReview.jobId, clientId: jobReview.clientId, updateJobReviewDto: jobReview.updateJobReviewDto });
       if (wizardDetails && wizardDetails.email) {
-        sendEmail(templateParams)
+        // sendEmail(templateParams)
       }
     } catch (error) {
+      Swal.fire("Error updating review", "", "error");
       console.error(error);
     }
   }
@@ -126,6 +148,30 @@ useEffect( () => {
       setJobsByClient(unableJobsByClient);
     }
   }, [unableJobsByClient]);
+
+  useEffect(() => {
+    if (isUpdateReviewSuccess) {
+      Swal.fire("Updated review", "", "success");
+      refetch();
+      setJobReview({
+        jobId: "",
+        clientId: "",
+        updateJobReviewDto: {rating: 0}, 
+      });
+      setClientInReviewViews({
+        language: '',
+        numClasses: 0,
+        price: 0,
+        status: '',
+        subject: '',
+      });
+      if (jobReviewRef.current && reviewValueRef.current) {
+        jobReviewRef.current.value = '';
+        reviewValueRef.current.value = '0';
+      }
+    }
+  }, [isUpdateReviewSuccess]);
+  
 
   const onChangeInProgressClient = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const value: string = event.target.value;
@@ -173,16 +219,16 @@ const [buttonDisabled, setButtonDisabled] = useState(false)
   )}
   <h1>Class Feedback</h1>
   <div className={styles.reviewContainer}>
-  <select name="" onChange={onChangeReviewJobId}>
+  <select ref={jobReviewRef} name="" onChange={onChangeReviewJobId}>
     <option>Select</option>
     {jobsByClient?.map((job) => {
-      if (job.status === "Finished") {
+      if (job.status === "Finished" && !job.rating) {
         return <option value={job._id} key={job._id}>{job.description}</option>;
       }
     })}
   </select>
   </div>
-  <select name="" onChange={onChangeReview} className={styles.reviewNumber}>
+  <select ref={reviewValueRef} name="" onChange={onChangeReview} className={styles.reviewNumber}>
     <option value="0">Select Points</option>
     <option value="1">⭐</option>
     <option value="2">⭐⭐</option>
@@ -200,7 +246,7 @@ const [buttonDisabled, setButtonDisabled] = useState(false)
       <div >Subject: {clientInReviewViews.subject}</div>
     </div>
   )}
-  <button onClick={onClickHandlerReview} disabled={buttonDisabled}>Give Review</button>
+  <button onClick={onClickHandlerReview} disabled={jobReview.updateJobReviewDto.rating === 0 || jobReview.jobId === ''}>Give Review</button>
   <div className={styles.block}></div>
 </div>
 

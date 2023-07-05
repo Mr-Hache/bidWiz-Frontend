@@ -65,6 +65,11 @@
       @include h-4;
       margin-bottom: 0.5em;
     }
+
+    label[for="experience.title"],
+    label[for="experience.origin"] {
+    margin-bottom: 0.5em;
+  }
     textarea[name="aboutMe"] {
       @include p-p; // Usando el mixin que ya tienes para la tipografía
       border: 1px solid $lightMediumGray;
@@ -90,7 +95,8 @@
     }
 
     input[type="text"][name="aboutMe"] {
-      height: 100px; // define una altura mayor para el cuadro de texto "aboutMe"
+      height: 100px; 
+      width: 100%;
     }
 
     img {
@@ -107,5 +113,6 @@
       @include button-styles2(1vw);
       margin-top: 1em;
     }
+
   }
 }
