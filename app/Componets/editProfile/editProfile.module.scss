@@ -17,6 +17,7 @@
   .change {
     @include button-styles1(1vw);
     margin-bottom: 2vw;
+    margin-top: -1vw;
   }
 
   .isWizard {
@@ -68,8 +69,8 @@
 
     label[for="experience.title"],
     label[for="experience.origin"] {
-    margin-bottom: 0.5em;
-  }
+      margin-bottom: 0.5em;
+    }
     textarea[name="aboutMe"] {
       @include p-p; // Usando el mixin que ya tienes para la tipografía
       border: 1px solid $lightMediumGray;
@@ -95,7 +96,7 @@
     }
 
     input[type="text"][name="aboutMe"] {
-      height: 100px; 
+      height: 100px;
       width: 100%;
     }
 
@@ -113,6 +114,10 @@
       @include button-styles2(1vw);
       margin-top: 1em;
     }
-
+  }
+  .changeImage {
+    margin-top: -10px;
+    margin-bottom: 10px;
+    color: rgba(0, 0, 139, 0);
   }
 }
