@@ -160,8 +160,8 @@ const onChangeStatusJobId = (event: React.ChangeEvent<HTMLSelectElement>) => {
           <div >Subject: {InProgressJobViews.subject}</div>
         </div>
       )}
-      <button  onClick={onClickHandlerJobStatus}>Complete Job</button>
-      <div className={styles.block}></div>
+      <button  onClick={onClickHandlerJobStatus} disabled={InProgressJobViews.language === ''}>Complete Job</button>
+      <div className={styles.block} ></div>
       </div>
     );
   }

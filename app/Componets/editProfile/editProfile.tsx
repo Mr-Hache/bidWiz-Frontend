@@ -14,6 +14,7 @@ import Select from 'react-select';
 import Swal from "sweetalert2";
 import { title, origin } from "@/app/utils/titleAndOrigin";
 
+
 function EditProfile() {
   const localUid = useAppSelector((state) => state.userAuth.uid);
   const [updateWizardStatus, { isLoading }] = useUpdateWizardStatusMutation();
@@ -30,8 +31,18 @@ function EditProfile() {
   const customStyles = {
     control: (base: any, state: any) => ({
       ...base,
-      
-      
+      border: state.isFocused ? '1px solid black' : '1px solid black',
+      boxShadow: state.isFocused ? '0 0 0 1px black' : 0,
+      borderRadius: '5px',
+      fontSize: '1em',
+      width: '100%',
+      color: '#999',
+      fontFamily: 'Raleway, sans-serif',
+    }),
+    option: (base: any) => ({
+      ...base,
+      color: '#999',
+      fontFamily: 'Raleway, sans-serif',
     }),
   };
   
@@ -207,7 +218,6 @@ function EditProfile() {
         });
     }
 
-    
   };
 
   return (
