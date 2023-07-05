@@ -26,9 +26,9 @@
     text-align: center;
     border-radius: 10px 10px 10px 10px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
-    height: 670px;
     margin: auto 2vw;
     margin-top: 2vw;
+    padding-bottom: 10px ;
   }
 
   .sidebarDark {
@@ -185,7 +185,7 @@
   color: $darkMediumGray;
   font-weight: 600;
 }
-@media only screen and (max-width: 1130px) {
+@media only screen and (max-width: 1200px) {
   .detail {
     width: 100vw;
     font-size: 12px;
