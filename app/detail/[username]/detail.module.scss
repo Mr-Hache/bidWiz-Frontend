@@ -1,11 +1,10 @@
 @import "../../utils/mixin";
 @import "../../utils/variabls";
 
-
-.block{
+.block {
   height: 150px;
 }
-.block2{
+.block2 {
   height: 70px;
 }
 .detail {
@@ -17,9 +16,9 @@
   margin: auto;
   width: 95vw;
   max-width: 1740px;
-  overflow: hidden; 
-  .stars{
-    color:yellow;
+  overflow: hidden;
+  .stars {
+    color: yellow;
     font-size: 20px;
   }
   .sidebar {
@@ -96,7 +95,7 @@
     margin-left: 5px;
   }
 
-  .righbar { 
+  .righbar {
     text-align: center;
     align-items: center;
     table {
@@ -157,6 +156,8 @@
 .chooseLang {
   margin-right: 20px;
   margin-left: 5px;
+  color: $darkMediumGray;
+  font-weight: 600;
 }
 
 .contInputs {
@@ -176,11 +177,13 @@
   background-color: #181123;
   box-shadow: 0px 0px 6px 4px rgba(93, 4, 153, 0.491);
 }
-.mercadopago{
+.mercadopago {
   font-size: 500px;
 }
-.chooseSubj{
+.chooseSubj {
   margin-right: 5px;
+  color: $darkMediumGray;
+  font-weight: 600;
 }
 @media only screen and (max-width: 1130px) {
   .detail {
