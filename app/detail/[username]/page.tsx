@@ -48,7 +48,7 @@ function detail() {
   const [selectedPrice, setSelectedPrice] = useState<number | null>(null);
   const [buyerName, setBuyerName] = useState("");
 
-  const [availability, setAvailability] = useState<
+  const [available, setAvailable] = useState<
     { day: string; hour: string }[]
   >([]);
   const [createJob, { data: job }] = useCreateJobMutation();
@@ -105,7 +105,7 @@ function detail() {
       //   message: `Class: ${selectedSubject} in ${selectedLanguage}. Client name: ${buyerName}. Client ID: ${buyerId}. Wizard name: ${user?.name}. Wizard ID: ${_id}. Price: $${(selectedClasses || 0) * (selectedPrice || 0)} USD.`,
       //   to_email: user?.email,
       // };
-      console.log(createJobDto);
+      console.log("del click", createJobDto);
       const newJob = await createJob(createJobDto).unwrap();
       setPreferenceId(newJob.result);
       // sendEmail(templateParams)
@@ -119,9 +119,7 @@ function detail() {
     setCreateJobDto({
       ...createJobDto,
       status: "In Progress",
-      description: `Class: ${selectedSubject} in ${selectedLanguage}. Client name: ${buyerName}. Wizard name: ${
-        user?.name
-      }. Price: $${(selectedClasses || 0) * (selectedPrice || 0)} USD.`,
+      description: `Class: ${selectedSubject} in ${selectedLanguage}. Client name: ${buyerName}. Wizard name: ${user?.name}. Price: $${(selectedClasses || 0) * (selectedPrice || 0)} USD.`,
       price: selectedPrice,
       numClasses: selectedClasses,
       clientId: buyerId,
@@ -129,7 +127,7 @@ function detail() {
       language: selectedLanguage,
       subject: selectedSubject,
       result: "default",
-      availability: availability,
+      availability: available,
     });
     console.log(createJobDto);
   }, [
@@ -139,7 +137,9 @@ function detail() {
     _id,
     selectedPrice,
     buyerId,
+    available
   ]);
+
 
   function sendEmail(templateParams: {
     message: string;
@@ -219,12 +219,13 @@ function detail() {
 
   const handleSelectedTimeslots = (
     timeslots: { day: string; hour: string }[]
-  ) => {
+) => {
+    setAvailable(timeslots);
     setCreateJobDto((prevCreateJobDto) => ({
-      ...prevCreateJobDto,
-      availability: timeslots,
+        ...prevCreateJobDto,
+        availability: timeslots,
     }));
-  };
+};
 
   return (
     <div>
@@ -403,7 +404,7 @@ function detail() {
 
           <button
             onClick={handleClick}
-            disabled={!selectedLanguage || !selectedSubject || !selectedClasses}
+            
           >
             CONFIRM
           </button>
