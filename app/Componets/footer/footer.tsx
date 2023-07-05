@@ -13,8 +13,6 @@ import { setSubjects } from "@/app/redux/services/filtersSlice";
 import { usePathname } from "next/navigation";
 import { useRouter } from "next/navigation";
 
-
-
 const subjectsList = [
   "Accounting",
   "Biology",
@@ -72,32 +70,49 @@ export default function Footer() {
         </div>
       </div>
       <div className={styles.containerSmall}>
-
-                
-                 
-          
-
         <div className={styles.icons}>
-          <Link href="https://web.facebook.com/profile.php?id=100094452996515" className={styles.link}>
-
-            <BsFacebook className={styles.face} />
-          </Link>
-          <Link href="https://www.instagram.com/bidwiz.ok/"  className={styles.link}>
-            <BsInstagram className={styles.inst} />
-          </Link>
-          <Link href="https://twitter.com/Bidwiz268498" target="_blank" className={styles.link}>
-            <BsTwitter className={styles.twit} />
-          </Link>
-          <Link href="https://www.youtube.com/channel/UC6T-APDv6ywdM9aUy2QxrFg" target="_blank" className={styles.link}>
-            <BsYoutube className={styles.yout} />
-          </Link>
-          <Link href="www.linkedin.com/in/bidwiz-undefined-548593282" className={styles.link}>
-            <BsLinkedin className={styles.lin} />
-          </Link>
+          <div className={styles.containerIcon}>
+            <Link
+              href="https://web.facebook.com/profile.php?id=100094452996515"
+              className={styles.link}
+            >
+              <BsFacebook className={styles.face} />
+            </Link>
+            <Link
+              href="https://www.instagram.com/bidwiz.ok/"
+              className={styles.link}
+            >
+              <BsInstagram className={styles.inst} />
+            </Link>
+            <Link
+              href="https://twitter.com/Bidwiz268498"
+              target="_blank"
+              className={styles.link}
+            >
+              <BsTwitter className={styles.twit} />
+            </Link>
+            <Link
+              href="https://www.youtube.com/channel/UC6T-APDv6ywdM9aUy2QxrFg"
+              target="_blank"
+              className={styles.link}
+            >
+              <BsYoutube className={styles.yout} />
+            </Link>
+            <Link
+              href="www.linkedin.com/in/bidwiz-undefined-548593282"
+              className={styles.link}
+            >
+              <BsLinkedin className={styles.lin} />
+            </Link>
+          </div>
+          <div className={styles.ab}>
+            <Link href="/about" className={styles.about2}>
+              About us
+            </Link>
+          </div>
         </div>
         <div className={styles.containerCopy}>
           <small>Copyright &copy; BidWiz Company</small>
-          <Link href="/about" className={styles.about}>About us</Link>
         </div>
       </div>
     </section>
