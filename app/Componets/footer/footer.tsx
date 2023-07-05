@@ -82,10 +82,10 @@ export default function Footer() {
 
             <BsFacebook className={styles.face} />
           </Link>
-          <Link href="/notfound"  className={styles.link}>
+          <Link href="https://www.instagram.com/bidwiz.ok/"  className={styles.link}>
             <BsInstagram className={styles.inst} />
           </Link>
-          <Link href="https://twitter.com/home" target="_blank" className={styles.link}>
+          <Link href="https://twitter.com/Bidwiz268498" target="_blank" className={styles.link}>
             <BsTwitter className={styles.twit} />
           </Link>
           <Link href="https://www.youtube.com/channel/UC6T-APDv6ywdM9aUy2QxrFg" target="_blank" className={styles.link}>
