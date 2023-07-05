@@ -131,3 +131,19 @@
     transition: 0.1s;
   }
 }
+
+.about { 
+  font-family: $ralewayFont;
+  color: $lightGray;
+  font-size: 17px;  
+  border-radius: 6px;  
+  text-decoration: none;
+  width: 6vw;
+  text-align: center;
+  margin-left: 78vw;
+}
+
+.about:hover {
+  transform: scale(1.1);  
+  box-shadow: 0 0 6px 1.5px rgba(2, 1, 8, 0.571);
+}
