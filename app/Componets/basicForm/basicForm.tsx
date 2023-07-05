@@ -97,14 +97,31 @@ function basicForm() {
 
   const [errors, setErrors] = useState<Errors>({});
 
-  const [selectedTitle, setSelectedTitle] = useState('');
-
-  const [selectedFlag, setSelectedFlag] = useState("");
-
   const [authentication, setAuthentication] = useState({
     password: "",
     email: "",
   });
+
+  const titleOptions = title.map(t => ({ value: t.name, label: t.name }));
+  const originOptions = origin.map(o => ({ value: o.name, label: o.name }));
+
+  const customStyles = {
+    control: (base: any, state: any) => ({
+      ...base,
+      border: state.isFocused ? '1px solid black' : '1px solid black',
+      boxShadow: state.isFocused ? '0 0 0 1px black' : 0,
+      borderRadius: '5px',
+      fontSize: '1em',
+      width: '47%',
+      color: '#999',
+      fontFamily: 'Raleway, sans-serif',
+    }),
+    option: (base: any) => ({
+      ...base,
+      color: '#999',
+      fontFamily: 'Raleway, sans-serif',
+    }),
+  };
 
   const validateForm = () => {
     let formErrors = {};
@@ -162,11 +179,6 @@ function basicForm() {
       setItem("name", values.name);
       setItem("title", values.experience.title);
       setItem("origin", values.experience.origin);
-
-      console.log("Datos guardados en el Local Storage - email:", values.email);
-      console.log("Datos guardados en el Local Storage - name:", values.name);
-      console.log("Datos guardados en el Local Storage - title:", values.experience.title);
-      console.log("Datos guardados en el Local Storage - origin:", values.experience.origin);
     }
   }, [values, authentication]);
   
@@ -208,19 +220,7 @@ function basicForm() {
     });
   };
 
-  const handleExperienceChanges = (
-    event: React.ChangeEvent<HTMLSelectElement>
-  ) => {
-    setValues({
-      ...values,
-      experience: {
-        ...values.experience,
-        title: event.target.value,
-      },
-    });
-  };
-
-  const handleTitleChange = (selectedOption: SelectedOptionType) => {
+  const handleSelectChange = (fieldName: string, selectedOption: SelectedOptionType) => {
     if (selectedOption === null) {
       // manejar el caso en que no se selecciona ninguna opción
     } else {
@@ -228,7 +228,7 @@ function basicForm() {
         ...values,
         experience: {
           ...values.experience,
-          title: selectedOption.value,
+          [fieldName]: selectedOption.value,
         },
       });
     }
@@ -427,59 +427,33 @@ function basicForm() {
                 </select>
                 <br />
 
-                {errors.subjects && (
-                  <span className="error">{errors.subjects}</span>
-                )}
+                {errors.subjects && (<span className="error">{errors.subjects}</span>)}
               </div>
             </div>
           </div>
           <br />
           <br />
           <div className={style.inputcontainer}>
-            <label>
-                    
-               <select
-                className={style.input}
-                name="title"
-                value={values.experience.title}
-                onChange={(event) => {
-                  const selectedValue = event.target.value;
-                  handleExperienceChanges(event);
-                  setSelectedTitle(selectedValue);
-                }}
-              >
-                <option value="">Select a title</option>
-                {title.map((tit, index) => (
-                  <option key={index} value={tit.name}>
-                    {tit.name}
-                  </option>
-                ))}
-              </select>
-            </label>
+          <label className={style.exp} htmlFor="experience.title">Title</label>
+          <Select
+            styles={customStyles}
+            options={titleOptions}
+            name="title"
+            value={titleOptions.find(option => option.value === values.experience.title)}
+            onChange={(selectedOption) => handleSelectChange("title", selectedOption)}
+          />
             {errors.title && <span className="error">{errors.title}</span>}
           </div>
           <br />
           <div className={style.inputcontainer}>
-            <label>
-              
-              <select
-                className={style.input}
-                name="origin"
-                value={values.experience.origin}
-                onChange={(event) => {
-                  const selectedValue = event.target.value;
-                  handleExperienceChange(event);
-                  setSelectedFlag(selectedValue);
-                }}
-              >
-                <option value="">Select a country</option>
-                {origin.map((orig, index) => (
-                  <option key={index} value={orig.name}>
-                    {orig.name}
-                  </option>
-                ))}
-              </select>
-            </label>
+          <label className={style.exp} htmlFor="experience.origin">Origin</label>
+          <Select
+            styles={customStyles}
+            options={originOptions}
+            name="origin"
+            value={originOptions.find(option => option.value === values.experience.origin)}
+            onChange={(selectedOption) => handleSelectChange("origin", selectedOption)}
+          />
             {errors.origin && <span className="error">{errors.origin}</span>}
           </div>
         </div>
