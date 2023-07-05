@@ -462,8 +462,6 @@ function basicForm() {
           <br />
           <div className={style.select}>
             <div className={style.selectTitle}>Languages</div>
-            <br />
-
             <div className={style.selectSelect}>
               <select
                 multiple
@@ -486,7 +484,6 @@ function basicForm() {
           <br />
           <div className={style.select}>
             <div className={style.selectTitle}>Subjects</div>
-            <br />
             <div className={style.selectSelect}>
               <select
                 multiple
