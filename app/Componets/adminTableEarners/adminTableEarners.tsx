@@ -17,7 +17,7 @@ export default function adminTableEarners() {
 
   useEffect(() => {
     fetch(
-      "https://bidwiz-backend-production-db77.up.railway.app/jobs/top-earners"
+      "https://bid-wiz-backend.vercel.app/jobs/top-earners"
     )
       .then((response) => response.json())
       .then((data) => {

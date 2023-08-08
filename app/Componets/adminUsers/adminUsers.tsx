@@ -33,7 +33,7 @@ export default function adminUsers() {
   //--------------SALES AND REVENUE------------
 
   useEffect(() => {
-    fetch("https://bidwiz-backend-production-db77.up.railway.app/jobs/totals")
+    fetch("https://bid-wiz-backend.vercel.app/jobs/totals")
       .then((response) => response.json())
       .then((data) => {
         setJobsData(data);

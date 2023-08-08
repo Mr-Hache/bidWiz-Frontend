@@ -62,7 +62,7 @@ function authent() {
             const user = result.user;
 
             fetch(
-              `https://bidwiz-backend-production-db77.up.railway.app/users/emails`
+              `https://bid-wiz-backend.vercel.app/users/emails`
             )
               .then((response) => response.json())
               .then((data) => {

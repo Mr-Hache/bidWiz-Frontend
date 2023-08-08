@@ -19,7 +19,7 @@
 
 //   useEffect(() => {
 //     fetch(
-//       "https://bidwiz-backend-production-db77.up.railway.app/users/top-wizards"
+//       "https://bid-wiz-backend.vercel.app/users/top-wizards"
 //     )
 //       .then((response) => response.json())
 //       .then((data) => {

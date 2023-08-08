@@ -14,7 +14,7 @@ function MyCalendar() {
   const fetchUserData = async () => {
     try {
       const response = await fetch(
-        `https://bidwiz-backend-production-db77.up.railway.app/users/user/${localUid}`
+        `https://bid-wiz-backend.vercel.app/users/user/${localUid}`
       );
       const data = await response.json();
       setUserId(data._id);
@@ -26,7 +26,7 @@ function MyCalendar() {
   const fetchUserCalendar = async () => {
     try {
       const response = await fetch(
-        `https://bidwiz-backend-production-db77.up.railway.app/users/calendar/${userId}`
+        `https://bid-wiz-backend.vercel.app/users/calendar/${userId}`
       );
       const data = await response.json();
       setCalendar(data.calendar);
