@@ -75,9 +75,9 @@ export type UpdateJobReviewDto = {
 
 export const userApi = createApi({
   reducerPath: "userApi",
-  refetchOnFocus: true, // when the window is refocused, refetch the data
+  refetchOnFocus: true, 
   baseQuery: fetchBaseQuery({
-    baseUrl: "https://bidwiz-backend-production-db77.up.railway.app",
+    baseUrl: "https://bid-wiz-backend.vercel.app",
   }),
   endpoints: (builder) => ({
     getUsers: builder.query<User[], null>({

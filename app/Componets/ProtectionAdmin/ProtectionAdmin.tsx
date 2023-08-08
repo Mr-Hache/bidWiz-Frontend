@@ -17,7 +17,7 @@ const ProtectionAdmin = () => {
       const unsubscribe = onAuthStateChanged(auth, (user) => {
         if (user) {
           fetch(
-              `https://bidwiz-backend-production-db77.up.railway.app/users/user/${user.uid}`
+              `https://bid-wiz-backend.vercel.app/users/user/${user.uid}`
             ).then ((response) => response.json())
               .then((data) => {
                   if (data.name === "bidwiz.admin") {

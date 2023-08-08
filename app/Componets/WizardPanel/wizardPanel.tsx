@@ -25,7 +25,7 @@ export default function WizardPanel() {
   const localUid = useAppSelector((state) => state.userAuth.uid)
   const [userId, setUserId] = useState('');
   const fetchUserData = async () => {
-    await fetch(`https://bidwiz-backend-production-db77.up.railway.app/users/user/${localUid}`)
+    await fetch(`https://bid-wiz-backend.vercel.app/users/user/${localUid}`)
     .then(response => response.json())
     .then(data => {
     setUserId(data._id)

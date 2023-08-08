@@ -38,7 +38,7 @@ export default function Navbar() {
         dispatch(setEmail(user.email));
         dispatch(setUid(user.uid));
         fetch(
-          `https://bidwiz-backend-production-db77.up.railway.app/users/user/${user.uid}`
+          `https://bid-wiz-backend.vercel.app/users/user/${user.uid}`
         )
           .then((response) => response.json())
           .then((data) => {

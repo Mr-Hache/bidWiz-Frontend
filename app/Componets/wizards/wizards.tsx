@@ -53,7 +53,7 @@ export default function wizards() {
   const takeCounter = (languages: string[] = [], subjects: string[] = []) => {
     const filter = concatLanguagesAndSubjects(languages, subjects);
     fetch(
-      `https://bidwiz-backend-production-db77.up.railway.app/users/wizards/count?${filter}`
+      `https://bid-wiz-backend.vercel.app/users/wizards/count?${filter}`
     )
       .then((response) => {
         if (!response.ok) {
@@ -75,7 +75,7 @@ export default function wizards() {
   ) => {
     const filter = concatLanguagesAndSubjects(languages, subjects);
     fetch(
-      `https://bidwiz-backend-production-db77.up.railway.app/users/wizards?page=${page}&size=${size}&${filter}&sortByReviews=${sortByReviews}`
+      `https://bid-wiz-backend.vercel.app/users/wizards?page=${page}&size=${size}&${filter}&sortByReviews=${sortByReviews}`
     )
       .then((response) => {
         if (!response.ok) {

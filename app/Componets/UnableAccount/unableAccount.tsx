@@ -17,7 +17,7 @@ export default function UnableAccount() {
 
   const fetchUserData = () => {
     fetch(
-      `https://bidwiz-backend-production-db77.up.railway.app/users/user/${localUid}`
+      `https://bid-wiz-backend.vercel.app/users/user/${localUid}`
     )
       .then((response) => response.json())
       .then((data) => {

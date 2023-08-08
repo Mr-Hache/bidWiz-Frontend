@@ -48,7 +48,7 @@
 
 //   useEffect(() => {
 //     fetch(
-//       "https://bidwiz-backend-production-db77.up.railway.app/jobs/subject-stats"
+//       "https://bid-wiz-backend.vercel.app/jobs/subject-stats"
 //     )
 //       .then((response) => response.json())
 //       .then((data) => {
@@ -86,7 +86,7 @@
 
 //   useEffect(() => {
 //     fetch(
-//       "https://bidwiz-backend-production-db77.up.railway.app/jobs/language-stats"
+//       "https://bid-wiz-backend.vercel.app/jobs/language-stats"
 //     )
 //       .then((response) => response.json())
 //       .then((data) => {
